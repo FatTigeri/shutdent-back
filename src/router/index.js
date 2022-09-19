@@ -5,12 +5,14 @@ Vue.use(VueRouter)
 
 import Home from '@/components/Home.vue'
 import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
 
 const router = new VueRouter({
   routes: [
     { path: '/home', component: Home },
     { path: "/", redirect: '/home' },
-    { path: "/login", component: Login }
+    { path: "/login", component: Login },
+    { path: "/register", component: Register}
   ]
 })
 

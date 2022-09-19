@@ -1,0 +1,206 @@
+<template>
+    <div id="login-container">
+        <!-- 使用原生的Div+Css进行登录页面的样式设计 -->
+        <div class="login">
+            <form action="" style="height: 100%" method="post">
+                <!-- 整个的登录框内容 -->
+                <div class="login-box">
+                    <!-- 登录框标题内容 -->
+                    <div class="login-text">
+                        <h3>希冀数学用户登录</h3>
+                    </div>
+                    <!-- 登录框用户名内容 -->
+                    <div class="login-username">
+                        <input type="text" v-model="username" name="username" placeholder="请输入用户名">
+                        <span class="info1" v-if="context === 'user_err'"><strong>{{ info1 }}</strong></span>
+                        <span class="info1" v-if="context === 'isnull'"><strong>{{ info3 }}</strong></span>
+                    </div>
+                    <!-- 登录框密码内容 -->
+                    <div class="login-password">
+                        <input type="password" v-model="password" name="passowrd" placeholder="请输入用户密码">
+                        <span class="info2" v-if="context === 'psw_err'"><strong>{{ info2 }}</strong></span>
+                    </div>
+                    <!-- 新用户登录注册链接 -->
+                    <div class="register-link">
+                        <router-link to="/register">没有账号? 前往注册!</router-link>
+                    </div>
+                    <!-- 登录框提交内容 -->
+                    <div class="login-submit">
+                        <router-link to="">
+                            <button type="submit" id="submit" @click="login">登录</button>
+                        </router-link>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'login',
+    // 管理员登录页面中使用到的数据
+    data() {
+        return {
+            username: '',
+            password: '',
+            info1: '用户不存在！！',
+            info2: '密码错误！！',
+            info3: '用户名不能为空！！',
+            context: '',
+            url: '/home'
+        }
+    },
+    // 管理员登录页面中需要用到的事件方法
+    methods: {
+        // 登录函数login，用来发送ajax异步判断数据库表administrator表中是否存在该用户
+        async login() {
+            // 调用vuex中的changeFlag方法将flag进行更改
+            this.$store.commit("changeFlag")
+            // 调用ajax进行Post请求(注意：下方使用了qs模块中的一个功能，在后续开发也要使用到的)
+            if (this.username !== '') {
+                const { data: res } = await this.$http.post("http://localhost:8088/api/user", this.$qs.stringify({
+                    "username": this.username,
+                    "password": this.password
+                }))
+
+                // 如果后端返回的数据均不为以下的信息时进行对应的信息提示和返回到home页面
+                if (res !== 'user_err' && res !== 'psw_err') {
+                    this.$store.commit("getImgSrc", res)
+                    this.$message({
+                        type: "success",
+                        message: this.username + "欢迎您!"
+                    })
+                    // 使用编程式导航将页面退返回首页
+                    this.$router.push("/home")
+                } else {
+                    // 控制提示信息展示变量的赋值
+                    this.context = res
+                }
+            } else {
+                // 控制提示信息展示变量的赋值
+                this.context = 'isnull'
+            }
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+// 当用户的手机屏幕小于768px时, 对应的字体大小为12px
+@media (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+// 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
+@media (min-width: 768px) and (max-width: 992px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+// 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
+@media (min-width:992px) and (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+
+}
+
+// 当用户的屏幕大于1200px时，对应的字体大小为15px
+@media (min-width: 1200px) {
+    html {
+        font-size: 15px;
+    }
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// 这是给login页面单独进行背景图的设置
+#login-container {
+    top: 0;
+    left: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    background: url('../assets/login-bg.jpg');
+
+    .login,
+    .el-row {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        width: 28rem;
+        height: 23rem;
+        text-align: center;
+        background: rgba(250, 250, 250, 0.92);
+        transform: translate(-50%, -50%);
+
+        .login-box {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+
+            .login-text {
+                height: 20%;
+                width: 100%;
+                color: purple;
+                line-height: 5rem;
+            }
+
+            .login-username,
+            .login-password,
+            .login-submit {
+                height: 20%;
+                width: 100%;
+                line-height: 5rem;
+            }
+
+            .register-link {
+                height: 12%;
+                width: 100%;
+                font-size: 14px;
+                text-align: right;
+                line-height: 2.4rem;
+
+                a {
+                    color: purple;
+                    text-decoration: none;
+                }
+            }
+
+        }
+
+        .login-username input,
+        .login-password input,
+        .login-submit button {
+            width: 100%;
+            height: 35px;
+            outline: none;
+            border-radius: 3px;
+            border: 1px solid #c9c9c9;
+        }
+
+        .login-submit button {
+            background: rgb(64, 158, 255);
+            color: white
+        }
+
+        span {
+            float: left;
+            margin-top: 4px;
+            color: red;
+            font-size: 12px;
+        }
+    }
+}
+</style>
