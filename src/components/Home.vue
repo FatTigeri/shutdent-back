@@ -14,14 +14,14 @@
 
         <!-- 点击反馈弹出的模态框 -->
         <el-dialog title="反馈信息" :visible.sync="dialogFormVisible">
-          <el-form :model="form">
+          <el-form>
             <el-form-item label="" :label-width="formLabelWidth">
               <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="textarea"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            <el-button type="primary" @click="feedback">确 定</el-button>
           </div>
         </el-dialog>
       </el-col>
@@ -439,6 +439,28 @@ export default {
       return require('@/assets/' + src)
     },
 
+    // 用户点击反馈调用的数据
+    async feedback() {
+      if (this.textarea !== '') {
+        // 将评论内容发送到后端，并存进数据库
+        const { data: res } = await this.$http.get('http://localhost:8088/api/feedback', {
+          params: {
+            "feedback": this.textarea
+          }
+        })
+        // 当后端返回的数据res > 0 时(即此时插入语句成功执行了)， 进行对应的消息提醒
+        if (res > 0) {
+          const h = this.$createElement;
+          this.$notify({
+            title: '消息提示',
+            message: h('i', { style: 'color: teal' }, '感谢您宝贵的评价，我们会继续努力的~~~')
+          })
+        }
+      }
+      // 最后将后续的变量修改
+      this.textarea = ''
+      this.dialogFormVisible = false
+    },
 
     // 导航栏线上答疑功能
     online() {
