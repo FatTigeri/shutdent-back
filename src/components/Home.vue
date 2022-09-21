@@ -346,7 +346,6 @@ export default {
     return {
       values: [5, 4, 3, 4, 1, 2],
       count: 1,
-      height: 0,
       // 用户搜索内容变量
       input: '',
       circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
@@ -359,9 +358,13 @@ export default {
       activityList: [],
       // 最受欢迎老师变量
       popularList: [],
+      // 控制表格模态框显示变量
       dialogTableVisible: false,
+      // 控制反馈表单模态框显示变量
       dialogFormVisible: false,
+      // 控制反馈模态框宽度变量
       formLabelWidth: '6.66666rem',
+      // 用户反馈内容变量
       textarea: ''
     }
   },
@@ -418,20 +421,34 @@ export default {
         type: 'success',
         message: '前往登录页面成功!!!'
       })
+      // 编程式路由-将页面跳转到登录页
       this.$router.push('/login')
     },
 
     // 用户注销方法
     logout() {
-      // 用户调用vuex中的changeFlag方法，将后续的flag进行转换
-      this.$store.commit('changeFlag')
-      this.$store.commit('getImgSrc', '')
+      if (window.localStorage.getItem('token')) {
+        // 用户调用vuex中的changeFlag方法，将后续的flag进行转换
+        this.$store.commit('changeFlag')
+        // 用户调用Vuex中的getImgSrc方法，获取从接口中得到的头像地址
+        this.$store.commit('getImgSrc', '')
 
-      // 网页进行对应的消息提醒
-      this.$message({
-        type: 'success',
-        message: "退出登录成功!"
-      })
+        // 将本地存储的伪token删除
+        window.localStorage.removeItem('token')
+
+        // 网页进行对应的消息提醒
+        this.$message({
+          type: 'success',
+          message: "退出登录成功!"
+        })
+      } else {
+        // 用户还没登录点击了注销按钮的网页提醒
+        const h = this.$createElement;
+        this.$notify({
+          title: '消息提示',
+          message: h('i', { style: 'color: teal' }, '您还未登录，不能进行用户注销操作！！！')
+        })
+      }
     },
 
     // 返回后端传输到前端的图片地址
@@ -668,6 +685,7 @@ export default {
             // background: rgba(255, 165, 0, 0.3);
             border: 1px solid black;
             background: rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
           }
         }
 
