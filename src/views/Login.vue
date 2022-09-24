@@ -1,39 +1,48 @@
 <template>
-    <div id="login-container">
-        <!-- 使用原生的Div+Css进行登录页面的样式设计 -->
-        <div class="login">
-            <form action="" style="height: 100%" method="post">
-                <!-- 整个的登录框内容 -->
-                <div class="login-box">
-                    <!-- 登录框标题内容 -->
-                    <div class="login-text">
-                        <h3>希冀数学用户登录</h3>
-                    </div>
-                    <!-- 登录框用户名内容 -->
-                    <div class="login-username">
-                        <input type="text" v-model="username" name="username" placeholder="请输入用户名">
-                        <span class="info1" v-if="context === 'user_err'"><strong>{{ info1 }}</strong></span>
-                        <span class="info1" v-if="context === 'isnull'"><strong>{{ info3 }}</strong></span>
-                    </div>
-                    <!-- 登录框密码内容 -->
-                    <div class="login-password">
-                        <input type="password" v-model="password" name="passowrd" placeholder="请输入用户密码">
-                        <span class="info2" v-if="context === 'psw_err'"><strong>{{ info2 }}</strong></span>
-                    </div>
-                    <!-- 新用户登录注册链接 -->
-                    <div class="register-link">
-                        <router-link to="/register">没有账号? 前往注册!</router-link>
-                    </div>
-                    <!-- 登录框提交内容 -->
-                    <div class="login-submit">
-                        <router-link to="">
-                            <button type="submit" id="submit" @click="login">登录</button>
-                        </router-link>
-                    </div>
+    <!-- 使用响应式布局 -->
+    <el-row :gutter="0">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <div id="login-container">
+                <!-- 使用原生的Div+Css进行登录页面的样式设计 -->
+                <div class="login">
+                    <form action="" style="height: 100%" method="post">
+                        <!-- 整个的登录框内容 -->
+                        <div class="login-box">
+                            <!-- 登录框标题内容 -->
+                            <div class="login-text">
+                                <h3>希冀数学用户登录</h3>
+                            </div>
+                            <!-- 登录框用户名内容 -->
+                            <div class="login-username">
+                                <el-input type="text" v-model="username" placeholder="请输入用户名"
+                                    prefix-icon="el-icon-user"></el-input>
+                                <span class="info1" v-if="context === 'user_err'"><strong>{{ info1 }}</strong></span>
+                                <span class="info1" v-if="context === 'isnull'"><strong>{{ info3 }}</strong></span>
+                            </div>
+                            <!-- 登录框密码内容 -->
+                            <div class="login-password">
+                                <el-input type="password" v-model="password" placeholder="请输入用户密码" show-password
+                                    prefix-icon="el-icon-setting"></el-input>
+                                <span class="info2" v-if="context === 'psw_err'"><strong>{{ info2 }}</strong></span>
+                            </div>
+                            <!-- 新用户登录注册链接 -->
+                            <div class="register-link">
+                                <router-link to="/register">没有账号? 前往注册!</router-link>
+                            </div>
+                            <!-- 登录框提交内容 -->
+                            <div class="login-submit">
+                                <router-link to="">
+                                    <el-button type="primary" id="submit" @click="login">
+                                        <i class="el-icon-upload el-icon--right"></i> 登录
+                                    </el-button>
+                                </router-link>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        </el-col>
+    </el-row>
 </template>
 
 <script>
@@ -42,12 +51,19 @@ export default {
     // 管理员登录页面中使用到的数据
     data() {
         return {
+            // 用户登录名变量
             username: '',
+            // 用户登录密码变量
             password: '',
+            // 登录信息一
             info1: '用户不存在！！',
+            // 登录信息二
             info2: '密码错误！！',
+            // 登录信息三
             info3: '用户名不能为空！！',
+            // 控制登录信息显示变量
             context: '',
+            // 登录成功前往页面变量
             url: '/home'
         }
     },
@@ -57,6 +73,7 @@ export default {
         async login() {
             // 调用vuex中的changeFlag方法将flag进行更改
             this.$store.commit("changeFlag")
+            this.$store.commit("setToken", this.username)
             // 调用ajax进行Post请求(注意：下方使用了qs模块中的一个功能，在后续开发也要使用到的)
             if (this.username !== '') {
                 const { data: res } = await this.$http.post("http://localhost:8088/api/user", this.$qs.stringify({
@@ -71,6 +88,8 @@ export default {
                         type: "success",
                         message: this.username + "欢迎您!"
                     })
+                    // 调用Vuex中的setToken方法，设置对应的token变量
+                    window.localStorage.setItem('token', this.username)
                     // 使用编程式导航将页面退返回首页
                     this.$router.push("/home")
                 } else {
@@ -130,10 +149,17 @@ export default {
     height: 100%;
     width: 100%;
     position: fixed;
-    background-size: cover;
-    background-position: center;
     background: url('../assets/login-bg.jpg');
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
 
+    // 登录框样式
     .login,
     .el-row {
         position: relative;
@@ -145,11 +171,13 @@ export default {
         background: rgba(250, 250, 250, 0.92);
         transform: translate(-50%, -50%);
 
+        // 登录具体框样式
         .login-box {
             width: 80%;
             height: 100%;
             margin: 0 auto;
 
+            // 登录文字样式
             .login-text {
                 height: 20%;
                 width: 100%;
@@ -157,6 +185,7 @@ export default {
                 line-height: 5rem;
             }
 
+            // 登录名，密码，提交按钮样式
             .login-username,
             .login-password,
             .login-submit {
@@ -165,6 +194,7 @@ export default {
                 line-height: 5rem;
             }
 
+            // 注册链接样式
             .register-link {
                 height: 12%;
                 width: 100%;
@@ -180,6 +210,7 @@ export default {
 
         }
 
+        // 登录各输入框样式
         .login-username input,
         .login-password input,
         .login-submit button {
@@ -190,16 +221,24 @@ export default {
             border: 1px solid #c9c9c9;
         }
 
+        .login-username input,
+        .login-password input {
+            text-indent: 1rem;
+        }
+
+        // 登录提交按钮样式
         .login-submit button {
             background: rgb(64, 158, 255);
             color: white
         }
 
+        // 各登录信息样式
         span {
             float: left;
             margin-top: 4px;
             color: red;
             font-size: 12px;
+            line-height: 0;
         }
     }
 }

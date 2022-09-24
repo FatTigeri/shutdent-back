@@ -6,7 +6,7 @@
       <el-col :xs="0">
         <div class="functions-fix">
           <ul>
-            <li><a href="">客服</a></li>
+            <li><a href="#">客服</a></li>
             <li @click="dialogFormVisible = true"><a href="#">反馈</a></li>
             <li><a href="#home-container">返顶</a></li>
           </ul>
@@ -659,14 +659,15 @@ export default {
             color: black;
             width: 100%;
             height: 100%;
-            border-radius: 1.3333rem;
             text-decoration: none;
+            border-radius: 1.3333rem;
           }
 
           a:hover {
             color: purple;
             // background: rgba(255, 165, 0, 0.3);
             border: 1px solid black;
+            transform: scale(0.9);
             background: rgba(0, 0, 0, 0.3);
           }
         }
