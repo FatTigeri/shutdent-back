@@ -9,10 +9,11 @@ import Register from '@/views/Register.vue'
 
 const router = new VueRouter({
   routes: [
-    { path: '/home', component: Home },
-    { path: "/", redirect: '/home' },
+    { path: "/home", component: Home },
+    { path: "/", redirect: "/home" },
+    { path: "/home-container", redirect: "/home" },
     { path: "/login", component: Login },
-    { path: "/register", component: Register}
+    { path: "/register", component: Register }
   ]
 })
 

@@ -1,15 +1,318 @@
 <template>
-    <div class="register-container">
-        登录页面的开发
-    </div>
+    <!-- 整个页面响应式布局 -->
+    <el-row :gutter="0">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <!-- (一) 用户全部标签 -->
+            <div id="register-container">
+                <!-- 1.2 用户注册内容框内容 -->
+                <div class="register">
+                    <!-- 1.2.1 用户注册框头部文字 -->
+                    <div class="text">
+                        <h3>希冀数学用户注册</h3>
+                    </div>
+                    <!-- 1.2.2 用户注册内容框 -->
+                    <div class="container">
+                        <!-- 1.2.2.1 用户注册表单内容 -->
+                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                            class="demo-ruleForm">
+                            <!-- 1.2.2.1.1 用户名输入框 -->
+                            <el-form-item label="用户名:" prop="username">
+                                <el-input type="username" v-model="ruleForm.username" autocomplete="off"
+                                    prefix-icon="el-icon-user" @blur="jUsername">
+                                </el-input>
+                            </el-form-item>
+                            <!-- 1.2.2.1.2 密码输入框 -->
+                            <el-form-item label="密码:" prop="pass">
+                                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"
+                                    prefix-icon="el-icon-setting"></el-input>
+                            </el-form-item>
+                            <!-- 1.2.2.1.3 确认密码输入框 -->
+                            <el-form-item label="确认密码:" prop="checkPass">
+                                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"
+                                    prefix-icon="el-icon-setting">
+                                </el-input>
+                            </el-form-item>
+                            <!-- 1.2.2.1.4 头像上传按钮框 -->
+                            <el-form-item label="头像上传:">
+                                <el-button type="" size="mini" @click="dialogFormVisible = true "
+                                    :disabled=" ruleForm.username === '' || ruleForm.password === '' || ruleForm.checkPass === ''">
+                                    上传<i class="el-icon-upload el-icon--right"></i>
+                                </el-button>
+                            </el-form-item>
+                            <!-- 1.2.2.1.5 用户确定和取消按钮框 -->
+                            <el-form-item>
+                                <el-button type="primary" size="mini" @click="submitForm">提交
+                                </el-button>
+                                <el-button @click="resetForm('ruleForm')" size="mini">重置</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+            </div>
+            <!-- (二) 用户头像上传模态框-->
+            <el-dialog title="头像上传功能" :visible.sync="dialogFormVisible">
+                <el-form :model="form">
+                    <!-- 2.1 头像上传 -->
+                    <el-form-item label="上传" :label-width="formLabelWidth">
+                        <!-- 2.1.1 头像上传框 -->
+                        <el-upload :action="uploadUrl" list-type="picture-card" :on-preview="handlePictureCardPreview"
+                            :on-remove="handleRemove" :on-success="picture">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                    </el-form-item>
+                </el-form>
+                <!-- 用户注册确定和取消按钮 -->
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false" size="mini">取 消</el-button>
+                    <el-button type="primary" @click="success" size="mini">确 定</el-button>
+                </div>
+            </el-dialog>
+        </el-col>
+    </el-row>
 </template>
 
 <script>
 export default {
-    name: 'register'
+    name: 'register',
+    data() {
+        // 使用异步交互进行新用户注册名验证功能
+        var validateUsername = async (rule, value, callback) => {
+            // 当且仅当用户名不为空才进行下列的内容验证
+            if (value === '') {
+                callback(new Error('请输入用户名'));
+            } else if (value !== '') {
+                const { data: res } = await this.$http.post("http://localhost:8088/api/cUsername", this.$qs.stringify({
+                    "username": value
+                }))
+                // 当后端接口返回的是已存在该用户的字符串信息时，进行相应的提示
+                if (res === 'exists') {
+                    // 提示用户存在
+                    callback(new Error('用户已存在'))
+                } else {
+                    callback()
+                }
+            }
+        };
+        // 用户新密码验证
+        var validatePass = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入密码'));
+            } else {
+                if (this.ruleForm.checkPass !== '') {
+                    this.$refs.ruleForm.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        // 用户确认新密码验证
+        var validatePass2 = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请再次输入密码'));
+            } else if (value !== this.ruleForm.pass) {
+                callback(new Error('两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        };
+        return {
+            // 用户注册表单内容
+            ruleForm: {
+                username: '',
+                pass: '',
+                checkPass: '',
+            },
+            // 用户注册规则
+            rules: {
+                username: [{
+                    validator: validateUsername, trigger: 'blur'
+                }],
+                pass: [
+                    { validator: validatePass, trigger: 'blur' }
+                ],
+                checkPass: [
+                    { validator: validatePass2, trigger: 'blur' }
+                ],
+            },
+            dialogFormVisible: false,
+            form: {
+                name: '',
+            },
+            formLabelWidth: '120px',
+            dialogImageUrl: '',
+            dialogVisible: false,
+            // 新用户头像上传到服务器的网址
+            uploadUrl: 'http://localhost:8088/api/upload'
+        };
+    },
+    methods: {
+        // 用户注册提交表单方法，进行注册信息的传输
+        async submitForm() {
+            const fileName = this.$store.state.upLoadImg;
+            // 调用后端的接口进行用户信息的注册
+            const { data: res } = await this.$http.post("http://localhost:8088/api/insertUser", this.$qs.stringify({
+                "username": this.ruleForm.username,
+                "password": this.ruleForm.pass,
+                "img_url": fileName
+            }))
+            // 对接收到前端的结果集进行判断
+            if (res === 'success') {
+                // 页面对用户进行消息的提示
+                this.$message({
+                    type: 'success',
+                    message: '注册成功!'
+                })
+                // 使用编程式导航，前往用户登录页面
+                this.$router.push("/login")
+            }
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePictureCardPreview(file) {
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
+
+        // 图片上传成功后自动触发的钩子函数
+        picture(file, fileList) {
+            // 将用户上传的头像的filename存进Vuex中，为后续的表单提交做铺垫
+            this.$store.commit('setImgName', fileList.name)
+        },
+
+        // 用户注册头像上传按钮信息提示函数
+        success() {
+            this.dialogFormVisible = false
+            this.$notify({
+                title: '成功',
+                message: '头像上传成功！',
+                type: 'success'
+            });
+        }
+    }
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+// 使用响应式布局会产生对应的布局偏差，因此使用媒体特征进行布局
+@media (min-width: 345px) and (max-width: 768px) {
+    .register {
+        width: 28.839333rem !important;
+        height: 31.404rem !important;
+    }
 
+    /deep/ .el-dialog {
+        width: 90%;
+    }
+
+}
+
+// 当用户显示屏小于768px时对应的样式
+@media (max-width: 768px) {
+    html {
+        font-size: 12px;
+        font-family: Arial, sans-serif;
+    }
+}
+
+// 当用户显示屏大于768px小于992px时对应的样式
+@media (min-width: 768px) and (max-width: 992px) {
+    html {
+        font-size: 13px;
+        font-family: Arial, sans-serif;
+    }
+}
+
+// 当用户的显示屏大于992px但是小于1200px时对应的样式
+@media (min-width: 992px) and (max-width: 1200px) {
+    html {
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+    }
+}
+
+// 当用户的显示屏大于1200px时对应的样式
+@media (min-width: 1200px) {
+    html {
+        font-size: 15px;
+        font-family: Arial, sans-serif;
+    }
+}
+
+
+// register页面的最大包含框样式
+#register-container {
+    top: 0;
+    left: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: url('../assets/register-bg.jpg') no-repeat;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+
+    // register页面的文字介绍内容
+    .register-text {
+        width: 30%;
+        height: 25%;
+        color: purple;
+        line-height: 6.6666rem;
+        margin: 0 0 0 8.5rem;
+        font-size: 22px;
+
+        h3 {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    // 用户注册内容样式
+    .register {
+        position: relative;
+        width: 35.839333rem;
+        height: 26.404rem;
+        top: 50%;
+        left: 50%;
+        border-radius: 1rem;
+        transform: translate(-50%, -50%);
+        background: rgba(250, 250, 250, 1);
+
+        // 用户注册文字样式
+        .text {
+            width: 100%;
+            height: 15%;
+            color: purple;
+            text-align: center;
+            line-height: 3.960666rem;
+        }
+
+        // 各输入框内容样式
+        .container {
+            width: 100%;
+            height: 85%;
+            margin: 2% 0 0 0;
+
+            // 输入框样式
+            /deep/ .el-input__inner {
+                width: 90%;
+            }
+        }
+
+    }
+}
 </style>
