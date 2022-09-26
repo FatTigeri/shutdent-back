@@ -80,9 +80,7 @@
                     <div class="demo-basic--circle">
                       <el-dropdown>
                         <span class="el-dropdown-link">
-                          <img :src="getSrc('' + $store.state.imgSrc)" alt="blank" style="width: 100%;"
-                            v-if="this.$store.state.flag === false">
-                          <img :src="circleUrl" alt="blank" style="width: 100%;" v-else>
+                          <img :src="getSrc('' + this.$store.state.imgSrc)" alt="blank" style="width: 100%;">
                           <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
@@ -201,21 +199,21 @@
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
                                   <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">解三角问题</a>
+                                  <a href="#">课题:解三角问题</a>
                                   <a href="#">授课人: 于静</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">解三角问题</a>
-                                  <a href="#">授课人: 于静</a>
+                                  <img src="@/assets/math1.png" alt="blank">
+                                  <a href="#">课题:"加""减"法</a>
+                                  <a href="#">授课人: 江玉婷</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">解三角问题</a>
+                                  <img src="@/assets/math3.png" alt="blank">
+                                  <a href="#">课题:长方形问题</a>
                                   <a href="#">授课人: 于静</a>
                                 </li>
                               </el-col>
@@ -237,14 +235,14 @@
                             <ul>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">圆的起源</a>
+                                  <img src="@/assets/math5.jpg" alt="blank">
+                                  <router-link to="/circular">Π的由来</router-link>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">你不知的数学故事</a>
+                                  <img src="@/assets/math6.jpg" alt="blank">
+                                  <a href="#">数学界的"罪人"</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
@@ -320,6 +318,9 @@
                 <li><a href="#">广东二师</a></li>
                 <li><a href="#">希望小学</a></li>
                 <li><a href="#">广东二师</a></li>
+                <li><a href="#">广东二师</a></li>
+                <li><a href="#">希望小学</a></li>
+                <li><a href="#">广东二师</a></li>
               </ul>
             </div>
           </el-footer>
@@ -341,6 +342,11 @@ export default {
     // 执行获取最受欢迎老师数据方法
     this.getPopularList();
 
+    if (window.localStorage.getItem("token")) {
+      this.$store.commit('changeFlag', false)
+      console.log("获取头像成功!");
+      this.$store.commit('getImgSrc', window.localStorage.getItem("avatar"))
+    }
   },
   data() {
     return {
@@ -365,7 +371,8 @@ export default {
       // 控制反馈模态框宽度变量
       formLabelWidth: '6.66666rem',
       // 用户反馈内容变量
-      textarea: ''
+      textarea: '',
+      img: ''
     }
   },
   methods: {
@@ -429,12 +436,17 @@ export default {
     logout() {
       if (window.localStorage.getItem('token')) {
         // 用户调用vuex中的changeFlag方法，将后续的flag进行转换
-        this.$store.commit('changeFlag')
+        this.$store.commit('changeFlag', true)
         // 用户调用Vuex中的getImgSrc方法，获取从接口中得到的头像地址
         this.$store.commit('getImgSrc', '')
 
         // 将本地存储的伪token删除
         window.localStorage.removeItem('token')
+
+        // 将本地存储的伪session删除
+        window.sessionStorage.removeItem("userImg")
+
+        this.$store.commit('getImgSrc', 'avatar.png')
 
         // 网页进行对应的消息提醒
         this.$message({
@@ -455,6 +467,7 @@ export default {
     getSrc(src) {
       return require('@/assets/' + src)
     },
+
 
     // 用户点击反馈调用的数据
     async feedback() {
@@ -927,7 +940,7 @@ export default {
           display: flex;
           flex-wrap: wrap;
           justify-items: center;
-          justify-content: space-between;
+          justify-content: space-around;
           margin-bottom: 0.333rem;
 
           // 资源推荐个课程包括框样式
@@ -937,11 +950,12 @@ export default {
             text-align: left;
             margin-bottom: 0.26666rem;
             border-radius: 0.33333rem;
-            border: 0.0666rem solid pink;
+            border: 0.0666rem solid #c9c9c9;
 
             // 不同内容的文字介绍样式
             a {
               display: block;
+              color: purple;
               margin: 0.13333rem;
             }
 
