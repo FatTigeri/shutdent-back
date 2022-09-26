@@ -72,7 +72,8 @@ export default {
         // 登录函数login，用来发送ajax异步判断数据库表administrator表中是否存在该用户
         async login() {
             // 调用vuex中的changeFlag方法将flag进行更改
-            this.$store.commit("changeFlag")
+            this.$store.commit("changeFlag", false)
+            // 调用Vuex中的setToken方法将state中的token变量进行赋值
             this.$store.commit("setToken", this.username)
             // 调用ajax进行Post请求(注意：下方使用了qs模块中的一个功能，在后续开发也要使用到的)
             if (this.username !== '') {
@@ -85,11 +86,13 @@ export default {
                 if (res !== 'user_err' && res !== 'psw_err') {
                     this.$store.commit("getImgSrc", res)
                     this.$message({
-                        type: "success",
+                        type: "info",
                         message: this.username + "欢迎您!"
                     })
-                    // 调用Vuex中的setToken方法，设置对应的token变量
+                    // 设置对应的token变量
                     window.localStorage.setItem('token', this.username)
+                    // 将从后台中获取到的用户头像名设置为avatar变量
+                    window.localStorage.setItem('avatar', res)
                     // 使用编程式导航将页面退返回首页
                     this.$router.push("/home")
                 } else {
