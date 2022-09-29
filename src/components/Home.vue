@@ -331,6 +331,9 @@
 </template>
 
 <script>
+import { mythrollte } from '@/utils/index.js'
+import { mydebounce } from '@/utils/index.js'
+
 export default {
   created() {
     // 执行获取教师答疑排班数据一方法
@@ -376,17 +379,17 @@ export default {
     }
   },
   methods: {
-    // 最受欢迎老师可打分题型
-    open1() {
+    // 最受欢迎老师可打分题型(使用到了节流操作)
+    open1: mythrollte(function () {
       const h = this.$createElement;
       this.$notify({
         title: '消息提示',
         message: h('i', { style: 'color: teal' }, '可以给自己喜欢的老师进行打分哦~~~')
       })
-    },
+    }, 5000),
 
-    // 最受欢迎老师打分确定
-    open2() {
+    // 最受欢迎老师打分确定(使用到了节流操作)
+    open2: mythrollte(function () {
       const h = this.$createElement;
       this.$notify({
         title: '消息提示',
@@ -402,10 +405,10 @@ export default {
       // this.$http.post("http://localhost:8088/api/likes", {
       //   "teachers": this.popularList
       // })
-    },
+    }, 5000),
 
-    // 导航栏搜索功能
-    search() {
+    // 导航栏搜索功能(新增设置了防抖操作)
+    search: mydebounce(function () {
       if (this.input === '') {
         // 当用户点击了搜索框，但是并没有进行内容的输入时，浏览器进行信息的提示
         this.$message({
@@ -419,7 +422,7 @@ export default {
           message: '功能还未开放, 抱歉~~~'
         })
       }
-    },
+    }, 1000),
 
 
     // 用户登录方法
@@ -443,9 +446,7 @@ export default {
         // 将本地存储的伪token删除
         window.localStorage.removeItem('token')
 
-        // 将本地存储的伪session删除
-        window.sessionStorage.removeItem("userImg")
-
+        // 用户登录注销后，调用Vuex中getImgSrc方法，赋值为没有头像的样式
         this.$store.commit('getImgSrc', 'avatar.png')
 
         // 网页进行对应的消息提醒
@@ -646,6 +647,7 @@ export default {
       display: flex;
       text-align: center;
       justify-content: space-around;
+      text-shadow: 0.1em 0.1em 0.5em #333;
 
       // home页面图片样式设置
       img {

@@ -8,7 +8,7 @@ export default new Vuex.Store({
     // 全局变量flag用来控制home页面中的登录按钮的消失
     flag: true,
     // 全局变量imgSrc用来保存用户登录后获取到的图片地址
-    imgSrc: '',
+    imgSrc: 'avatar.png',
     // 全局变量upLoadImg用来保存用户注册中上传的图片名字
     upLoadImg: ''
   },
@@ -19,8 +19,8 @@ export default new Vuex.Store({
 
   mutations: {
     // 控制全局变量state的状态
-    changeFlag(state) {
-      state.flag = !state.flag
+    changeFlag(state, result) {
+      state.flag = result
     },
 
     // 控制后台中获取到的图片地址

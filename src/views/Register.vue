@@ -299,6 +299,7 @@ export default {
             color: purple;
             text-align: center;
             line-height: 3.960666rem;
+            text-shadow: 0.1em 0.1em 0.5em #333;
         }
 
         // 各输入框内容样式
