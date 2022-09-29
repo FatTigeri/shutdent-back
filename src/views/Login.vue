@@ -183,6 +183,7 @@ export default {
                 width: 100%;
                 color: purple;
                 line-height: 5rem;
+                text-shadow: 0.1em 0.1em 0.5em #333;
             }
 
             // 登录名，密码，提交按钮样式
