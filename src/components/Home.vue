@@ -389,23 +389,27 @@ export default {
     }, 5000),
 
     // 最受欢迎老师打分确定(使用到了节流操作)
-    open2: mythrollte(function () {
+    open2: mythrollte(async function () {
+
+      // 先对相应的数据进行更新
+      for (let i = 0; i < this.popularList.length; i++) {
+        // 对不同老师的分数total进行更新
+        this.popularList[i].total += this.values[i];
+        // 每次都发送对应的post请求进行数据的更新
+        await this.$http.get("http://localhost:8088/api/likes",
+          { params: { "tID": this.popularList[i].tID, "total": this.popularList[i].total } }
+        )
+      }
+
+      // 对应样式显示的代码
       const h = this.$createElement;
       this.$notify({
         title: '消息提示',
         message: h('i', { style: 'color: teal' }, '感谢您的喜欢~~~')
       })
 
-      // 先对相应的数据进行更新
-      // for(let i = 0; i < this.popularList.length; i++) {
-      //   this.popularList[i].total += this.values[i];
-      // }
-      // console.log(this.popularList);
-      // // TODO: 后续是将实现当用户点击了打分确定后进行数据的传输到数据库
-      // this.$http.post("http://localhost:8088/api/likes", {
-      //   "teachers": this.popularList
-      // })
     }, 5000),
+
 
     // 导航栏搜索功能(新增设置了防抖操作)
     search: mydebounce(function () {
@@ -1010,6 +1014,7 @@ export default {
         .teacher-name {
           cursor: pointer;
           color: rgba(0, 0, 0, 0.7);
+          text-shadow: 0.1em 0.1em 7.2em #333;
         }
       }
     }
