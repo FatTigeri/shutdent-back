@@ -11,7 +11,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
 
+// 将相同的后端接口进行挂载
+axios.defaults.baseURL = "http://localhost:8088/api"
 Vue.prototype.$http = axios
+
 Vue.prototype.$qs = qs
 Vue.config.productionTip = false
 

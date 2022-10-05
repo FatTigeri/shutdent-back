@@ -24,12 +24,12 @@
                             <!-- 1.2.2.1.2 密码输入框 -->
                             <el-form-item label="密码:" prop="pass">
                                 <el-input type="password" v-model="ruleForm.pass" autocomplete="off"
-                                    prefix-icon="el-icon-setting"></el-input>
+                                    prefix-icon="el-icon-lock"></el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.3 确认密码输入框 -->
                             <el-form-item label="确认密码:" prop="checkPass">
                                 <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"
-                                    prefix-icon="el-icon-setting">
+                                    prefix-icon="el-icon-lock">
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.4 头像上传按钮框 -->
@@ -87,7 +87,7 @@ export default {
             if (value === '') {
                 callback(new Error('请输入用户名'));
             } else if (value !== '') {
-                const { data: res } = await this.$http.post("http://localhost:8088/api/cUsername", this.$qs.stringify({
+                const { data: res } = await this.$http.post("/cUsername", this.$qs.stringify({
                     "username": value
                 }))
                 // 当后端接口返回的是已存在该用户的字符串信息时，进行相应的提示
@@ -147,7 +147,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             // 新用户头像上传到服务器的网址
-            uploadUrl: 'http://localhost:8088/api/upload'
+            uploadUrl: '/upload'
         };
     },
     methods: {
@@ -155,7 +155,7 @@ export default {
         async submitForm() {
             const fileName = this.$store.state.upLoadImg;
             // 调用后端的接口进行用户信息的注册
-            const { data: res } = await this.$http.post("http://localhost:8088/api/insertUser", this.$qs.stringify({
+            const { data: res } = await this.$http.post("/insertUser", this.$qs.stringify({
                 "username": this.ruleForm.username,
                 "password": this.ruleForm.pass,
                 "img_url": fileName
@@ -256,7 +256,7 @@ export default {
     height: 100%;
     width: 100%;
     position: fixed;
-    background: url('../assets/register-bg.jpg') no-repeat;
+    background: url('../assets/login-bg.jpg') no-repeat;
     background-position: center 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -288,7 +288,6 @@ export default {
         height: 26.404rem;
         top: 50%;
         left: 50%;
-        border-radius: 1rem;
         transform: translate(-50%, -50%);
         background: rgba(250, 250, 250, 1);
 

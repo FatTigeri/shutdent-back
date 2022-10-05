@@ -8,7 +8,7 @@
           <ul>
             <li><a href="#">客服</a></li>
             <li @click="dialogFormVisible = true"><a href="#">反馈</a></li>
-            <li><a href="#home-container">返顶</a></li>
+            <li><a href="#layout-container">返顶</a></li>
           </ul>
         </div>
 
@@ -30,81 +30,13 @@
     <!-- home页面对应的固定栏功能 -->
     <el-container>
       <!-- (一) 首页导航栏 -->
-      <el-header>
-        <div class="header-container">
-          <!-- 1.1 使用响应式布局进行设计 -->
-          <el-row style="height: 100%" :gutter="0">
-            <!-- 1.1.1 导航栏logo -->
-            <el-col :xs="0" :sm="3" :md="3" :lg="3" :xl="3" style="height: 100%">
-              <!-- 1.1.1 网站logo -->
-              <div class="logo">
-                <!-- 1.1.1.1 logo图片 -->
-                <img src="@/assets/logo.png" alt="blank">
-                <!-- 1.1.1.2 网站的名称介绍 -->
-                <div><a href="#">希冀数学</a></div>
-              </div>
-            </el-col>
-            <!-- 1.1.2 导航栏功能链接 -->
-            <el-col :xs="24" :sm="13" :md="12" :lg="12" :xl="12" style="height: 100%">
-              <!-- 1.1.2 导航栏功能选择 -->
-              <div class="functions">
-                <ul>
-                  <!-- 1.1.3 具体的a标签内容 -->
-                  <li><a href="#" class="actived">首页</a></li>
-                  <li><a href="#" @click="online">线上答疑</a></li>
-                  <li><a href="#">趣味课堂</a></li>
-                  <li><a href="#">线下活动</a></li>
-                  <li><a href="#">资源推荐</a></li>
-                  <li><a href="#">教师资源</a></li>
-                </ul>
-              </div>
-            </el-col>
-            <!-- 1.1.3 导航栏搜索框 -->
-            <el-col :xs="0" :sm="4" :md="4" :lg="4" :xl="4" style="height: 100%">
-              <!-- 1.1.3 内容搜索框 -->
-              <div class="user-login">
-                <el-input prefix-icon="el-icon-search" v-model="input" placeholder="请输入内容" size="small"
-                  @keyup.enter.native="search"></el-input>
-              </div>
-            </el-col>
-            <!-- 1.1.4 导航栏登录按钮和用户头像 -->
-            <el-col :xs="0" :sm="4" :md="5" :lg="5" :xl="5" style="height: 100%">
-              <div class="user">
-                <!-- 1.1.4.1 用户登录跳转按钮 -->
-                <el-button size="mini" plain style="border: 1px solid black" @click="login"
-                  v-show="this.$store.state.flag === true">登录
-                </el-button>
-                <!-- 1.1.4.2 用户登录图片 -->
-                <el-row class="demo-avatar demo-basic">
-                  <el-col :xs="0">
-                    <div class="demo-basic--circle">
-                      <el-dropdown>
-                        <span class="el-dropdown-link">
-                          <img :src="getSrc('' + this.$store.state.imgSrc)" alt="blank" style="width: 100%;">
-                          <i class="el-icon-arrow-down el-icon--right"></i>
-                        </span>
-                        <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item icon="el-icon-turn-off"><span @click="logout">注销</span></el-dropdown-item>
-                          <el-dropdown-item icon="el-icon-chat-dot-round" class="clearfix">
-                            消息
-                            <el-badge class="mark" :value="12" />
-                          </el-dropdown-item>
-                        </el-dropdown-menu>
-                      </el-dropdown>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </el-header>
+
 
       <!-- (二)  首页主要内容-->
       <el-row :gutter="0">
-        <el-container style="height: 52rem">
+        <el-container style="height: 53rem;">
           <!-- 2.1 侧边栏内容 -->
-          <el-col :xs="0" :sm="6" :md="5" :lg="5">
+          <el-col :xs="0" :sm="6" :md="5" :lg="5" style="height: 100%">
             <div class="aside">
               <!-- 2.1.1 侧边栏内容一：教师排答疑排班表 -->
               <div class="courses">
@@ -118,7 +50,7 @@
                   <!-- 2.1.1.1.2 教师排版当天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
                     <li v-for="item in teacherList" :key="item.id">
-                      {{ item.date }}<span> {{ item.name }} </span>
+                      {{ item.date }}&nbsp;&nbsp;<span> {{ item.name }} </span>
                     </li>
                   </ul>
                   <!-- 2.1.1.1.3 教师排班下一天日期 -->
@@ -163,22 +95,27 @@
                 <!-- 2.2.1 home首页轮播图内容-->
                 <el-row :gutter="0">
                   <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                    <el-carousel :interval="4000" type="card" height="13.3333rem"
-                      style="line-height: 80px; box-shadow: 0 0 5px #c9c9c9; border-radius: 8px;">
+                    <el-carousel :interval="4000" type="card" height="14.3333rem"
+                      style="line-height: 5.333rem; box-shadow: 0 0 0.233rem black ; border-radius: 0.5333rem;">
                       <!-- v-for="item in 6" :key="item" -->
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/img1.webp" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/img2.webp" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/img4.webp" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel3.png" alt="blank" style="width: 100%; height: 100%">
+                        </h3>
+                      </el-carousel-item>
+                      <el-carousel-item>
+                        <h3 class="medium" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel4.png" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                     </el-carousel>
@@ -274,7 +211,8 @@
                               <span class="teacher-name" @click="dialogTableVisible = true">
                                 {{ item.tName }}
                               </span>
-                              <el-rate v-model="values[index]" show-text style="float: right; width: 160px"></el-rate>
+                              <el-rate v-model="values[index]" show-text style="float: right; width: 10.666rem">
+                              </el-rate>
                             </li>
                           </ul>
                           <!-- 2.2.2.2.1 最受欢迎老师介绍模态框 -->
@@ -311,16 +249,16 @@
       <!-- (三) 页脚内容 -->
       <el-row :gutter="0">
         <el-col :xs="24" :sm=24 :md="24" :lg="24">
-          <el-footer height="70px">
+          <el-footer height="4.6666rem">
             <div class="schools">
-              <h5>&copy; 特别鸣谢</h5>
+              <h5>&copy; 希冀数学 特别鸣谢</h5>
               <ul>
-                <li><a href="#">广东二师</a></li>
-                <li><a href="#">希望小学</a></li>
-                <li><a href="#">广东二师</a></li>
-                <li><a href="#">广东二师</a></li>
-                <li><a href="#">希望小学</a></li>
-                <li><a href="#">广东二师</a></li>
+                <li><i class="el-icon-school"></i> <a href="#">广东第二师范学院</a></li>
+                <li><i class="el-icon-office-building"></i> <a href="#">希望小学</a></li>
+                <li><i class="el-icon-school"></i> <a href="#">广东第二师范学院</a></li>
+                <li><i class="el-icon-office-building"></i> <a href="#">希望小学</a></li>
+                <li><i class="el-icon-school"></i> <a href="#">广东第二师范学院</a></li>
+                <li><i class="el-icon-office-building"></i> <a href="#">希望小学</a></li>
               </ul>
             </div>
           </el-footer>
@@ -344,16 +282,10 @@ export default {
     this.getActivityList();
     // 执行获取最受欢迎老师数据方法
     this.getPopularList();
-
-    if (window.localStorage.getItem("token")) {
-      this.$store.commit('changeFlag', false)
-      console.log("获取头像成功!");
-      this.$store.commit('getImgSrc', window.localStorage.getItem("avatar"))
-    }
   },
   data() {
     return {
-      values: [5, 4, 3, 4, 1, 2],
+      values: [5, 4, 3, 4, 1, 2, 3, 5],
       count: 1,
       // 用户搜索内容变量
       input: '',
@@ -396,7 +328,7 @@ export default {
         // 对不同老师的分数total进行更新
         this.popularList[i].total += this.values[i];
         // 每次都发送对应的post请求进行数据的更新
-        await this.$http.get("http://localhost:8088/api/likes",
+        await this.$http.get("/likes",
           { params: { "tID": this.popularList[i].tID, "total": this.popularList[i].total } }
         )
       }
@@ -409,7 +341,6 @@ export default {
       })
 
     }, 5000),
-
 
     // 导航栏搜索功能(新增设置了防抖操作)
     search: mydebounce(function () {
@@ -429,56 +360,12 @@ export default {
     }, 1000),
 
 
-    // 用户登录方法
-    login() {
-      this.$message({
-        type: 'success',
-        message: '前往登录页面成功!!!'
-      })
-      // 编程式路由-将页面跳转到登录页
-      this.$router.push('/login')
-    },
-
-    // 用户注销方法
-    logout() {
-      if (window.localStorage.getItem('token')) {
-        // 用户调用vuex中的changeFlag方法，将后续的flag进行转换
-        this.$store.commit('changeFlag', true)
-        // 用户调用Vuex中的getImgSrc方法，获取从接口中得到的头像地址
-        this.$store.commit('getImgSrc', '')
-
-        // 将本地存储的伪token删除
-        window.localStorage.removeItem('token')
-
-        // 用户登录注销后，调用Vuex中getImgSrc方法，赋值为没有头像的样式
-        this.$store.commit('getImgSrc', 'avatar.png')
-
-        // 网页进行对应的消息提醒
-        this.$message({
-          type: 'success',
-          message: "退出登录成功!"
-        })
-      } else {
-        // 用户还没登录点击了注销按钮的网页提醒
-        const h = this.$createElement;
-        this.$notify({
-          title: '消息提示',
-          message: h('i', { style: 'color: teal' }, '您还未登录，不能进行用户注销操作！！！')
-        })
-      }
-    },
-
-    // 返回后端传输到前端的图片地址
-    getSrc(src) {
-      return require('@/assets/' + src)
-    },
-
 
     // 用户点击反馈调用的数据
     async feedback() {
       if (this.textarea !== '') {
         // 将评论内容发送到后端，并存进数据库
-        const { data: res } = await this.$http.get('http://localhost:8088/api/feedback', {
+        const { data: res } = await this.$http.get('/feedback', {
           params: {
             "feedback": this.textarea
           }
@@ -497,34 +384,29 @@ export default {
       this.dialogFormVisible = false
     },
 
-    // 导航栏线上答疑功能
-    online() {
-      // 当用户点击了导航栏中的线上答疑链接时，页面进行对饮的跳转
-      this.$router.push("/chat");
-    },
 
     // 调用axois中的get方法发送请求，得到系统当天的日期中的教师排班数据
     async getTeacherList() {
-      const { data: res } = await this.$http.get('http://localhost:8088/api/teacher', { params: { "day": "9月11日(周日)" } });
+      const { data: res } = await this.$http.get('/teacher', { params: { "day": "9月11日(周日)" } });
       this.teacherList = res
     },
 
     // 调用axois中的get方法发送请求，得到系统下一天的日期中的教师排班数据
     async getTeacherList1() {
-      const { data: res } = await this.$http.get('http://localhost:8088/api/teacher', { params: { "day": "9月12日(周一)" } });
+      const { data: res } = await this.$http.get('/teacher', { params: { "day": "9月12日(周一)" } });
       this.teacherList1 = res
       this.height = document.body.clientWidth;
     },
 
     // 调用axois中的get方法发送请求，得到线下活动数据
     async getActivityList() {
-      const { data: res } = await this.$http.get('http://localhost:8088/api/activity');
+      const { data: res } = await this.$http.get('/activity');
       this.activityList = res
     },
 
     // 调用axois中的get方法发送请求，得到最受老师欢迎数据
     async getPopularList() {
-      const { data: res } = await this.$http.get('http://localhost:8088/api/popular');
+      const { data: res } = await this.$http.get('/popular');
       this.popularList = res;
     }
   },
@@ -557,10 +439,6 @@ export default {
   .resources-item {
     width: 100%;
   }
-
-  // .user {
-  //   display: none;
-  // }
 }
 
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
@@ -632,132 +510,6 @@ export default {
   height: 100%;
 }
 
-// home页面导航栏样式
-.el-header {
-  // background-color: rgb(184, 187, 250);
-  background-color: rgba(199, 201, 201, 0.3);
-  color: #333;
-  text-align: center;
-  // line-height: 60px;
-
-  .header-container {
-    width: 100%;
-    height: 100%;
-
-    // home页面logo样式
-    .logo {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      text-align: center;
-      justify-content: space-around;
-      text-shadow: 0.1em 0.1em 0.5em #333;
-
-      // home页面图片样式设置
-      img {
-        height: 100%;
-      }
-
-      // home页面网站名称样式
-      div {
-        line-height: 4rem;
-
-        a {
-          color: purple;
-          text-decoration: none;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-      }
-    }
-
-    // home页面功能链接样式设置
-    .functions {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
-      ul {
-        width: 100%;
-        height: 2.1875rem;
-        list-style: none;
-
-        li {
-          float: left;
-          width: 15%;
-          height: 100%;
-          line-height: 2.1875rem;
-          margin-left: 0.3125rem;
-
-          a {
-            display: block;
-            color: black;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-            border-radius: 1.3333rem;
-          }
-
-          a:hover {
-            color: purple;
-            // background: rgba(255, 165, 0, 0.3);
-            border: 1px solid black;
-            transform: scale(0.9);
-            background: rgba(0, 0, 0, 0.3);
-            transform: scale(0.9);
-          }
-        }
-
-        .actived {
-          color: purple;
-          border: 1px solid black;
-          background: rgba(0, 0, 0, 0.3);
-        }
-      }
-    }
-
-    // 导航栏搜索框样式
-    .el-input__inner {
-      // border: 1px solid white;
-      border: 0.01333rem solid black;
-    }
-
-    // 内容搜索框
-    .user-login {
-      width: 100%;
-      height: 100%;
-      line-height: 4rem;
-    }
-
-    // 用户登录内容样式
-    .user {
-      height: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-
-      .demo-basic--circle {
-        height: 3rem;
-        width: 3rem;
-        border-radius: 50%;
-        overflow: hidden;
-
-        .el-dropdown-link {
-          cursor: pointer;
-          color: #409EFF;
-        }
-
-        .el-icon-arrow-down {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-
-}
-
 // home页面页脚样式
 .el-footer {
   // background-color: rgb(184, 187, 250);
@@ -772,19 +524,29 @@ export default {
     font-weight: 600;
 
     ul {
-      list-style-type: none;
-      // border: 1px solid red;
+      display: flex;
       height: 65%;
+      flex-direction: row;
+      justify-content: space-around;
+      list-style-type: none;
       line-height: 3.13333rem;
 
       li {
-        display: inline-block;
-        width: 15%;
-        height: 80%;
-        margin: 0.3333rem;
-        line-height: 224%;
-        border-radius: 0.333rem;
-        border: 0.0666rem solid black;
+        // display: inline-block;
+        width: 12%;
+        height: 70%;
+        margin: 0.2333rem;
+        line-height: 200%;
+        border-radius: 0.666rem;
+        border: 0.13333rem solid black;
+        box-shadow: 0 0 0.6666rem rgba(0, 0, 0, 0.8);
+        
+
+        a {
+          color: black;
+          font-size: 0.8333rem;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -794,13 +556,11 @@ export default {
 .aside {
   height: 100%;
   // background-color: rgb(184, 187, 222);
-  background-color: rgba(201, 201, 201, 0.2);
   color: #333;
   text-align: center;
-  // border-bottom: 1px solid #c9c9c9;
-  // border-top: 1px solid #c9c9c9;
+  background-color: rgba(201, 201, 201, 0.2);
   border-right: 0.06666rem solid #c9c9c9;
-  border-radius: 0.3333rem;
+
 
   // 侧边栏内容一：线上答疑教师排班表样式
   .courses {
@@ -810,27 +570,28 @@ export default {
     left: 50%;
     min-height: 19.33333rem;
     border-radius: 0.53333rem;
-    transform: translate(-50%, -50%);
     box-shadow: 0 0 10px white;
+    transform: translate(-50%, -50%);
     background: rgba(250, 250, 250, 1);
-    border: 2px solid rgb(64, 158, 255);
+    // border: 2px solid rgba(64, 158, 255, 0.5);
+    box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
     // 分页按钮样式
     .pagination {
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
       margin-top: 0.666rem;
       color: rgb(0, 66, 149);
+      justify-content: space-around;
     }
 
     // 教师排班当天日期样式
     .day {
       text-align: left;
       padding: 0.8rem;
-      font-size: 0.73333rem;
       font-weight: 600;
+      font-size: 0.73333rem;
       border-bottom: 0.06666rem solid #c9c9c9;
     }
 
@@ -851,15 +612,17 @@ export default {
   // 侧边内容二：线上活动展示样式
   .activities {
     position: relative;
-    top: 33%;
+    top: 35%;
     left: 50%;
     width: 85%;
     min-height: 45%;
     border-radius: 0.53333rem;
     box-shadow: 0 0 1.3333rem white;
-    background: rgba(250, 250, 250, 1);
     transform: translate(-50%, -50%);
-    border: 0.13333rem solid rgb(255, 235, 59);
+    background: rgba(250, 250, 250, 1);
+    // border: 0.13333rem solid rgb(255, 235, 59);
+    box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
+
 
     // 线上活动数据展示样式
     .activities-item {
@@ -870,9 +633,9 @@ export default {
 
       // 具体的数据样式
       li {
+        font-weight: 600;
         padding: 0.3333rem;
         margin-bottom: 0.13333rem;
-        font-weight: 600;
         border: 0.06666rem solid #c9c9c9;
 
         // 线上内容链接样式
@@ -888,7 +651,7 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-      margin-top: 0.6666rem;
+      margin-top: 0.1111rem;
       color: rgb(0, 66, 149);
     }
   }
@@ -979,6 +742,7 @@ export default {
     .resources-favor {
       width: 100%;
       height: 100%;
+      font-weight: 600;
       border-radius: 0.3333rem;
       box-shadow: 0 0 0.6666rem #c9c9c9;
 
@@ -1037,16 +801,14 @@ export default {
   }
 }
 
-// body>.el-container {
-//   margin-bottom: 40px;
-// }
+
+.el-container {
+  // margin-bottom: 40px;
+  display: block !important;
+}
 
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {
   line-height: 17.333rem;
 }
-
-// .el-container:nth-child(7) .el-aside {
-//   line-height: 320px;
-// }
 </style>
