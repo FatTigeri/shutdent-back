@@ -22,7 +22,7 @@
                             <!-- 登录框密码内容 -->
                             <div class="login-password">
                                 <el-input type="password" v-model="password" placeholder="请输入用户密码" show-password
-                                    prefix-icon="el-icon-setting"></el-input>
+                                    prefix-icon="el-icon-lock"></el-input>
                                 <span class="info2" v-if="context === 'psw_err'"><strong>{{ info2 }}</strong></span>
                             </div>
                             <!-- 新用户登录注册链接 -->
@@ -77,7 +77,7 @@ export default {
             this.$store.commit("setToken", this.username)
             // 调用ajax进行Post请求(注意：下方使用了qs模块中的一个功能，在后续开发也要使用到的)
             if (this.username !== '') {
-                const { data: res } = await this.$http.post("http://localhost:8088/api/user", this.$qs.stringify({
+                const { data: res } = await this.$http.post("/user", this.$qs.stringify({
                     "username": this.username,
                     "password": this.password
                 }))
