@@ -94,7 +94,7 @@ export default {
                     // 将从后台中获取到的用户头像名设置为avatar变量
                     window.localStorage.setItem('avatar', res)
                     // 使用编程式导航将页面退返回首页
-                    this.$router.push("/home")
+                    this.$router.push("/math/home")
                 } else {
                     // 控制提示信息展示变量的赋值
                     this.context = res
