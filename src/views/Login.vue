@@ -91,7 +91,7 @@ export default {
                     // 调用Vuex中的setToken方法，设置对应的token变量
                     window.localStorage.setItem('token', this.username)
                     // 使用编程式导航将页面退返回首页
-                    this.$router.push("/home")
+                    this.$router.push("/math/home")
                 } else {
                     // 控制提示信息展示变量的赋值
                     this.context = res
