@@ -52,6 +52,9 @@
             <!-- (二) 用户头像上传模态框-->
             <el-dialog title="头像上传功能" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
+                    <!-- 进行头像消息的提醒  -->
+                    <el-form-item label="提醒:为防止出现拉伸与缩放情况  请上传1:1图片形式头像">
+                    </el-form-item>
                     <!-- 2.1 头像上传 -->
                     <el-form-item label="上传" :label-width="formLabelWidth">
                         <!-- 2.1.1 头像上传框 -->

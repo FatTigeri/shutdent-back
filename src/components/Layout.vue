@@ -21,9 +21,9 @@
                         <div class="functions">
                             <ul>
                                 <!-- 1.1.3 具体的a标签内容 -->
-                                <li><a href="#/home" :class="{active: 0 ===  cur}" @click="change(0)">首页</a></li>
-                                <li><a href="#/chat" :class="{active: 1 ===  cur}" @click="change(1)">线上答疑</a></li>
-                                <li><a href="#/room" :class="{active: 2 ===  cur}" @click="change(2)">趣味课堂</a></li>
+                                <li><a href="#/math/home" :class="{active: 0 ===  cur}" @click="change(0)">首页</a></li>
+                                <li><a href="#/math/chat" :class="{active: 1 ===  cur}" @click="change(1)">线上答疑</a></li>
+                                <li><a href="#/math/room" :class="{active: 2 ===  cur}" @click="change(2)">趣味课堂</a></li>
                                 <li><a href="#" :class="{active: 3 ===  cur}" @click="change(3)">线下活动</a></li>
                                 <li><a href="#" :class="{active: 4 ===  cur}" @click="change(4)">资源推荐</a></li>
                                 <li><a href="#" :class="{active: 5 ===  cur}" @click="change(5)">教师资源</a></li>
@@ -56,12 +56,15 @@
                                                 <i class="el-icon-arrow-down el-icon--right"></i>
                                             </span>
                                             <el-dropdown-menu slot="dropdown">
-                                                <el-dropdown-item icon="el-icon-turn-off"><span
-                                                        @click="logout">注销</span>
+                                                <el-dropdown-item icon="el-icon-turn-off">
+                                                    <span @click="logout">注销</span>
                                                 </el-dropdown-item>
                                                 <el-dropdown-item icon="el-icon-chat-dot-round" class="clearfix">
                                                     消息
                                                     <el-badge class="mark" :value="12" />
+                                                </el-dropdown-item>
+                                                <el-dropdown-item icon="el-icon-setting" class="clearfix">
+                                                    <span @click="admin">教师后台管理</span>
                                                 </el-dropdown-item>
                                             </el-dropdown-menu>
                                         </el-dropdown>
@@ -73,6 +76,8 @@
                 </el-row>
             </div>
         </el-header>
+        <router-link to="/math/home"></router-link>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -183,6 +188,40 @@ export default {
         getSrc(src) {
             return require('@/assets/' + src)
         },
+
+        // 用户判断是否为教师方法
+        async admin() {
+            // 先对客户端中的token进行读取
+            const username = window.localStorage.getItem('token')
+            // 若用户已经登陆
+            if (username) {
+                // 异步发送get请求进行当前用户是否为教师的判断
+                const { data: res } = await this.$http.get('/checkTeacher?username=' + username)
+                // 用户是教师
+                if (res) {
+                    this.$router.replace('/administrator')
+                    this.$store.commit('changeAlive')
+                    this.$message({
+                        type: 'success',
+                        message: username + '欢迎您!!!'
+                    })
+                    // 用户不是教师
+                } else {
+                    const h = this.$createElement;
+                    this.$notify({
+                        title: '消息提示',
+                        message: h('i', { style: 'color: teal' }, '您不是教师，无权进入！！！')
+                    })
+                }
+            } else {
+                // 用户还没登录点击了后台管理页面的网页提醒
+                const h = this.$createElement;
+                this.$notify({
+                    title: '消息提示',
+                    message: h('i', { style: 'color: teal' }, '请先登录！！！')
+                })
+            }
+        }
     }
 }
 </script>
@@ -258,6 +297,7 @@ body {
                     line-height: 2.1875rem;
                     margin-left: 0.3125rem;
 
+                    // 对应a的标签样式
                     a {
                         display: block;
                         width: 100%;
@@ -269,6 +309,7 @@ body {
                         border-radius: 1.3333rem;
                     }
 
+                    // a标签鼠标经过时的样式
                     a:hover {
                         color: purple;
                         transform: scale(0.9);
@@ -277,6 +318,7 @@ body {
                     }
                 }
 
+                // a标签被选中时的样式
                 .active {
                     color: purple;
                     transform: scale(0.9);

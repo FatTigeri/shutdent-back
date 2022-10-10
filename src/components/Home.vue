@@ -31,7 +31,6 @@
     <el-container>
       <!-- (一) 首页导航栏 -->
 
-
       <!-- (二)  首页主要内容-->
       <el-row :gutter="0">
         <el-container style="height: 53rem;">
@@ -136,7 +135,7 @@
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
                                   <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">课题:解三角问题</a>
+                                  <a href="#/course?cid=1">课题:解三角问题</a>
                                   <a href="#">授课人: 于静</a>
                                 </li>
                               </el-col>
@@ -540,7 +539,7 @@ export default {
         border-radius: 0.666rem;
         border: 0.13333rem solid black;
         box-shadow: 0 0 0.6666rem rgba(0, 0, 0, 0.8);
-        
+
 
         a {
           color: black;

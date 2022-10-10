@@ -13,7 +13,7 @@
                         <div class="contents1">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li>11</li>
+                                    <li><img src="@/assets/罗斯.jpg" alt="blank"></li>
                                     <li>22</li>
                                     <li>33</li>
                                     <li>11</li>
@@ -56,22 +56,22 @@
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math1.png" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math1.png" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math3.png" alt="blank"> </li>
+                                        <li><a href="#"><img src="@/assets/math3.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -84,22 +84,22 @@
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math5.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math5.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math6.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math6.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -112,22 +112,22 @@
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math1.png" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math1.png" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math3.png" alt="blank"> </li>
+                                        <li><a href="#"><img src="@/assets/math3.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><img src="@/assets/math2.jpg" alt="blank"></li>
+                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -142,9 +142,8 @@
                     <div class="ranking">
                         <div class="rank-text">积分排行榜</div>
                         <el-table v-loading="loading" element-loading-text="数据拼命加载中"
-                            element-loading-spinner="el-icon-loading"
-                            element-loading-background="rgba(0, 0, 0, 0.8)" :data="tableData" style="width: 100%"
-                            stripe>
+                            element-loading-spinner="el-icon-loading" element-loading-background="rgba(250, 250, 250, 0.8)"
+                            :data="tableData" style="width: 100%" stripe>
                             <!-- 3.1.1 用户的ID展示 -->
                             <el-table-column label="ID" width="55">
                                 <template slot-scope="scope">
@@ -307,9 +306,18 @@ html {
                 justify-content: space-evenly;
 
                 li {
-                    width: 25%;
-                    height: 25%;
-                    border: 1px solid red;
+                    width: 30%;
+                    height: 30%;
+                    text-align: center;
+                    // border: 1px solid red;
+
+                    img {
+                        width: 80%;
+                        margin: 0 auto;
+                        border: 1px solid red;
+                        // height: 80%; 
+                    }
+
                 }
             }
         }

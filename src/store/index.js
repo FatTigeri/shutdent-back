@@ -14,6 +14,7 @@ export default new Vuex.Store({
     upLoadImg: '',
     // 项目导航栏处的当前位置变量
     current: 0,
+    alive: true
   },
 
   // 
@@ -23,6 +24,9 @@ export default new Vuex.Store({
 
   // 
   mutations: {
+    changeAlive(state) {
+      state.alive = !state.alive
+    },
     // 控制全局变量state的状态
     changeFlag(state, result) {
       state.flag = result
