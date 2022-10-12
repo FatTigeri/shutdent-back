@@ -6,7 +6,6 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <img :src="getSrc('' + this.$store.state.imgSrc)" alt="">
-                            <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
                         </div>
                         <div class="text item">
                             <div class="word">昵称: </div>

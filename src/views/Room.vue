@@ -13,15 +13,15 @@
                         <div class="contents1">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li><img src="@/assets/罗斯.jpg" alt="blank"></li>
-                                    <li>22</li>
-                                    <li>33</li>
-                                    <li>11</li>
-                                    <li>22</li>
-                                    <li>33</li>
-                                    <li>11</li>
-                                    <li>22</li>
-                                    <li>33</li>
+                                    <li><a href="#"><img src="@/assets/game1.webp" alt="blank"></a></li>
+                                    <li><a href="#" @click="jumpTo"><img src="@/assets/game2.webp" alt="blank"></a></li>
+                                    <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg" alt="blank"></a></li>
+                                    <li><a href="/static/snake.html"><img src="@/assets/snake.webp" alt="blank"></a></li>
+                                    <li><a href="/static/word.html"><img src="@/assets/word.webp" alt="blank"></a></li>
+                                    <li><a href="/static/Tiger.html"><img src="@/assets/tiger.webp" alt="blank"></a></li>
+                                    <li><a href="/static/bird.html"><img src="@/assets/bird.webp" alt="blank"></a></li>
+                                    <li><a href="/static/number.html"><img src="@/assets/number.jpg" alt="blank"></a></li>
+                                    <li><a href="/static/white.html"><img src="@/assets/white.png" alt="blank"></a></li>
                                 </ul>
                             </el-row>
                         </div>
@@ -142,8 +142,9 @@
                     <div class="ranking">
                         <div class="rank-text">积分排行榜</div>
                         <el-table v-loading="loading" element-loading-text="数据拼命加载中"
-                            element-loading-spinner="el-icon-loading" element-loading-background="rgba(250, 250, 250, 0.8)"
-                            :data="tableData" style="width: 100%" stripe>
+                            element-loading-spinner="el-icon-loading"
+                            element-loading-background="rgba(250, 250, 250, 0.8)" :data="tableData" style="width: 100%"
+                            stripe>
                             <!-- 3.1.1 用户的ID展示 -->
                             <el-table-column label="ID" width="55">
                                 <template slot-scope="scope">
@@ -194,7 +195,11 @@ export default {
             setTimeout(() => {
                 this.loading = false
             }, 2000)
+        },
+        jumpTo() {
+            window.location.href = '/static/2048.html'
         }
+
     },
     data() {
         return {
@@ -312,12 +317,14 @@ html {
                     // border: 1px solid red;
 
                     img {
-                        width: 80%;
+                        width: 70%;
                         margin: 0 auto;
-                        border: 1px solid red;
-                        // height: 80%; 
                     }
 
+                    // a{
+                    //     display: block;
+                    //     width: 100%;
+                    // }
                 }
             }
         }
