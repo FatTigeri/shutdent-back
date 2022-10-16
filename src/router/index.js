@@ -14,6 +14,7 @@ import Course from '@/views/Course.vue'
 import Administrator from '@/components/Administrator.vue'
 import Teacher from '@/views/Teacher.vue'
 import Answer from '@/views/Answer.vue'
+import Resource from '@/components/Resource.vue'
 
 const router = new VueRouter({
   routes: [
@@ -25,6 +26,7 @@ const router = new VueRouter({
         { path: 'room', component: Room },
         { path: 'chat', component: Chat },
         { path: 'course', component: Course },
+        { path: 'resource', component: Resource}
       ]
     },
     { path: '', redirect: '/math/home' },

@@ -6,7 +6,7 @@
       <el-col :xs="0">
         <div class="functions-fix">
           <ul>
-            <li><a href="#">客服</a></li>
+            <li><a href="#" @click="linkTo()">客服</a></li>
             <li @click="dialogFormVisible = true"><a href="#">反馈</a></li>
             <li><a href="#layout-container">返顶</a></li>
           </ul>
@@ -44,7 +44,7 @@
                 <div style="">
                   <!-- 2.1.1.1.1 教师排班当天日期 -->
                   <div class="day">
-                    {{ teacherList[0].day }}
+                    <a href="#">{{ currentDay + '(' + currentWeek +')' }}</a>
                   </div>
                   <!-- 2.1.1.1.2 教师排版当天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -54,7 +54,7 @@
                   </ul>
                   <!-- 2.1.1.1.3 教师排班下一天日期 -->
                   <div class="day">
-                    {{ teacherList1[0].day }}
+                    <a href="#">{{ nextDay + '(' + nextweek +')' }}</a>
                   </div>
                   <!-- 2.1.1.4 教师排版下一天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -309,6 +309,72 @@ export default {
       img: ''
     }
   },
+  computed: {
+    // 根据系统的当前时间动态生成今天的日期
+    currentDay: function () {
+      const now = new Date()
+      return (now.getMonth() + 1) + '月' + now.getDate() + '日'
+    },
+    // 根据系统的当前时间动态生成明天的日期
+    nextDay: function () {
+      const now = new Date()
+      return (now.getMonth() + 1) + '月' + (now.getDate() + 1) + '日'
+    },
+    // 根据系统的当前时间动态生成今天是周几
+    currentWeek: function () {
+      const now = new Date()
+      switch (now.getDay()) {
+        case 0:
+          return '周日'
+          break
+        case 1:
+          return '周一'
+          break
+        case 2:
+          return '周二'
+          break
+        case 3:
+          return '周三'
+          break
+        case 4:
+          return '周四'
+          break
+        case 5:
+          return '周五'
+          break
+        case 6:
+          return '周六'
+          break
+      }
+    },
+    // 根据系统的当前时间动态生成明天是周几
+    nextweek: function () {
+      const now = new Date()
+      switch (now.getDay()) {
+        case 0:
+          return '周一'
+          break
+        case 1:
+          return '周二'
+          break
+        case 2:
+          return '周三'
+          break
+        case 3:
+          return '周四'
+          break
+        case 4:
+          return '周五'
+          break
+        case 5:
+          return '周六'
+          break
+        case 6:
+          return '周日'
+          break
+      }
+    }
+  },
   methods: {
     // 最受欢迎老师可打分题型(使用到了节流操作)
     open1: mythrollte(function () {
@@ -338,7 +404,6 @@ export default {
         title: '消息提示',
         message: h('i', { style: 'color: teal' }, '感谢您的喜欢~~~')
       })
-
     }, 5000),
 
     // 导航栏搜索功能(新增设置了防抖操作)
@@ -358,7 +423,13 @@ export default {
       }
     }, 1000),
 
-
+    // 当用户点击了home页面中的客服按钮时进行的操作
+    linkTo() {
+      // 改变vuex中的current状态
+      this.$store.commit('changeCurrent', 1)
+      // 使用编程式路由将页面改为线上答疑页面
+      this.$router.push('/math/chat')
+    },
 
     // 用户点击反馈调用的数据
     async feedback() {
@@ -511,7 +582,6 @@ export default {
 
 // home页面页脚样式
 .el-footer {
-  // background-color: rgb(184, 187, 250);
   background-color: rgba(201, 201, 201, 0.2);
 
   // 致谢学校内容包括框样式
@@ -572,7 +642,6 @@ export default {
     box-shadow: 0 0 10px white;
     transform: translate(-50%, -50%);
     background: rgba(250, 250, 250, 1);
-    // border: 2px solid rgba(64, 158, 255, 0.5);
     box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
@@ -590,8 +659,13 @@ export default {
       text-align: left;
       padding: 0.8rem;
       font-weight: 600;
-      font-size: 0.73333rem;
+      font-size: 0.9rem;
       border-bottom: 0.06666rem solid #c9c9c9;
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
     }
 
     // 教师排班内容展示样式

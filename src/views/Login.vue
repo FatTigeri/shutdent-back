@@ -74,7 +74,7 @@ export default {
             // 调用vuex中的changeFlag方法将flag进行更改
             this.$store.commit("changeFlag", false)
             // 调用Vuex中的setToken方法将state中的token变量进行赋值
-            this.$store.commit("setToken", this.username)
+            this.$store.commit("setUsername", this.username)
             // 调用ajax进行Post请求(注意：下方使用了qs模块中的一个功能，在后续开发也要使用到的)
             if (this.username !== '') {
                 const { data: res } = await this.$http.post("/user", this.$qs.stringify({
@@ -91,6 +91,7 @@ export default {
                     })
                     // 设置对应的token变量
                     window.localStorage.setItem('token', this.username)
+                    window.sessionStorage.setItem("user", JSON.stringify(this.username))
                     // 将从后台中获取到的用户头像名设置为avatar变量
                     window.localStorage.setItem('avatar', res)
                     // 使用编程式导航将页面退返回首页

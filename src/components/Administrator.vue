@@ -62,7 +62,7 @@
                                             </li>
                                             <!-- 2.1.3 答疑入口选项 -->
                                             <li>
-                                                <a href="#" :class="{actived: cur === 1}" @click="change(1)"><i
+                                                <a href="#/math/chat" :class="{actived: cur === 1}" @click="change(1)"><i
                                                         class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
                                             </li>
                                             <!-- 2.1.4 课程上传选项 -->
@@ -331,6 +331,7 @@ export default {
 
                         // 选项被选中时的样式
                         .active {
+                            position: relative;
 
                             // 小三角样式 注意：content是必须要写的
                             &::after {
@@ -341,7 +342,7 @@ export default {
                                 content: "";
                                 width: 0;
                                 height: 0;
-                                border: 5px solid rgba(0, 0, 0, 0);
+                                border: 0.333rem solid rgba(0, 0, 0, 0);
                                 border-top-color: black;
                             }
 

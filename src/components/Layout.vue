@@ -25,7 +25,8 @@
                                 <li><a href="#/math/chat" :class="{active: 1 ===  cur}" @click="change(1)">线上答疑</a></li>
                                 <li><a href="#/math/room" :class="{active: 2 ===  cur}" @click="change(2)">趣味课堂</a></li>
                                 <li><a href="#" :class="{active: 3 ===  cur}" @click="change(3)">线下活动</a></li>
-                                <li><a href="#" :class="{active: 4 ===  cur}" @click="change(4)">资源推荐</a></li>
+                                <li><a href="#/math/resource" :class="{active: 4 ===  cur}" @click="change(4)">资源推荐</a>
+                                </li>
                                 <li><a href="#" :class="{active: 5 ===  cur}" @click="change(5)">教师资源</a></li>
                             </ul>
                         </div>
@@ -106,7 +107,10 @@ export default {
         }
     },
     computed: {
-
+        // 时刻计算当前的功能索引位置
+        cur: function () {
+            return this.$store.state.current
+        }
     },
     data() {
         return {
@@ -118,7 +122,6 @@ export default {
             // 控制反馈模态框宽度变量
             formLabelWidth: '6.66666rem',
             // 当前导航栏的索引
-            cur: 0
         }
     },
     methods: {
@@ -165,6 +168,7 @@ export default {
 
                 // 将本地存储的伪token删除
                 window.localStorage.removeItem('token')
+                window.localStorage.removeItem('user')
 
                 // 用户登录注销后，调用Vuex中getImgSrc方法，赋值为没有头像的样式
                 this.$store.commit('getImgSrc', 'avatar.png')
@@ -307,6 +311,7 @@ body {
                         font-size: 0.9333rem;
                         text-decoration: none;
                         border-radius: 1.3333rem;
+
                     }
 
                     // a标签鼠标经过时的样式
@@ -324,6 +329,19 @@ body {
                     transform: scale(0.9);
                     border: 1px solid black;
                     background: rgba(0, 0, 0, 0.3);
+
+                    // 使用伪元素设置对应的三角
+                    &::after {
+                        display: block;
+                        position: absolute;
+                        top: 2.2rem;
+                        left: 2.666rem;
+                        content: '';
+                        width: 0;
+                        height: 0;
+                        border: 0.333rem solid rgba(0, 0, 0, 0);
+                        border-top-color: rgba(0, 0, 0, 0.6);
+                    }
                 }
             }
         }

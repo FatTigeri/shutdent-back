@@ -1,28 +1,38 @@
 <template>
+    <!-- teacher页面响应式布局 -->
     <el-row :gutter="0" style="height: 100%;">
         <el-col :xs="24" :sm="24" :md="24" :lg="24" style="height: 99%;">
+            <!-- 页面的最外层盒子 -->
             <div id="teacher-container">
+                <!-- 页面的数据内容盒子 -->
                 <div class="container">
+                    <!-- 数据信息显示卡片 -->
                     <el-card class="box-card">
+                        <!-- 卡片头部数据 -->
                         <div slot="header" class="clearfix">
                             <img :src="getSrc('' + this.$store.state.imgSrc)" alt="">
                         </div>
+                        <!-- 卡片内容数据一-昵称 -->
                         <div class="text item">
                             <div class="word">昵称: </div>
                             <div>{{ teacherInfo.tname }}</div>
                         </div>
+                        <!-- 卡片内容数据二-简介 -->
                         <div class="text item">
                             <div class="word">简介: </div>
                             <div>{{ teacherInfo.info }}</div>
                         </div>
+                        <!-- 卡片数据内容三-微信 -->
                         <div class="text item">
                             <div class="word">微信: </div>
                             <div>{{ teacherInfo.weChat }}</div>
                         </div>
+                        <!-- 卡片数据内容四-邮箱 -->
                         <div class="text item">
                             <div class="word">邮箱: </div>
                             <div>{{ teacherInfo.email }}</div>
                         </div>
+                        <!-- 卡片数据内容五-联系方式 -->
                         <div class="text item">
                             <div class="word">联系方式: </div>
                             <div>{{ teacherInfo.tel }}</div>
@@ -50,6 +60,7 @@ export default {
         getSrc(src) {
             return require('@/assets/' + src)
         },
+        // 获取教师资料信息方法
         async getTeacherInfo() {
             let name = window.localStorage.getItem('token')
             const { data: res } = await this.$http.get("/teacherInfo?name=" + name)
@@ -102,11 +113,13 @@ export default {
     padding: 0;
 }
 
+// 整个页面盒子样式
 #teacher-container {
     height: 100%;
     border: 0.1rem solid #c9c9c9;
     background: rgba(250, 250, 250, 1);
 
+    // 数据信息盒子样式
     .container {
         width: 80%;
         height: 80%;
@@ -115,14 +128,17 @@ export default {
         border-radius: 0.5rem;
         box-shadow: 0 0 0.6666rem #c9c9c9;
 
+        // 卡片文字样式
         .text {
             font-size: 14px;
         }
 
+        // 卡片内容样式
         .item {
             margin-bottom: 18px;
             display: flex;
 
+            // 信息显示文字样式
             .word {
                 width: 50%;
                 text-align: right;
