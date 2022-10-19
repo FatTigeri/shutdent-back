@@ -24,3 +24,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 2022/10/16 完善了home页面中线上答疑排班表的动态显示时间
 
 2022/10/16 初步模拟化了客服功能
+
+2022/10/18 增加了用户登录的验证码功能

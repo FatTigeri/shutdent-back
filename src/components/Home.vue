@@ -793,6 +793,7 @@ export default {
             margin-bottom: 0.26666rem;
             border-radius: 0.33333rem;
             border: 0.0666rem solid #c9c9c9;
+            z-index: 999;
 
             // 不同内容的文字介绍样式
             a {
@@ -806,6 +807,19 @@ export default {
               width: 100%;
               height: 72%;
             }
+          }
+
+          div::before {
+            display: none;
+            position: absolute;
+            width: 22%;
+            height: 100%;
+            content: '';
+            background: rgba(0, 0, 0, .4) url(@/assets/arr.jpg) no-repeat center;
+          }
+
+          div:hover::before {
+            display: block;
           }
         }
       }

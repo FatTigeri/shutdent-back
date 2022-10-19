@@ -166,9 +166,10 @@ export default {
                 // 用户调用Vuex中的getImgSrc方法，获取从接口中得到的头像地址
                 this.$store.commit('getImgSrc', '')
 
-                // 将本地存储的伪token删除
+                // 将本地存储的变量删除
                 window.localStorage.removeItem('token')
-                window.localStorage.removeItem('user')
+                window.sessionStorage.removeItem('user')
+                window.localStorage.removeItem('avatar')
 
                 // 用户登录注销后，调用Vuex中getImgSrc方法，赋值为没有头像的样式
                 this.$store.commit('getImgSrc', 'avatar.png')
