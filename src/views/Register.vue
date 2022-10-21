@@ -18,7 +18,7 @@
                             <!-- 1.2.2.1.1 用户名输入框 -->
                             <el-form-item label="用户名:" prop="username">
                                 <el-input type="username" v-model="ruleForm.username" autocomplete="off"
-                                    prefix-icon="el-icon-user" @blur="jUsername">
+                                    prefix-icon="el-icon-user">
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.2 密码输入框 -->
@@ -53,8 +53,8 @@
             <el-dialog title="头像上传功能" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
                     <!-- 进行头像消息的提醒  -->
-                    <el-form-item label="提醒:为防止出现拉伸与缩放情况  请上传1:1图片形式头像">
-                    </el-form-item>
+                    <el-form-item label="提醒:为防止出现拉伸与缩放情况  请上传1:1比例图片">
+                    </el-form-item> 
                     <!-- 2.1 头像上传 -->
                     <el-form-item label="上传" :label-width="formLabelWidth">
                         <!-- 2.1.1 头像上传框 -->
@@ -150,7 +150,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             // 新用户头像上传到服务器的网址
-            uploadUrl: '/upload'
+            uploadUrl: 'http://localhost:8088/api/upload'
         };
     },
     methods: {

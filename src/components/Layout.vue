@@ -60,9 +60,11 @@
                                                 <el-dropdown-item icon="el-icon-turn-off">
                                                     <span @click="logout">注销</span>
                                                 </el-dropdown-item>
-                                                <el-dropdown-item icon="el-icon-chat-dot-round" class="clearfix">
+                                                <!-- 注意：此处的用户消息内容只有当用户进行登录后才进行展示 -->
+                                                <el-dropdown-item icon="el-icon-chat-dot-round" class="clearfix"
+                                                    v-show="this.$store.state.flag === false">
                                                     消息
-                                                    <el-badge class="mark" :value="12" />
+                                                    <el-badge class="mark" :value="count" />
                                                 </el-dropdown-item>
                                                 <el-dropdown-item icon="el-icon-setting" class="clearfix">
                                                     <span @click="admin">教师后台管理</span>
@@ -121,7 +123,8 @@ export default {
             dialogFormVisible: false,
             // 控制反馈模态框宽度变量
             formLabelWidth: '6.66666rem',
-            // 当前导航栏的索引
+            // 数据库中answer表与当前登录用户对应的消息条数
+            count: 0
         }
     },
     methods: {

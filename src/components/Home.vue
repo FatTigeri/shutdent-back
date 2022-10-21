@@ -787,6 +787,7 @@ export default {
 
           // 资源推荐个课程包括框样式
           li {
+            position: relative;
             width: 98%;
             font-size: 0.8rem;
             text-align: left;
@@ -809,16 +810,17 @@ export default {
             }
           }
 
-          div::before {
+          li::before {
             display: none;
             position: absolute;
-            width: 22%;
+            width: 100%;
             height: 100%;
             content: '';
-            background: rgba(0, 0, 0, .4) url(@/assets/arr.jpg) no-repeat center;
+            background: rgba(0, 0, 0, .4) url(@/assets/arr.png) no-repeat center;
+            background-size: 2rem;
           }
 
-          div:hover::before {
+          li:hover::before {
             display: block;
           }
         }

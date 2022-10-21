@@ -10,7 +10,7 @@
                     <el-card class="box-card">
                         <!-- 卡片头部数据 -->
                         <div slot="header" class="clearfix">
-                            <img :src="getSrc('' + this.$store.state.imgSrc)" alt="">
+                            <img :src="getSrc('' + imgSrc)" alt="">
                         </div>
                         <!-- 卡片内容数据一-昵称 -->
                         <div class="text item">
@@ -52,7 +52,10 @@ export default {
     },
     data() {
         return {
-            teacherInfo: []
+            // 教师信息数组
+            teacherInfo: [],
+            // 获取教师头像
+            imgSrc: window.localStorage.getItem('avatar')
         }
     },
     methods: {

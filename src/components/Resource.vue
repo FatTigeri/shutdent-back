@@ -28,7 +28,7 @@
                             <el-radio :label="9">名人故事</el-radio>
                             <el-radio :label="4">趣味数学</el-radio>
                             <el-radio :label="5">考点总结</el-radio>
-                            <el-radio :label="5">解题技巧</el-radio>
+                            <el-radio :label="6">解题技巧</el-radio>
                         </el-radio-group>
                     </div>
                     <div class="other">

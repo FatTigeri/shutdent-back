@@ -15,12 +15,16 @@
                                 <ul>
                                     <li><a href="#"><img src="@/assets/game1.webp" alt="blank"></a></li>
                                     <li><a href="#" @click="jumpTo"><img src="@/assets/game2.webp" alt="blank"></a></li>
-                                    <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg" alt="blank"></a></li>
-                                    <li><a href="/static/snake.html"><img src="@/assets/snake.webp" alt="blank"></a></li>
+                                    <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg"
+                                                alt="blank"></a></li>
+                                    <li><a href="/static/snake.html"><img src="@/assets/snake.webp" alt="blank"></a>
+                                    </li>
                                     <li><a href="/static/word.html"><img src="@/assets/word.webp" alt="blank"></a></li>
-                                    <li><a href="/static/Tiger.html"><img src="@/assets/tiger.webp" alt="blank"></a></li>
+                                    <li><a href="/static/Tiger.html"><img src="@/assets/tiger.webp" alt="blank"></a>
+                                    </li>
                                     <li><a href="/static/bird.html"><img src="@/assets/bird.webp" alt="blank"></a></li>
-                                    <li><a href="/static/number.html"><img src="@/assets/number.jpg" alt="blank"></a></li>
+                                    <li><a href="/static/number.html"><img src="@/assets/number.jpg" alt="blank"></a>
+                                    </li>
                                     <li><a href="/static/white.html"><img src="@/assets/white.png" alt="blank"></a></li>
                                 </ul>
                             </el-row>
@@ -440,12 +444,29 @@ html {
 
                     // 不同推荐个课程包括框样式
                     li {
+                        position: relative;
                         width: 98%;
                         font-size: 0.8rem;
                         text-align: left;
                         margin-bottom: 0.26666rem;
                         border-radius: 0.33333rem;
                         border: 0.088888rem solid rgb(92, 48, 21);
+
+                        // 使用伪元素进行布局样式
+                        &::before {
+                            display: none;
+                            position: absolute;
+                            content: '';
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0, 0, 0, .4) url(@/assets/arr.png) no-repeat center;
+                            background-size: 2rem;
+                        }
+
+                        // 当用户鼠标经过时显示伪元素的内容
+                        &:hover::before {
+                            display: block;
+                        }
 
                         // 不同内容的文字介绍样式
                         a {

@@ -23,7 +23,7 @@
                                 <!-- 1.2 中间搜索框内容 -->
                                 <div class="nav-m">
                                     <div class="content-m">
-                                        <el-input size="mini" placeholder="请选择日期" suffix-icon="el-icon-date"
+                                        <el-input size="mini" placeholder="请输入搜索内容" suffix-icon="el-icon-search"
                                             v-model="input1">
                                         </el-input>
                                     </div>
@@ -41,7 +41,7 @@
                         </el-col>
                     </el-row>
                     <!-- (二) 非导航内容，数据的展示区域 -->
-                    <el-row :gutter="0" class="el-row2">
+                    <el-row :gutter="0" class="el-row2" style="height: 100%">
                         <div class="contents">
                             <el-container>
                                 <!-- 使用响应式布局 -->
@@ -51,7 +51,7 @@
                                         <ul>
                                             <!-- 2.1.1 用户的头像与名称 -->
                                             <li class="user">
-                                                <img :src="getSrc('' + this.$store.state.imgSrc)" alt="blank">
+                                                <img :src="getSrc('' + imgSrc)" alt="blank">
                                                 <div class="teacher"><i>{{ teacher }}</i></div>
                                             </li>
                                             <!-- 2.1.2 用户资料选项 -->
@@ -62,8 +62,8 @@
                                             </li>
                                             <!-- 2.1.3 答疑入口选项 -->
                                             <li>
-                                                <a href="#/math/chat" :class="{actived: cur === 1}" @click="change(1)"><i
-                                                        class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
+                                                <a href="#/math/chat" :class="{actived: cur === 1}"
+                                                    @click="change(1)"><i class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
                                             </li>
                                             <!-- 2.1.4 课程上传选项 -->
                                             <li>
@@ -94,10 +94,10 @@
                                         <el-header height="70px">
                                             <!-- 2.2.1 头部区域 -->
                                             <ul>
-                                                <li><a href="#" :class="{ active: current === 0}"
+                                                <li><a href="#/administrator/student" :class="{ active: current === 0}"
                                                         @click="change1(0)">学生</a>
                                                 </li>
-                                                <li><a href="#" :class="{ active: current === 1}"
+                                                <li><a href="#/administrator/problem" :class="{ active: current === 1}"
                                                         @click="change1(1)">问题</a>
                                                 </li>
                                                 <li><a href="#" :class="{ active: current === 2}"
@@ -127,10 +127,16 @@ export default {
     name: 'administrator',
     data() {
         return {
+            // 控制左侧栏区域active属性
             cur: 0,
+            // 控制头部区域active属性
             current: 0,
+            // 输入框内容
             input1: '',
-            teacher: window.localStorage.getItem('token')
+            // 教师名字
+            teacher: window.localStorage.getItem('token'),
+            // 教师头像
+            imgSrc: window.localStorage.getItem('avatar')
         }
     },
     methods: {
@@ -161,6 +167,10 @@ export default {
     html {
         font-size: 12px;
     }
+
+    .contents {
+        height: 100% !important;
+    }
 }
 
 // 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
@@ -168,6 +178,7 @@ export default {
     html {
         font-size: 13px;
     }
+
 }
 
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
