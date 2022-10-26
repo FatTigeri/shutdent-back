@@ -60,22 +60,22 @@
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math3.png" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course3.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -94,16 +94,16 @@
                                         <li><a href="#"><img src="@/assets/math6.jpg" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -116,22 +116,22 @@
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math1.png" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course1.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math3.png" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course3.png" alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math2.jpg" alt="blank"></a></li>
+                                        <li><a href="#"><img src="@/assets/math_course2.png" alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>

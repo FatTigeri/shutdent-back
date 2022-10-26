@@ -21,13 +21,15 @@
                         <div class="functions">
                             <ul>
                                 <!-- 1.1.3 具体的a标签内容 -->
-                                <li><a href="#/math/home" :class="{active: 0 ===  cur}" @click="change(0)">首页</a></li>
-                                <li><a href="#/math/chat" :class="{active: 1 ===  cur}" @click="change(1)">线上答疑</a></li>
-                                <li><a href="#/math/room" :class="{active: 2 ===  cur}" @click="change(2)">趣味课堂</a></li>
-                                <li><a href="#" :class="{active: 3 ===  cur}" @click="change(3)">线下活动</a></li>
-                                <li><a href="#/math/resource" :class="{active: 4 ===  cur}" @click="change(4)">资源推荐</a>
+                                <li><a href="#/math/home" :class="{ active: 0 === cur }" @click="change(0)">首页</a></li>
+                                <li><a href="#/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a></li>
+                                <li><a href="#/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a></li>
+                                <li><a href="#/math/activity" :class="{ active: 3 === cur }" @click="change(3)">线下活动</a>
                                 </li>
-                                <li><a href="#" :class="{active: 5 ===  cur}" @click="change(5)">教师资源</a></li>
+                                <li><a href="#/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
+                                </li>
+                                <li><a href="#/math/video/1" :class="{ active: 5 === cur }" @click="change(5)">视频资源</a>
+                                </li>
                             </ul>
                         </div>
                     </el-col>
@@ -131,7 +133,6 @@ export default {
         // 更改导航索引的方法
         change(index) {
             this.$store.commit('changeCurrent', index)
-            this.cur = index
         },
         // 导航栏搜索功能(新增设置了防抖操作)
         search: mydebounce(function () {
@@ -245,6 +246,12 @@ body {
     -o-background-size: cover;
     -moz-background-size: cover;
     -ms-background-size: cover;
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
 }
 
 // home页面导航栏样式

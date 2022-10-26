@@ -4,9 +4,9 @@
             <!-- 侧边栏内容 -->
             <el-aside width="140px">
                 <ul>
-                    <li><a href="#" :class="{actived : cur === 0}" @click="change(0)">优质课堂</a></li>
-                    <li><a href="#" :class="{actived : cur === 1}" @click="change(1)">试卷真题</a></li>
-                    <li><a href="#" :class="{actived : cur === 2}" @click="change(2)">巩固提升</a></li>
+                    <li><a href="#" :class="{ actived: cur === 0 }" @click="change(0)">优质课堂</a></li>
+                    <li><a href="#" :class="{ actived: cur === 1 }" @click="change(1)">试卷真题</a></li>
+                    <li><a href="#" :class="{ actived: cur === 2 }" @click="change(2)">巩固提升</a></li>
                 </ul>
             </el-aside>
             <el-main>
@@ -73,6 +73,13 @@ export default {
         width: 25% !important;
         letter-spacing: 0 !important;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 // 当用户的手机屏幕小于768px时, 对应的字体大小为12px
@@ -80,6 +87,13 @@ export default {
     html {
         font-size: 12px;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 // 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
@@ -87,6 +101,13 @@ export default {
     html {
         font-size: 13px;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
@@ -95,6 +116,20 @@ export default {
         font-size: 14px;
     }
 
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+
+
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
@@ -102,6 +137,13 @@ export default {
     html {
         font-size: 15px;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 
 }
 

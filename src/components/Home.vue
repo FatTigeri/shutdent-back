@@ -6,7 +6,7 @@
       <el-col :xs="0">
         <div class="functions-fix">
           <ul>
-            <li><a href="#" @click="linkTo()">客服</a></li>
+            <li><a href="#/math/chat" @click="linkTo()">客服</a></li>
             <li @click="dialogFormVisible = true"><a href="#">反馈</a></li>
             <li><a href="#layout-container">返顶</a></li>
           </ul>
@@ -33,7 +33,7 @@
 
       <!-- (二)  首页主要内容-->
       <el-row :gutter="0">
-        <el-container style="height: 53rem;">
+        <el-container style="height: 56rem;">
           <!-- 2.1 侧边栏内容 -->
           <el-col :xs="0" :sm="6" :md="5" :lg="5" style="height: 100%">
             <div class="aside">
@@ -44,7 +44,7 @@
                 <div style="">
                   <!-- 2.1.1.1.1 教师排班当天日期 -->
                   <div class="day">
-                    <a href="#">{{ currentDay + '(' + currentWeek +')' }}</a>
+                    <a href="#">{{ currentDay + '(' + currentWeek + ')' }}</a>
                   </div>
                   <!-- 2.1.1.1.2 教师排版当天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -54,7 +54,7 @@
                   </ul>
                   <!-- 2.1.1.1.3 教师排班下一天日期 -->
                   <div class="day">
-                    <a href="#">{{ nextDay + '(' + nextweek +')' }}</a>
+                    <a href="#">{{ nextDay + '(' + nextweek + ')' }}</a>
                   </div>
                   <!-- 2.1.1.4 教师排版下一天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -94,6 +94,13 @@
                 <!-- 2.2.1 home首页轮播图内容-->
                 <el-row :gutter="0">
                   <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                    <div class="text" ref="text1">
+                      <p class="line animation">Welcome to xijiMath!</p>
+                    </div>
+                    <div class="text margin" ref="text2">
+                      <p class="line animation it">Let’s begin the math adventure!</p>
+                    </div>
+
                     <el-carousel :interval="4000" type="card" height="14.3333rem"
                       style="line-height: 5.333rem; box-shadow: 0 0 0.233rem black ; border-radius: 0.5333rem;">
                       <!-- v-for="item in 6" :key="item" -->
@@ -117,6 +124,31 @@
                           <img src="@/assets/carousel4.png" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
+                      <el-carousel-item>
+                        <h3 class="medium" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel5.png" alt="blank" style="width: 100%; height: 100%">
+                        </h3>
+                      </el-carousel-item>
+                      <el-carousel-item>
+                        <h3 class="medium" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel6.png" alt="blank" style="width: 100%; height: 100%">
+                        </h3>
+                      </el-carousel-item>
+                      <el-carousel-item>
+                        <h3 class="medium" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
+                        </h3>
+                      </el-carousel-item>
+                      <el-carousel-item>
+                        <h3 class="medium" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
+                        </h3>
+                      </el-carousel-item>
+                      <el-carousel-item>
+                        <h3 class="medium" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
+                        </h3>
+                      </el-carousel-item>
                     </el-carousel>
                   </el-col>
                 </el-row>
@@ -124,7 +156,7 @@
                 <div class="resources">
                   <el-row :gutter="0" style="width: 100%;">
                     <!-- 2.2.2.1 home页面主题内容 - 教学推荐和趣味课堂内容 -->
-                    <el-col :xs="24" :lg="14" style="float: left; margin: 15px 0 0 0">
+                    <el-col :xs="24" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
                       <div class="resources-item">
                         <div class="title1">
                           <a href="#" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
@@ -134,30 +166,30 @@
                             <ul>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#/course?cid=1">课题:解三角问题</a>
-                                  <a href="#">授课人: 于静</a>
+                                  <img src="@/assets/math_course2.png" alt="blank">
+                                  <a href="#/course?cid=1">课题:三角面积公式</a>
+                                  <a href="#">授课人: 陈栩晴</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math1.png" alt="blank">
+                                  <img src="@/assets/math_course1.png" alt="blank">
                                   <a href="#">课题:"加""减"法</a>
                                   <a href="#">授课人: 江玉婷</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math3.png" alt="blank">
+                                  <img src="@/assets/math_course3.png" alt="blank">
                                   <a href="#">课题:长方形问题</a>
                                   <a href="#">授课人: 于静</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">解三角问题</a>
-                                  <a href="#">授课人: 于静</a>
+                                  <img src="@/assets/math_course4.png" alt="blank">
+                                  <a href="#">分数加法</a>
+                                  <a href="#">授课人: 陈栩晴</a>
                                 </li>
                               </el-col>
                             </ul>
@@ -183,14 +215,14 @@
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">解三角问题</a>
+                                  <img src="@/assets/math7.png" alt="blank">
+                                  <a href="#">先行者-祖冲之</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
                                 <li>
-                                  <img src="@/assets/math2.jpg" alt="blank">
-                                  <a href="#">解三角问题</a>
+                                  <img src="@/assets/math8.png" alt="blank">
+                                  <a href="#">数学的对称美</a>
                                 </li>
                               </el-col>
                             </ul>
@@ -200,12 +232,12 @@
                     </el-col>
 
                     <!-- 2.2.2.2 home页面主题内容 - 最受欢迎老师内容 -->
-                    <el-col :xs="0" :lg="8" style="float:right; margin: 15px 15px 0 0;">
+                    <el-col :xs="0" :lg="8" style="float:right; margin: 2.5rem 0.33rem 0 0;">
                       <div class="resources-favor">
                         <div class="title2">
                           <a href="#" alt="blank">最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i></a>
                           <ul style="list-style: none;">
-                            <li v-for="(item , index) in popularList" :key="item.id">
+                            <li v-for="(item, index) in popularList" :key="item.id">
                               <el-badge :value="index + 1" class="item" type="primary"></el-badge>
                               <span class="teacher-name" @click="dialogTableVisible = true">
                                 {{ item.tName }}
@@ -272,6 +304,13 @@ import { mythrollte } from '@/utils/index.js'
 import { mydebounce } from '@/utils/index.js'
 
 export default {
+  mounted() {
+    const _this = this
+    setTimeout(function () {
+      _this.$refs.text1.style.display = 'none'
+      _this.$refs.text2.style.display = 'none'
+    }, 8000)
+  },
   created() {
     // 执行获取教师答疑排班数据一方法
     this.getTeacherList();
@@ -496,6 +535,12 @@ export default {
   .resources-item {
     width: 100%;
   }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
+  }
 }
 
 // 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
@@ -509,6 +554,12 @@ export default {
   .resources-item {
     width: 100%;
   }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
+  }
 }
 
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
@@ -521,6 +572,12 @@ export default {
 
   .resources-item {
     width: 100%;
+  }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
   }
 }
 
@@ -536,6 +593,12 @@ export default {
 
   .resources-item {
     width: 100%;
+  }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
   }
 }
 
@@ -634,12 +697,11 @@ export default {
   // 侧边栏内容一：线上答疑教师排班表样式
   .courses {
     position: relative;
-    width: 85%;
-    top: 25%;
+    width: 87%;
+    top: 24%;
     left: 50%;
     min-height: 19.33333rem;
     border-radius: 0.53333rem;
-    box-shadow: 0 0 10px white;
     transform: translate(-50%, -50%);
     background: rgba(250, 250, 250, 1);
     box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
@@ -685,9 +747,9 @@ export default {
   // 侧边内容二：线上活动展示样式
   .activities {
     position: relative;
-    top: 35%;
+    top: 37%;
     left: 50%;
-    width: 85%;
+    width: 87%;
     min-height: 45%;
     border-radius: 0.53333rem;
     box-shadow: 0 0 1.3333rem white;
@@ -733,15 +795,90 @@ export default {
 // home页面主体内容样式
 .el-main {
   height: 100%;
-  // background-color: #E9EEF3;
-  // background-color: rgba(201, 201, 201, 0.1);
   color: #333;
   text-align: center;
+  margin: 1rem 0 0 0;
+
+  .text {
+    position: absolute;
+    top: 100%;
+    left: 35%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 999;
+  }
+
+  .text.margin {
+    top: 115%;
+  }
+
+  .line {
+    width: 100%;
+    border-right: 2px solid #000;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .animation {
+    animation: grow 2s steps(70) 1s normal both, blink 200ms infinite normal;
+  }
+
+  /*对动画设置时间和分段，对右边框设置动画样式*/
+  .it {
+    animation-delay: 3.5s;
+  }
+
+  /*下一段延时执行动画*/
+  @keyframes grow {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+      /*段落长度 */
+      border-right-color: transparent;
+    }
+
+    0% {
+      border-right: 0;
+    }
+
+    /*光标起始位置不显示*/
+    1% {
+      color: purple;
+      border-right: 2px solid #000;
+    }
+
+    /*光标显示*/
+    99% {
+      color: #c9c9c9;
+      border-right: 2px solid #000;
+    }
+
+    100% {
+      border-right: 0;
+    }
+
+    /*结束位置光标不显示*/
+  }
+
+  @keyframes blink {
+    from {
+      border-right-color: #000;
+    }
+
+    to {
+      border-right-color: transparent;
+      /*文字透明化*/
+    }
+  }
+
 
   // 资源推荐样式
   .resources {
     margin: 0 auto;
-    width: 98%;
+    width: 100%;
     height: 59%;
     background: rgba(250, 250, 250, 1);
 

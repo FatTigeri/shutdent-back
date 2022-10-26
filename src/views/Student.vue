@@ -1,57 +1,17 @@
 <template>
     <div id="student-container">
-        <div class="student-box">
-            <ul>
-                <li>
-                    <img :src="getSrc('' + studentsList[0].imgSrc)" alt="blank">
-                    <span>{{ studentsList[0].username }}</span>
-                </li>
-                <li>
-                    <img :src="getSrc('' + studentsList[1].imgSrc)" alt="blank">
-                    <span>{{ studentsList[1].username }}</span>
-                </li>
-                <li>
-                    <img :src="getSrc('' + studentsList[2].imgSrc)" alt="blank">
-                    <span>{{ studentsList[2].username }}</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-                <li>
-                    <img :src="circleUrl" alt="blank">
-                    <span>XXX</span>
-                </li>
-            </ul>
-        </div>
+        <el-row :gutter="0" style="height: 100%">
+            <el-col :xs="24" style="height: 100%">
+                <div class="student-box">
+                    <ul>
+                        <li v-for="item in studentsList" :key="item.id">
+                            <img :src="getSrc('' + item.imgSrc)" alt="blank" @click="click(item.id)">
+                            <span>{{ item.username }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -72,10 +32,12 @@ export default {
         async getStudents() {
             const { data: res } = await this.$http.get('/getUsers')
             this.studentsList = res
-            console.log(this.studentsList);
         },
         getSrc(src) {
             return require('@/assets/' + src)
+        },
+        click(index) {
+            console.log(index);
         }
     }
 }   
@@ -156,6 +118,7 @@ export default {
                 img {
                     width: 80px;
                     height: 80px;
+                    cursor: pointer;
                     margin: 0.5rem 0 0 0;
                     border-radius: 50%;
                 }

@@ -17,25 +17,25 @@
                             class="demo-ruleForm">
                             <!-- 1.2.2.1.1 用户名输入框 -->
                             <el-form-item label="用户名:" prop="username">
-                                <el-input type="username" v-model="ruleForm.username" autocomplete="off"
+                                <el-input type="username" v-model.trim="ruleForm.username" autocomplete="off"
                                     prefix-icon="el-icon-user">
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.2 密码输入框 -->
                             <el-form-item label="密码:" prop="pass">
-                                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"
+                                <el-input type="password" v-model.trim="ruleForm.pass" autocomplete="off"
                                     prefix-icon="el-icon-lock"></el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.3 确认密码输入框 -->
                             <el-form-item label="确认密码:" prop="checkPass">
-                                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"
+                                <el-input type="password" v-model.trim="ruleForm.checkPass" autocomplete="off"
                                     prefix-icon="el-icon-lock">
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.4 头像上传按钮框 -->
                             <el-form-item label="头像上传:">
-                                <el-button type="" size="mini" @click="dialogFormVisible = true "
-                                    :disabled=" ruleForm.username === '' || ruleForm.password === '' || ruleForm.checkPass === ''">
+                                <el-button type="" size="mini" @click="dialogFormVisible = true"
+                                    :disabled="ruleForm.username === '' || ruleForm.password === '' || ruleForm.checkPass === ''">
                                     上传<i class="el-icon-upload el-icon--right"></i>
                                 </el-button>
                             </el-form-item>
@@ -53,21 +53,17 @@
             <el-dialog title="头像上传功能" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
                     <!-- 进行头像消息的提醒  -->
-                    <el-form-item label="提醒:为防止出现拉伸与缩放情况  请上传1:1比例图片">
-                    </el-form-item> 
+                    <el-form-item label="">
+                        <i><strong>注意:图片命名必须为1:1非中文，否则无法上传传！！</strong></i>
+                    </el-form-item>
                     <!-- 2.1 头像上传 -->
-                    <el-form-item label="上传" :label-width="formLabelWidth">
+                    <el-form-item label="" :label-width="formLabelWidth">
                         <!-- 2.1.1 头像上传框 -->
-                        <el-upload :action="uploadUrl" list-type="picture-card" :on-preview="handlePictureCardPreview"
-                            :on-remove="handleRemove" :on-success="picture">
-                            <i class="el-icon-plus"></i>
+                        <el-upload class="avatar-uploader" :action="uploadUrl" :show-file-list="false"
+                            :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar" style="width:140px">
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
                     </el-form-item>
                 </el-form>
                 <!-- 用户注册确定和取消按钮 -->
@@ -150,7 +146,8 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             // 新用户头像上传到服务器的网址
-            uploadUrl: 'http://localhost:8088/api/upload'
+            uploadUrl: 'http://localhost:8088/api/upload',
+            imageUrl: ''
         };
     },
     methods: {
@@ -199,6 +196,21 @@ export default {
                 message: '头像上传成功！',
                 type: 'success'
             });
+        },
+        handleAvatarSuccess(res, file) {
+            this.imageUrl = URL.createObjectURL(file.raw);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
         }
     }
 }
@@ -216,6 +228,13 @@ export default {
         width: 90%;
     }
 
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+
 }
 
 // 当用户显示屏小于768px时对应的样式
@@ -224,6 +243,13 @@ export default {
         font-size: 12px;
         font-family: Arial, sans-serif;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 // 当用户显示屏大于768px小于992px时对应的样式
@@ -232,6 +258,13 @@ export default {
         font-size: 13px;
         font-family: Arial, sans-serif;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 // 当用户的显示屏大于992px但是小于1200px时对应的样式
@@ -240,6 +273,13 @@ export default {
         font-size: 14px;
         font-family: Arial, sans-serif;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 // 当用户的显示屏大于1200px时对应的样式
@@ -248,6 +288,13 @@ export default {
         font-size: 15px;
         font-family: Arial, sans-serif;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
 }
 
 
@@ -292,7 +339,7 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(250, 250, 250, 1);
+        background: rgba(250, 250, 250, .95);
 
         // 用户注册文字样式
         .text {
@@ -315,7 +362,37 @@ export default {
                 width: 90%;
             }
         }
-
     }
+}
+
+
+.avatar-uploader,
+.el-upload {
+    width: 178px;
+    height: 178px;
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
 }
 </style>

@@ -14,25 +14,27 @@
                             </div>
                             <!-- 登录框用户名内容 -->
                             <div class="login-username">
-                                <el-input type="text" v-model="username" placeholder="请输入用户名"
+                                <el-input type="text" v-model.trim="username" placeholder="请输入用户名"
                                     prefix-icon="el-icon-user"></el-input>
                                 <span class="info1" v-if="context === 'user_err'"><strong>{{ info1 }}</strong></span>
                                 <span class="info1" v-if="context === 'isnull'"><strong>{{ info3 }}</strong></span>
                             </div>
                             <!-- 登录框密码内容 -->
                             <div class="login-password">
-                                <el-input type="password" v-model="password" placeholder="请输入用户密码" show-password
+                                <el-input type="password" v-model.trim="password" placeholder="请输入用户密码" show-password
                                     prefix-icon="el-icon-lock"></el-input>
                                 <span class="info2" v-if="context === 'psw_err'"><strong>{{ info2 }}</strong></span>
                             </div>
                             <div class="code">
-                                <el-input placeholder="验证码" prefix-icon="el-icon-key" v-model="input_code">
+                                <el-input placeholder="验证码" prefix-icon="el-icon-key" v-model.trim="input_code">
                                     <template slot="append">{{ code }}</template>
                                 </el-input>
                                 <span class="info4" v-if="context === 'code_err'"><strong>{{ info4 }}</strong></span>
                             </div>
                             <!-- 新用户登录注册链接 -->
                             <div class="register-link">
+                                <el-radio v-model="radio" label="student">学生</el-radio>
+                                <el-radio v-model="radio" label="teacher">教师</el-radio>
                                 <router-link to="/register">没有账号? 前往注册!</router-link>
                             </div>
                             <!-- 登录框提交内容 -->
@@ -76,7 +78,8 @@ export default {
             // 控制登录信息显示变量
             context: '',
             // 登录成功前往页面变量
-            url: '/home'
+            url: '/home',
+            radio: 'student'
         }
     },
     // 管理员登录页面中需要用到的事件方法
@@ -137,6 +140,13 @@ export default {
     html {
         font-size: 12px;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background-color: white !important;
+    }
+
 }
 
 // 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
@@ -144,12 +154,25 @@ export default {
     html {
         font-size: 13px;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background-color: white !important;
+    }
+
 }
 
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
 @media (min-width:992px) and (max-width: 1200px) {
     html {
         font-size: 14px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background-color: white !important;
     }
 
 }
@@ -159,6 +182,13 @@ export default {
     html {
         font-size: 15px;
     }
+
+    .el-notification,
+    .left,
+    .right {
+        background-color: white !important;
+    }
+
 
 }
 
@@ -234,8 +264,7 @@ export default {
                 height: 12%;
                 width: 100%;
                 font-size: 14px;
-                text-align: right;
-                line-height: 2.4rem;
+                line-height: 3rem;
 
                 a {
                     color: purple;

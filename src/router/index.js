@@ -5,9 +5,8 @@ Vue.use(VueRouter)
 
 import Layout from '@/components/Layout.vue'
 import Home from '@/components/Home.vue'
-import Login from '@/views/Login.vue'
-import Register from '@/views/Register.vue'
-import Circular from '@/components/Circular.vue'
+import Login from '@/components/Login.vue'
+import Register from '@/components/Register.vue'
 import Room from '@/views/Room.vue'
 import Chat from '@/views/Chat.vue'
 import Course from '@/views/Course.vue'
@@ -17,18 +16,23 @@ import Answer from '@/views/Answer.vue'
 import Resource from '@/components/Resource.vue'
 import Problem from '@/views/Problem.vue'
 import Student from '@/views/Student.vue'
+import Video from '@/views/Video.vue'
+import Activity from '@/views/Activity.vue'
 
 const router = new VueRouter({
+  mode: 'hash',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/math', component: Layout, children: [
         { path: 'home', component: Home },
         { path: 'home-container', redirect: '/math/home' },
-        { path: 'circular', component: Circular },
         { path: 'room', component: Room },
         { path: 'chat', component: Chat },
         { path: 'course', component: Course },
-        { path: 'resource', component: Resource }
+        { path: 'resource', component: Resource },
+        { path: 'video/:id', component: Video },
+        { path: 'activity', component: Activity }
       ]
     },
     { path: '', redirect: '/math/home' },
