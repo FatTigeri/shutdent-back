@@ -18,6 +18,7 @@ import Problem from '@/views/Problem.vue'
 import Student from '@/views/Student.vue'
 import Video from '@/views/Video.vue'
 import Activity from '@/views/Activity.vue'
+import Examination from '@/views/Examination.vue'
 
 const router = new VueRouter({
   mode: 'hash',
@@ -30,9 +31,13 @@ const router = new VueRouter({
         { path: 'room', component: Room },
         { path: 'chat', component: Chat },
         { path: 'course', component: Course },
-        { path: 'resource', component: Resource },
+        {
+          path: 'resource', component: Resource, redirect: '/math/resource/examination' ,children: [
+            { path: 'examination', component: Examination },
+          ]
+        },
         { path: 'video/:id', component: Video },
-        { path: 'activity', component: Activity }
+        { path: 'activity', component: Activity },
       ]
     },
     { path: '', redirect: '/math/home' },

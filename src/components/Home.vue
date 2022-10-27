@@ -935,8 +935,9 @@ export default {
 
             // 不同内容的文字介绍样式
             a {
+              color: black;
               display: block;
-              color: purple;
+              text-decoration: none;
               margin: 0.13333rem;
             }
 

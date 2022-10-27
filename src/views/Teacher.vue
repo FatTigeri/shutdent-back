@@ -13,27 +13,27 @@
                             <img :src="getSrc('' + imgSrc)" alt="">
                         </div>
                         <!-- 卡片内容数据一-昵称 -->
-                        <div class="text item">
+                        <div class="info-text item">
                             <div class="word">昵称: </div>
                             <div>{{ teacherInfo.tname }}</div>
                         </div>
                         <!-- 卡片内容数据二-简介 -->
-                        <div class="text item">
+                        <div class="info-text item">
                             <div class="word">简介: </div>
                             <div>{{ teacherInfo.info }}</div>
                         </div>
                         <!-- 卡片数据内容三-微信 -->
-                        <div class="text item">
+                        <div class="info-text item">
                             <div class="word">微信: </div>
                             <div>{{ teacherInfo.weChat }}</div>
                         </div>
                         <!-- 卡片数据内容四-邮箱 -->
-                        <div class="text item">
+                        <div class="info-text item">
                             <div class="word">邮箱: </div>
                             <div>{{ teacherInfo.email }}</div>
                         </div>
                         <!-- 卡片数据内容五-联系方式 -->
-                        <div class="text item">
+                        <div class="info-text item">
                             <div class="word">联系方式: </div>
                             <div>{{ teacherInfo.tel }}</div>
                         </div>
@@ -100,7 +100,6 @@ export default {
     html {
         font-size: 14px;
     }
-
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
@@ -108,7 +107,6 @@ export default {
     html {
         font-size: 15px;
     }
-
 }
 
 * {
@@ -132,7 +130,7 @@ export default {
         box-shadow: 0 0 0.6666rem #c9c9c9;
 
         // 卡片文字样式
-        .text {
+        .info-text {
             font-size: 14px;
         }
 

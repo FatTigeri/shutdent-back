@@ -5,7 +5,7 @@
             <el-aside width="140px">
                 <ul>
                     <li><a href="#" :class="{ actived: cur === 0 }" @click="change(0)">优质课堂</a></li>
-                    <li><a href="#" :class="{ actived: cur === 1 }" @click="change(1)">试卷真题</a></li>
+                    <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }" @click="change(1)">试卷真题</a></li>
                     <li><a href="#" :class="{ actived: cur === 2 }" @click="change(2)">巩固提升</a></li>
                 </ul>
             </el-aside>
@@ -17,6 +17,9 @@
                             <el-radio :label="1">一年级</el-radio>
                             <el-radio :label="2">二年级</el-radio>
                             <el-radio :label="3">三年级</el-radio>
+                            <el-radio :label="4">四年级</el-radio>
+                            <el-radio :label="5">五年级</el-radio>
+                            <el-radio :label="6">六年级</el-radio>
                         </el-radio-group>
                     </div>
                     <div class="type">
@@ -40,7 +43,8 @@
                     </div>
                 </div>
                 <div class="contents">
-                    111
+                    <router-link to="/math/resource/examination"></router-link>
+                    <router-view></router-view>
                 </div>
             </el-main>
         </el-container>
@@ -52,7 +56,7 @@ export default {
     name: 'resource',
     data() {
         return {
-            cur: 0,
+            cur: 1,
             grade: 1,
             type: 1,
             other: 1,
@@ -149,7 +153,7 @@ export default {
 
 #resource-container {
     width: 100%;
-    height: 549px;
+    height: 532px;
 
     .el-container {
         height: 100%;

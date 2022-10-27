@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+const path = require('path');
 const port = 8080
 module.exports = defineConfig({
   transpileDependencies: true,
