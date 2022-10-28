@@ -40,7 +40,8 @@ export default {
     name: 'examination',
     created() {
         // 执行获取数据的函数
-        this.getPages()
+        this.getPages();
+        this.getMaxPage();
     },
     data() {
         return {
@@ -51,7 +52,7 @@ export default {
             // 当前页数变量
             current: 1,
             // 最大页数变量
-            maxPage: 2
+            maxPage: 0
         }
     },
     methods: {
@@ -62,6 +63,12 @@ export default {
             // 数据赋值
             this.pagesList = res
         },
+        // 获取后台数据的最大页数
+        async getMaxPage() {
+            const { data: res } = await this.$http.get('/getMaxPage')
+            this.maxPage = res
+        },
+
         // 下一页功能
         async pre() {
             // 先对页面当前页数进行判断
@@ -150,7 +157,7 @@ export default {
 
                     // 试卷链接样式
                     a {
-                        color: black;
+                        color: green;
                         text-decoration: none;
                     }
                 }

@@ -22,8 +22,10 @@
                             <ul>
                                 <!-- 1.1.3 具体的a标签内容 -->
                                 <li><a href="#/math/home" :class="{ active: 0 === cur }" @click="change(0)">首页</a></li>
-                                <li><a href="#/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a></li>
-                                <li><a href="#/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a></li>
+                                <li><a href="#/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a>
+                                </li>
+                                <li><a href="#/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a>
+                                </li>
                                 <li><a href="#/math/activity" :class="{ active: 3 === cur }" @click="change(3)">线下活动</a>
                                 </li>
                                 <li><a href="#/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
@@ -90,8 +92,14 @@
 import { mydebounce } from '@/utils/index.js'
 export default {
     created() {
-        this.$store.commit('changeCurrent', 0)
-
+        // 
+        if (!window.sessionStorage.getItem('index')) {
+            window.sessionStorage.setItem('index', 0)
+            this.$store.commit('changeCurrent', 0)
+        } else {
+            const index = parseInt(window.sessionStorage.getItem('index'))
+            this.$store.commit('changeCurrent', index)
+        }
         // 判断用户的token是否已经存在于客户端电脑
         if (window.localStorage.getItem("token")) {
             // 改变控制按钮的变量的状态
@@ -133,6 +141,7 @@ export default {
         // 更改导航索引的方法
         change(index) {
             this.$store.commit('changeCurrent', index)
+            window.sessionStorage.setItem('index', index)
         },
         // 导航栏搜索功能(新增设置了防抖操作)
         search: mydebounce(function () {

@@ -13,13 +13,13 @@ export default new Vuex.Store({
     // 全局变量upLoadImg用来保存用户注册中上传的图片名字
     upLoadImg: '',
     // 项目导航栏处的当前位置变量
-    current: 0,
+    current: parseInt(window.sessionStorage.getItem('index')),
     alive: true
   },
 
   // 
   getters: {
-    
+
   },
 
   // 
