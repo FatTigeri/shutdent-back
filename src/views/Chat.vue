@@ -1,33 +1,30 @@
 <template>
-    <div style="padding: 0.666rem; margin-bottom: 3.333rem">
-        <el-row :gutter="0">
-            <el-col :span="6">
-                <el-card
-                    style="width: 100%; height: 20rem; color: #333; font-weight: 600; ; box-shadow: 0 0 0.666rem #ccc">
-                    <div style="padding-bottom: 0.666rem; border-bottom: 0.0666rem solid #ccc">在线用户<span
-                            style="font-size: 0.8rem">（点击聊天气泡开始聊天）</span></div>
-                    <div style="padding: 0.666rem 0" v-for="user in users" :key="user.username">
+    <div style="padding: 10px; margin-bottom: 50px">
+        <el-row>
+            <el-col :span="4">
+                <el-card style="width: 300px; height: 300px; color: #333">
+                    <div style="padding-bottom: 10px; border-bottom: 1px solid #ccc">在线用户<span
+                            style="font-size: 12px">（点击聊天气泡开始聊天）</span></div>
+                    <div style="padding: 10px 0" v-for="user in users" :key="user.username">
                         <span>{{ user.username }}</span>
-                        <i class="el-icon-chat-dot-round"
-                            style="margin-left: 0.666rem; font-size: 1.1rem; cursor: pointer"
+                        <i class="el-icon-chat-dot-round" style="margin-left: 10px; font-size: 16px; cursor: pointer"
                             @click="chatUser = user.username"></i>
-                        <span style="font-size: 0.8rem; color: limegreen; margin-left: 0.333rem"
+                        <span style="font-size: 12px;color: limegreen; margin-left: 5px"
                             v-if="user.username === chatUser">chatting...</span>
                     </div>
                 </el-card>
             </el-col>
-            <el-col :span="17">
-                <div style="width: 96%; margin: 0 auto; background-color: white;
-                      border-radius: 0.333rem; box-shadow: 0 0 0.666rem #ccc;">
-                    <div style="text-align: center; line-height: 3.333rem; font-weight: 600;">
-                        在线答疑室（{{ chatUser }}）
+            <el-col :span="20">
+                <div style="width: 800px; margin: 0 auto; background-color: white;
+                      border-radius: 5px; box-shadow: 0 0 10px #ccc">
+                    <div style="text-align: center; line-height: 50px;">
+                        Web聊天室（{{ chatUser }}）
                     </div>
-                    <div style="height: 23.333rem; overflow:auto; border-top: 0.066rem solid #ccc" v-html="content">
-                    </div>
-                    <div style="height: 13.333rem">
-                        <textarea v-model="text" style="height: 10.666rem; width: 95%; padding: 1.333rem; border: none; border-top: 0.066rem solid #ccc;
-               border-bottom: 0.066rem solid #ccc; outline: none"></textarea>
-                        <div style="text-align: right; padding-right: 0.666rem">
+                    <div style="height: 350px; overflow:auto; border-top: 1px solid #ccc" v-html="content"></div>
+                    <div style="height: 200px">
+                        <textarea v-model="text" style="height: 169px;width: 760px; padding: 20px; border: none; border-top: 1px solid #ccc;
+               border-bottom: 1px solid #ccc; outline: none"></textarea>
+                        <div style="text-align: right; padding-right: 10px">
                             <el-button type="primary" size="mini" @click="send">发送</el-button>
                         </div>
                     </div>
@@ -86,7 +83,7 @@ export default {
             if (nowUser) { // nowUser 表示是否显示当前用户发送的聊天消息，绿色气泡
                 html = "<div class=\"el-row\" style=\"padding: 5px 0\">\n" +
                     "  <div class=\"el-col el-col-22\" style=\"text-align: right; padding-right: 10px\">\n" +
-                    "    <div class=\"tip left\">" + text + "</div>\n" +
+                    "    <div class=\"tip left1\">" + text + "</div>\n" +
                     "  </div>\n" +
                     "  <div class=\"el-col el-col-2\">\n" +
                     "  <span class=\"el-avatar el-avatar--circle\" style=\"height: 40px; width: 40px; line-height: 40px;\">\n" +
@@ -98,11 +95,11 @@ export default {
                 html = "<div class=\"el-row\" style=\"padding: 5px 0\">\n" +
                     "  <div class=\"el-col el-col-2\" style=\"text-align: right\">\n" +
                     "  <span class=\"el-avatar el-avatar--circle\" style=\"height: 40px; width: 40px; line-height: 40px;\">\n" +
-                    "    <img " + "src=" + this.getSrc(this.$store.state.imgSrc) + " style=\"object-fit: cover;\">\n" +
+                    "    <img src=\"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png\" style=\"object-fit: cover;\">\n" +
                     "  </span>\n" +
                     "  </div>\n" +
                     "  <div class=\"el-col el-col-22\" style=\"text-align: left; padding-left: 10px\">\n" +
-                    "    <div class=\"tip right\">" + text + "</div>\n" +
+                    "    <div class=\"tip right1\">" + text + "</div>\n" +
                     "  </div>\n" +
                     "</div>";
             }
@@ -173,11 +170,11 @@ export default {
     display: inline;
 }
 
-.right {
+.right1 {
     background-color: deepskyblue;
 }
 
-.left {
+.left1 {
     background-color: forestgreen;
 }
 </style>

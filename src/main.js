@@ -11,6 +11,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'element-ui/lib/theme-chalk/display.css';
 
+import VideoPlayer from 'vue-video-player'
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+Vue.use(VideoPlayer)
+
 // 将相同的后端接口进行挂载
 axios.defaults.baseURL = "http://localhost:8088/api"
 Vue.prototype.$http = axios

@@ -116,22 +116,22 @@
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/carousel3.png" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/carousel4.png" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/carousel5.png" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <img src="@/assets/carousel6.png" alt="blank" style="width: 100%; height: 100%">
+                          <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
@@ -165,31 +165,31 @@
                           <el-row :gutter="20">
                             <ul>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
-                                <li>
-                                  <img src="@/assets/math_course2.png" alt="blank">
-                                  <a href="#/course?cid=1">课题:三角面积公式</a>
-                                  <a href="#">授课人: 陈栩晴</a>
+                                <li @click="player(1)">
+                                  <img src="@/assets/math_course1.jpg" alt="blank">
+                                  <a href="#/course?cid=1">课题:分数除法</a>
+                                  <a href="#">授课人: 广东二师</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
-                                <li>
-                                  <img src="@/assets/math_course1.png" alt="blank">
-                                  <a href="#">课题:"加""减"法</a>
-                                  <a href="#">授课人: 江玉婷</a>
+                                <li @click="player(2)">
+                                  <img src="@/assets/math_course2.jpg" alt="blank">
+                                  <a href="#">课题:负数的认识</a>
+                                  <a href="#">授课人: 李如煜</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
-                                <li>
-                                  <img src="@/assets/math_course3.png" alt="blank">
-                                  <a href="#">课题:长方形问题</a>
-                                  <a href="#">授课人: 于静</a>
+                                <li @click="player(3)">
+                                  <img src="@/assets/math_course3.jpg" alt="blank">
+                                  <a href="#">课题:平移与旋转</a>
+                                  <a href="#">授课人: 卡通人物</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="12" :md="8" :lg="6">
-                                <li>
-                                  <img src="@/assets/math_course4.png" alt="blank">
-                                  <a href="#">分数加法</a>
-                                  <a href="#">授课人: 陈栩晴</a>
+                                <li @click="player(4)">
+                                  <img src="@/assets/math_course4.jpg" alt="blank">
+                                  <a href="#">课题:分数的认识</a>
+                                  <a href="#">授课人: 周宇轩</a>
                                 </li>
                               </el-col>
                             </ul>
@@ -517,6 +517,11 @@ export default {
     async getPopularList() {
       const { data: res } = await this.$http.get('/popular');
       this.popularList = res;
+    },
+
+    // 视频播放方法
+    player(id) {
+      this.$router.push("/math/video/" + id)
     }
   },
 

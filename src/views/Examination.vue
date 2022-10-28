@@ -15,7 +15,7 @@
                         <!-- 1.1.2 不同试卷对应的类型 -->
                         <span>{{ item.type }}</span>
                         <!-- 1.1.3 不同书卷对应的好评 -->
-                        <span>好评率:{{ item.rate }}</span>
+                        <span>好评率:{{ item.rate }}%</span>
                         <!-- 1.1.4 不同试卷的年级 -->
                         <span>{{ item.grade }}</span>
                     </div>

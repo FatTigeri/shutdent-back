@@ -5,7 +5,8 @@
             <el-aside width="140px">
                 <ul>
                     <li><a href="#" :class="{ actived: cur === 0 }" @click="change(0)">优质课堂</a></li>
-                    <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }" @click="change(1)">试卷真题</a></li>
+                    <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }"
+                            @click="change(1)">试卷真题</a></li>
                     <li><a href="#" :class="{ actived: cur === 2 }" @click="change(2)">巩固提升</a></li>
                 </ul>
             </el-aside>
@@ -40,6 +41,11 @@
                             <el-radio :label="1">好评率</el-radio>
                             <el-radio :label="2">点击率</el-radio>
                         </el-radio-group>
+                        <el-button size="mini" type="primary">确定</el-button>
+                        <div class="search-btn">
+                            <el-input size="mini" placeholder="老师 / 关键字" suffix-icon="el-icon-search" v-model="input1">
+                            </el-input>
+                        </div>
                     </div>
                 </div>
                 <div class="contents">
@@ -60,7 +66,8 @@ export default {
             grade: 1,
             type: 1,
             other: 1,
-            input: ''
+            input: '',
+            input1: ''
         }
     },
     methods: {
@@ -234,6 +241,14 @@ export default {
                 height: 30%;
                 line-height: 35.59px;
 
+                .el-button {
+                    margin: 0 0 0 2rem;
+                }
+
+                .search-btn {
+                    width: 25%;
+                    float: right;
+                }
             }
         }
 

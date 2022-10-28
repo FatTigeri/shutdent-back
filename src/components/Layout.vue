@@ -30,7 +30,7 @@
                                 </li>
                                 <li><a href="#/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
                                 </li>
-                                <li><a href="#/math/video/1" :class="{ active: 5 === cur }" @click="change(5)">视频资源</a>
+                                <li><a href="#" :class="{ active: 5 === cur }" @click="change(5)">师资资源</a>
                                 </li>
                             </ul>
                         </div>
