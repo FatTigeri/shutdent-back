@@ -60,22 +60,34 @@
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course1.jpg" alt="blank"></a></li>
+                                        <li @click="player(1)">
+                                            <a href="#"><img src="@/assets/math_course1.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a></li>
+                                        <li @click="player(2)">
+                                            <a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a>
+                                        </li>
+                                    </el-col >
+                                    <el-col :xs="12" :sm="12" :md="8" :lg="4">
+                                        <li @click="player(3)">
+                                            <a href="#"><img src="@/assets/math_course3.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course3.jpg" alt="blank"></a></li>
+                                        <li @click="player(4)">
+                                            <a href="#"><img src="@/assets/math_course4.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course4.jpg" alt="blank"></a></li>
+                                        <li @click="player(5)">
+                                            <a href="#"><img src="@/assets/math_course5.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course5.jpg" alt="blank"></a></li>
-                                    </el-col>
-                                    <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course6.jpg" alt="blank"></a></li>
+                                        <li @click="player(6)">
+                                            <a href="#"><img src="@/assets/math_course6.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -202,6 +214,11 @@ export default {
         },
         jumpTo() {
             window.location.href = '/static/2048.html'
+        },
+
+        // 视频播放功能
+        player(id) {
+            this.$router.push("/math/video/" + id)
         }
 
     },
@@ -318,17 +335,13 @@ html {
                     width: 30%;
                     height: 30%;
                     text-align: center;
-                    // border: 1px solid red;
 
                     img {
                         width: 70%;
                         margin: 0 auto;
+                        
                     }
 
-                    // a{
-                    //     display: block;
-                    //     width: 100%;
-                    // }
                 }
             }
         }
@@ -450,7 +463,7 @@ html {
                         text-align: left;
                         margin-bottom: 0.26666rem;
                         border-radius: 0.33333rem;
-                        border: 0.088888rem solid rgb(92, 48, 21);
+                        // border: 0.088888rem solid rgb(92, 48, 21);
 
                         // 使用伪元素进行布局样式
                         &::before {
@@ -478,6 +491,7 @@ html {
                         // 课程图片样式
                         img {
                             width: 100%;
+                            box-shadow: 5px 5px 8px #888888;
                         }
                     }
                 }

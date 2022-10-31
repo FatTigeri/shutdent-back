@@ -1,19 +1,34 @@
 <template>
-    <div id="video-container">
-        <div class="video-box">
-            <video-player style="width: 80%;height: 100%;margin:0 auto;box-shadow:5px 5px 8px #888888"
-                class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions">
-            </video-player>
+    <el-row :gutter="0">
+        <div id="video-container">
+            <el-col :xs="24" :sm="18">
+                <div class="video-box">
+                    <video-player style="width: 80%;height: 100%;margin:0 auto;box-shadow:5px 5px 8px #888888"
+                        class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
+                        :options="playerOptions">
+                    </video-player>
+
+                    <!-- 用户评论发表 -->
+                    <div class="comments">
+                        <span>评论发表:</span>
+                        <el-input type="textarea" @keydown.enter.native="e" placeholder="请输入内容" v-model="textarea"
+                            maxlength="30" show-word-limit>
+                        </el-input>
+                    </div>
+                </div>
+            </el-col>
+            <el-col :xs="0" :sm="6">
+                <div class="video-wrap">
+                    1
+                </div>
+            </el-col>
         </div>
-        <div class="video-wrap">
-            1
-        </div>
-    </div>
+    </el-row>
 </template>
 
 <script>
 export default {
-    name: 'video',
+    name: 'videos',
     data() {
         return {
             playerOptions: {
@@ -39,6 +54,12 @@ export default {
                     fullscreenToggle: true  //全屏按钮
                 }
             },
+            textarea: ''
+        }
+    },
+    methods: {
+        e() {
+            console.log('评论成功!');
         }
     }
 }
@@ -92,25 +113,31 @@ html {
 #video-container {
     display: flex;
     width: 100%;
-    min-height: 500px;
+    height: 600px;
     box-sizing: border-box;
     border: 1px solid red;
 
     .video-box {
-        width: 60%;
-        height: 380px;
         margin: 1rem;
         box-sizing: border-box;
-        // border: 1px solid red;
+        border: 1px solid red;
 
-        .video {
-            width: 100%;
-            height: 100%;
+        .comments {
+            margin: 1rem;
+            font-weight: 600;
+
+            span {
+                display: block;
+                margin: 1rem 0;
+            }
+
+            /deep/ .el-textarea__inner {
+                border: 1px solid black;
+            }
         }
     }
 
     .video-wrap {
-        width: 30%;
         min-height: 400px;
         margin: 1rem;
         box-sizing: border-box;

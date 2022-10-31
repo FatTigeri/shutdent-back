@@ -5,11 +5,11 @@
         <div class="contents-box">
             <ul>
                 <!-- 1.1 使用v-for循环进行数据库数据的读取 -->
-                <li v-for="item in pagesList" :key="item.id">
+                <li v-for="item in currentList" :key="item.id">
                     <div class="pages">
                         <i>试卷:</i>&nbsp;&nbsp;
                         <!-- 1.1.1 不同试卷对应的链接 -->
-                        <span><a :href="src + item.pdf">{{ item.test }}</a></span>
+                        <span><a :href="src + item.pdf" @click="update(item.id)">{{ item.test }}</a></span>
                     </div>
                     <div class="type">
                         <!-- 1.1.2 不同试卷对应的类型 -->
@@ -39,16 +39,22 @@ export default {
     // vue组件的名字
     name: 'examination',
     created() {
-        // 执行获取数据的函数
-        this.getPages();
-        this.getMaxPage();
+        // 先进行当当前是否为第一次点击页面情况
+        if (this.$store.state.grade === '') {
+            this.initPages();
+            this.getMaxPage();
+        } else {
+            this.getPages();
+        }
     },
     data() {
         return {
             // 固定的pdf路径写法
             src: '/static/page.html?pdf=',
-            // 接收试卷数据的数组变量
-            pagesList: [],
+            // 用来接收store中获取的到试卷数据
+            List: [],
+            // 当前要展示的页面数据
+            currentList: [],
             // 当前页数变量
             current: 1,
             // 最大页数变量
@@ -57,19 +63,62 @@ export default {
     },
     methods: {
         // 当用户点击了资源推荐后的连接后自动执行获取信息的接口
-        async getPages() {
+        async initPages() {
             // 使用axois发送GET请求，获取试卷数据
-            const { data: res } = await this.$http.get('/getPages', { params: { "number": this.current } })
-            // 数据赋值
-            this.pagesList = res
+            const { data: res } = await this.$http.get('/getPages')
+
+            // 数据赋值Vux中的pagesList变量
+            this.$store.commit('setPageList', res)
+
+            // 本组件再进行读取Vux中的pagesList变量
+            this.List = this.$store.state.pagesList
+
+            // 中间分页查询数组变量List进行赋值
+            for (let i = 0; i < 6; i++) {
+                this.currentList.push(this.List[i])
+            }
         },
+
         // 获取后台数据的最大页数
         async getMaxPage() {
+            // 调用获取examination表的数据数接口
             const { data: res } = await this.$http.get('/getMaxPage')
+            // 对获取到的数据进行赋值操作
             this.maxPage = res
         },
 
-        // 下一页功能
+        // 用户点击详细数据定位搜索后，获取vuex已经存在的数据
+        getPages() {
+            // 先将初始化数据的结果进行清除
+            this.currentList.splice(0, this.currentList.length);
+
+            // 本组件再进行读取Vux中的pagesList变量
+            this.List = this.$store.state.pagesList
+
+            // 中间分页查询数组变量List进行赋值
+            if (this.List.length >= 6) {
+                // 搜索数据值大于6条时
+                if (this.List % 6 === 0) {
+                    this.maxPage = this.List.length / 6
+                } else {
+                    this.maxPage = this.List.length / 6 + 1
+                }
+                // 对当前数据变量数组currentList进行赋值
+                for (let i = 0; i < 6; i++) {
+                    this.currentList.push(this.List[i])
+                }
+            } else {
+                // 搜索值小于6条时
+                this.maxPage = 1
+                // 对当前数据变量数组currentList进行赋值
+                for (let i = 0; i < this.List.length; i++) {
+                    this.currentList.push(this.List[i])
+                }
+            }
+            // 将当前页面变量进行归一操作
+            this.current = 1
+        },
+        // 上一页功能
         async pre() {
             // 先对页面当前页数进行判断
             if (this.current === 1) {
@@ -81,12 +130,14 @@ export default {
                     position: 'top-left'
                 })
             } else {
-                // 使用axois发送GET请求，获取试卷数据
-                const { data: res } = await this.$http.get('/getPages', { params: { "number": this.current - 1 } })
-                // 数据赋值
-                this.pagesList = res
-                // 当前页面页数减一
-                this.current = this.current - 1
+                // 将当前的数据进行清除操作
+                this.currentList = []
+                // 将当前页面变量进行减一操作
+                this.current--
+                // 对应的赋值算法
+                for (var i = (this.current - 1) * 6; i < this.current * 6; i++) {
+                    this.currentList.push(this.List[i])
+                }
             }
         },
         // 下一页功能
@@ -101,13 +152,23 @@ export default {
                     position: 'top-left'
                 })
             } else {
-                // 使用axois发送GET请求，获取试卷数据
-                const { data: res } = await this.$http.get('/getPages', { params: { "number": this.current + 1 } })
-                // 数据赋值
-                this.pagesList = res
-                // 当前页面页数减一
-                this.current = this.current + 1
+                // 将当前的数据进行清除操作
+                this.currentList = []
+
+                const size = (this.current + 1) * 6 > this.List.length ? this.List.length : (this.current + 1) * 6
+
+                // 对应的赋值算法
+                for (var i = this.current * 6; i < (this.current + 1) * 6; i++) {
+                    this.currentList.push(this.List[i])
+                }
+                // 将当前页面变量进行加一操作
+                this.current++;
             }
+        },
+        // 用户点击了哪个试卷，对应的更新数据库中的popular点击变量
+        async update(id) {
+            // 调用更新接口，后台自动更新即可
+            await this.$http.get('/updatePage', { params: { "id": id } })
         }
     }
 }

@@ -279,7 +279,7 @@
 
       <!-- (三) 页脚内容 -->
       <el-row :gutter="0">
-        <el-col :xs="24" :sm=24 :md="24" :lg="24">
+        <el-col :xs="0" :sm=24 :md="24" :lg="24">
           <el-footer height="4.6666rem">
             <div class="schools">
               <h5>&copy; 希冀数学 特别鸣谢</h5>
@@ -520,7 +520,7 @@ export default {
     },
 
     // 视频播放方法
-    player(id) {
+    async player(id) {
       this.$router.push("/math/video/" + id)
     }
   },
@@ -936,6 +936,8 @@ export default {
             margin-bottom: 0.26666rem;
             border-radius: 0.33333rem;
             border: 0.0666rem solid #c9c9c9;
+            box-shadow: 5px 5px 8px #888888;
+
             z-index: 999;
 
             // 不同内容的文字介绍样式

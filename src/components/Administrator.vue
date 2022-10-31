@@ -225,11 +225,6 @@ export default {
 
 }
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
 // teacher组件样式
 #administrator-container {
     top: 0;

@@ -14,7 +14,13 @@ export default new Vuex.Store({
     upLoadImg: '',
     // 项目导航栏处的当前位置变量
     current: parseInt(window.sessionStorage.getItem('index')),
-    alive: true
+    alive: true,
+    // examination页面的初始化数据
+    pagesList: [],
+    // grade
+    grade: '',
+    type: '',
+    other: ''
   },
 
   // 
@@ -45,6 +51,12 @@ export default new Vuex.Store({
     // 切换当前页面被选中的索引
     changeCurrent(state, index) {
       state.current = index
+    },
+    setPageList(state, res) {
+      state.pagesList = res
+    },
+    setGrade(state, status) {
+      state.grade = status
     }
   },
 

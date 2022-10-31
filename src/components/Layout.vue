@@ -10,7 +10,7 @@
                         <!-- 1.1.1 网站logo -->
                         <div class="logo">
                             <!-- 1.1.1.1 logo图片 -->
-                            <img src="@/assets/logo.jpg" alt="blank" style="border-radius: 50%;">
+                            <img src="@/assets/log.png" alt="blank" style="border-radius: 50%;">
                             <!-- 1.1.1.2 网站的名称介绍 -->
                             <div><a href="#">希冀数学</a></div>
                         </div>
@@ -245,6 +245,69 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// 当用户的手机屏幕小于768px时, 对应的字体大小为12px
+@media (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+}
+
+// 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
+@media (min-width: 768px) and (max-width: 992px) {
+    html {
+        font-size: 13px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+    .logo {
+        div {
+            display: none;
+        }
+    }
+
+}
+
+// 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
+@media (min-width:992px) and (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+}
+
+// 当用户的屏幕大于1200px时，对应的字体大小为15px
+@media (min-width: 1200px) {
+    html {
+        font-size: 15px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+
+
+}
+
 body {
     position: fixed;
     background-position: center 0;

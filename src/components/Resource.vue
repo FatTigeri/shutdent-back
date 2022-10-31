@@ -1,58 +1,83 @@
 <template>
     <div id="resource-container">
         <el-container>
-            <!-- 侧边栏内容 -->
-            <el-aside width="140px">
-                <ul>
-                    <li><a href="#" :class="{ actived: cur === 0 }" @click="change(0)">优质课堂</a></li>
-                    <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }"
-                            @click="change(1)">试卷真题</a></li>
-                    <li><a href="#" :class="{ actived: cur === 2 }" @click="change(2)">巩固提升</a></li>
-                </ul>
-            </el-aside>
-            <el-main>
-                <div class="choice">
-                    <div class="grade">
-                        <i>年级:</i>
-                        <el-radio-group v-model="grade">
-                            <el-radio :label="1">一年级</el-radio>
-                            <el-radio :label="2">二年级</el-radio>
-                            <el-radio :label="3">三年级</el-radio>
-                            <el-radio :label="4">四年级</el-radio>
-                            <el-radio :label="5">五年级</el-radio>
-                            <el-radio :label="6">六年级</el-radio>
-                        </el-radio-group>
-                    </div>
-                    <div class="type">
-                        <i>类型:</i>
-                        <el-radio-group v-model="type">
-                            <el-radio :label="1">课堂知识</el-radio>
-                            <el-radio :label="2">考试时解</el-radio>
-                            <el-radio :label="3">名人故事</el-radio>
-                            <el-radio :label="9">名人故事</el-radio>
-                            <el-radio :label="4">趣味数学</el-radio>
-                            <el-radio :label="5">考点总结</el-radio>
-                            <el-radio :label="6">解题技巧</el-radio>
-                        </el-radio-group>
-                    </div>
-                    <div class="other">
-                        <i>其他:</i>
-                        <el-radio-group v-model="other">
-                            <el-radio :label="1">好评率</el-radio>
-                            <el-radio :label="2">点击率</el-radio>
-                        </el-radio-group>
-                        <el-button size="mini" type="primary">确定</el-button>
-                        <div class="search-btn">
-                            <el-input size="mini" placeholder="老师 / 关键字" suffix-icon="el-icon-search" v-model="input1">
-                            </el-input>
+            <el-row :gutter="0" style="height: 100%;">
+                <!-- 侧边栏内容 -->
+                <el-col :xs="0" :sm="3" style="height: 100% !important;">
+                    <el-aside>
+                        <ul>
+                            <li><a href="#/math/resource/classes" :class="{ actived: cur === 0 }"
+                                    @click="change(0)">优质课堂</a></li>
+                            <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }"
+                                    @click="change(1)">试卷真题</a></li>
+                            <li><a href="#" :class="{ actived: cur === 2 }" @click="change(2)">巩固提升</a></li>
+                        </ul>
+                    </el-aside>
+                </el-col>
+                <el-col :xs="24" :sm="21" style="height: 100% !important;">
+                    <el-main>
+                        <div class="choice">
+                            <el-row :gutter="0">
+                                <div class="grade">
+                                    <el-col :xs="0" :sm="2">
+                                        <div><i>年级:</i></div>
+                                    </el-col>
+                                    <el-col :xs="24" :sm="22">
+                                        <el-radio-group v-model="grade">
+                                            <el-radio :label="1">一年级</el-radio>
+                                            <el-radio :label="2">二年级</el-radio>
+                                            <el-radio :label="3">三年级</el-radio>
+                                            <el-radio :label="4">四年级</el-radio>
+                                            <el-radio :label="5">五年级</el-radio>
+                                            <el-radio :label="6">六年级</el-radio>
+                                        </el-radio-group>
+                                    </el-col>
+                                </div>
+                            </el-row>
+                            <el-row :gutter="0">
+                                <div class="type">
+                                    <el-col :xs="0" :sm="2">
+                                        <div><i>类型:</i></div>
+                                    </el-col>
+                                    <el-col :xs="24" :sm="22">
+                                        <el-radio-group v-model="type">
+                                            <el-radio :label="1">课堂知识</el-radio>
+                                            <el-radio :label="2">考试时解</el-radio>
+                                            <el-radio :label="3">名人故事</el-radio>
+                                            <el-radio :label="4">趣味数学</el-radio>
+                                            <el-radio :label="5">考点总结</el-radio>
+                                            <el-radio :label="6">解题技巧</el-radio>
+                                        </el-radio-group>
+                                    </el-col>
+                                </div>
+                            </el-row>
+                            <el-row :gutter="0">
+                                <div class="other">
+                                    <el-col :xs="0" :sm="2">
+                                        <div><i>其他:</i></div>
+                                    </el-col>
+                                    <el-col :xs="12" :sm="8">
+                                        <el-radio-group v-model="other">
+                                            <el-radio :label="1">好评率</el-radio>
+                                            <el-radio :label="2">点击率</el-radio>
+                                        </el-radio-group>
+                                    </el-col>
+                                    <el-col :xs="12" :sm="14">
+                                        <div class="btns">
+                                            <el-button size="mini" type="primary" @click="submit">确定</el-button>
+
+                                        </div>
+                                    </el-col>
+                                </div>
+                            </el-row>
                         </div>
-                    </div>
-                </div>
-                <div class="contents">
-                    <router-link to="/math/resource/examination"></router-link>
-                    <router-view></router-view>
-                </div>
-            </el-main>
+                        <div class="contents">
+                            <router-link to="/math/resource/classes"></router-link>
+                            <router-view></router-view>
+                        </div>
+                    </el-main>
+                </el-col>
+            </el-row>
         </el-container>
     </div>
 </template>
@@ -62,17 +87,40 @@ export default {
     name: 'resource',
     data() {
         return {
-            cur: 1,
+            cur: 0,
             grade: 1,
             type: 1,
             other: 1,
             input: '',
-            input1: ''
+            // input1: '',
+            grades: ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级'],
+            types: ['课堂知识', '考试时解', '名人故事', '趣味数学', '考点总结', '解题技巧'],
+            others: ['rate', 'popular']
         }
     },
     methods: {
+        // 改变侧边栏的索引位置
         change(index) {
             this.cur = index
+        },
+        // 用户进行试卷搜索功能
+        async submit() {
+            const { data: res } = await this.$http.get('/searchPages', {
+                params: {
+                    "grade": this.grades[this.grade - 1],
+                    "type": this.types[this.type - 1],
+                    "other": this.others[this.other - 1]
+                }
+            })
+
+            this.cur = 1
+            
+            this.$store.commit('setPageList', res)
+
+            this.$store.commit('setGrade', this.grade)
+
+            this.$router.replace("/math/resource/back")
+
         }
     }
 }
@@ -80,15 +128,15 @@ export default {
 
 <style lang="less" scoped>
 @media (min-width: 345px) and (max-width: 768px) {
-    .word {
-        width: 25% !important;
-        letter-spacing: 0 !important;
-    }
 
     .el-notification,
     .left,
     .right {
         background: white !important;
+    }
+
+    .search-btn {
+        display: none;
     }
 
 }
@@ -103,6 +151,10 @@ export default {
     .left,
     .right {
         background: white !important;
+    }
+
+    .search-btn {
+        display: none;
     }
 
 }
@@ -164,7 +216,6 @@ export default {
 
     .el-container {
         height: 100%;
-        display: flex !important;
     }
 
     .el-header,
@@ -177,6 +228,7 @@ export default {
 
     // 侧边栏样式
     .el-aside {
+        width: 100% !important;
         height: 100%;
         color: #333;
         text-align: center;
@@ -185,6 +237,7 @@ export default {
         // 侧边栏ul标签样式
         ul {
             display: flex;
+            list-style: none;
             flex-direction: column;
             justify-content: space-between;
             height: 60%;
@@ -221,7 +274,10 @@ export default {
     }
 
     .el-main {
+        width: 100%;
         color: #333;
+        padding: 1rem !important;
+        margin: 0 0 0 0 !important;
 
         .choice {
             width: 98%;
@@ -231,6 +287,10 @@ export default {
             font-weight: 600;
             padding: 0.333rem;
 
+            .el-row {
+                height: 30%;
+            }
+
             i {
                 margin: 0 1rem 0 0;
             }
@@ -238,17 +298,27 @@ export default {
             .grade,
             .type,
             .other {
-                height: 30%;
-                line-height: 35.59px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-items: center;
+                align-content: center;
+                align-items: center;
+
+                .el-radio {
+                    margin-right: 1rem;
+                }
 
                 .el-button {
                     margin: 0 0 0 2rem;
                 }
 
-                .search-btn {
-                    width: 25%;
-                    float: right;
-                }
+
+            }
+
+            .btns {
+                display: flex;
+                justify-content: space-between;
             }
         }
 
