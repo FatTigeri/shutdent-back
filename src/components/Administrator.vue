@@ -155,7 +155,7 @@ export default {
         },
         // 返回后端传输到前端的图片地址
         getSrc(src) {
-            return require('@/assets/' + src)
+            return 'http://1.12.235.213/img/' + src
         },
     }
 }

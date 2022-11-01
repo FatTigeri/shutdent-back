@@ -10,7 +10,6 @@
                                     @click="change(0)">优质课堂</a></li>
                             <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }"
                                     @click="change(1)">试卷真题</a></li>
-                            <li><a href="#" :class="{ actived: cur === 2 }" @click="change(2)">巩固提升</a></li>
                         </ul>
                     </el-aside>
                 </el-col>
@@ -114,7 +113,7 @@ export default {
             })
 
             this.cur = 1
-            
+
             this.$store.commit('setPageList', res)
 
             this.$store.commit('setGrade', this.grade)

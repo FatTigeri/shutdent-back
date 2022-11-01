@@ -3,5 +3,5 @@ const path = require('path');
 const port = 8080
 module.exports = defineConfig({
   transpileDependencies: true,
-  // publicPath: process.env.NODE_ENV === "production" ? "./" : "/" + "root/workspace/math",
+  // publicPath: process.env.NODE_ENV === "production" ? "./" : "/" + "/project/math",
 })

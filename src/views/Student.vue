@@ -34,7 +34,7 @@ export default {
             this.studentsList = res
         },
         getSrc(src) {
-            return require('@/assets/' + src)
+            return 'http://1.12.235.213/img/' + src
         },
         click(index) {
             console.log(index);

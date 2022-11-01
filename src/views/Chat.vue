@@ -114,7 +114,7 @@ export default {
                 console.log("您的浏览器不支持WebSocket");
             } else {
                 console.log("您的浏览器支持WebSocket");
-                let socketUrl = "ws://localhost:8088/imserver/" + username;
+                let socketUrl = "ws://1.12.235.213:8088/imserver/" + username;
                 if (socket != null) {
                     socket.close();
                     socket = null;

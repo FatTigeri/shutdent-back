@@ -57,7 +57,8 @@
                                         <el-dropdown>
                                             <span class="el-dropdown-link">
                                                 <img :src="getSrc('' + this.$store.state.imgSrc)" alt="blank"
-                                                    style="width: 100%;">
+                                                    style="width: 100%;" v-if="this.$store.state.flag === false">
+                                                <img :src="circleUrl" alt="blank" style="width: 100%;" v-else>
                                                 <i class="el-icon-arrow-down el-icon--right"></i>
                                             </span>
                                             <el-dropdown-menu slot="dropdown">
@@ -204,7 +205,7 @@ export default {
 
         // 返回后端传输到前端的图片地址
         getSrc(src) {
-            return require('@/assets/' + src)
+            return 'http://1.12.235.213/img/' + src
         },
 
         // 用户判断是否为教师方法

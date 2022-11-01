@@ -54,14 +54,14 @@
                 <el-form :model="form">
                     <!-- 进行头像消息的提醒  -->
                     <el-form-item label="">
-                        <i><strong>注意:图片命名必须为1:1非中文，否则无法上传传！！</strong></i>
+                        <i><strong>注意:图片命名必须为1:1非中文，否则无法上传！！</strong></i>
                     </el-form-item>
                     <!-- 2.1 头像上传 -->
                     <el-form-item label="" :label-width="formLabelWidth">
                         <!-- 2.1.1 头像上传框 -->
                         <el-upload class="avatar-uploader" :action="uploadUrl" :show-file-list="false"
                             :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-                            <img v-if="imageUrl" :src="imageUrl" class="avatar" style="width:140px">
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar" style="width:178px">
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
@@ -146,7 +146,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             // 新用户头像上传到服务器的网址
-            uploadUrl: 'http://localhost:8088/api/upload',
+            uploadUrl: 'http://1.12.235.213:8088/api/upload',
             imageUrl: ''
         };
     },
@@ -154,6 +154,7 @@ export default {
         // 用户注册提交表单方法，进行注册信息的传输
         async submitForm() {
             const fileName = this.$store.state.upLoadImg;
+            console.log(fileName);
             // 调用后端的接口进行用户信息的注册
             const { data: res } = await this.$http.post("/insertUser", this.$qs.stringify({
                 "username": this.ruleForm.username,
@@ -171,22 +172,22 @@ export default {
                 this.$router.push("/login")
             }
         },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
-        },
+        // resetForm(formName) {
+        //     this.$refs[formName].resetFields();
+        // },
+        // handleRemove(file, fileList) {
+        //     console.log(file, fileList);
+        // },
+        // handlePictureCardPreview(file) {
+        //     this.dialogImageUrl = file.url;
+        //     this.dialogVisible = true;
+        // },
 
         // 图片上传成功后自动触发的钩子函数
-        picture(file, fileList) {
-            // 将用户上传的头像的filename存进Vuex中，为后续的表单提交做铺垫
-            this.$store.commit('setImgName', fileList.name)
-        },
+        // picture(file, fileList) {
+        //     // 将用户上传的头像的filename存进Vuex中，为后续的表单提交做铺垫
+        //     this.$store.commit('setImgName', fileList.name)
+        // },
 
         // 用户注册头像上传按钮信息提示函数
         success() {
@@ -198,7 +199,9 @@ export default {
             });
         },
         handleAvatarSuccess(res, file) {
+            this.$store.commit('setImgName', res)
             this.imageUrl = URL.createObjectURL(file.raw);
+
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
@@ -391,7 +394,6 @@ export default {
 }
 
 .avatar {
-    width: 178px;
     height: 178px;
     display: block;
 }
