@@ -24,12 +24,12 @@
                             <!-- 1.2.2.1.2 密码输入框 -->
                             <el-form-item label="密码:" prop="pass">
                                 <el-input type="password" v-model.trim="ruleForm.pass" autocomplete="off"
-                                    prefix-icon="el-icon-lock"></el-input>
+                                    prefix-icon="el-icon-lock" show-password></el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.3 确认密码输入框 -->
                             <el-form-item label="确认密码:" prop="checkPass">
                                 <el-input type="password" v-model.trim="ruleForm.checkPass" autocomplete="off"
-                                    prefix-icon="el-icon-lock">
+                                    prefix-icon="el-icon-lock" show-password>
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.4 头像上传按钮框 -->
@@ -84,27 +84,38 @@ export default {
         var validateUsername = async (rule, value, callback) => {
             // 当且仅当用户名不为空才进行下列的内容验证
             if (value === '') {
-                callback(new Error('请输入用户名'));
+                callback(new Error('请输入数字, 字母或下划线的4-16位用户名。'));
             } else if (value !== '') {
-                const { data: res } = await this.$http.post("/cUsername", this.$qs.stringify({
-                    "username": value
-                }))
-                // 当后端接口返回的是已存在该用户的字符串信息时，进行相应的提示
-                if (res === 'exists') {
-                    // 提示用户存在
-                    callback(new Error('用户已存在'))
+                // 先使用正则表达式进行用户名表单认证
+                const reg = /^[a-zA-Z0-9_-]{4,16}$/
+                if (reg.test(value)) {
+                    const { data: res } = await this.$http.post("/cUsername", this.$qs.stringify({
+                        "username": value
+                    }))
+                    // 当后端接口返回的是已存在该用户的字符串信息时，进行相应的提示
+                    if (res === 'exists') {
+                        // 提示用户存在
+                        callback(new Error('用户已存在。'))
+                    } else {
+                        callback();
+                    }
                 } else {
-                    callback()
+                    callback('用户名非法。')
                 }
             }
         };
         // 用户新密码验证
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
+                callback(new Error('请输入6-16位至少1个大写字母,1个小写字母,1个数字,1个特殊字符密码。'));
             } else {
                 if (this.ruleForm.checkPass !== '') {
                     this.$refs.ruleForm.validateField('checkPass');
+                }
+                // 先使用正则表达式进行密码表单认证
+                const req = /^\S*(?=\S{6,16})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/
+                if (!req.test(value)) {
+                    callback('密码非法。')
                 }
                 callback();
             }
@@ -112,7 +123,7 @@ export default {
         // 用户确认新密码验证
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请再次输入密码'));
+                callback(new Error('请再次输入密码。'));
             } else if (value !== this.ruleForm.pass) {
                 callback(new Error('两次输入密码不一致!'));
             } else {
@@ -153,8 +164,8 @@ export default {
     methods: {
         // 用户注册提交表单方法，进行注册信息的传输
         async submitForm() {
+            // 获取Vuex中用户上传的头像名
             const fileName = this.$store.state.upLoadImg;
-            console.log(fileName);
             // 调用后端的接口进行用户信息的注册
             const { data: res } = await this.$http.post("/insertUser", this.$qs.stringify({
                 "username": this.ruleForm.username,
@@ -172,23 +183,6 @@ export default {
                 this.$router.push("/login")
             }
         },
-        // resetForm(formName) {
-        //     this.$refs[formName].resetFields();
-        // },
-        // handleRemove(file, fileList) {
-        //     console.log(file, fileList);
-        // },
-        // handlePictureCardPreview(file) {
-        //     this.dialogImageUrl = file.url;
-        //     this.dialogVisible = true;
-        // },
-
-        // 图片上传成功后自动触发的钩子函数
-        // picture(file, fileList) {
-        //     // 将用户上传的头像的filename存进Vuex中，为后续的表单提交做铺垫
-        //     this.$store.commit('setImgName', fileList.name)
-        // },
-
         // 用户注册头像上传按钮信息提示函数
         success() {
             this.dialogFormVisible = false
@@ -362,7 +356,7 @@ export default {
 
             // 输入框样式
             /deep/ .el-input__inner {
-                width: 90%;
+                width: 88%;
             }
         }
     }
