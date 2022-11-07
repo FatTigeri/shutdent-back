@@ -12,7 +12,9 @@
                             <!-- 1.1.1.1 logo图片 -->
                             <img src="@/assets/log.png" alt="blank" style="border-radius: 50%;">
                             <!-- 1.1.1.2 网站的名称介绍 -->
-                            <div><a href="#">希冀数学</a></div>
+                            <div>
+                                <a href="/static/photo.html">希冀数学</a>
+                            </div>
                         </div>
                     </el-col>
                     <!-- 1.1.2 导航栏功能链接 -->
@@ -57,7 +59,8 @@
                                         <el-dropdown>
                                             <span class="el-dropdown-link">
                                                 <img :src="getSrc('' + this.$store.state.imgSrc)" alt="blank"
-                                                    style="width: 100%;" v-if="this.$store.state.flag === false">
+                                                    style="width: 100%; height: 3rem"
+                                                    v-if="this.$store.state.flag === false">
                                                 <img :src="circleUrl" alt="blank" style="width: 100%;" v-else>
                                                 <i class="el-icon-arrow-down el-icon--right"></i>
                                             </span>
@@ -68,11 +71,16 @@
                                                 <!-- 注意：此处的用户消息内容只有当用户进行登录后才进行展示 -->
                                                 <el-dropdown-item icon="el-icon-chat-dot-round" class="clearfix"
                                                     v-show="this.$store.state.flag === false">
-                                                    消息
+                                                    <span @click="linkTo()">消息</span>
                                                     <el-badge class="mark" :value="count" />
                                                 </el-dropdown-item>
-                                                <el-dropdown-item icon="el-icon-setting" class="clearfix">
+                                                <el-dropdown-item icon="el-icon-setting" class="clearfix"
+                                                    v-show="state === '1'">
                                                     <span @click="admin">教师后台管理</span>
+                                                </el-dropdown-item>
+                                                <el-dropdown-item icon="el-icon-setting" class="clearfix"
+                                                    v-show="state === '0'">
+                                                    <span>学生后台</span>
                                                 </el-dropdown-item>
                                             </el-dropdown-menu>
                                         </el-dropdown>
@@ -93,14 +101,26 @@
 import { mydebounce } from '@/utils/index.js'
 export default {
     created() {
-        // 
+        // 当用户为教师时，进行对应的读取question表数据读取
+        if (window.localStorage.getItem('state') === '1') {
+            this.initQuestionCount()
+            this.src = '/administrator/problem'
+        } else {
+            // 当用户为学生时，进行对应的读取answer表数据读取
+
+        }
+
+        // 使用window.sessionStorage进行索引变量值的控制
         if (!window.sessionStorage.getItem('index')) {
+            // 用户第一次进入改网站时设置的索引值index
             window.sessionStorage.setItem('index', 0)
             this.$store.commit('changeCurrent', 0)
         } else {
+            // 用户不是第一次进入网站时，获取对应的index值
             const index = parseInt(window.sessionStorage.getItem('index'))
             this.$store.commit('changeCurrent', index)
         }
+
         // 判断用户的token是否已经存在于客户端电脑
         if (window.localStorage.getItem("token")) {
             // 改变控制按钮的变量的状态
@@ -123,6 +143,9 @@ export default {
         // 时刻计算当前的功能索引位置
         cur: function () {
             return this.$store.state.current
+        },
+        state: function () {
+            return window.localStorage.getItem('state')
         }
     },
     data() {
@@ -135,7 +158,9 @@ export default {
             // 控制反馈模态框宽度变量
             formLabelWidth: '6.66666rem',
             // 数据库中answer表与当前登录用户对应的消息条数
-            count: 0
+            count: 0,
+            // 消息跳转链接
+            src: ''
         }
     },
     methods: {
@@ -164,6 +189,7 @@ export default {
 
         // 用户登录方法
         login() {
+            // 跳转消息提示
             this.$message({
                 type: 'success',
                 message: '前往登录页面成功!!!'
@@ -183,7 +209,9 @@ export default {
                 // 将本地存储的变量删除
                 window.localStorage.removeItem('token')
                 window.sessionStorage.removeItem('user')
+                window.localStorage.removeItem('state')
                 window.localStorage.removeItem('avatar')
+                this.count = 0
 
                 // 用户登录注销后，调用Vuex中getImgSrc方法，赋值为没有头像的样式
                 this.$store.commit('getImgSrc', 'avatar.png')
@@ -240,6 +268,19 @@ export default {
                     message: h('i', { style: 'color: teal' }, '请先登录！！！')
                 })
             }
+        },
+
+        // 获取question表数据数的函数
+        async initQuestionCount() {
+            // 调用后端api接口，获取question表的所有数据
+            const { data: res } = await this.$http.get("/getProblems")
+            // 将对象的长度赋值给消息count变量
+            this.count = res.length
+        },
+
+        // 用户消息跳转方法
+        linkTo() {
+            this.$router.push('' + this.src)
         }
     }
 }
@@ -362,6 +403,8 @@ body {
                     text-decoration: none;
                     font-family: Arial, Helvetica, sans-serif;
                 }
+
+
             }
         }
 

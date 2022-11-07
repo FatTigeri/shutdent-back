@@ -309,13 +309,12 @@ html {
 
         // 文字信息1样式
         .aside-text1 {
-            width: 10%;
+            width: 1.5033rem;
             height: 100%;
             font-weight: 700;
             line-height: 500%;
             text-align: center;
             color: rgb(92, 48, 21);
-            // border-right: 0.10000rem solid rgb(92, 48, 21);
         }
 
         .contents1 {
@@ -387,7 +386,7 @@ html {
 
         // 文字信息2样式
         .aside-text2 {
-            width: 10%;
+            width: 1.5033rem;
             height: 100%;
             font-weight: 700;
             line-height: 320%;

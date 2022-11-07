@@ -13,7 +13,7 @@
                                 <div class="nav-l">
                                     <div class="content-l">
                                         <el-badge is-dot class="item" type="danger"></el-badge>
-                                        <el-badge is-dot class="item" type="warning "></el-badge>
+                                        <el-badge is-dot class="item" type="warning"></el-badge>
                                         <el-badge is-dot class="item" type="success"></el-badge>
                                         <i class="el-icon-reading"></i>
                                         <i class="el-icon-arrow-left"></i>
@@ -67,8 +67,8 @@
                                             </li>
                                             <!-- 2.1.4 课程上传选项 -->
                                             <li>
-                                                <a href="#" :class="{ actived: cur === 2 }" @click="change(2)"><i
-                                                        class="el-icon-upload"></i>&nbsp;课程上传</a>
+                                                <a href="#/administrator/upload" :class="{ actived: cur === 2 }"
+                                                    @click="change(2)"><i class="el-icon-upload"></i>&nbsp;课程上传</a>
                                             </li>
                                             <!-- 2.1.5 互动窗口选项 -->
                                             <li>
@@ -125,6 +125,7 @@
 export default {
     // 组件名称
     name: 'administrator',
+    props: ['type'],
     data() {
         return {
             // 控制左侧栏区域active属性
@@ -136,13 +137,14 @@ export default {
             // 教师名字
             teacher: window.localStorage.getItem('token'),
             // 教师头像
-            imgSrc: window.localStorage.getItem('avatar')
+            imgSrc: window.localStorage.getItem('avatar'),
         }
     },
     methods: {
         // 教师退出登录方法
         logout() {
             this.$store.commit('changeAlive')
+            window.sessionStorage.setItem('index', 0)
             this.$router.replace('/math/home')
         },
         // 控制选项转换方法

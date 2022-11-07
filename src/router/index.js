@@ -21,6 +21,7 @@ import Activity from '@/views/Activity.vue'
 import Examination from '@/views/Examination.vue'
 import Back from '@/components/Back.vue'
 import Classes from '@/views/Classes.vue'
+import Upload from '@/views/Upload.vue'
 
 const router = new VueRouter({
   mode: 'hash',
@@ -40,7 +41,7 @@ const router = new VueRouter({
             { path: 'classes', component: Classes }
           ]
         },
-        { path: 'video/:id', component: Video },
+        { path: 'video/:url/:id', component: Video },
         { path: 'activity', component: Activity },
       ]
     },
@@ -52,10 +53,28 @@ const router = new VueRouter({
         { path: 'teacher', component: Teacher },
         { path: 'answer', component: Answer },
         { path: 'problem', component: Problem },
-        { path: 'student', component: Student }
+        { path: 'student', component: Student },
+        { path: 'upload', component: Upload }
       ]
     }
   ]
+})
+
+// 使用路由守卫, 对页面的跳转进行限制
+router.beforeEach(function (to, from, next) {
+  if (to.path === '/administrator/teacher' || to.path === '/administrator/problem' || to.path === '/administrator/student') {
+    // 读取浏览器中的token缓存
+    const token = window.localStorage.getItem('token')
+
+    if (token) {
+      next()
+    } else {
+      window.sessionStorage.setItem('index', 0)
+      next('/math/home')
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -1,27 +1,40 @@
 <template>
   <div id="home-container">
-
     <!-- 右侧的内容固定栏 -->
     <el-row :gutter="0">
       <el-col :xs="0">
         <div class="functions-fix">
           <ul>
             <li><a href="#/math/chat" @click="linkTo()">客服</a></li>
-            <li @click="dialogFormVisible = true"><a href="#">反馈</a></li>
+            <li @click="dialogFormVisible = true"><a href="#">提问</a></li>
             <li><a href="#layout-container">返顶</a></li>
           </ul>
         </div>
 
         <!-- 点击反馈弹出的模态框 -->
-        <el-dialog title="反馈信息" :visible.sync="dialogFormVisible">
+        <el-dialog title="问题收集。" :visible.sync="dialogFormVisible">
           <el-form>
             <el-form-item label="" :label-width="formLabelWidth">
-              <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="textarea"></el-input>
+              <el-input type="textarea" :rows="5" placeholder="请输入您出现的数学问题" v-model="textarea"></el-input>
             </el-form-item>
           </el-form>
+          <el-radio-group v-model="grade">
+            <el-radio label="一年级">一年级</el-radio>
+            <el-radio label="二年级">二年级</el-radio>
+            <el-radio label="三年级">三年级</el-radio>
+            <el-radio label="四年级">四年级</el-radio>
+            <el-radio label="五年级">五年级</el-radio>
+            <el-radio label="六年级">六年级</el-radio>
+          </el-radio-group>
+          <el-radio-group v-model="problem">
+            <el-radio label="三角和问题">三角和问题</el-radio>
+            <el-radio label="数运算问题">数运算问题</el-radio>
+            <el-radio label="圆计算问题">圆计算问题</el-radio>
+            <el-radio label="试卷真题问题">试卷真题问题</el-radio>
+          </el-radio-group>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="feedback">确 定</el-button>
+            <el-button @click="dialogFormVisible = false" size="mini">取 消</el-button>
+            <el-button type="primary" @click="question" size="mini" :disabled="flag">确 定</el-button>
           </div>
         </el-dialog>
       </el-col>
@@ -29,8 +42,6 @@
 
     <!-- home页面对应的固定栏功能 -->
     <el-container>
-      <!-- (一) 首页导航栏 -->
-
       <!-- (二)  首页主要内容-->
       <el-row :gutter="0">
         <el-container style="height: 56rem;">
@@ -302,7 +313,6 @@
 <script>
 import { mythrollte } from '@/utils/index.js'
 import { mydebounce } from '@/utils/index.js'
-
 export default {
   mounted() {
     const _this = this
@@ -343,9 +353,15 @@ export default {
       dialogFormVisible: false,
       // 控制反馈模态框宽度变量
       formLabelWidth: '6.66666rem',
-      // 用户反馈内容变量
+      // 用户提问内容变量
       textarea: '',
-      img: ''
+      img: '',
+      // 年级可选数组
+      grade: '一年级',
+      // 问题类型
+      problem: '试卷真题问题',
+      // 接收课程信息对象
+      course: {}
     }
   },
   computed: {
@@ -412,6 +428,9 @@ export default {
           return '周日'
           break
       }
+    },
+    flag() {
+      return this.textarea === '';
     }
   },
   methods: {
@@ -426,7 +445,6 @@ export default {
 
     // 最受欢迎老师打分确定(使用到了节流操作)
     open2: mythrollte(async function () {
-
       // 先对相应的数据进行更新
       for (let i = 0; i < this.popularList.length; i++) {
         // 对不同老师的分数total进行更新
@@ -470,13 +488,18 @@ export default {
       this.$router.push('/math/chat')
     },
 
-    // 用户点击反馈调用的数据
-    async feedback() {
+    // 用户点击提问调用的函数
+    async question() {
       if (this.textarea !== '') {
+        // 获取当前用户的姓名
+        var questioner = window.localStorage.getItem('token')
         // 将评论内容发送到后端，并存进数据库
-        const { data: res } = await this.$http.get('/feedback', {
+        const { data: res } = await this.$http.get('/question', {
           params: {
-            "feedback": this.textarea
+            "question": this.textarea,
+            "grade": this.grade,
+            "problem": this.problem,
+            "questioner": questioner
           }
         })
         // 当后端返回的数据res > 0 时(即此时插入语句成功执行了)， 进行对应的消息提醒
@@ -484,15 +507,22 @@ export default {
           const h = this.$createElement;
           this.$notify({
             title: '消息提示',
-            message: h('i', { style: 'color: teal' }, '感谢您宝贵的评价，我们会继续努力的~~~')
+            message: h('i', { style: 'color: teal' }, '您的疑惑已提交到后台~~~')
           })
         }
+      } else {
+        // 若用户提问的问题内容为空
+        const h = this.$createElement;
+        this.$notify({
+          title: '消息提示',
+          message: h('i', { style: 'color: teal' }, '提问内容不能为空!!!')
+        })
       }
       // 最后将后续的变量修改
       this.textarea = ''
+      // 将表单模态框隐藏变量
       this.dialogFormVisible = false
     },
-
 
     // 调用axois中的get方法发送请求，得到系统当天的日期中的教师排班数据
     async getTeacherList() {
@@ -519,9 +549,14 @@ export default {
       this.popularList = res;
     },
 
-    // 视频播放方法
+    // 前往视频播放页面方法
     async player(id) {
-      this.$router.push("/math/video/" + id)
+      // 先获取当前视频的id值
+      const { data: res } = await this.$http.get('/getCourseById?id=' + id)
+      // 将获取到数据进行赋值操作
+      this.course = res
+      // 将数据对象中的url属性作为video组件的动态参数
+      this.$router.push("/math/video/" + this.course[0].url + "/" + id)
     }
   },
 
@@ -610,6 +645,14 @@ export default {
 * {
   margin: 0;
   padding: 0;
+}
+
+.el-radio {
+  margin: 0.666rem 0.333rem;
+}
+
+.el-dialog {
+  border-radius: 0.45rem !important;
 }
 
 // 侧边栏固定部内容样式

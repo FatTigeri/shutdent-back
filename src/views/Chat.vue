@@ -3,13 +3,14 @@
         <el-row>
             <el-col :span="4">
                 <el-card style="width: 300px; height: 300px; color: #333">
-                    <div style="padding-bottom: 10px; border-bottom: 1px solid #ccc">在线用户<span
+                    <div style="padding-bottom: 10px; border-bottom: 1px solid #ccc; font-weight: 600;">在线用户<span
                             style="font-size: 12px">（点击聊天气泡开始聊天）</span></div>
                     <div style="padding: 10px 0" v-for="user in users" :key="user.username">
                         <span>{{ user.username }}</span>
-                        <i class="el-icon-chat-dot-round" style="margin-left: 10px; font-size: 16px; cursor: pointer"
+                        <i class="el-icon-chat-dot-round"
+                            style="margin-left: 10px; font-size: 16px; cursor: pointer;font-weight: 600;"
                             @click="chatUser = user.username"></i>
-                        <span style="font-size: 12px;color: limegreen; margin-left: 5px"
+                        <span style="font-size: 12px;color: limegreen; margin-left: 5px;font-weight: 600;"
                             v-if="user.username === chatUser">chatting...</span>
                     </div>
                 </el-card>
@@ -17,7 +18,7 @@
             <el-col :span="20">
                 <div style="width: 800px; margin: 0 auto; background-color: white;
                       border-radius: 5px; box-shadow: 0 0 10px #ccc">
-                    <div style="text-align: center; line-height: 50px;">
+                    <div style="text-align: center; line-height: 50px;font-weight: 600;">
                         Web聊天室（{{ chatUser }}）
                     </div>
                     <div style="height: 350px; overflow:auto; border-top: 1px solid #ccc" v-html="content"></div>
@@ -153,7 +154,7 @@ export default {
         },
         // 返回后端传输到前端的图片地址
         getSrc(src) {
-            return require('@/assets/' + src)
+            return 'http://1.12.235.213/img/' + src
         },
     }
 }

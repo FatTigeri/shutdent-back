@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D图片</title>
+    <style>
+        @keyframes rotate-frame {
+            0% {
+                transform: rotateX(-20deg) rotateY(0deg);
+            }
+
+            10% {
+                transform: rotateX(-20deg) rotateY(36deg);
+            }
+
+            20% {
+                transform: rotateX(-20deg) rotateY(72deg);
+            }
+
+            30% {
+                transform: rotateX(-20deg) rotateY(108deg);
+            }
+
+            40% {
+                transform: rotateX(-20deg) rotateY(144deg);
+            }
+
+            50% {
+                transform: rotateX(-20deg) rotateY(180deg);
+            }
+
+            60% {
+                transform: rotateX(-20deg) rotateY(216deg);
+            }
+
+            70% {
+                transform: rotateX(-20deg) rotateY(252deg);
+            }
+
+            80% {
+                transform: rotateX(-20deg) rotateY(288deg);
+            }
+
+            90% {
+                transform: rotateX(-20deg) rotateY(324deg);
+            }
+
+            100% {
+                transform: rotateX(-20deg) rotateY(360deg);
+            }
+        }
+
+        body {
+            background: #0b0b0b;
+            margin-left: 200px;
+            margin-top: 40px;
+            box-sizing: border-box;
+        }
+
+        img {
+            width: 100%;
+            height: 100%
+        }
+
+        .photo-wrap {
+            perspective: 1000px;
+            width: 1000px;
+        }
+
+        .container {
+            widows: 1000px;
+            height: 700px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-10deg);
+            animation: rotate-frame 10s linear infinite;
+        }
+
+        img {
+            width: 200px;
+            height: 118px;
+            line-height: 118px;
+            text-align: center;
+            position: absolute;
+            top: 160px;
+            left: 300px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .9) inset;
+            -webkit-box-reflect: below 3px -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .5));
+            background: pink;
+            background: -moz-linear-gradient(top, pink, rgba(0, 0, 155, .5));
+            background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ccccff) to(rgba(174, 221, 129, .5)));
+            background: -o-linear-gradient(top, pink, rgba(0, 0, 255, .5));
+            transform: rotateY(0deg);
+        }
+
+        .img01 {
+            transform: rotateY(0deg) translateZ(300px);
+        }
+        .img02 {
+            transform: rotateY(40deg) translateZ(300px);
+        }
+        .img03 {
+            transform: rotateY(80deg) translateZ(300px);
+        }
+        .img04 {
+            transform: rotateY(120deg) translateZ(300px);
+        }
+        .img05 {
+            transform: rotateY(160deg) translateZ(300px);
+        }
+        .img06 {
+            transform: rotateY(200deg) translateZ(300px);
+        }
+        .img07 {
+            transform: rotateY(240deg) translateZ(300px);
+        }
+        .img08 {
+            transform: rotateY(280deg) translateZ(300px);
+        }
+        .img09 {
+            transform: rotateY(320deg) translateZ(300px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="photo-wrap">
+        <div class="container">
+            <div class="img"><img src="./images/img08.webp" alt="blank"></div>
+            <div class="img img01"><img src="./images/img07.webp" alt="blank"></div>
+            <div class="img img02"><img src="./images/img02.webp" alt="blank"></div>
+            <div class="img img03"><img src="./images/img04.webp" alt="blank"></div>
+            <div class="img img04"><img src="./images/img05.webp" alt="blank"></div>
+            <div class="img img05"><img src="./images/img03.webp" alt="blank"></div>
+            <div class="img img06"><img src="./images/img01.webp" alt="blank"></div>
+            <div class="img img07"><img src="./images/img07.webp" alt="blank"></div>
+            <div class="img img08"><img src="./images/img06.webp" alt="blank"></div>
+            <div class="img img09"><img src="./images/img02.webp" alt="blank"></div>
+        </div>
+    </div>
+</body>
+
+</html>

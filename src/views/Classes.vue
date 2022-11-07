@@ -12,7 +12,7 @@
             </div>
             <ul>
                 <!-- v-for指令展示得到的课程内容信息 -->
-                <li v-for="item in List" :key="item.cid" @click="player(item.cid)">
+                <li v-for="item in List" :key="item.cid" @click="player(item.url, item.cid)">
                     <a href="javascript:void(0)"><img :src="getSrc(item.cover)" alt="blank"></a>
                 </li>
 
@@ -101,14 +101,14 @@ export default {
         }, 5000),
         // 获取图片方法
         getSrc(src) {
-            return require('@/assets/' + src)
+            return 'http://1.12.235.213/img/' + src
         },
         // 点击对应视频跳转方法
-        player(id) {
-            this.$router.push('/math/video/' + id)
+        player(url, id) {
+            this.$router.push('/math/video/' + url + "/" + id)
         },
         // 上一页功能
-        async pre() {
+        pre() {
             // 先对页面当前页数进行判断
             if (this.current === 1) {
                 // 信息提示
@@ -130,7 +130,7 @@ export default {
             }
         },
         // 下一页功能
-        async next() {
+        next() {
             // 先对页面当前页数进行判断
             if (this.current === this.maxCourse) {
                 // 信息提示

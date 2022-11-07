@@ -98,12 +98,13 @@ export default {
 
                     // 调用vuex中的changeFlag方法将flag进行更改
                     this.$store.commit("changeFlag", false)
-                    // 调用Vuex中的setToken方法将state中的token变量进行赋值
-                    this.$store.commit("setUsername", this.username)
 
                     // 如果后端返回的数据均不为以下的信息时进行对应的信息提示和返回到home页面
-                    if (res !== 'user_err' && res !== 'psw_err') {
-                        this.$store.commit("getImgSrc", res)
+                    if (res.msg !== 'user_err' && res.msg !== 'psw_err') {
+                        // 设置Vuex中当前用户头像名称
+                        this.$store.commit("getImgSrc", res.imgSrc)
+                        // 设置Vuex中当前用户的角色状态
+                        window.localStorage.setItem("state", res.state)
                         this.$message({
                             type: "info",
                             message: this.username + "欢迎您!"
@@ -112,15 +113,17 @@ export default {
                         // 设置对应的token变量
                         window.localStorage.setItem('token', this.username)
                         window.sessionStorage.setItem("user", JSON.stringify(this.username))
+                        // 将索引值再设置为0
+                        window.sessionStorage.setItem('index', 0)
 
                         // 将从后台中获取到的用户头像名设置为avatar变量
-                        window.localStorage.setItem('avatar', res)
+                        window.localStorage.setItem('avatar', res.imgSrc)
 
                         // 使用编程式导航将页面退返回首页
                         this.$router.push("/math/home")
                     } else {
                         // 控制提示信息展示变量的赋值
-                        this.context = res
+                        this.context = res.msg
                     }
                 } else {
                     this.context = 'code_err'

@@ -41,7 +41,7 @@
                             </el-form-item>
                             <!-- 1.2.2.1.5 用户确定和取消按钮框 -->
                             <el-form-item>
-                                <el-button type="primary" size="mini" @click="submitForm">提交
+                                <el-button type="primary" size="mini" @click="submitForm" :disabled="flag">提交
                                 </el-button>
                                 <el-button @click="resetForm('ruleForm')" size="mini">重置</el-button>
                             </el-form-item>
@@ -54,7 +54,7 @@
                 <el-form :model="form">
                     <!-- 进行头像消息的提醒  -->
                     <el-form-item label="">
-                        <i><strong>注意:图片命名必须为1:1非中文，否则无法上传！！</strong></i>
+                        <i><strong>提议:为防止缩放,请上传1:1图片</strong></i>
                     </el-form-item>
                     <!-- 2.1 头像上传 -->
                     <el-form-item label="" :label-width="formLabelWidth">
@@ -123,10 +123,13 @@ export default {
         // 用户确认新密码验证
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
+                this.flag = true;
                 callback(new Error('请再次输入密码。'));
             } else if (value !== this.ruleForm.pass) {
+                this.flag = true;
                 callback(new Error('两次输入密码不一致!'));
             } else {
+                this.flag = false;
                 callback();
             }
         };
@@ -158,10 +161,15 @@ export default {
             dialogVisible: false,
             // 新用户头像上传到服务器的网址
             uploadUrl: 'http://1.12.235.213:8088/api/upload',
-            imageUrl: ''
+            imageUrl: '',
+            // 控制注册功能按钮是否为禁用变量
+            flag: true
         };
     },
     methods: {
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
         // 用户注册提交表单方法，进行注册信息的传输
         async submitForm() {
             // 获取Vuex中用户上传的头像名
@@ -202,7 +210,7 @@ export default {
             const isLt2M = file.size / 1024 / 1024 < 2;
 
             if (!isJPG) {
-                this.$message.error('上传头像图片只能是 JPG 格式!');
+                this.$message.error('上传头像图片只能是JPG');
             }
             if (!isLt2M) {
                 this.$message.error('上传头像图片大小不能超过 2MB!');
