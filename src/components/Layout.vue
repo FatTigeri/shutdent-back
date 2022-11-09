@@ -80,7 +80,7 @@
                                                 </el-dropdown-item>
                                                 <el-dropdown-item icon="el-icon-setting" class="clearfix"
                                                     v-show="state === '0'">
-                                                    <span>学生后台</span>
+                                                    <span @click="stuAdmin">学生后台管理</span>
                                                 </el-dropdown-item>
                                             </el-dropdown-menu>
                                         </el-dropdown>
@@ -103,11 +103,12 @@ export default {
     created() {
         // 当用户为教师时，进行对应的读取question表数据读取
         if (window.localStorage.getItem('state') === '1') {
-            this.initQuestionCount()
+            this.initCount(1)
             this.src = '/administrator/problem'
         } else {
             // 当用户为学生时，进行对应的读取answer表数据读取
-
+            this.initCount(0)
+            this.src = '/stuAdmin/answer'
         }
 
         // 使用window.sessionStorage进行索引变量值的控制
@@ -270,12 +271,41 @@ export default {
             }
         },
 
+        stuAdmin() {
+            // 先对客户端中的token进行读取
+            const username = window.localStorage.getItem('token')
+            if (username) {
+                this.$message({
+                    type: 'success',
+                    message:  username  + '欢迎您!'
+                })
+                this.$router.replace('/stuAdmin')
+            } else {
+                const h = this.$createElement;
+                this.$notify({
+                    title: '消息提示',
+                    message: h('i', { style: 'color: teal' }, '请先登录~!')
+                })
+            }
+        },
+
         // 获取question表数据数的函数
-        async initQuestionCount() {
-            // 调用后端api接口，获取question表的所有数据
-            const { data: res } = await this.$http.get("/getProblems")
-            // 将对象的长度赋值给消息count变量
-            this.count = res.length
+        async initCount(state) {
+            if (state === 1) {
+                // 调用后端api接口，获取question表的所有数据
+                const { data: res } = await this.$http.get("/getProblems")
+                // 将对象的长度赋值给消息count变量
+                this.count = res.length
+            } else {
+                // 调用后端api接口，获取question表的所有数据
+                const { data: res } = await this.$http.get('/getInfos', {
+                    params: {
+                        "questioner": window.localStorage.getItem('token')
+                    }
+                })
+                // 将对象的长度赋值给消息count变量
+                this.count = res.length
+            }
         },
 
         // 用户消息跳转方法
@@ -375,7 +405,7 @@ body {
     color: #333;
     font-weight: 600;
     text-align: center;
-    // line-height: 60px;
+    height: 4rem !important;    
 
     .header-container {
         width: 100%;
@@ -387,6 +417,8 @@ body {
             height: 100%;
             display: flex;
             text-align: center;
+            align-items: center;
+            align-content: center;
             justify-content: space-around;
 
             // home页面图片样式设置
@@ -396,7 +428,7 @@ body {
 
             // home页面网站名称样式
             div {
-                line-height: 4rem;
+                // line-height: 4rem;
 
                 a {
                     color: purple;
@@ -483,7 +515,12 @@ body {
         .user-login {
             width: 100%;
             height: 100%;
-            line-height: 4rem;
+            display: table;
+
+            .el-input {
+                display: table-cell;
+                vertical-align: middle;
+            }
         }
 
         // 用户登录内容样式

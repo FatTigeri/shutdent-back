@@ -199,7 +199,7 @@ export default {
                     display: none;
                     position: absolute;
                     width: 50%;
-                    height: 75%;
+                    height: 78%;
                     left: 25%;
                     top: 0;
                     content: '';

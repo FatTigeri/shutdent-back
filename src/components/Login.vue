@@ -15,7 +15,7 @@
                             <!-- 登录框用户名内容 -->
                             <div class="login-username">
                                 <el-input type="text" v-model.trim="username" placeholder="请输入用户名"
-                                    prefix-icon="el-icon-user"></el-input>
+                                    prefix-icon="el-icon-user" autocomplete="on"></el-input>
                                 <span class="info1" v-if="context === 'user_err'"><strong>{{ info1 }}</strong></span>
                                 <span class="info1" v-if="context === 'isnull'"><strong>{{ info3 }}</strong></span>
                             </div>
@@ -181,7 +181,7 @@ export default {
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-width: 1279.9px) {
     html {
         font-size: 15px;
     }
@@ -189,11 +189,46 @@ export default {
     .el-notification,
     .left,
     .right {
-        background-color: white !important;
+        background: white !important;
+    }
+}
+
+@media (min-width:1280px) and (max-width: 1399.9px) {
+    html {
+        font-size: 16px;
     }
 
-
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
 }
+
+@media (min-width: 1399.9px) and (max-width: 1559.9px) {
+    html {
+        font-size: 17px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+}
+
+@media(max-width: 2059.9px) and (min-width: 1560px) {
+    html {
+        font-size: 22.5px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+}
+
 
 * {
     margin: 0;

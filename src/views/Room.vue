@@ -1,7 +1,7 @@
 <template>
     <!-- 希冀数学涨知识页面 -->
     <div id="room-container">
-        <el-row :gutter="0">
+        <el-row :gutter="0" style="height: 100%;">
             <!-- 左侧内容响应式布局 -->
             <el-col :xs="0" :sm="6">
                 <!-- (一) 左侧内容(包含小游戏和技能提升链接) -->
@@ -68,7 +68,7 @@
                                         <li @click="player(2)">
                                             <a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a>
                                         </li>
-                                    </el-col >
+                                    </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(3)">
                                             <a href="#"><img src="@/assets/math_course3.jpg" alt="blank"></a>
@@ -218,7 +218,7 @@ export default {
 
         // 视频播放功能
         player(id) {
-            this.$router.push("/math/video/" + id)
+            this.$router.push("/math/video/" + id + "/" + id)
         }
 
     },
@@ -260,11 +260,19 @@ export default {
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-width: 1279.9px) {
     html {
         font-size: 15px;
     }
 }
+
+@media (min-width:1280px) and (max-width: 1399.9px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
 
 
 * {
@@ -281,13 +289,13 @@ html {
 // room页面的root标签样式
 #room-container {
     height: 100%;
-    padding: 0.333rem;
     box-shadow: 0 0 0.6666rem #c9c9c9;
+    box-sizing: border-box;
 
     // 左侧边框的样式
     .left-aside {
         width: 100%;
-        height: 34.6666rem;
+        height: 33.6666rem;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -338,7 +346,7 @@ html {
                     img {
                         width: 70%;
                         margin: 0 auto;
-                        
+
                     }
 
                 }
@@ -400,9 +408,7 @@ html {
     // 中间边框样式
     .main {
         width: 100%;
-        height: 34.6666rem;
-        // border-radius: 0.3333rem;
-        // box-shadow: 0 0 0.6666rem #c9c9c9;
+        height: 32.6666rem;
 
         // 中间区域文字信息样式
         .text {
@@ -502,7 +508,7 @@ html {
     // 右侧边框样式
     .right-aside {
         width: 100%;
-        height: 34.6666rem;
+        height: 33.6666rem;
 
         // 积分排行榜样式
         .ranking {

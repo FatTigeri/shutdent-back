@@ -56,35 +56,34 @@
                                             </li>
                                             <!-- 2.1.2 用户资料选项 -->
                                             <li>
-                                                <a href="#/administrator/teacher" :class="{ actived: cur === 0 }"
-                                                    @click="change(0)"><i
-                                                        class="el-icon-user-solid"></i>&nbsp;&nbsp;教师资料</a>
+                                                <a href="#" :class="{ actived: cur === 0 }" @click="change(0)"><i
+                                                        class="el-icon-user-solid"></i>&nbsp;&nbsp;学生资料</a>
                                             </li>
                                             <!-- 2.1.3 答疑入口选项 -->
                                             <li>
                                                 <a href="#/math/chat" :class="{ actived: cur === 1 }"
                                                     @click="change(1)"><i class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
                                             </li>
-                                            <!-- 2.1.4 课程上传选项 -->
+                                            <!-- 2.1.4 问题上传选项 -->
                                             <li>
-                                                <a href="#/administrator/upload" :class="{ actived: cur === 2 }"
-                                                    @click="change(2)"><i class="el-icon-upload"></i>&nbsp;课程上传</a>
+                                                <a href="#" :class="{ actived: cur === 2 }" @click="change(2)"><i
+                                                        class="el-icon-upload"></i>&nbsp;问题上传</a>
                                             </li>
                                             <!-- 2.1.5 互动窗口选项 -->
-                                            <li>
+                                            <!-- <li>
                                                 <a href="#" :class="{ actived: cur === 3 }" @click="change(3)"><i
                                                         class="el-icon-monitor"></i>&nbsp;互动窗口</a>
-                                            </li>
+                                            </li> -->
                                             <!-- 2.1.6 上班预约选项 -->
-                                            <li>
+                                            <!-- <li>
                                                 <a href="#" :class="{ actived: cur === 4 }" @click="change(4)"><i
                                                         class="el-icon-service"></i>&nbsp;上班预约</a>
-                                            </li>
+                                            </li> -->
                                             <!-- 2.1.7 线下活动选项 -->
-                                            <li>
+                                            <!-- <li>
                                                 <a href="#" :class="{ actived: cur === 5 }" @click="change(5)"><i
                                                         class="el-icon-location"></i>&nbsp;线下活动</a>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </el-aside>
                                 </el-col>
@@ -94,20 +93,20 @@
                                         <el-header height="70px">
                                             <!-- 2.2.1 头部区域 -->
                                             <ul>
-                                                <li><a href="#/administrator/student" :class="{ active: current === 0 }"
+                                                <!-- <li><a href="#" :class="{ active: current === 0 }"
                                                         @click="change1(0)">学生</a>
+                                                </li> -->
+                                                <li><a href="#/stuAdmin/answer" :class="{ active: current === 0 }"
+                                                        @click="change1(0)">回复</a>
                                                 </li>
-                                                <li><a href="#/administrator/problem" :class="{ active: current === 1 }"
-                                                        @click="change1(1)">问题</a>
-                                                </li>
-                                                <li><a href="#" :class="{ active: current === 2 }"
-                                                        @click="change1(2)">其他</a>
+                                                <li><a href="#" :class="{ active: current === 1 }"
+                                                        @click="change1(1)">其他</a>
                                                 </li>
                                             </ul>
                                         </el-header>
                                         <!-- 2.2.2 主体内容区域 -->
                                         <el-main>
-                                            <router-link to="/administrator/teacher"></router-link>
+                                            <router-link to="/stuAdmin/answer"></router-link>
                                             <router-view></router-view>
                                         </el-main>
                                     </el-container>

@@ -118,7 +118,7 @@ export default {
 
             this.$store.commit('setGrade', this.grade)
 
-            this.$router.replace("/math/resource/back")
+            this.$router.replace("/math/resource/back/")
 
         }
     }
@@ -195,7 +195,7 @@ export default {
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-width: 1279.9px) {
     html {
         font-size: 15px;
     }
@@ -205,13 +205,47 @@ export default {
     .right {
         background: white !important;
     }
+}
 
+@media (min-width:1280px) and (max-width: 1399.9px) {
+    html {
+        font-size: 16px;
+    }
 
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+}
+
+@media (min-width: 1399.9px) and (max-width: 1559.9px) {
+    html {
+        font-size: 17px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+}
+
+@media(max-width: 2059.9px) and (min-width: 1560px) {
+    html {
+        font-size: 22.5px;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
 }
 
 #resource-container {
     width: 100%;
-    height: 532px;
+    height: 34.100rem;
 
     .el-container {
         height: 100%;
@@ -258,7 +292,7 @@ export default {
                     left: 50%;
                     color: purple;
                     border-radius: 1rem;
-                    line-height: 31.4px;
+                    line-height: 2.09333rem;
                     text-decoration: none;
                     transform: translate(-50%, -50%);
                 }

@@ -22,6 +22,7 @@ import Examination from '@/views/Examination.vue'
 import Back from '@/components/Back.vue'
 import Classes from '@/views/Classes.vue'
 import Upload from '@/views/Upload.vue'
+import stuAdmin from '@/components/StuAdmin.vue'
 
 const router = new VueRouter({
   mode: 'hash',
@@ -56,13 +57,18 @@ const router = new VueRouter({
         { path: 'student', component: Student },
         { path: 'upload', component: Upload }
       ]
+    },
+    {
+      path: '/stuAdmin', component: stuAdmin, redirect: '/stuAdmin/answer', children: [
+        { path: 'answer', component: Answer }
+      ]
     }
   ]
 })
 
 // 使用路由守卫, 对页面的跳转进行限制
 router.beforeEach(function (to, from, next) {
-  if (to.path === '/administrator/teacher' || to.path === '/administrator/problem' || to.path === '/administrator/student') {
+  if (to.path === '/administrator/teacher' || to.path === '/administrator/problem' || to.path === '/administrator/student' || to.path === '/stuAdmin/answer') {
     // 读取浏览器中的token缓存
     const token = window.localStorage.getItem('token')
 

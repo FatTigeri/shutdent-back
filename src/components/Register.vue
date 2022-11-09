@@ -238,8 +238,6 @@ export default {
     .right {
         background: white !important;
     }
-
-
 }
 
 // 当用户显示屏小于768px时对应的样式
@@ -287,8 +285,9 @@ export default {
 
 }
 
-// 当用户的显示屏大于1200px时对应的样式
-@media (min-width: 1200px) {
+
+// 当用户的屏幕大于1200px时，对应的字体大小为15px
+@media (min-width: 1200px) and (max-width: 1279.9px) {
     html {
         font-size: 15px;
         font-family: Arial, sans-serif;
@@ -299,7 +298,45 @@ export default {
     .right {
         background: white !important;
     }
+}
 
+@media (min-width:1280px) and (max-width: 1399.9px) {
+    html {
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+}
+
+@media (min-width: 1399.9px) and (max-width: 1559.9px) {
+    html {
+        font-size: 17px;
+        font-family: Arial, sans-serif;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
+}
+
+@media(max-width: 2059.9px) and (min-width: 1560px) {
+    html {
+        font-size: 22.5px;
+        font-family: Arial, sans-serif;
+    }
+
+    .el-notification,
+    .left,
+    .right {
+        background: white !important;
+    }
 }
 
 

@@ -3,21 +3,27 @@
     <!-- 右侧的内容固定栏 -->
     <el-row :gutter="0">
       <el-col :xs="0">
+        <!-- 固定栏内容 -->
         <div class="functions-fix">
           <ul>
-            <li><a href="#/math/chat" @click="linkTo()">客服</a></li>
-            <li @click="dialogFormVisible = true"><a href="#">提问</a></li>
-            <li><a href="#layout-container">返顶</a></li>
+            <!-- 客服 -->
+            <li><a href="#/math/chat" @click="linkTo()"><i class="el-icon-phone-outline"></i> 客服</a></li>
+            <!-- 提问 -->
+            <li @click="ask"><a href="#"><i class="el-icon-chat-dot-round"></i> 提问</a></li>
+            <!-- 返顶 -->
+            <li><a href="#layout-container"><i class="el-icon-caret-top"></i> 返顶</a></li>
           </ul>
         </div>
 
         <!-- 点击反馈弹出的模态框 -->
         <el-dialog title="问题收集。" :visible.sync="dialogFormVisible">
           <el-form>
-            <el-form-item label="" :label-width="formLabelWidth">
+            <!-- 输入框内容 -->
+            <el-form-item label="内容:" :label-width="formLabelWidth">
               <el-input type="textarea" :rows="5" placeholder="请输入您出现的数学问题" v-model="textarea"></el-input>
             </el-form-item>
           </el-form>
+          <!-- 年级单选框 -->
           <el-radio-group v-model="grade">
             <el-radio label="一年级">一年级</el-radio>
             <el-radio label="二年级">二年级</el-radio>
@@ -26,7 +32,9 @@
             <el-radio label="五年级">五年级</el-radio>
             <el-radio label="六年级">六年级</el-radio>
           </el-radio-group>
+          <!-- 问题类型单选框 -->
           <el-radio-group v-model="problem">
+            <el-radio label="基础知识">基础知识问题</el-radio>
             <el-radio label="三角和问题">三角和问题</el-radio>
             <el-radio label="数运算问题">数运算问题</el-radio>
             <el-radio label="圆计算问题">圆计算问题</el-radio>
@@ -487,6 +495,18 @@ export default {
       // 使用编程式路由将页面改为线上答疑页面
       this.$router.push('/math/chat')
     },
+    // 控制提问模态框的展示函数
+    ask() {
+      if (window.localStorage.getItem('token')) {
+        this.dialogFormVisible = true
+      } else {
+        const h = this.$createElement;
+        this.$notify({
+          title: '消息提示',
+          message: h('i', { style: 'color: teal' }, '请先登录~！')
+        })
+      }
+    },
 
     // 用户点击提问调用的函数
     async question() {
@@ -622,13 +642,65 @@ export default {
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
-@media (min-width: 1200px) {
-  #home-container {
+@media (min-width: 1200px) and (max-width: 1279.9px) {
+
+  #home-container,
+  html {
     font-size: 15px;
   }
 
+  .resources-item {
+    width: 100%;
+  }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
+  }
+}
+
+@media (min-width:1280px) and (max-width: 1399.9px) {
+
+  #home-container,
   html {
-    font-size: 15px;
+    font-size: 16px;
+  }
+
+  .resources-item {
+    width: 100%;
+  }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
+  }
+}
+
+@media (min-width: 1399.9px) and (max-width: 1559.9px) {
+
+  #home-container,
+  html {
+    font-size: 17px;
+  }
+
+  .resources-item {
+    width: 100%;
+  }
+
+  .el-notification,
+  .right,
+  .left {
+    background-color: white !important;
+  }
+}
+
+@media(max-width: 2059.9px) and (min-width: 1560px) {
+
+  #home-container,
+  html {
+    font-size: 22.5px;
   }
 
   .resources-item {
@@ -658,14 +730,12 @@ export default {
 // 侧边栏固定部内容样式
 .functions-fix {
   position: fixed;
-  width: 3rem;
-  height: 7rem;
-  top: 48%;
-  right: 0;
+  width: 7rem;
+  height: 9rem;
+  top: 73%;
+  right: 15px;
   font-size: 14px;
   font-weight: 600;
-  border-radius: 5px;
-  background: rgba(128, 0, 128, 0.8);
   z-index: 1000;
 
   ul {
@@ -676,11 +746,23 @@ export default {
       width: 100%;
       height: 2.3333rem;
       line-height: 2.3333rem;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      background: rgba(250, 250, 249, 0.95);
+      box-shadow: 0px 2px 10px 0px rgba(31, 35, 41, .38);
+
 
       a {
-        color: black;
+        display: block;
+        color: rgb(58, 139, 255, 1);
+        width: 100%;
         font-weight: 600;
         text-decoration: none;
+        border-radius: 1rem;
+
+        &:hover {
+          color: rgba(58, 139, 255, .65);
+        }
       }
     }
   }
@@ -845,7 +927,7 @@ export default {
   height: 100%;
   color: #333;
   text-align: center;
-  margin: 1rem 0 0 0;
+  margin: 2rem 0 0 0;
 
   .text {
     position: absolute;
@@ -974,7 +1056,7 @@ export default {
           li {
             position: relative;
             width: 98%;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             text-align: left;
             margin-bottom: 0.26666rem;
             border-radius: 0.33333rem;
