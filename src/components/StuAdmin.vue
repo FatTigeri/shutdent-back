@@ -56,7 +56,8 @@
                                             </li>
                                             <!-- 2.1.2 用户资料选项 -->
                                             <li>
-                                                <a href="#" :class="{ actived: cur === 0 }" @click="change(0)"><i
+                                                <a href="#/stuAdmin/info" :class="{ actived: cur === 0 }"
+                                                    @click="change(0)"><i
                                                         class="el-icon-user-solid"></i>&nbsp;&nbsp;学生资料</a>
                                             </li>
                                             <!-- 2.1.3 答疑入口选项 -->
@@ -90,23 +91,17 @@
                                 <el-col :xs="24">
                                     <!-- 2.2 头部内容与主体内容 -->
                                     <el-container>
-                                        <el-header height="70px">
+                                        <el-header height="4.375rem">
                                             <!-- 2.2.1 头部区域 -->
                                             <ul>
-                                                <!-- <li><a href="#" :class="{ active: current === 0 }"
-                                                        @click="change1(0)">学生</a>
-                                                </li> -->
                                                 <li><a href="#/stuAdmin/answer" :class="{ active: current === 0 }"
                                                         @click="change1(0)">回复</a>
-                                                </li>
-                                                <li><a href="#" :class="{ active: current === 1 }"
-                                                        @click="change1(1)">其他</a>
                                                 </li>
                                             </ul>
                                         </el-header>
                                         <!-- 2.2.2 主体内容区域 -->
                                         <el-main>
-                                            <router-link to="/stuAdmin/answer"></router-link>
+                                            <router-link to="/stuAdmin/info"></router-link>
                                             <router-view></router-view>
                                         </el-main>
                                     </el-container>
@@ -130,7 +125,7 @@ export default {
             // 控制左侧栏区域active属性
             cur: 0,
             // 控制头部区域active属性
-            current: 0,
+            current: -1,
             // 输入框内容
             input1: '',
             // 教师名字
@@ -149,9 +144,11 @@ export default {
         // 控制选项转换方法
         change(index) {
             this.cur = index
+            this.current = ''
         },
         // 控制上方选项方法
         change1(index) {
+            this.cur = ''
             this.current = index
         },
         // 返回后端传输到前端的图片地址
@@ -441,6 +438,7 @@ export default {
                         // 图片样式
                         img {
                             width: 50%;
+                            height: 66%;
                             border-radius: 50%;
                             margin: 0.666rem 0 0 0;
                         }

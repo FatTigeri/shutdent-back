@@ -245,7 +245,7 @@ export default {
 
 #resource-container {
     width: 100%;
-    height: 34.100rem;
+    height: 36.100rem;
 
     .el-container {
         height: 100%;

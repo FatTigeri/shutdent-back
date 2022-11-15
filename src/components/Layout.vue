@@ -1,7 +1,7 @@
 <template>
     <div id="layout-container">
         <!-- (一) 首页导航栏 -->
-        <el-header>
+        <el-header id="topBannerNav" :style="topBannerNavBg">
             <div class="header-container">
                 <!-- 1.1 使用响应式布局进行设计 -->
                 <el-row style="height: 100%" :gutter="0">
@@ -92,6 +92,7 @@
                 </el-row>
             </div>
         </el-header>
+        <div class="none"></div>
         <router-link to="/math/home"></router-link>
         <router-view></router-view>
     </div>
@@ -100,6 +101,9 @@
 <script>
 import { mydebounce } from '@/utils/index.js'
 export default {
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll) // 监听页面滚动
+    },
     created() {
         // 当用户为教师时，进行对应的读取question表数据读取
         if (window.localStorage.getItem('state') === '1') {
@@ -161,10 +165,34 @@ export default {
             // 数据库中answer表与当前登录用户对应的消息条数
             count: 0,
             // 消息跳转链接
-            src: ''
+            src: '',
+            // 控制导航栏下拉的样式变量
+            topBannerNavBg: {
+                // 背景颜色
+                backgroundColor: '',
+                // 底部边框
+                borderBottom: ''
+            }
         }
     },
     methods: {
+        // 滚动页面时触发导航变色
+        handleScroll() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+            // 设置背景颜色的透明度
+            if (scrollTop >= 70) {
+                this.topBannerNavBg.backgroundColor = 'rgba(250, 250, 250, 1)' // scrollTop + 多少根据自己的需求设置
+                this.topBannerNavBg.borderBottom = '0.0333rem solid #ccc'
+            } else if (scrollTop === 0) {
+                this.topBannerNavBg.backgroundColor = 'rgba(199, 201, 201, .3)' // 设置回到顶部时，背景颜色为透明
+                this.topBannerNavBg.borderBottom = ''
+            }
+        },
+        // 滚动之前重置
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.handleScroll)
+        },
+
         // 更改导航索引的方法
         change(index) {
             this.$store.commit('changeCurrent', index)
@@ -277,7 +305,7 @@ export default {
             if (username) {
                 this.$message({
                     type: 'success',
-                    message:  username  + '欢迎您!'
+                    message: username + '欢迎您!'
                 })
                 this.$router.replace('/stuAdmin')
             } else {
@@ -400,12 +428,15 @@ body {
 
 // home页面导航栏样式
 .el-header {
+    position: fixed;
+    width: 100%;
     // background-color: rgb(184, 187, 250);
     background-color: rgba(199, 201, 201, 0.3);
     color: #333;
     font-weight: 600;
     text-align: center;
-    height: 4rem !important;    
+    height: 4rem !important;
+    z-index: 999;
 
     .header-container {
         width: 100%;
@@ -550,5 +581,9 @@ body {
         }
     }
 
+}
+
+.none {
+    height: 4rem !important;
 }
 </style>

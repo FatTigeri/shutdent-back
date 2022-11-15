@@ -47,7 +47,7 @@
                                 <!-- 使用响应式布局 -->
                                 <el-col :xs="0" :sm="8" :md="6" :lg="6" :xl="6">
                                     <!-- 2.1 侧边栏 -->
-                                    <el-aside width="13.3333rem">
+                                    <el-aside width="100%">
                                         <ul>
                                             <!-- 2.1.1 用户的头像与名称 -->
                                             <li class="user">
@@ -77,8 +77,8 @@
                                             </li>
                                             <!-- 2.1.6 上班预约选项 -->
                                             <li>
-                                                <a href="#" :class="{ actived: cur === 4 }" @click="change(4)"><i
-                                                        class="el-icon-service"></i>&nbsp;上班预约</a>
+                                                <a href="#/administrator/schedule" :class="{ actived: cur === 4 }"
+                                                    @click="change(4)"><i class="el-icon-service"></i>&nbsp;上班预约</a>
                                             </li>
                                             <!-- 2.1.7 线下活动选项 -->
                                             <li>
@@ -91,7 +91,7 @@
                                 <el-col :xs="24">
                                     <!-- 2.2 头部内容与主体内容 -->
                                     <el-container>
-                                        <el-header height="70px">
+                                        <el-header height="4.375rem">
                                             <!-- 2.2.1 头部区域 -->
                                             <ul>
                                                 <li><a href="#/administrator/student" :class="{ active: current === 0 }"
@@ -131,7 +131,7 @@ export default {
             // 控制左侧栏区域active属性
             cur: 0,
             // 控制头部区域active属性
-            current: 0,
+            current: -1,
             // 输入框内容
             input1: '',
             // 教师名字
@@ -150,10 +150,12 @@ export default {
         // 控制选项转换方法
         change(index) {
             this.cur = index
+            this.current = ''
         },
         // 控制上方选项方法
         change1(index) {
             this.current = index
+            this.cur = ''
         },
         // 返回后端传输到前端的图片地址
         getSrc(src) {
@@ -180,6 +182,10 @@ export default {
         background: white !important;
     }
 
+    .el-dialog {
+        width: 85% !important;
+    }
+
 }
 
 // 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
@@ -194,7 +200,9 @@ export default {
         background: white !important;
     }
 
-
+    .el-dialog {
+        width: 85% !important;
+    }
 }
 
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
@@ -209,7 +217,9 @@ export default {
         background: white !important;
     }
 
-
+    .el-dialog {
+        width: 85% !important;
+    }
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
@@ -259,6 +269,7 @@ export default {
     .right {
         background: white !important;
     }
+
 }
 
 // teacher组件样式
@@ -427,7 +438,7 @@ export default {
                 height: 100%;
                 color: #333;
                 text-align: center;
-                border-right: 1px solid white;
+                border-right: 1px solid #c9c9c9;
 
                 // 侧边栏内容包含框样式
                 ul {
@@ -442,6 +453,7 @@ export default {
                         // 图片样式
                         img {
                             width: 50%;
+                            height: 66%;
                             border-radius: 50%;
                             margin: 0.666rem 0 0 0;
                         }

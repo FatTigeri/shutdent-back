@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { mydebounce } from '@/utils/index.js'
+import { mythrollte } from '@/utils/index.js'
 export default {
     name: 'problem',
     created() {
@@ -111,6 +111,7 @@ export default {
         async initProblem() {
             // 调用后台接口
             const { data: res } = await this.$http.get('/getProblems')
+
             // 将获取到的数据进行接收赋值
             this.problemList = res
 
@@ -132,7 +133,7 @@ export default {
             }
         },
         // 教师问题信息搜索方法(使用防抖限制)
-        search: mydebounce(function () {
+        search: mythrollte(async function () {
             if (this.input1 === '') {
                 this.$notify({
                     title: '信息提示',
@@ -140,12 +141,31 @@ export default {
                     message: '搜索内容不能为空！'
                 })
             } else {
-                console.log(this.input1);
-                this.$notify({
-                    title: '信息提示',
-                    type: 'info',
-                    message: '功能后续开发中！'
-                })
+                const { data: res } = await this.$http.get('/getQuestionById?search=' + this.input1)
+
+                // 先将初始化的question数据进行清空操作
+                this.problemList = this.currentList = []
+
+                // 将获取到的数据进行接收赋值
+                this.problemList = res
+
+                // 计算当前获取的数据长度
+                const size = this.problemList.length > 5 ? 5 : this.problemList.length
+
+                // 将需要展示的数据通过for循环赋值给currentList
+                for (let i = 0; i < size; i++) {
+                    this.currentList.push(this.problemList[i])
+                }
+
+                // 计算数据的最大页数
+                if (this.problemList.length % 5 === 0) {
+                    // 刚好整除，直接赋值
+                    this.maxPages = parseInt(this.problemList.length / 5)
+                } else {
+                    // 非整除，加一操作
+                    this.maxPages = parseInt(this.problemList.length / 5) + 1
+                }
+                this.$message.success('搜索成功!')
             }
         }, 3000),
         // 上一页功能
@@ -206,10 +226,6 @@ export default {
         async submit() {
             // 将回复模态框进行隐藏
             this.dialogFormVisible = false
-            console.log(this.textarea);
-            console.log(typeof this.imgName);
-            console.log(this.qid);
-            console.log(window.localStorage.getItem('token'))
             // TODO: 调用接口将教师回复的信息进行存进数据库answer中
             const { data: res } = await this.$http.get("/addAnswer", {
                 params: {

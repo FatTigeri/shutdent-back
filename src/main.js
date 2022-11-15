@@ -17,8 +17,8 @@ require('vue-video-player/src/custom-theme.css')
 Vue.use(VideoPlayer)
 
 // 将相同的后端接口进行挂载
-axios.defaults.baseURL = "http://1.12.235.213:8088/api"
-// axios.defaults.baseURL = "http://localhost:8088/api"
+// axios.defaults.baseURL = "http://1.12.235.213:8088/api"
+axios.defaults.baseURL = "http://localhost:8088/api"
 
 Vue.prototype.$http = axios
 

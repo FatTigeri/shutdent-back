@@ -5,11 +5,18 @@
                 <div class="student-box">
                     <ul>
                         <li v-for="item in studentsList" :key="item.id">
-                            <img :src="getSrc('' + item.imgSrc)" alt="blank" @click="click(item.id)">
+                            <img :src="getSrc('' + item.imgSrc)" alt="blank" @click="show(item.username)">
                             <span>{{ item.username }}</span>
                         </li>
                     </ul>
                 </div>
+                <el-dialog title="ta问过:" :visible.sync="dialogTableVisible" append-to-body>
+                    <el-table :data="gridData">
+                        <el-table-column property="date" label="日期" width="190"></el-table-column>
+                        <el-table-column property="comments" label="问题" width="280"></el-table-column>
+                        <el-table-column property="grade" label="年级"></el-table-column>
+                    </el-table>
+                </el-dialog>
             </el-col>
         </el-row>
     </div>
@@ -25,13 +32,24 @@ export default {
         return {
             studentsList: [],
             circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-            imgSrc: ''
+            imgSrc: '',
+            dialogTableVisible: false,
+            gridData: [],
         }
     },
     methods: {
+        // 初始化页面学生信息方法
         async getStudents() {
+            // 调用接口
             const { data: res } = await this.$http.get('/getUsers')
+            // 结果赋值
             this.studentsList = res
+        },
+        // 教师点击学生头像展示该学生问过的问题方法
+        async show(name) {
+            this.dialogTableVisible = true
+            const { data: res } = await this.$http.get('/getQuestion?questioner=' + name)
+            this.gridData = res
         },
         getSrc(src) {
             return 'http://1.12.235.213/img/' + src
@@ -85,7 +103,8 @@ export default {
 }
 
 #student-container {
-    height: 100%;
+    width: 100%;
+    height: 99%;
     padding: 1rem;
     box-sizing: border-box;
     border: 0.1rem solid #c9c9c9;
@@ -97,7 +116,6 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        border: 1px solid red;
 
         ul {
             display: flex;
@@ -105,7 +123,6 @@ export default {
             height: 100%;
             list-style: none;
             box-sizing: border-box;
-            border: 1px solid red;
             flex-wrap: wrap;
             flex-direction: row;
 

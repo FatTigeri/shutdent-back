@@ -106,7 +106,7 @@ export default {
                         // 设置Vuex中当前用户的角色状态
                         window.localStorage.setItem("state", res.state)
                         this.$message({
-                            type: "info",
+                            type: "success",
                             message: this.username + "欢迎您!"
                         })
 
@@ -229,12 +229,6 @@ export default {
     }
 }
 
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
 // 这是给login页面单独进行背景图的设置
 #login-container {
     top: 0;
@@ -303,6 +297,10 @@ export default {
                 width: 100%;
                 font-size: 14px;
                 line-height: 3rem;
+
+                .el-radio {
+                    margin-right: 30px !important;
+                }
 
                 a {
                     color: purple;

@@ -9,7 +9,6 @@ import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
 import Room from '@/views/Room.vue'
 import Chat from '@/views/Chat.vue'
-import Course from '@/views/Course.vue'
 import Administrator from '@/components/Administrator.vue'
 import Teacher from '@/views/Teacher.vue'
 import Answer from '@/views/Answer.vue'
@@ -23,6 +22,8 @@ import Back from '@/components/Back.vue'
 import Classes from '@/views/Classes.vue'
 import Upload from '@/views/Upload.vue'
 import stuAdmin from '@/components/StuAdmin.vue'
+import Schedule from '@/views/Schedule.vue'
+import Info from '@/components/Info.vue'
 
 const router = new VueRouter({
   mode: 'hash',
@@ -34,7 +35,6 @@ const router = new VueRouter({
         { path: 'home-container', redirect: '/math/home' },
         { path: 'room', component: Room },
         { path: 'chat', component: Chat },
-        { path: 'course', component: Course },
         {
           path: 'resource', component: Resource, redirect: '/math/resource/classes', children: [
             { path: 'examination', component: Examination },
@@ -55,12 +55,14 @@ const router = new VueRouter({
         { path: 'answer', component: Answer },
         { path: 'problem', component: Problem },
         { path: 'student', component: Student },
-        { path: 'upload', component: Upload }
+        { path: 'upload', component: Upload },
+        { path: 'schedule', component: Schedule }
       ]
     },
     {
       path: '/stuAdmin', component: stuAdmin, redirect: '/stuAdmin/answer', children: [
-        { path: 'answer', component: Answer }
+        { path: 'answer', component: Answer },
+        { path: 'info', component: Info }
       ]
     }
   ]

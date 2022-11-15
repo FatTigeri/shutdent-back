@@ -7,8 +7,7 @@
           <!-- 搜索框盒子 -->
           <div class="search-box">
             <div class="search">
-              <el-input placeholder="问题类型 / 年级" prefix-icon="el-icon-search" v-model="input1"
-                @keydown.enter.native="search">
+              <el-input placeholder="" prefix-icon="el-icon-search" v-model="input1" @keydown.enter.native="search">
                 <el-button slot="append" icon="el-icon-search"></el-button>
               </el-input>
             </div>
@@ -17,10 +16,11 @@
           <div class="answer-box">
             <!-- 学生问题内容显示 -->
             <ul>
+              <div class="answer-end" v-if="currentList.length === 0">暂无消息</div>
               <li v-for="item in currentList" :key="item.id">
                 <div class="answer">
                   <i>{{ item.answerer }}回答:</i>&nbsp;&nbsp;
-                  <span>{{ item.contents }}</span>
+                  <span @click="show(item.image)">{{ item.contents }}</span>
                   <el-button type="text" @click="open(item.id, item.qid)">我已阅读</el-button>
                 </div>
                 <div class="type">
@@ -35,6 +35,14 @@
                 </el-button>
               </div>
             </ul>
+            <el-dialog title="提示" :visible.sync="centerDialogVisible" width="40%" center append-to-body>
+              <span v-if="this.image === ''">老师没有上传对应的图片解答</span>
+              <img :src="image" alt="" style="width: 200px;" v-else>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="confirm">取 消</el-button>
+                <el-button type="primary" @click="confirm">确 定</el-button>
+              </span>
+            </el-dialog>
           </div>
         </div>
       </div>
@@ -67,6 +75,8 @@ export default {
       imgName: '',
       // 接收当前问题的id
       qid: 0,
+      centerDialogVisible: false,
+      image: ''
     }
   },
   methods: {
@@ -107,7 +117,6 @@ export default {
           message: '搜索内容不能为空！'
         })
       } else {
-        console.log(this.input1);
         this.$notify({
           title: '信息提示',
           type: 'info',
@@ -184,6 +193,18 @@ export default {
           message: '已取消操作'
         });
       });
+    },
+
+    // 返回对应的图片地址
+    show(src) {
+      this.centerDialogVisible = true
+      if (src !== '') {
+        this.image = 'http://1.12.235.213/img/' + src;
+      }
+    },
+    confirm() {
+      this.image = ''
+      this.centerDialogVisible = false
     }
   }
 }
@@ -262,13 +283,21 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         list-style: none;
-        // border: 1px solid red;
+
+        .answer-end {
+          height: 3.125rem;
+          text-align: center;
+          color: #9499a0;
+          margin-top: 1.25rem;
+          font-size: 0.8125rem;
+        }
 
         li {
           width: 100%;
           height: 17%;
           box-sizing: border-box;
           border: 1px solid black;
+
 
           .answer {
             width: 95%;
@@ -280,6 +309,7 @@ export default {
             line-height: 1.9786rem;
             box-sizing: border-box;
             color: rgb(212, 39, 97);
+            cursor: pointer;
 
             .el-button {
               float: right;
@@ -325,6 +355,10 @@ export default {
           margin-top: 0.7rem;
           color: rgb(0, 66, 149);
         }
+      }
+
+      .el-dialog {
+        text-align: center;
       }
     }
   }

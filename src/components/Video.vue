@@ -1,9 +1,10 @@
 <template>
     <el-row :gutter="0">
         <div id="video-container">
-            <el-col :xs="24" :sm="17">
-                <div class="video-box">
-                    <video-player style="width: 85%;height: 100%;margin:0 auto;box-shadow:5px 5px 8px #888888"
+            <el-col :xs="24" :sm="17" :md="17" :lg="17">
+                <div class="video-box" @click="update">
+                    <video-player
+                        style="width: 85%;height: 100%;margin:1rem auto;box-shadow:0.3125rem 0.3125rem 0.5rem #888888"
                         class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
                         :options="playerOptions">
                     </video-player>
@@ -36,24 +37,75 @@
                             <img :src="getSrc('' + this.$store.state.imgSrc)" alt="blank" v-else>
                         </div>
                         <div class="input">
-                            <el-input v-model="input" placeholder="发一条友善的评论"></el-input>
+                            <el-input v-model="input" placeholder="发一条友善的评论" @keydown.enter.native="submit">
+                            </el-input>
                         </div>
                         <div class="button">
-                            <el-button type="primary">发布</el-button>
+                            <el-button type="primary" @click="submit">发布</el-button>
                         </div>
                     </div>
+
+                    <!-- 视频评论展示(响应式布局) -->
+                    <div class="comment-box" v-for="item in comments" :key="item.id">
+                        <!-- 评论头像盒子 -->
+                        <el-row :gutter="0">
+                            <el-col :xs="4" :sm="4" :md="3" :lg="3" :xl="3">
+                                <div class="user-box">
+                                    <img :src="getSrc('' + item.avatar)" alt="blank">
+                                </div>
+                            </el-col>
+                            <!-- 评论内容信息 -->
+                            <el-col :xs="20" :sm="20" :md="21" :lg="21" :xl="21">
+                                <div class="infos-box">
+                                    <!-- 评论者名称 -->
+                                    <div class="name">{{ item.author }}</div>
+                                    <!-- 评论内容 -->
+                                    <div class="infos">
+                                        <div class="text">{{ item.comments }}</div>
+                                    </div>
+                                    <!-- 评论日期 -->
+                                    <div class="date">
+                                        {{ item.date }}
+                                    </div>
+                                </div>
+                            </el-col>
+                        </el-row>
+                    </div>
+
+                    <!-- 底部的信息提示 -->
+                    <el-row :gutter="0">
+                        <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                            <div class="reply-end">没有更多评论</div>
+                            <div class="reply-end-mask"></div>
+                        </el-col>
+                    </el-row>
                 </div>
             </el-col>
-            <el-col :xs="0" :sm="7">
+
+            <el-col :xs="0" :sm="7" :md="7" :lg="7">
                 <div class="video-wrap">
                     <div class="text">
                         <h4>猜你喜欢</h4>
                     </div>
                     <ul>
-                        <li v-for="item in List" :key="item.cid">
-                            <div class="img"><img :src="getCover(item.cover)" alt="blacnk"></div>
-                            <div>{{ item.contents }}</div>
-                        </li>
+                        <el-row :gutter="0">
+                            <li v-for="item in List" :key="item.cid">
+                                <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+                                    <div class="img">
+                                        <img :src="getCover(item.cover)" alt="blacnk">
+                                    </div>
+                                </el-col>
+                                <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+                                    <div class="information">
+                                        <div>{{ item.contents }}</div>
+                                        <div>
+                                            <i class="el-icon-video-play"> {{ item.click }} 次</i>
+                                            <i class="el-icon-chat-line-square"> 0 </i>
+                                        </div>
+                                    </div>
+                                </el-col>
+                            </li>
+                        </el-row>
                     </ul>
                 </div>
             </el-col>
@@ -67,6 +119,7 @@ export default {
     created() {
         this.initCourse()
         this.initCourseList()
+        this.getComments()
     },
     data() {
         return {
@@ -97,9 +150,11 @@ export default {
                     fullscreenToggle: true  //全屏按钮
                 }
             },
+            // 用户输入的评论内容变量
             input: '',
             courseLists: [],
-            List: []
+            List: [],
+            comments: []
         }
     },
     methods: {
@@ -117,8 +172,56 @@ export default {
                 this.List.push(this.courseLists[randNum])
             }
         },
-        e() {
-            console.log('评论成功!');
+        // 用户点击播放视频对应的视频点击数加一
+        async update() {
+            const { data: res } = await this.$http.get('/updateClick', {
+                params: {
+                    "cid": this.$route.params.id
+                }
+            })
+        },
+        // 获取当前课程的所有评论
+        async getComments() {
+            // 调用后端评论接口
+            const { data: res } = await this.$http.get('/getComment', {
+                params: {
+                    "cid": this.$route.params.id
+                }
+            })
+            // 将获取到得评论内容赋值给comments变量
+            this.comments = res
+            return res.length
+        },
+        // 用户发表评论方法
+        async submit() {
+            if (!window.localStorage.getItem('token')) {
+                this.$message.error('登录后才能发表评论~')
+                return
+            }
+            // 倘若评论内容为空
+            if (this.input === '') {
+                this.$message.error('评论内容不能为空！！')
+            } else {
+                // 调用对饮的api接口
+                const { data: res } = await this.$http.get('/insertComment', {
+                    params: {
+                        "cid": this.$route.params.id,
+                        "comment": this.input,
+                        "author": window.localStorage.getItem('token'),
+                        "avatar": this.$store.state.imgSrc
+                    }
+                })
+                // 对后端返回的结果进行判断
+                if (res === 1) {
+                    this.$message.success('评论发表成功!!!')
+                } else {
+                    this.$message.error('评论发布失败!!!')
+                }
+                // 置空处理
+                this.input = ''
+                // 页面自刷新
+                this.$router.go(0)
+            }
         },
         async initCourse() {
             const { data: res } = await this.$http.get('/getCourseById?id=' + this.$route.params.id)
@@ -130,7 +233,11 @@ export default {
         },
         getCover(src) {
             return require('@/assets/' + src)
-        }
+        },
+        // 视频链接跳转
+        // player(id, url) {
+        //     this.$router.push("/math/video/" + url + "/" + id)
+        // }
     }
 
 }
@@ -140,9 +247,12 @@ export default {
 // 当用户的手机屏幕小于768px时, 对应的字体大小为12px
 @media (max-width: 768px) {
 
-    html,
-    #home-container {
+    html {
         font-size: 12px;
+    }
+
+    .infos-box {
+        height: 10rem !important;
     }
 }
 
@@ -151,6 +261,10 @@ export default {
 
     html {
         font-size: 13px;
+    }
+
+    .infos-box {
+        height: 9rem !important;
     }
 }
 
@@ -183,20 +297,22 @@ html {
 
     .video-box {
         margin: 1rem;
+
         box-sizing: border-box;
-        border: 1px solid red;
+        border: 1px solid white;
+        box-shadow: 0 0 15px #c9c9c9;
 
         .course-info {
             display: flex;
             width: 85%;
-            height: 75px;
+            height: 4.6875rem;
             margin: 1rem auto;
             border-bottom: 0.0333rem solid #c9c9c9;
             box-sizing: border-box;
 
             .teacher-img {
-                width: 60px;
-                height: 60px;
+                width: 3.75rem;
+                height: 3.75rem;
                 box-sizing: border-box;
 
                 img {
@@ -215,9 +331,9 @@ html {
                 .content {
                     widows: 100%;
                     height: 50%;
-                    font-size: 13px;
+                    font-size: 0.8125rem;
                     font-weight: 600;
-                    line-height: 28px;
+                    line-height: 1.75rem;
                     text-indent: 1rem;
                     box-sizing: border-box;
                 }
@@ -226,44 +342,43 @@ html {
 
         .video-info {
             width: 85%;
-            height: 50px;
-            line-height: 50px;
+            height: 3.125rem;
+            line-height: 3.125rem;
             margin: 1rem auto;
 
             span:nth-child(1) {
-                font-size: 16px;
+                font-size: 1rem;
             }
 
             span:nth-child(2) {
                 color: rgba(155, 160, 164, .8);
-                font-size: 12px;
+                font-size: 0.75rem;
                 margin: 0 1rem;
             }
 
             span:nth-child(3) {
-                font-size: 12px;
-                // margin: 0 1rem;
+                font-size: 0.75rem;
             }
 
             span:nth-child(5) {
                 color: rgba(155, 160, 164, .8);
-                font-size: 12px;
+                font-size: 0.75rem;
             }
         }
 
+        // 用户发表评论框样式
         .comments {
             display: flex;
             width: 80%;
-            height: 100px;
+            height: 6.25rem;
             margin: 1rem auto;
             font-weight: 600;
-            border: 0.0333rem solid black;
             align-content: center;
             align-items: center;
 
             img {
-                width: 50px;
-                height: 50px;
+                width: 3.125rem;
+                height: 3.125rem;
                 border-radius: 50%;
             }
 
@@ -273,14 +388,87 @@ html {
                 box-sizing: border-box;
             }
         }
+
+        // 评论展示样式
+        .comment-box {
+            width: 80%;
+            height: 6.5rem;
+            margin: 0 auto;
+            box-sizing: border-box;
+
+            // 用户头像盒子样式
+            .user-box {
+                float: left;
+                width: 3.125rem;
+                height: 3.125rem;
+                box-sizing: border-box;
+
+                // 用户图片样式
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+            }
+
+            .infos-box {
+                float: right;
+                width: 100%;
+                height: 7.0rem;
+                font-weight: 500;
+                font-family: PingFang SC, HarmonyOS_Medium, Helvetica Neue, Microsoft YaHei, sans-serif;
+                cursor: pointer;
+
+                .name {
+                    width: 100%;
+                    height: 20%;
+                    font-size: 0.75rem;
+                    color: rgba(95, 98, 116, .95);
+                    // border: 0.0625rem solid red;
+                }
+
+                .infos {
+                    width: 100%;
+                    margin: 0.6rem 0;
+                    font-size: 0.875rem;
+                    line-height: 23px;
+                    box-sizing: border-box;
+                    // border: 0.0625rem solid red;
+
+                    .text {
+                        width: 90%;
+                    }
+                }
+
+                .date {
+                    width: 100%;
+                    height: 20%;
+                    font-size: 0.75rem;
+                    color: rgba(95, 98, 116, .95);
+                }
+            }
+        }
+
+        .reply-end {
+            clear: both;
+            text-align: center;
+            color: #9499a0;
+            font-size: 0.8125rem;
+        }
+
+        .reply-end-mask {
+            height: 3.125rem;
+        }
+
     }
 
     .video-wrap {
-        min-height: 400px;
-        margin: 1rem;
-        padding: 0.5rem;
+        min-height: 25rem;
+        margin: 1rem 0;
+        padding: 0.30rem;
         box-sizing: border-box;
-        border: 1px solid red;
+        border: 0.0625rem solid white;
+        box-shadow: 0 0 15px #c9c9c9;
 
         .text {
             box-sizing: border-box;
@@ -289,48 +477,59 @@ html {
 
         ul {
             width: 100%;
-            min-height: 400px;
+            min-height: 25rem;
 
             li {
                 display: flex;
-                width: 100%;
+                width: 90%;
                 height: 20%;
-                margin: 0.5rem 0;
+                margin: 1.25rem auto;
                 flex-wrap: wrap;
                 list-style: none;
                 align-items: center;
                 align-content: center;
-                border: 1px solid red;
 
                 .img::before {
                     position: absolute;
                     display: none;
-                    width: 8%;
-                    height: 8%;
+                    width: 27%;
+                    height: 11.5%;
                     content: '';
-                    background: rgba(0, 0, 0, .4) url(@/assets/arr.png) no-repeat center;
+                    border-radius: 0.625rem;
                     background-size: 1.4rem;
+                    background: rgba(0, 0, 0, .4) url(@/assets/arr.png) no-repeat center;
                 }
 
                 .img:hover::before {
                     display: block;
                 }
 
-                & div:nth-child(1) {
-                    width: 40%;
+                .img {
+                    width: 100%;
 
                     img {
-                        width: 100px;
-                        height: 60px;
-                        border: 1px solid black;
-
+                        width: 6.25rem;
+                        height: 6.25rem;
+                        border-radius: 0.625rem;
+                        border: 0.0625rem solid #ccc;
                     }
                 }
 
-                & div:nth-child(2) {
-                    font-size: 12px;
-                    font-weight:600;
-                    margin: 0 0 0 1rem;
+                .information {
+                    width: 100%;
+                    height: 100%;
+                    font-size: 0.8125rem;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    line-height: 1.5rem;
+                    box-sizing: border-box;
+
+                    div:nth-child(2) {
+                        color: #9499a0;
+                    }
+
+                    i {
+                        margin: 0 0.3rem;
+                    }
                 }
             }
         }

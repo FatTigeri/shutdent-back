@@ -3,7 +3,7 @@
     <div id="room-container">
         <el-row :gutter="0" style="height: 100%;">
             <!-- 左侧内容响应式布局 -->
-            <el-col :xs="0" :sm="6">
+            <el-col :xs="0" :sm="6" style="height: 100%">
                 <!-- (一) 左侧内容(包含小游戏和技能提升链接) -->
                 <div class="left-aside">
                     <!-- 1.1 小游戏内容 -->
@@ -47,7 +47,7 @@
                 </div>
             </el-col>
             <!-- 中间内容响应式布局 -->
-            <el-col :xs="24" :sm="13">
+            <el-col :xs="24" :sm="13" style="height: 100%">
                 <!-- (二) 中间内容(最具体的希冀数学知识展示区域) -->
                 <div class="main">
                     <div class="text">希冀数学涨知识</div>
@@ -152,7 +152,7 @@
                 </div>
             </el-col>
             <!-- 右侧内容响应式布局 -->
-            <el-col :xs="0" :sm="5">
+            <el-col :xs="0" :sm="5" style="height: 100%">
                 <div class="right-aside">
                     <!-- 3.1 用户积分榜（降序展示用户信息） -->
                     <div class="ranking">
@@ -162,13 +162,13 @@
                             element-loading-background="rgba(250, 250, 250, 0.8)" :data="tableData" style="width: 100%"
                             stripe>
                             <!-- 3.1.1 用户的ID展示 -->
-                            <el-table-column label="ID" width="55">
+                            <el-table-column label="ID" width="48">
                                 <template slot-scope="scope">
-                                    <span style="margin-left: 10px">{{ scope.row.id }}</span>
+                                    <span>{{ scope.row.id }}</span>
                                 </template>
                             </el-table-column>
                             <!-- 3.1.2 用户的名字以及鼠标悬浮到该区域，进行信息的展示 -->
-                            <el-table-column label="姓名" width="100">
+                            <el-table-column label="姓名" width="125">
                                 <template slot-scope="scope">
                                     <el-popover trigger="hover" placement="top">
                                         <p>姓名: {{ scope.row.username }}</p>
@@ -255,20 +255,44 @@ export default {
 @media (min-width:992px) and (max-width: 1200px) {
 
     html {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
 @media (min-width: 1200px) and (max-width: 1279.9px) {
     html {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
 @media (min-width:1280px) and (max-width: 1399.9px) {
     html {
+        font-size: 14px;
+    }
+
+    #room-container {
+        height: 36rem !important;
+    }
+}
+
+@media (min-width: 1399.9px) and (max-width: 1559.9px) {
+    html {
         font-size: 16px;
+    }
+
+    #room-container {
+        height: 640px !important;
+    }
+}
+
+@media(max-width: 2059.9px) and (min-width: 1560px) { 
+    html {
+        font-size: 23.5px;
+    }
+
+    #room-container {
+        height: 740px !important;
     }
 }
 
@@ -288,18 +312,18 @@ html {
 
 // room页面的root标签样式
 #room-container {
-    height: 100%;
-    box-shadow: 0 0 0.6666rem #c9c9c9;
+    height: 36rem;
+    // box-shadow: 0 0 0.6666rem #c9c9c9;
     box-sizing: border-box;
 
     // 左侧边框的样式
     .left-aside {
         width: 100%;
-        height: 33.6666rem;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        box-shadow: 0 0 0.6666rem #c9c9c9;
+        // box-shadow: 0 0 0.6666rem #c9c9c9;
 
         // border: 1px solid red;
 
@@ -408,7 +432,7 @@ html {
     // 中间边框样式
     .main {
         width: 100%;
-        height: 32.6666rem;
+        height: 100%;
 
         // 中间区域文字信息样式
         .text {
@@ -508,7 +532,7 @@ html {
     // 右侧边框样式
     .right-aside {
         width: 100%;
-        height: 33.6666rem;
+        height: 100%;
 
         // 积分排行榜样式
         .ranking {
@@ -518,7 +542,7 @@ html {
             top: 51%;
             left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 0.6666rem #c9c9c9;
+            // box-shadow: 0 0 0.6666rem #c9c9c9;
 
             // 积分排行榜文字信息样式
             .rank-text {
