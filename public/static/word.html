@@ -249,7 +249,12 @@
         'feeble',
         'admit',
         'drag',
-        'loving'
+        'loving',
+        'linguistic',
+        'available',
+        'component',
+        'compensate',
+        'fail'
     ];
     var randomWord;
 
@@ -290,6 +295,30 @@
       <button οnclick="location.reload()">Reload</button>
     `;
         endgame.style.display = 'flex';
+
+        const username = window.localStorage.getItem('token')
+        if (score_now != 0 && username != null) {
+            // TODO调用原生JS实现ajax数据交互
+            var xhr;
+            if (window.XMLHttpRequest) {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xhr = new XMLHttpRequest();
+            } else {
+                // IE6, IE5 浏览器执行代码
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText == 1) {
+                        console.log('ok');
+                    } else {
+                        console.log('fail');
+                    }
+                }
+            }
+            xhr.open('GET', 'http://1.12.235.213:8088/api/updateScore?score=' + score_now + '&username=' + username, true);
+            xhr.send();
+        }
     }
     settingbtn.addEventListener('click', () => setting.classList.toggle('hide'));
 

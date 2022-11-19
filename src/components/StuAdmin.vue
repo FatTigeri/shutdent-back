@@ -67,8 +67,8 @@
                                             </li>
                                             <!-- 2.1.4 问题上传选项 -->
                                             <li>
-                                                <a href="#" :class="{ actived: cur === 2 }" @click="change(2)"><i
-                                                        class="el-icon-upload"></i>&nbsp;问题上传</a>
+                                                <a href="#/stuAdmin/question" :class="{ actived: cur === 2 }"
+                                                    @click="change(2)"><i class="el-icon-upload"></i>&nbsp;问题上传</a>
                                             </li>
                                             <!-- 2.1.5 互动窗口选项 -->
                                             <!-- <li>

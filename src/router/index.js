@@ -24,10 +24,12 @@ import Upload from '@/views/Upload.vue'
 import stuAdmin from '@/components/StuAdmin.vue'
 import Schedule from '@/views/Schedule.vue'
 import Info from '@/components/Info.vue'
+import Question from '@/views/Question.vue'
 
 const router = new VueRouter({
   mode: 'hash',
-  base: process.env.BASE_URL,
+  // mode: 'history',
+  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/math', component: Layout, children: [
@@ -60,9 +62,10 @@ const router = new VueRouter({
       ]
     },
     {
-      path: '/stuAdmin', component: stuAdmin, redirect: '/stuAdmin/answer', children: [
+      path: '/stuAdmin', component: stuAdmin, redirect: '/stuAdmin/info', children: [
         { path: 'answer', component: Answer },
-        { path: 'info', component: Info }
+        { path: 'info', component: Info },
+        { path: 'question', component: Question }
       ]
     }
   ]
@@ -70,7 +73,9 @@ const router = new VueRouter({
 
 // 使用路由守卫, 对页面的跳转进行限制
 router.beforeEach(function (to, from, next) {
-  if (to.path === '/administrator/teacher' || to.path === '/administrator/problem' || to.path === '/administrator/student' || to.path === '/stuAdmin/answer') {
+  if (to.path === '/administrator/teacher' || to.path === '/administrator/problem'
+    || to.path === '/administrator/student' || to.path === '/stuAdmin/answer' || to.path === '/stuAdmin/info'
+    || to.path === '/stuAdmin/question') {
     // 读取浏览器中的token缓存
     const token = window.localStorage.getItem('token')
 

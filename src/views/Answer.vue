@@ -178,10 +178,12 @@ export default {
       }).then((res) => {
         // 调用后端的api接口进行对应回答进行删除操作
         this.$http.get('/deleteAnswer?id=' + id);
-        // 调用后端的api接口进行对应的问题删除操作
-        this.$http.get('/deleteQuestion?id=' + qid)
-        // 页面刷新
-        this.$router.go(0)
+        if (res === 1) {
+          // 调用后端的api接口进行对应的问题删除操作
+          this.$http.get('/deleteQuestion?id=' + qid)
+          // 页面刷新
+          this.$router.go(0)
+        }
 
         this.$message({
           type: 'success',
@@ -202,6 +204,8 @@ export default {
         this.image = 'http://1.12.235.213/img/' + src;
       }
     },
+
+    // 关闭图片展示模态框
     confirm() {
       this.image = ''
       this.centerDialogVisible = false

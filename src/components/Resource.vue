@@ -229,6 +229,10 @@ export default {
     .right {
         background: white !important;
     }
+
+    #resource-container {
+        height: 41.1rem !important;
+    }   
 }
 
 @media(max-width: 2059.9px) and (min-width: 1560px) {
@@ -241,6 +245,10 @@ export default {
     .right {
         background: white !important;
     }
+
+    #resource-container {
+        height: 33.5rem !important;
+    }   
 }
 
 #resource-container {

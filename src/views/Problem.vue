@@ -17,10 +17,12 @@
                     <div class="problems-box">
                         <!-- 学生问题内容显示 -->
                         <ul>
-                            <li v-for="item in currentList" :key="item.id" @click="getProblem(item.id)">
+                            <li v-for="item in currentList" :key="item.id">
                                 <div class="problem">
                                     <i>问:</i>&nbsp;&nbsp;
                                     <span>{{ item.comments }}</span>
+                                    <el-button type="text" @click="show(item.image)">查看图片</el-button>
+                                    <el-button type="text" @click="getProblem(item.id)">点击回复</el-button>
                                 </div>
                                 <div class="type">
                                     <span>{{ item.problem }}</span>
@@ -37,6 +39,14 @@
                             </div>
                         </ul>
                     </div>
+                    <el-dialog title="提示" :visible.sync="centerDialogVisible" width="40%" center append-to-body>
+                        <span v-if="this.image === ''">学生没有上传对应的问题图片</span>
+                        <img :src="image" alt="" style="width: 200px;" v-else>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button @click="confirm">取 消</el-button>
+                            <el-button type="primary" @click="confirm">确 定</el-button>
+                        </span>
+                    </el-dialog>
                     <el-dialog title="问题回复" :visible.sync="dialogFormVisible" append-to-body>
                         <el-form :model="form">
                             <el-form-item label="" :label-width="formLabelWidth">
@@ -104,6 +114,7 @@ export default {
             imgName: '',
             // 接收当前问题的id
             qid: 0,
+            image: ''
         }
     },
     methods: {
@@ -149,23 +160,27 @@ export default {
                 // 将获取到的数据进行接收赋值
                 this.problemList = res
 
-                // 计算当前获取的数据长度
-                const size = this.problemList.length > 5 ? 5 : this.problemList.length
-
-                // 将需要展示的数据通过for循环赋值给currentList
-                for (let i = 0; i < size; i++) {
-                    this.currentList.push(this.problemList[i])
-                }
-
-                // 计算数据的最大页数
-                if (this.problemList.length % 5 === 0) {
-                    // 刚好整除，直接赋值
-                    this.maxPages = parseInt(this.problemList.length / 5)
+                if (res.length === 0) {
+                    this.$message.error('没有对应的检索结果!')
                 } else {
-                    // 非整除，加一操作
-                    this.maxPages = parseInt(this.problemList.length / 5) + 1
+                    // 计算当前获取的数据长度
+                    const size = this.problemList.length > 5 ? 5 : this.problemList.length
+
+                    // 将需要展示的数据通过for循环赋值给currentList
+                    for (let i = 0; i < size; i++) {
+                        this.currentList.push(this.problemList[i])
+                    }
+
+                    // 计算数据的最大页数
+                    if (this.problemList.length % 5 === 0) {
+                        // 刚好整除，直接赋值
+                        this.maxPages = parseInt(this.problemList.length / 5)
+                    } else {
+                        // 非整除，加一操作
+                        this.maxPages = parseInt(this.problemList.length / 5) + 1
+                    }
+                    this.$message.success('搜索成功!')
                 }
-                this.$message.success('搜索成功!')
             }
         }, 3000),
         // 上一页功能
@@ -245,6 +260,20 @@ export default {
 
             // 将答案内容置为空
             this.textarea = ''
+        },
+
+        // 返回对应的图片地址
+        show(src) {
+            this.centerDialogVisible = true
+            if (src !== '') {
+                this.image = 'http://1.12.235.213/img/' + src;
+            }
+        },
+
+        // 关闭图片展示模态框
+        confirm() {
+            this.image = ''
+            this.centerDialogVisible = false
         },
 
         // 当用户图片上传成功后，接收后端返回来的图片名
@@ -362,6 +391,12 @@ export default {
                         line-height: 2.058rem;
                         box-sizing: border-box;
                         color: rgb(212, 39, 97);
+
+                        .el-button {
+                            margin: 0 1rem;
+                            font-size: 0.8rem;
+
+                        }
                     }
 
                     .type {

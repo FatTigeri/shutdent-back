@@ -282,7 +282,7 @@ export default {
     }
 
     #room-container {
-        height: 640px !important;
+        height: 40.875rem !important;
     }
 }
 
@@ -292,7 +292,7 @@ export default {
     }
 
     #room-container {
-        height: 740px !important;
+        height: 33.0212rem !important;
     }
 }
 
@@ -421,7 +421,7 @@ html {
             width: 1.5033rem;
             height: 100%;
             font-weight: 700;
-            line-height: 320%;
+            line-height: 310%;
             text-align: center;
             color: rgb(92, 48, 21);
             // border-left: 0.10000rem solid rgb(92, 48, 21);

@@ -15,8 +15,8 @@
                             v-if="user.username === chatUser">chatting...</span>
                     </div>
                     <div v-if="users.length === 0"
-                        style="width: 100%; font-size: 0.9rem; font-weight: 600;margin: 2rem auto;">
-                        当前没有在线的用户
+                        style="width: 100%; font-size: 0.9rem; font-weight: 600;margin: 2rem auto; text-align: center">
+                        当前没有在线的用户 / 老师
                     </div>
                 </el-card>
             </el-col>
@@ -62,15 +62,20 @@ export default {
         this.init()
     },
     methods: {
+        // 用户建立连接函数
         connect(username) {
             // 要进行聊天的人 this.user 是本人
             this.chatUser = username
             let message = { from: this.user, to: this.chatUser, text: this.user + '邀请您聊天' }
             socket.send(JSON.stringify(message));  // 将组装好的json发送给服务端，由服务端进行转发
             this.messages.push({ user: this.user, text: this.text })
-            // 构建消息内容，本人消息
-            // this.createContent(null, this.user, this.text)
-            // this.text = '';
+        },
+        // 拒绝的
+        decline() {
+            this.chatUser = username
+            let message = { from: this.user, to: this.chatUser, text: this.user + '当前忙线中' }
+            socket.send(JSON.stringify(message));  // 将组装好的json发送给服务端，由服务端进行转发
+            this.messages.push({ user: this.user, text: this.text })
         },
         send() {
             if (!this.chatUser) {
@@ -113,7 +118,7 @@ export default {
                 html = "<div class=\"el-row\" style=\"padding: 0.3125rem 0\">\n" +
                     "  <div class=\"el-col el-col-2\" style=\"text-align: right\">\n" +
                     "  <span class=\"el-avatar el-avatar--circle\" style=\"height: 2.5rem; width: 2.5rem; line-height: 2.5rem;\">\n" +
-                    "    <img src=\"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png\" style=\"object-fit: cover;\">\n" +
+                    "    <img src=\"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png\" style=\"object-fit: cover; width: 100%; height: 100%\">\n" +
                     "  </span>\n" +
                     "  </div>\n" +
                     "  <div class=\"el-col el-col-22\" style=\"text-align: left; padding-left: 0.625rem\">\n" +
@@ -145,15 +150,31 @@ export default {
                 //  浏览器端收消息，获得从服务端发送过来的文本消息
                 socket.onmessage = function (msg) {
                     console.log("收到数据====" + msg.data)
+                    // 使用算法将对应你的字符串抽取出来
                     let index = msg.data.lastIndexOf('"')
                     let i = msg.data.lastIndexOf(':')
                     let m = msg.data.substring(index - 5, index)
                     let n = msg.data.substring(i + 2, index - 5)
+                    // 提醒用户聊天
                     if (m === '邀请您聊天') {
-                        _this.$notify.info({
-                            title: '消息',
-                            message: '' + n + m
+                        _this.$confirm(n + m, '提醒', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '婉拒',
+                            type: 'warning'
+                        }).then(() => {
+                            _this.$message({
+                                type: 'success',
+                                message: '点击' + n + '后的气泡即可聊天'
+                            });
+                        }).catch(() => {
+                            _this.$message({
+                                type: 'info',
+                                message: '已通知ta',
+                            });
                         });
+                    }
+                    if (m === '当前忙线中') {
+                        _this.$message.error(n + m)
                     }
                     let data = JSON.parse(msg.data)  // 对收到的json数据进行解析， 类似这样的： {"users": [{"username": "zhang"},{ "username": "admin"}]}
                     if (data.users) {  // 获取在线人员信息

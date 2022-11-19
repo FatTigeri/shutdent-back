@@ -235,11 +235,39 @@
     function fail() {
         clearInterval(clock);
         flag = false;
-        confirm('你的最终得分 ' + parseInt($('score').innerHTML));
+        var score = parseInt($('score').innerHTML)
+        confirm('你的最终得分 ' + score);
         var con = $('con');
         con.innerHTML = "";
         $('score').innerHTML = 0;
         con.style.top = '-408px';
+
+        // 获取浏览器中的用户名
+        const username = window.localStorage.getItem('token')
+
+        // 当且仅当分数和用户已经登录时,才进行以下操作
+        if (score > 0 && username != null) {
+            // TODO调用原生JS实现ajax数据交互
+            var xhr;
+            if (window.XMLHttpRequest) {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xhr = new XMLHttpRequest();
+            } else {
+                // IE6, IE5 浏览器执行代码
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText == 1) {
+                        console.log('ok');
+                    } else {
+                        console.log('fail');
+                    }
+                }
+            }
+            xhr.open('GET', 'http://1.12.235.213:8088/api/updateScore?score=' + score + '&username=' + username, true);
+            xhr.send();
+        }
     }
 
     function judge(ev) {

@@ -547,7 +547,8 @@ export default {
             "question": this.textarea,
             "grade": this.grade,
             "problem": this.problem,
-            "questioner": questioner
+            "questioner": questioner,
+            "image": ''
           }
         })
         // 当后端返回的数据res > 0 时(即此时插入语句成功执行了)， 进行对应的消息提醒

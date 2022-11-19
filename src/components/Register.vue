@@ -226,7 +226,7 @@ export default {
 @media (min-width: 345px) and (max-width: 768px) {
     .register {
         width: 28.839333rem !important;
-        height: 31.404rem !important;
+        height: 24.404rem !important;
     }
 
     /deep/ .el-dialog {
@@ -324,6 +324,15 @@ export default {
     .right {
         background: white !important;
     }
+
+    .register {
+        height: 24.404rem !important;
+
+        /deep/.el-form-item {
+            height: 2.8rem !important;
+        }
+    }
+
 }
 
 @media(max-width: 2059.9px) and (min-width: 1560px) {
@@ -336,6 +345,14 @@ export default {
     .left,
     .right {
         background: white !important;
+    }
+
+    .register {
+        height: 24.404rem !important;
+
+        /deep/.el-form-item {
+            height: 2.8rem !important;
+        }
     }
 }
 
@@ -383,6 +400,10 @@ export default {
         transform: translate(-50%, -50%);
         background: rgba(250, 250, 250, .95);
 
+        .el-form-item {
+            margin-bottom: 1.4666rem !important;
+        }
+
         // 用户注册文字样式
         .text {
             width: 100%;
@@ -410,10 +431,10 @@ export default {
 
 .avatar-uploader,
 .el-upload {
-    width: 178px;
-    height: 178px;
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
+    width: 11.8666rem;
+    height: 11.8666rem;
+    border: 0.0666rem dashed #d9d9d9;
+    border-radius: 0.4rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -424,16 +445,16 @@ export default {
 }
 
 .avatar-uploader-icon {
-    font-size: 28px;
+    font-size: 1.8666rem;
     color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
+    width: 11.8666rem;
+    height: 11.8666rem;
+    line-height: 11.8666rem;
     text-align: center;
 }
 
 .avatar {
-    height: 178px;
+    height: 11.8666rem;
     display: block;
 }
 </style>
