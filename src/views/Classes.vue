@@ -14,9 +14,11 @@
                 <!-- v-for指令展示得到的课程内容信息 -->
                 <li v-for="item in List" :key="item.cid" @click="player(item.url, item.cid)">
                     <a href="javascript:void(0)"><img :src="getSrc(item.cover)" alt="blank"></a>
-                </li>
 
+                </li>
             </ul>
+
+
 
             <!-- 分页按钮盒子 -->
             <div class="pagination">

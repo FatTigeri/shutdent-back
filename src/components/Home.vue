@@ -7,11 +7,11 @@
         <div class="functions-fix">
           <ul>
             <!-- 客服 -->
-            <li><a href="#/math/chat" @click="linkTo()"><i class="el-icon-phone-outline"></i> 客服</a></li>
+            <li><a href="/math/chat" @click="linkTo()"><i class="el-icon-phone-outline"></i> 客服</a></li>
             <!-- 提问 -->
-            <li @click="ask"><a href="#"><i class="el-icon-chat-dot-round"></i> 提问</a></li>
+            <li @click="ask"><i class="el-icon-chat-dot-round"></i> 提问</li>
             <!-- 返顶 -->
-            <li><a href="#layout-container"><i class="el-icon-caret-top"></i> 返顶</a></li>
+            <li @click="toTop"><i class="el-icon-caret-top"></i> 返顶</li>
           </ul>
         </div>
 
@@ -63,7 +63,7 @@
                 <div>
                   <!-- 2.1.1.1.1 教师排班当天日期 -->
                   <div class="day">
-                    <a href="#/math/home">{{ currentDay + ' (' + currentWeek + ')' }}</a>
+                    <a href="/math/home">{{ currentDay + ' (' + currentWeek + ')' }}</a>
                   </div>
                   <!-- 2.1.1.1.2 教师排版当天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -75,7 +75,7 @@
                   </ul>
                   <!-- 2.1.1.1.3 教师排班下一天日期 -->
                   <div class="day">
-                    <a href="#/math/home">{{ nextDay + ' (' + nextweek + ')' }}</a>
+                    <a href="/math/home">{{ nextDay + ' (' + nextweek + ')' }}</a>
                   </div>
                   <!-- 2.1.1.4 教师排版下一天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -88,8 +88,9 @@
                 </div>
                 <!-- 2.1.1.2 分页查询按钮 -->
                 <div class="pagination">
-                  <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
-                  <el-button type="primary" size="mini"><i class="el-icon-arrow-right el-icon--right"></i></el-button>
+                  <el-button type="primary" icon="el-icon-arrow-left" size="mini" @click="pre"></el-button>
+                  <el-button type="primary" size="mini" @click="next"><i class="el-icon-arrow-right el-icon--right"></i>
+                  </el-button>
                 </div>
               </div>
               <!-- 2.1.2 侧边栏内容二：线下活动内容展示 -->
@@ -98,13 +99,17 @@
                 <!-- 2.1.1.1 侧边栏线下活动内容具体展示 -->
                 <ul class="activities-item">
                   <li v-for="item in activityList" :key="item.id">
-                    <a href="#/math/home">{{ item.activity }}</a>
+                    <a href="javascript:void(0)" @click="link()">
+                      <h4>{{ item.title }}</h4>
+                      <span>{{ item.activity }}</span>
+                    </a>
                   </li>
                 </ul>
                 <!-- 2.1.1.2 侧边栏线下活动内容分页按钮 -->
                 <div class="pagination">
-                  <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
-                  <el-button type="primary" size="mini"><i class="el-icon-arrow-right el-icon--right"></i></el-button>
+                  <el-button type="primary" icon="el-icon-arrow-left" size="mini" @click="pre"></el-button>
+                  <el-button type="primary" size="mini" @click="next"><i class="el-icon-arrow-right el-icon--right"></i>
+                  </el-button>
                 </div>
               </div>
             </div>
@@ -128,63 +133,63 @@
                       <!-- v-for="item in 6" :key="item" -->
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#/math/video/1/1">
+                          <a href="/math/video/1/1">
                             <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#/math/video/4/4">
+                          <a href="/math/video/4/4">
                             <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#/math/video/2/2">
+                          <a href="/math/video/2/2">
                             <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#/math/video/3/3">
+                          <a href="/math/video/3/3">
                             <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#/math/video/6/6">
+                          <a href="/math/video/6/6">
                             <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#/math/video/5/5">
+                          <a href="/math/video/5/5">
                             <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#">
+                          <a href="javascript:void(0);">
                             <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
                       </el-carousel-item>
                       <el-carousel-item>
                         <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
                           </a>
                         </h3>
@@ -199,7 +204,7 @@
                     <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
                       <div class="resources-item">
                         <div class="title1">
-                          <a href="#/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
+                          <a href="/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <div class="item1">
                           <el-row :gutter="20">
@@ -207,36 +212,36 @@
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li @click="player(1)">
                                   <img src="@/assets/math_course1.jpg" alt="blank">
-                                  <a href="#/math/video/1/1">课题:分数除法</a>
-                                  <a href="#/math/video/1/1">授课人: 广东二师</a>
+                                  <a href="/math/video/1/1">课题:分数除法</a>
+                                  <a href="/math/video/1/1">授课人: 广东二师</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li @click="player(2)">
                                   <img src="@/assets/math_course2.jpg" alt="blank">
-                                  <a href="#/math/video/2/2">课题:负数的认识</a>
-                                  <a href="#/math/video/2/2">授课人: 李如煜</a>
+                                  <a href="/math/video/2/2">课题:负数的认识</a>
+                                  <a href="/math/video/2/2">授课人: 李如煜</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li @click="player(3)">
                                   <img src="@/assets/math_course3.jpg" alt="blank">
-                                  <a href="#">课题:平移与旋转</a>
-                                  <a href="#">授课人: 卡通人物</a>
+                                  <a href="">课题:平移与旋转</a>
+                                  <a href="">授课人: 卡通人物</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li @click="player(4)">
                                   <img src="@/assets/math_course4.jpg" alt="blank">
-                                  <a href="#/math/video/3/3">课题:分数的认识</a>
-                                  <a href="#/math/video/3/3">授课人: 周宇轩</a>
+                                  <a href="/math/video/3/3">课题:分数的认识</a>
+                                  <a href="/math/video/3/3">授课人: 周宇轩</a>
                                 </li>
                               </el-col>
                             </ul>
                           </el-row>
                         </div>
                         <div class="title1">
-                          <a href="#/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
+                          <a href="/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <div class="item1">
                           <el-row :gutter="20">
@@ -250,19 +255,19 @@
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li>
                                   <img src="@/assets/math6.jpg" alt="blank">
-                                  <a href="#/math/home">数学界的"罪人"</a>
+                                  <a href="/math/home">数学界的"罪人"</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li>
                                   <img src="@/assets/math7.png" alt="blank">
-                                  <a href="#/math/home">先行者-祖冲之</a>
+                                  <a href="/math/home">先行者-祖冲之</a>
                                 </li>
                               </el-col>
                               <el-col :xs="12" :sm="6" :md="6" :lg="6">
                                 <li>
                                   <img src="@/assets/math8.png" alt="blank">
-                                  <a href="#/math/home">数学的对称美</a>
+                                  <a href="/math/home">数学的对称美</a>
                                 </li>
                               </el-col>
                             </ul>
@@ -276,7 +281,7 @@
                       v-show="screenWidth >= 992">
                       <div class="resources-favor">
                         <div class="title2">
-                          <a href="#" alt="blank">最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i></a>
+                          <a href="javascript:void(0)" alt="blank">最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i></a>
                           <ul style="list-style: none;">
                             <li v-for="(item, index) in popularList" :key="item.id">
                               <el-badge :value="index + 1" class="item" type="primary"></el-badge>
@@ -325,10 +330,10 @@
             <div class="schools">
               <h5>&copy; 希冀数学 特别鸣谢</h5>
               <ul>
-                <li><i class="el-icon-school"></i> <a href="#/math/home">广东第二师范学院</a></li>
-                <li><i class="el-icon-office-building"></i> <a href="#/math/home">希望小学</a></li>
-                <li><i class="el-icon-school"></i> <a href="#/math/home">广东第二师范学院</a></li>
-                <li><i class="el-icon-office-building"></i> <a href="#/math/home">希望小学</a></li>
+                <li><i class="el-icon-school"></i> <a href="/math/home">广东第二师范学院</a></li>
+                <li><i class="el-icon-office-building"></i> <a href="/math/home">希望小学</a></li>
+                <li><i class="el-icon-school"></i> <a href="/math/home">广东第二师范学院</a></li>
+                <li><i class="el-icon-office-building"></i> <a href="/math/home">希望小学</a></li>
               </ul>
             </div>
           </el-footer>
@@ -465,6 +470,7 @@ export default {
           break
       }
     },
+    // 时刻监控提问模态框下的确认按钮是否为禁用变量
     flag() {
       return this.textarea === '';
     }
@@ -534,6 +540,30 @@ export default {
           message: h('i', { style: 'color: teal' }, '请先登录~！')
         })
       }
+    },
+
+    // home首页中的返顶方法
+    toTop() {
+      document.documentElement.scrollTop = 0;
+    },
+
+    // 点击线下活动跳转函数
+    link() {
+      this.$store.commit('changeCurrent', 3)
+      this.$router.push('/math/activity')
+    },
+
+    // 上一页按钮函数
+    pre() {
+      console.log("111");
+      this.$message.info('功能后续开发中~!')
+    },
+
+    // 下一页按钮函数
+    next() {
+      console.log("111");
+
+      this.$message.info('功能后续开发中~!')
     },
 
     // 用户点击提问调用的函数
@@ -607,7 +637,6 @@ export default {
       this.$router.push("/math/video/" + this.course[0].url + "/" + id)
     }
   },
-
 }
 </script>
 
@@ -788,8 +817,14 @@ export default {
       line-height: 2.3333rem;
       margin-bottom: 1rem;
       border-radius: 1rem;
+      color: rgb(58, 139, 255, 1);
       background: rgba(250, 250, 249, 0.95);
       box-shadow: 0px 2px 10px 0px rgba(31, 35, 41, .38);
+      cursor: pointer;
+
+      &:hover {
+        color: rgba(58, 139, 255, .65);
+      }
 
 
       a {
@@ -935,7 +970,7 @@ export default {
     top: 37%;
     left: 50%;
     width: 87%;
-    min-height: 45%;
+    min-height: 47%;
     border-radius: 0.53333rem;
     box-shadow: 0 0 1.3333rem white;
     transform: translate(-50%, -50%);
@@ -948,20 +983,43 @@ export default {
     .activities-item {
       list-style: none;
       font-size: 0.8rem;
-      padding: 0.666666rem;
+      padding: 0.3333rem;
+      box-sizing: border-box;
       text-align: left;
 
       // 具体的数据样式
       li {
-        font-weight: 600;
+        height: 25%;
+        font-weight: 500;
         padding: 0.3333rem;
         margin-bottom: 0.13333rem;
+        box-sizing: border-box;
         border: 0.06666rem solid #c9c9c9;
+
+
 
         // 线上内容链接样式
         a {
           text-decoration: none;
-          color: purple;
+          color: black;
+
+          span {
+            display: inline-block;
+            font-size: 12px;
+            margin: 0.2rem 0;
+            text-indent: 1rem;
+            font-family: fantasy;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* 将对象作为弹性伸缩盒子模型显示 */
+            display: -webkit-box;
+            /* 限制在一个块元素显示的文本的行数 */
+            /* -webkit-line-clamp 其实是一个不规范属性，使用了WebKit的CSS扩展属性，该方法适用于WebKit浏览器及移动端；*/
+            -webkit-line-clamp: 3;
+            /* 设置或检索伸缩盒对象的子元素的排列方式 */
+            -webkit-box-orient: vertical;
+          }
         }
       }
     }
@@ -971,7 +1029,6 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-      margin-top: 0.1111rem;
       color: rgb(0, 66, 149);
     }
   }

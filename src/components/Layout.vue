@@ -23,16 +23,16 @@
                         <div class="functions">
                             <ul>
                                 <!-- 1.1.3 具体的a标签内容 -->
-                                <li><a href="#/math/home" :class="{ active: 0 === cur }" @click="change(0)">首页</a></li>
-                                <li><a href="#/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a>
+                                <li><a href="/math/home" :class="{ active: 0 === cur }" @click="change(0)">首页</a></li>
+                                <li><a href="/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a>
                                 </li>
-                                <li><a href="#/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a>
+                                <li><a href="/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a>
                                 </li>
-                                <li><a href="#/math/activity" :class="{ active: 3 === cur }" @click="change(3)">线下活动</a>
+                                <li><a href="/math/activity" :class="{ active: 3 === cur }" @click="change(3)">线下活动</a>
                                 </li>
-                                <li><a href="#/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
+                                <li><a href="/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
                                 </li>
-                                <li><a href="#" :class="{ active: 5 === cur }" @click="change(5)">师资资源</a>
+                                <li><a href="/math/Tresource" :class="{ active: 5 === cur }" @click="change(5)">师资资源</a>
                                 </li>
                             </ul>
                         </div>
@@ -41,8 +41,8 @@
                     <el-col :xs="0" :sm="4" :md="4" :lg="4" :xl="4" style="height: 100%">
                         <!-- 1.1.3 内容搜索框 -->
                         <div class="user-login">
-                            <el-input prefix-icon="el-icon-search" v-model="input" placeholder="请输入内容" size="small"
-                                @keyup.enter.native="search"></el-input>
+                            <el-input prefix-icon="el-icon-search" v-model.trim="input" placeholder="请输入内容" size="small"
+                                @keyup.enter.native.once="search" clearable></el-input>
                         </div>
                     </el-col>
                     <!-- 1.1.4 导航栏登录按钮和用户头像 -->
@@ -132,14 +132,6 @@ export default {
             this.$store.commit('changeFlag', false)
             // 获取头像路径
             this.$store.commit('getImgSrc', window.localStorage.getItem("avatar"))
-
-            // 对再次登录的用户进行消息的提示
-            const h = this.$createElement;
-            this.$notify({
-                title: '消息提示',
-                message: h('i', { style: 'color: teal' }, window.localStorage.getItem('token') + '欢迎回来~！'),
-                position: 'top-left'
-            })
         } else {
             console.log("用户没有登录~~~!");
         }
@@ -208,10 +200,9 @@ export default {
                 })
             } else {
                 // TODO: 进行对应的内容查询
-                this.$message({
-                    type: 'info',
-                    message: '功能还未开放, 抱歉~~~'
-                })
+                this.$router.push('/math/courses')
+                this.$store.commit('setSearch', this.input)
+                this.input = ''
             }
         }, 1000),
 
@@ -281,6 +272,10 @@ export default {
                         type: 'success',
                         message: username + '欢迎您!!!'
                     })
+                    // 将控制跳转对应的变量进行设置(左侧边栏)
+                    window.sessionStorage.setItem('cur', 0)
+                    // 上方变量控制
+                    window.sessionStorage.setItem('current', -1)
                     // 用户不是教师
                 } else {
                     const h = this.$createElement;
@@ -308,6 +303,7 @@ export default {
                     message: username + '欢迎您!'
                 })
                 this.$router.replace('/stuAdmin')
+                window.sessionStorage.setItem('cur', 0)
             } else {
                 const h = this.$createElement;
                 this.$notify({

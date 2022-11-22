@@ -13,8 +13,9 @@
                         <div class="contents1">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li><a href="#"><img src="@/assets/game1.webp" alt="blank"></a></li>
-                                    <li><a href="#" @click="jumpTo"><img src="@/assets/game2.webp" alt="blank"></a></li>
+                                    <li><a href="javascript:void(0)"><img src="@/assets/game1.webp" alt="blank"></a>
+                                    </li>
+                                    <li><a href="/static/2048.html"><img src="@/assets/game2.webp" alt="blank"></a></li>
                                     <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg"
                                                 alt="blank"></a></li>
                                     <li><a href="/static/snake.html"><img src="@/assets/snake.webp" alt="blank"></a>
@@ -36,9 +37,10 @@
                         <div class="contents2">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li><a href="#"><i class="el-icon-tickets"></i>奥数竞赛抢答题</a></li>
-                                    <li><a href="#"><i class="el-icon-document-remove"></i>趣味数学抢答题</a></li>
-                                    <li><a href="#"><i class="el-icon-document"></i>知识巩固通关题</a></li>
+                                    <li><a href="javascript:void(0)"><i class="el-icon-tickets"></i>奥数竞赛抢答题</a></li>
+                                    <li><a href="javascript:void(0)"><i class="el-icon-document-remove"></i>趣味数学抢答题</a>
+                                    </li>
+                                    <li><a href="javascript:void(0)"><i class="el-icon-document"></i>知识巩固通关题</a></li>
                                 </ul>
                             </el-row>
                         </div>
@@ -53,7 +55,7 @@
                     <div class="text">希冀数学涨知识</div>
                     <div class="resources-item">
                         <div class="title1">
-                            <a href="#" alt="blank">猜你喜欢 <i class="el-icon-d-arrow-right"></i></a>
+                            <a href="javascript:void(0)" alt="blank">猜你喜欢 <i class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <!-- 2.1 猜你喜欢内容，主要是根据用户的爱好进行资源的推荐 -->
                         <div class="item1">
@@ -61,89 +63,107 @@
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(1)">
-                                            <a href="#"><img src="@/assets/math_course1.jpg" alt="blank"></a>
+                                            <a href="javascript:void(0)"><img src="@/assets/math_course1.jpg"
+                                                    alt="blank"></a>
                                         </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(2)">
-                                            <a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a>
+                                            <a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
+                                                    alt="blank"></a>
                                         </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(3)">
-                                            <a href="#"><img src="@/assets/math_course3.jpg" alt="blank"></a>
+                                            <a href="javascript:void(0)"><img src="@/assets/math_course3.jpg"
+                                                    alt="blank"></a>
                                         </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(4)">
-                                            <a href="#"><img src="@/assets/math_course4.jpg" alt="blank"></a>
+                                            <a href="javascript:void(0)"><img src="@/assets/math_course4.jpg"
+                                                    alt="blank"></a>
                                         </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(5)">
-                                            <a href="#"><img src="@/assets/math_course5.jpg" alt="blank"></a>
+                                            <a href="javascript:void(0)"><img src="@/assets/math_course5.jpg"
+                                                    alt="blank"></a>
                                         </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(6)">
-                                            <a href="#"><img src="@/assets/math_course6.jpg" alt="blank"></a>
+                                            <a href="javascript:void(0)"><img src="@/assets/math_course6.jpg"
+                                                    alt="blank"></a>
                                         </li>
                                     </el-col>
                                 </ul>
                             </el-row>
                         </div>
                         <div class="title1">
-                            <a href="#" alt="blank">数学名人馆 <i class="el-icon-d-arrow-right"></i></a>
+                            <a href="javascript:void(0)" alt="blank">数学名人馆 <i class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <!-- 2.2 数学名人堂内容，对数学家进行对应的详细介绍 -->
                         <div class="item1">
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math5.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math5.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math6.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math6.jpg" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math7.png" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math7.png" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math8.png" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math8.png" alt="blank"></a>
+                                        </li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
                         </div>
                         <div class="title1">
-                            <a href="#" alt="blank">不一样的数学<i class="el-icon-d-arrow-right"></i></a>
+                            <a href="javascript:void(0)" alt="blank">不一样的数学<i class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <!-- 2.3 不一样的数学内容，进行课外数学知识的拓展 -->
                         <div class="item1">
                             <el-row :gutter="20">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course1.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course1.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course1.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course1.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course3.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course3.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
-                                        <li><a href="#"><img src="@/assets/math_course2.jpg" alt="blank"></a></li>
+                                        <li><a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
+                                                    alt="blank"></a></li>
                                     </el-col>
                                 </ul>
                             </el-row>
@@ -172,8 +192,7 @@
                                 <template slot-scope="scope">
                                     <el-popover trigger="hover" placement="top">
                                         <p>姓名: {{ scope.row.username }}</p>
-                                        <p>年龄: {{ scope.row.age }}</p>
-                                        <p>性别: {{ scope.row.sex }}</p>
+                                        <p>积分: {{ scope.row.score }} 分</p>
                                         <div slot="reference" class="name-wrapper">
                                             <i class="el-icon-user-solid"></i>
                                             <el-tag size="medium">{{ scope.row.username }}</el-tag>
@@ -212,10 +231,6 @@ export default {
                 this.loading = false
             }, 2000)
         },
-        jumpTo() {
-            window.location.href = '/static/2048.html'
-        },
-
         // 视频播放功能
         player(id) {
             this.$router.push("/math/video/" + id + "/" + id)
@@ -286,7 +301,7 @@ export default {
     }
 }
 
-@media(max-width: 2059.9px) and (min-width: 1560px) { 
+@media(max-width: 2059.9px) and (min-width: 1560px) {
     html {
         font-size: 23.5px;
     }

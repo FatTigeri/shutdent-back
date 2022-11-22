@@ -23,10 +23,10 @@
                             <div>学生</div>
                         </div>
                         <!-- 卡片数据内容四-邮箱 -->
-                        <!-- <div class="info-text item">
-                            <div class="word">邮箱: </div>
-                            <div>{{ teacherInfo.email }}</div>
-                        </div> -->
+                        <div class="info-text item">
+                            <div class="word">积分: </div>
+                            <div>{{ item.score }} 分</div>
+                        </div>
                         <!-- 卡片数据内容五-联系方式 -->
                         <!-- <div class="info-text item">
                             <div class="word">联系方式: </div>

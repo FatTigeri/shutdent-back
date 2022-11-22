@@ -24,7 +24,7 @@
                                 <div class="nav-m">
                                     <div class="content-m">
                                         <el-input size="mini" placeholder="请输入搜索内容" suffix-icon="el-icon-search"
-                                            v-model="input1">
+                                            v-model="input1" @keydown.enter.native="search">
                                         </el-input>
                                     </div>
                                 </div>
@@ -56,35 +56,20 @@
                                             </li>
                                             <!-- 2.1.2 用户资料选项 -->
                                             <li>
-                                                <a href="#/stuAdmin/info" :class="{ actived: cur === 0 }"
+                                                <a href="/stuAdmin/info" :class="{ actived: cur === 0 }"
                                                     @click="change(0)"><i
                                                         class="el-icon-user-solid"></i>&nbsp;&nbsp;学生资料</a>
                                             </li>
                                             <!-- 2.1.3 答疑入口选项 -->
                                             <li>
-                                                <a href="#/math/chat" :class="{ actived: cur === 1 }"
+                                                <a href="/math/chat" :class="{ actived: cur === 1 }"
                                                     @click="change(1)"><i class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
                                             </li>
                                             <!-- 2.1.4 问题上传选项 -->
                                             <li>
-                                                <a href="#/stuAdmin/question" :class="{ actived: cur === 2 }"
+                                                <a href="/stuAdmin/question" :class="{ actived: cur === 2 }"
                                                     @click="change(2)"><i class="el-icon-upload"></i>&nbsp;问题上传</a>
                                             </li>
-                                            <!-- 2.1.5 互动窗口选项 -->
-                                            <!-- <li>
-                                                <a href="#" :class="{ actived: cur === 3 }" @click="change(3)"><i
-                                                        class="el-icon-monitor"></i>&nbsp;互动窗口</a>
-                                            </li> -->
-                                            <!-- 2.1.6 上班预约选项 -->
-                                            <!-- <li>
-                                                <a href="#" :class="{ actived: cur === 4 }" @click="change(4)"><i
-                                                        class="el-icon-service"></i>&nbsp;上班预约</a>
-                                            </li> -->
-                                            <!-- 2.1.7 线下活动选项 -->
-                                            <!-- <li>
-                                                <a href="#" :class="{ actived: cur === 5 }" @click="change(5)"><i
-                                                        class="el-icon-location"></i>&nbsp;线下活动</a>
-                                            </li> -->
                                         </ul>
                                     </el-aside>
                                 </el-col>
@@ -94,7 +79,7 @@
                                         <el-header height="4.375rem">
                                             <!-- 2.2.1 头部区域 -->
                                             <ul>
-                                                <li><a href="#/stuAdmin/answer" :class="{ active: current === 0 }"
+                                                <li><a href="/stuAdmin/answer" :class="{ active: current === 0 }"
                                                         @click="change1(0)">回复</a>
                                                 </li>
                                             </ul>
@@ -116,6 +101,7 @@
 </template>
 
 <script>
+import { mythrollte } from '@/utils'
 export default {
     // 组件名称
     name: 'administrator',
@@ -123,9 +109,9 @@ export default {
     data() {
         return {
             // 控制左侧栏区域active属性
-            cur: 0,
+            cur: parseInt(window.sessionStorage.getItem('cur')),
             // 控制头部区域active属性
-            current: -1,
+            current: parseInt(window.sessionStorage.getItem('current')),
             // 输入框内容
             input1: '',
             // 教师名字
@@ -143,18 +129,26 @@ export default {
         },
         // 控制选项转换方法
         change(index) {
-            this.cur = index
-            this.current = ''
+            window.sessionStorage.setItem('cur', index)
+            window.sessionStorage.setItem('current', -1)
         },
         // 控制上方选项方法
         change1(index) {
-            this.cur = ''
-            this.current = index
+            window.sessionStorage.setItem('current', index)
+            window.sessionStorage.setItem('cur', -1)
         },
         // 返回后端传输到前端的图片地址
         getSrc(src) {
             return 'http://1.12.235.213/img/' + src
         },
+        // 后台最上方的搜索框方法
+        search: mythrollte(function () {
+            if (this.input1 === '') {
+                this.$message.error('搜索内容不能为空!')
+            } else {
+                this.$message.info('该功能后续开发中~')
+            }
+        }, 5000)
     }
 }
 </script>

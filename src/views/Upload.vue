@@ -85,8 +85,7 @@ export default {
             imgName: ''
         }
     },
-    mounted: function () {
-    },
+   
     methods: {
         // 课程信息上传函数
         async submit() {

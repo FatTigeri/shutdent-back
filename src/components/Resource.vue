@@ -6,9 +6,9 @@
                 <el-col :xs="0" :sm="3" style="height: 100% !important;">
                     <el-aside>
                         <ul>
-                            <li><a href="#/math/resource/classes" :class="{ actived: cur === 0 }"
+                            <li><a href="/math/resource/classes" :class="{ actived: cur === 0 }"
                                     @click="change(0)">优质课堂</a></li>
-                            <li><a href="#/math/resource/examination" :class="{ actived: cur === 1 }"
+                            <li><a href="/math/resource/examination" :class="{ actived: cur === 1 }"
                                     @click="change(1)">试卷真题</a></li>
                         </ul>
                     </el-aside>
@@ -86,21 +86,28 @@ export default {
     name: 'resource',
     data() {
         return {
-            cur: 0,
+            // 获取当前控制左侧侧边栏样式的变量cur
+            cur: window.sessionStorage.getItem('cur') === null ? 0 : parseInt(window.sessionStorage.getItem('cur')),
+            // 试卷年级变量
             grade: 1,
+            // 试卷类型变量
             type: 1,
+            // 试卷点击率 / 好评率变量
             other: 1,
+            // 用户搜索框内容变量
             input: '',
-            // input1: '',
+            // 试卷年级数组
             grades: ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级'],
+            // 试卷类型数组
             types: ['课堂知识', '考试时解', '名人故事', '趣味数学', '考点总结', '解题技巧'],
+            // 试卷搜索方式数组
             others: ['rate', 'popular']
         }
     },
     methods: {
         // 改变侧边栏的索引位置
         change(index) {
-            this.cur = index
+            window.sessionStorage.setItem('cur', index)
         },
         // 用户进行试卷搜索功能
         async submit() {
@@ -115,9 +122,8 @@ export default {
             this.cur = 1
 
             this.$store.commit('setPageList', res)
-
             this.$store.commit('setGrade', this.grade)
-
+            // 使用中间组件进行当前页面数据的刷新
             this.$router.replace("/math/resource/back/")
 
         }
@@ -232,7 +238,7 @@ export default {
 
     #resource-container {
         height: 41.1rem !important;
-    }   
+    }
 }
 
 @media(max-width: 2059.9px) and (min-width: 1560px) {
@@ -248,7 +254,7 @@ export default {
 
     #resource-container {
         height: 33.5rem !important;
-    }   
+    }
 }
 
 #resource-container {
@@ -298,7 +304,7 @@ export default {
                     height: 30%;
                     top: 50%;
                     left: 50%;
-                    color: purple;
+                    color: #800080;
                     border-radius: 1rem;
                     line-height: 2.09333rem;
                     text-decoration: none;

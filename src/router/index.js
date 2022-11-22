@@ -25,11 +25,13 @@ import stuAdmin from '@/components/StuAdmin.vue'
 import Schedule from '@/views/Schedule.vue'
 import Info from '@/components/Info.vue'
 import Question from '@/views/Question.vue'
+import Course from '@/components/Course.vue'
+import TResource from '@/views/TResource.vue'
+import UpActivity from '@/views/UpActivity.vue'
 
 const router = new VueRouter({
-  mode: 'hash',
-  // mode: 'history',
-  // base: process.env.BASE_URL,
+  mode: 'history',
+  base: '/',
   routes: [
     {
       path: '/math', component: Layout, children: [
@@ -46,6 +48,8 @@ const router = new VueRouter({
         },
         { path: 'video/:url/:id', component: Video },
         { path: 'activity', component: Activity },
+        { path: 'courses', component: Course },
+        { path: 'TResource', component: TResource }
       ]
     },
     { path: '', redirect: '/math/home' },
@@ -58,7 +62,8 @@ const router = new VueRouter({
         { path: 'problem', component: Problem },
         { path: 'student', component: Student },
         { path: 'upload', component: Upload },
-        { path: 'schedule', component: Schedule }
+        { path: 'schedule', component: Schedule },
+        { path: 'upActivity', component: UpActivity }
       ]
     },
     {

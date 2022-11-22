@@ -6,6 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   // 
   state: {
+    // 导航栏中的输入框内容变量
+    search: '',
     // 全局变量flag用来控制home页面中的登录按钮的消失
     flag: true,
     // 全局变量imgSrc用来保存用户登录后获取到的图片地址
@@ -14,12 +16,15 @@ export default new Vuex.Store({
     upLoadImg: '',
     // 项目导航栏处的当前位置变量
     current: parseInt(window.sessionStorage.getItem('index')),
+    // 
     alive: true,
     // examination页面的初始化数据
     pagesList: [],
-    // grade
+    // 试卷年级变量
     grade: '',
+    // 试卷类型变量
     type: '',
+    // 试卷其他内容变量
     other: ''
   },
 
@@ -30,6 +35,11 @@ export default new Vuex.Store({
 
   // 
   mutations: {
+    // 设置layout搜索框的搜索内容
+    setSearch(state, res) {
+      state.search = res
+    },
+    // 
     changeAlive(state) {
       state.alive = !state.alive
     },
@@ -52,9 +62,13 @@ export default new Vuex.Store({
     changeCurrent(state, index) {
       state.current = index
     },
+
+    // 设置examination页面中的试卷数据内容
     setPageList(state, res) {
       state.pagesList = res
     },
+
+    // 改变当前examination页面中选中的年级
     setGrade(state, status) {
       state.grade = status
     }
