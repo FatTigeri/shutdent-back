@@ -39,7 +39,7 @@
 
 <script>
 // 导入防抖函数
-import { mythrollte } from '@/utils/index.js'
+import { mydebounce } from '@/utils/index.js'
 import { mapState } from 'vuex'
 export default {
     name: 'course',
@@ -92,7 +92,7 @@ export default {
             return 'http://1.12.235.213/img/' + src
         },
         // 搜索指定课程方法（使用防抖进行限制）
-        search: mythrollte(async function () {
+        search: mydebounce(async function () {
             // 先判断用户是否已经输入内容
             if (this.input === '') {
                 this.$message({
@@ -118,9 +118,10 @@ export default {
                 }
                 // 对最大课程页变量进行计算
                 this.maxCourse = this.courseLists.length % 10 === 0 ? parseInt(this.courseLists.length / 10) : parseInt(this.courseLists.length / 10) + 1
+                // 将本次搜索的容在Vuex中进行修改
                 this.$store.commit('setSearch', this.input)
             }
-        }, 5000),
+        }, 1500),
         // // 将数据进行拆分并重组
         strSplit(str) {
             // 先对目标字段进行定位

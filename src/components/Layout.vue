@@ -42,7 +42,7 @@
                         <!-- 1.1.3 内容搜索框 -->
                         <div class="user-login">
                             <el-input prefix-icon="el-icon-search" v-model.trim="input" placeholder="请输入内容" size="small"
-                                @keyup.enter.native.once="search" clearable></el-input>
+                                @input.once="search" clearable></el-input>
                         </div>
                     </el-col>
                     <!-- 1.1.4 导航栏登录按钮和用户头像 -->

@@ -143,7 +143,7 @@ export default {
                 this.maxPages = parseInt(this.problemList.length / 5) + 1
             }
         },
-        // 教师问题信息搜索方法(使用防抖限制)
+        // 教师问题信息搜索方法(使用节流限制)
         search: mythrollte(async function () {
             if (this.input1 === '') {
                 this.$notify({

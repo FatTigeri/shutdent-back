@@ -84,6 +84,11 @@
 <script>
 export default {
     name: 'resource',
+    mounted() {
+        const vh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        const header = document.querySelector('.el-header').offsetHeight
+        document.querySelector('#resource-container').style.height = (vh - header - 3) + 'px'
+    },
     data() {
         return {
             // 获取当前控制左侧侧边栏样式的变量cur
@@ -125,7 +130,6 @@ export default {
             this.$store.commit('setGrade', this.grade)
             // 使用中间组件进行当前页面数据的刷新
             this.$router.replace("/math/resource/back/")
-
         }
     }
 }
@@ -167,7 +171,7 @@ export default {
 // 当用户的手机屏幕小于992px但大于758px时，对应的字体大小为13px
 @media (min-width: 768px) and (max-width: 992px) {
     html {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .el-notification,
@@ -181,7 +185,7 @@ export default {
 // 当用户的手机屏幕大于992px但小于1200px时, 对应的字体大小为14px
 @media (min-width:992px) and (max-width: 1200px) {
     html {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .el-notification,
@@ -203,7 +207,7 @@ export default {
 // 当用户的屏幕大于1200px时，对应的字体大小为15px
 @media (min-width: 1200px) and (max-width: 1279.9px) {
     html {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .el-notification,
@@ -215,7 +219,7 @@ export default {
 
 @media (min-width:1280px) and (max-width: 1399.9px) {
     html {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .el-notification,
@@ -227,7 +231,7 @@ export default {
 
 @media (min-width: 1399.9px) and (max-width: 1559.9px) {
     html {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .el-notification,
@@ -236,9 +240,6 @@ export default {
         background: white !important;
     }
 
-    #resource-container {
-        height: 41.1rem !important;
-    }
 }
 
 @media(max-width: 2059.9px) and (min-width: 1560px) {
@@ -252,14 +253,10 @@ export default {
         background: white !important;
     }
 
-    #resource-container {
-        height: 33.5rem !important;
-    }
 }
 
 #resource-container {
     width: 100%;
-    height: 36.100rem;
 
     .el-container {
         height: 100%;

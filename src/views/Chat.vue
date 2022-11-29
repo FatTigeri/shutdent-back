@@ -110,7 +110,7 @@ export default {
                     "  </div>\n" +
                     "  <div class=\"el-col el-col-2\">\n" +
                     "  <span class=\"el-avatar el-avatar--circle\" style=\"height: 2.5rem; width: 2.5rem; line-height: 2.5rem;\">\n" +
-                    "    <img " + "src=" + this.getSrc(this.$store.state.imgSrc) + " style=\"object-fit: cover;\">\n" +
+                    "    <img " + "src=" + this.getSrc(this.$store.state.imgSrc) + " style=\"object-fit: cover; width: 100%; height: 100%;\">\n" +
                     "  </span>\n" +
                     "  </div>\n" +
                     "</div>";

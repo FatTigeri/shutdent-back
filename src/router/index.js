@@ -7,7 +7,7 @@ import Layout from '@/components/Layout.vue'
 import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
-import Room from '@/views/Room.vue'
+import Room from '@/components/Room.vue'
 import Chat from '@/views/Chat.vue'
 import Administrator from '@/components/Administrator.vue'
 import Teacher from '@/views/Teacher.vue'
@@ -28,10 +28,12 @@ import Question from '@/views/Question.vue'
 import Course from '@/components/Course.vue'
 import TResource from '@/views/TResource.vue'
 import UpActivity from '@/views/UpActivity.vue'
+import FeedBack from '@/views/FeedBack.vue'
 
 const router = new VueRouter({
   mode: 'history',
   base: '/',
+  // mode: 'hash',
   routes: [
     {
       path: '/math', component: Layout, children: [
@@ -63,7 +65,8 @@ const router = new VueRouter({
         { path: 'student', component: Student },
         { path: 'upload', component: Upload },
         { path: 'schedule', component: Schedule },
-        { path: 'upActivity', component: UpActivity }
+        { path: 'upActivity', component: UpActivity },
+        { path: 'feedback', component: FeedBack }
       ]
     },
     {

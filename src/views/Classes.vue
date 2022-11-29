@@ -7,14 +7,15 @@
             <div class="search-btn">
                 <!-- 课程信息搜索框 -->
                 <el-input size="mini" placeholder="老师 / 关键字" suffix-icon="el-icon-search" v-model.trim="input"
-                    @keydown.enter.native="search">
+                    @keydown.enter.native="search" clearable>
                 </el-input>
             </div>
             <ul>
                 <!-- v-for指令展示得到的课程内容信息 -->
                 <li v-for="item in List" :key="item.cid" @click="player(item.url, item.cid)">
                     <a href="javascript:void(0)"><img :src="getSrc(item.cover)" alt="blank"></a>
-
+                </li>
+                <li class="special" style="color: #9499a0; font-size: 0.8125rem;" v-if="List.length === 0">没有对应的检索内容...
                 </li>
             </ul>
 
@@ -191,38 +192,42 @@ export default {
 
             // 个课程内容样式
             li {
-                position: relative;
                 width: 20%;
                 height: 50%;
                 box-sizing: border-box;
 
-                // li伪元素样式
-                &::before {
-                    display: none;
-                    position: absolute;
-                    width: 50%;
-                    height: 78%;
-                    left: 25%;
-                    top: 0;
-                    content: '';
-                    background: rgba(0, 0, 0, .3) url(@/assets/arr.png) no-repeat center;
-                    background-size: 2rem;
-                }
-
-                // 鼠标经过li盒子样式
-                &:hover::before {
-                    display: block;
-                }
-
                 // a标签样式
                 a {
+                    position: relative;
                     display: block;
-                    height: 87%;
+                    height: 75%;
+                    width: 50%;
+                    margin: 0 auto;
+
+                    // li伪元素样式
+                    &::before {
+                        display: none;
+                        position: absolute;
+                        content: '';
+                        width: 100%;
+                        height: 100%;
+                        left: 50%;
+                        top: 48%;
+                        transform: translate(-50%, -50%);
+                        background: rgba(0, 0, 0, .3) url(@/assets/arr.png) no-repeat center;
+                        background-size: 2rem;
+                    }
+
+                    // 鼠标经过li盒子样式
+                    &:hover::before {
+                        display: block;
+                    }
+
                 }
 
                 // 课程图片样式
                 img {
-                    width: 50%;
+                    width: 100%;
                     box-shadow: 5px 5px 8px #888888;
                 }
             }

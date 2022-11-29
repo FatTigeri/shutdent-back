@@ -48,3 +48,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 2022/11/21 完成了home页面中导航栏中的内容搜索功能和对应的页面设计
 
 2022/11/22 完成了教师后台管理的线下活动添加功能
+
+2022/11/23 使用图片懒加载的方式对home页面进行了性能优化

@@ -18,18 +18,18 @@
                             <!-- 1.2.2.1.1 用户名输入框 -->
                             <el-form-item label="用户名:" prop="username">
                                 <el-input type="username" v-model.trim="ruleForm.username" autocomplete="off"
-                                    prefix-icon="el-icon-user">
+                                    prefix-icon="el-icon-user" placeholder="请输入注册名">
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.2 密码输入框 -->
                             <el-form-item label="密码:" prop="pass">
                                 <el-input type="password" v-model.trim="ruleForm.pass" autocomplete="off"
-                                    prefix-icon="el-icon-lock" show-password></el-input>
+                                    prefix-icon="el-icon-lock" show-password placeholder="请输入注册密码"></el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.3 确认密码输入框 -->
                             <el-form-item label="确认密码:" prop="checkPass">
                                 <el-input type="password" v-model.trim="ruleForm.checkPass" autocomplete="off"
-                                    prefix-icon="el-icon-lock" show-password>
+                                    prefix-icon="el-icon-lock" show-password placeholder="请再次输入相同密码">
                                 </el-input>
                             </el-form-item>
                             <!-- 1.2.2.1.4 头像上传按钮框 -->

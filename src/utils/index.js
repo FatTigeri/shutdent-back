@@ -21,7 +21,6 @@ export function mythrollte(fn, interval) {
 }
 
 export function mydebounce(fn, delay) {
-
     var delay = delay || 200;
     var timer;
     return function () {

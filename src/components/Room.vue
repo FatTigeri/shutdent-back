@@ -13,7 +13,7 @@
                         <div class="contents1">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li><a href="javascript:void(0)"><img src="@/assets/game1.webp" alt="blank"></a>
+                                    <li><a href="/static/index1.html"><img src="@/assets/game1.webp" alt="blank"></a>
                                     </li>
                                     <li><a href="/static/2048.html"><img src="@/assets/game2.webp" alt="blank"></a></li>
                                     <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg"
@@ -221,6 +221,11 @@ export default {
     created() {
         this.getTableDatas()
     },
+    mounted() {
+        const vh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        const header = document.querySelector('.el-header').offsetHeight
+        document.querySelector('#room-container').style.height = (vh - header - 10) + 'px'
+    },
     methods: {
         // 获取用户积分数据方法
         async getTableDatas() {
@@ -230,6 +235,15 @@ export default {
             setTimeout(() => {
                 this.loading = false
             }, 2000)
+
+            // 封装对应的方法把对象进行排序
+            function objectSort(property) {
+                return function (Obj1, Obj2) {
+                    return Obj2[property] - Obj1[property]
+                }
+            }
+            // 方法调用
+            this.tableData.sort(objectSort("score"))
         },
         // 视频播放功能
         player(id) {
@@ -285,29 +299,17 @@ export default {
     html {
         font-size: 14px;
     }
-
-    #room-container {
-        height: 36rem !important;
-    }
 }
 
 @media (min-width: 1399.9px) and (max-width: 1559.9px) {
     html {
         font-size: 16px;
     }
-
-    #room-container {
-        height: 40.875rem !important;
-    }
 }
 
 @media(max-width: 2059.9px) and (min-width: 1560px) {
     html {
         font-size: 23.5px;
-    }
-
-    #room-container {
-        height: 33.0212rem !important;
     }
 }
 
@@ -327,8 +329,6 @@ html {
 
 // room页面的root标签样式
 #room-container {
-    height: 36rem;
-    // box-shadow: 0 0 0.6666rem #c9c9c9;
     box-sizing: border-box;
 
     // 左侧边框的样式
@@ -338,9 +338,6 @@ html {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        // box-shadow: 0 0 0.6666rem #c9c9c9;
-
-        // border: 1px solid red;
 
         // 小游戏和技能提升样式
         .games,
@@ -417,11 +414,11 @@ html {
 
 
                     a {
-                        display: inline-block;
+                        display: flex;
                         width: 80%;
                         height: 100%;
                         margin: 0 auto;
-                        line-height: 245%;
+                        align-items: center;
                         color: rgb(92, 48, 21);
                         text-decoration: none;
                         letter-spacing: 0.266666rem;

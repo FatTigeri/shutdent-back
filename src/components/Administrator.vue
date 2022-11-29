@@ -100,7 +100,7 @@
                                                 <li><a href="/administrator/problem" :class="{ active: current === 1 }"
                                                         @click="change1(1)">问题</a>
                                                 </li>
-                                                <li><a href="" :class="{ active: current === 2 }"
+                                                <li><a href="/administrator/feedback" :class="{ active: current === 2 }"
                                                         @click="change1(2)">其他</a>
                                                 </li>
                                             </ul>

@@ -330,22 +330,6 @@
                 start();
         }
 
-        // function random_d(){
-        // 	for(var i=9;i>1;--i){
-        // 		var to=parseInt(Math.random()*(i-1)+1);
-        // 		if(d[i]!=0){
-        // 			document.getElementById("d"+d[i]).style.left=d_posXY[to][0]+"px";
-        // 			document.getElementById("d"+d[i]).style.top=d_posXY[to][1]+"px";
-        // 		}
-        // 		if(d[to]!=0){
-        // 			document.getElementById("d"+d[to]).style.left=d_posXY[i][0]+"px";
-        // 			document.getElementById("d"+d[to]).style.top=d_posXY[i][1]+"px";
-        // 		}
-        // 		var tem=d[to];
-        // 		d[to]=d[i];
-        // 		d[i]=tem;
-        // 	}
-        // }
         function random_d() {
             for (var i = 9; i > 1; --i) {
                 var to = parseInt(Math.random() * (i - 1) + 1);//产生随机数，范围为1到i，不能超出范围，因为没这个id的DIV

@@ -7,13 +7,26 @@
         <div class="functions-fix">
           <ul>
             <!-- 客服 -->
-            <li><a href="/math/chat" @click="linkTo()"><i class="el-icon-phone-outline"></i> 客服</a></li>
+            <li @click="dialogCommentVisible = true"><i class="el-icon-phone-outline"></i> 留言</li>
             <!-- 提问 -->
             <li @click="ask"><i class="el-icon-chat-dot-round"></i> 提问</li>
             <!-- 返顶 -->
             <li @click="toTop"><i class="el-icon-caret-top"></i> 返顶</li>
           </ul>
         </div>
+
+        <el-dialog title="信息反馈。" :visible.sync="dialogCommentVisible">
+          <el-form :model="form">
+            <!-- 输入框内容 -->
+            <el-form-item label="内容:" :label-width="formLabelWidth">
+              <el-input type="textarea" :rows="5" placeholder="请输入您反馈内容" v-model="form.textarea"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogCommentVisible = false">取 消</el-button>
+            <el-button type="primary" @click="comment">确 定</el-button>
+          </div>
+        </el-dialog>
 
         <!-- 点击反馈弹出的模态框 -->
         <el-dialog title="问题收集。" :visible.sync="dialogFormVisible">
@@ -52,7 +65,7 @@
     <el-container>
       <!-- (二)  首页主要内容-->
       <el-row :gutter="0">
-        <el-container style="height: 57rem;">
+        <el-container>
           <!-- 2.1 侧边栏内容 -->
           <el-col :xs="0" :sm="1" :md="5" :lg="5" style="height: 100%" v-show="screenWidth >= 992">
             <div class="aside">
@@ -115,210 +128,173 @@
             </div>
           </el-col>
           <!-- 2.2 home首页主内容区域 -->
-          <el-col :xs="24" :sm="24" :md="19" :lg="19" style="height: 100%;">
-            <el-container style="height: 100%">
-              <el-main>
-                <!-- 2.2.1 home首页轮播图内容-->
-                <el-row :gutter="0">
-                  <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                    <div class="text" ref="text1">
-                      <p class="line animation">Welcome to xijiMath!</p>
-                    </div>
-                    <div class="text margin" ref="text2">
-                      <p class="line animation it">Let’s begin the math adventure!</p>
-                    </div>
-
-                    <el-carousel :interval="4000" type="card" height="14.3333rem"
-                      style="line-height: 5.333rem; box-shadow: 0 0 0.233rem black ; border-radius: 0.5333rem;">
-                      <!-- v-for="item in 6" :key="item" -->
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="/math/video/1/1">
-                            <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="/math/video/4/4">
-                            <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="/math/video/2/2">
-                            <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="/math/video/3/3">
-                            <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="/math/video/6/6">
-                            <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="/math/video/5/5">
-                            <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="javascript:void(0);">
-                            <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="javascript:void(0)">
-                            <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                      <el-carousel-item>
-                        <h3 class="medium" style="width: 100%; height: 100%">
-                          <a href="javascript:void(0)">
-                            <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
-                          </a>
-                        </h3>
-                      </el-carousel-item>
-                    </el-carousel>
-                  </el-col>
-                </el-row>
-                <!-- 2.2.2 home页面主题内容 -->
-                <div class="resources">
-                  <el-row :gutter="0" style="width: 100%;">
-                    <!-- 2.2.2.1 home页面主题内容 - 教学推荐和趣味课堂内容 -->
-                    <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
-                      <div class="resources-item">
-                        <div class="title1">
-                          <a href="/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
-                        </div>
-                        <div class="item1">
-                          <el-row :gutter="20">
-                            <ul>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li @click="player(1)">
-                                  <img src="@/assets/math_course1.jpg" alt="blank">
-                                  <a href="/math/video/1/1">课题:分数除法</a>
-                                  <a href="/math/video/1/1">授课人: 广东二师</a>
-                                </li>
-                              </el-col>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li @click="player(2)">
-                                  <img src="@/assets/math_course2.jpg" alt="blank">
-                                  <a href="/math/video/2/2">课题:负数的认识</a>
-                                  <a href="/math/video/2/2">授课人: 李如煜</a>
-                                </li>
-                              </el-col>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li @click="player(3)">
-                                  <img src="@/assets/math_course3.jpg" alt="blank">
-                                  <a href="">课题:平移与旋转</a>
-                                  <a href="">授课人: 卡通人物</a>
-                                </li>
-                              </el-col>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li @click="player(4)">
-                                  <img src="@/assets/math_course4.jpg" alt="blank">
-                                  <a href="/math/video/3/3">课题:分数的认识</a>
-                                  <a href="/math/video/3/3">授课人: 周宇轩</a>
-                                </li>
-                              </el-col>
-                            </ul>
-                          </el-row>
-                        </div>
-                        <div class="title1">
-                          <a href="/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
-                        </div>
-                        <div class="item1">
-                          <el-row :gutter="20">
-                            <ul>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li>
-                                  <img src="@/assets/math5.jpg" alt="blank">
-                                  <router-link to="/circular">Π的由来</router-link>
-                                </li>
-                              </el-col>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li>
-                                  <img src="@/assets/math6.jpg" alt="blank">
-                                  <a href="/math/home">数学界的"罪人"</a>
-                                </li>
-                              </el-col>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li>
-                                  <img src="@/assets/math7.png" alt="blank">
-                                  <a href="/math/home">先行者-祖冲之</a>
-                                </li>
-                              </el-col>
-                              <el-col :xs="12" :sm="6" :md="6" :lg="6">
-                                <li>
-                                  <img src="@/assets/math8.png" alt="blank">
-                                  <a href="/math/home">数学的对称美</a>
-                                </li>
-                              </el-col>
-                            </ul>
-                          </el-row>
-                        </div>
+          <el-col class="main" :xs="24" :sm="24" :md="19" :lg="19" style="height: 100%;">
+            <div>
+              <el-container style="height: 100%">
+                <el-main>
+                  <!-- 2.2.1 home首页轮播图内容-->
+                  <el-row :gutter="0">
+                    <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                      <div class="text" ref="text1">
+                        <p class="line animation">Welcome to xijiMath!</p>
                       </div>
-                    </el-col>
-
-                    <!-- 2.2.2.2 home页面主题内容 - 最受欢迎老师内容 -->
-                    <el-col :xs="0" :sm="1" :md="8" :lg="8" style="float:right; margin: 2.5rem 0.33rem 0 0;"
-                      v-show="screenWidth >= 992">
-                      <div class="resources-favor">
-                        <div class="title2">
-                          <a href="javascript:void(0)" alt="blank">最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i></a>
-                          <ul style="list-style: none;">
-                            <li v-for="(item, index) in popularList" :key="item.id">
-                              <el-badge :value="index + 1" class="item" type="primary"></el-badge>
-                              <span class="teacher-name" @click="dialogTableVisible = true">
-                                {{ item.tName }}
-                              </span>
-                              <el-rate v-model="values[index]" show-text style="float: right;">
-                              </el-rate>
-                            </li>
-                          </ul>
-                          <!-- 2.2.2.2.1 最受欢迎老师介绍模态框 -->
-                          <el-dialog title="教师介绍" :visible.sync="dialogTableVisible"
-                            style="border-radius: 15px !important;">
-                            <el-table :data="popularList">
-                              <el-table-column property="tName" label="教师名字" width="150"></el-table-column>
-                              <el-table-column property="age" label="年龄" width="200"></el-table-column>
-                              <el-table-column property="department" label="院系部门"></el-table-column>
-                            </el-table>
-                          </el-dialog>
-                          <!-- 2.2.2.2.2 最受欢迎老师分页按钮 -->
-                          <div
-                            style="width: 100%; display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
-                            <el-button plain @click="open1" size="small" center style="margin-bottom: 10px">
-                              点击提示
-                            </el-button>
-                            <el-button plain @click.once="open2" size="small" center
-                              style="margin-bottom: 10px; float: right">
-                              打分确定
-                            </el-button>
-                          </div>
-                        </div>
+                      <div class="text margin" ref="text2">
+                        <p class="line animation it">Let’s begin the math adventure!</p>
                       </div>
+
+                      <el-carousel :interval="4000" type="card" height="14.3333rem"
+                        style="line-height: 5.333rem; box-shadow: 0 0 0.233rem black ; border-radius: 0.5333rem;">
+                        <!-- v-for="item in 6" :key="item" -->
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="/math/video/1/1">
+                              <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="/math/video/4/4">
+                              <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="/math/video/2/2">
+                              <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="/math/video/3/3">
+                              <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="/math/video/6/6">
+                              <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="/math/video/5/5">
+                              <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="javascript:void(0);">
+                              <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="javascript:void(0)">
+                              <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                        <el-carousel-item>
+                          <h3 class="medium" style="width: 100%; height: 100%">
+                            <a href="javascript:void(0)">
+                              <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
+                            </a>
+                          </h3>
+                        </el-carousel-item>
+                      </el-carousel>
                     </el-col>
                   </el-row>
-                </div>
-              </el-main>
-            </el-container>
+                  <!-- 2.2.2 home页面主题内容 -->
+                  <div class="resources">
+                    <el-row :gutter="0" style="width: 100%;">
+                      <!-- 2.2.2.1 home页面主题内容 - 教学推荐和趣味课堂内容 -->
+                      <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
+                        <div class="resources-item">
+                          <div class="title1">
+                            <a href="/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
+                          </div>
+                          <div class="item1">
+                            <el-row :gutter="20">
+                              <ul>
+                                <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in resource1" :key="item.id">
+                                  <li @click="player(item.id)">
+                                    <img :src="item.src" alt="blank">
+                                    <a href="/math/video/1/1">课题:{{ item.course }}</a>
+                                    <a href="/math/video/1/1">授课人: {{ item.teacher }}</a>
+                                  </li>
+                                </el-col>
+                              </ul>
+                            </el-row>
+                          </div>
+                          <div class="title1">
+                            <a href="/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
+                          </div>
+                          <div class="item1">
+                            <el-row :gutter="20">
+                              <ul>
+                                <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in c" :key="item.id">
+                                  <li>
+                                    <img ref="img" :src="item.src" :data-src="item.Rsrc" alt="blank">
+                                    <router-link to="/circular">{{ item.title }}</router-link>
+                                  </li>
+                                </el-col>
+                              </ul>
+                            </el-row>
+                          </div>
+                        </div>
+                      </el-col>
+
+                      <!-- 2.2.2.2 home页面主题内容 - 最受欢迎老师内容 -->
+                      <el-col :xs="0" :sm="1" :md="8" :lg="8" style="float:right; margin: 2.5rem 0.33rem 0 0;"
+                        v-show="screenWidth >= 992">
+                        <div class="resources-favor">
+                          <div class="title2">
+                            <a href="javascript:void(0)" alt="blank">最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i></a>
+                            <ul style="list-style: none;">
+                              <li v-for="(item, index) in popularList" :key="item.id">
+                                <el-badge :value="index + 1" class="item" type="primary"></el-badge>
+                                <span class="teacher-name" @click="dialogTableVisible = true">
+                                  {{ item.tName }}
+                                </span>
+                                <el-rate v-model="values[index]" show-text style="float: right;">
+                                </el-rate>
+                              </li>
+                            </ul>
+                            <!-- 2.2.2.2.1 最受欢迎老师介绍模态框 -->
+                            <el-dialog title="教师介绍" :visible.sync="dialogTableVisible"
+                              style="border-radius: 15px !important;">
+                              <el-table :data="popularList">
+                                <el-table-column property="tName" label="教师名字" width="150"></el-table-column>
+                                <el-table-column property="age" label="年龄" width="200"></el-table-column>
+                                <el-table-column property="department" label="院系部门"></el-table-column>
+                              </el-table>
+                            </el-dialog>
+                            <!-- 2.2.2.2.2 最受欢迎老师分页按钮 -->
+                            <div
+                              style="width: 100%; display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
+                              <el-button plain @click="open1" size="small" center style="margin-bottom: 10px">
+                                点击提示
+                              </el-button>
+                              <el-button plain @click.once="open2" size="small" center
+                                style="margin-bottom: 10px; float: right">
+                                打分确定
+                              </el-button>
+                            </div>
+                          </div>
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </el-main>
+              </el-container>
+            </div>
           </el-col>
         </el-container>
       </el-row>
@@ -326,7 +302,7 @@
       <!-- (三) 页脚内容 -->
       <el-row :gutter="0">
         <el-col :xs="0" :sm="24" :md="24" :lg="24">
-          <el-footer height="4.6666rem">
+          <el-footer height="4.6666rem" ref="footer">
             <div class="schools">
               <h5>&copy; 希冀数学 特别鸣谢</h5>
               <ul>
@@ -347,20 +323,6 @@
 import { mythrollte } from '@/utils/index.js'
 import { mydebounce } from '@/utils/index.js'
 export default {
-  mounted() {
-    const _this = this
-    setTimeout(function () {
-      _this.$refs.text1.style.display = 'none'
-      _this.$refs.text2.style.display = 'none'
-    }, 8000)
-
-    window.onresize = () => {
-      return (() => {
-        window.screenWidth = document.body.clientWidth
-        _this.screenWidth = window.screenWidth
-      })()
-    }
-  },
   created() {
     // 执行获取教师答疑排班数据一方法
     this.getTeacherList();
@@ -370,14 +332,95 @@ export default {
     this.getActivityList();
     // 执行获取最受欢迎老师数据方法
     this.getPopularList();
+
+
   },
+
+  mounted() {
+    // 设置一个setTimeout定时器，用作延迟获取首页的main内容的高度
+    setTimeout(() => {
+      // 获取高度
+      const height = document.querySelector('.main').offsetHeight
+      // 将main内容的高度进行赋值
+      document.querySelector('.aside').style.height = height + 'px'
+    }, 200)
+
+    const _this = this
+    setTimeout(function () {
+      _this.$refs.text1.style.display = 'none'
+      _this.$refs.text2.style.display = 'none'
+    }, 6000)
+
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        _this.screenWidth = window.screenWidth
+      })()
+    }
+
+    this.getScroll()
+    window.addEventListener('scroll', this.getScroll) //实时监听滚动条的变化
+  },
+
+  destroyed() { //注意：监听的函数要在关闭页面时销毁掉,不然会影响到其它页面
+    window.removeEventListener('scroll', this.getScroll)
+  },
+
   data() {
     return {
       values: [5, 4, 3, 4, 1, 2, 3, 5],
       count: 1,
       // 用户搜索内容变量
       input: '',
+      // 用户未登录时的头像
       circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+      // 资源推荐信息
+      resource1: [{
+        id: 1,
+        src: require('@/assets/math_course1.jpg'),
+        course: '分数除法',
+        teacher: '广东二师'
+      }, {
+        id: 2,
+        src: require('@/assets/math_course2.jpg'),
+        course: '负数的认识',
+        teacher: '李如煜'
+      }, {
+        id: 3,
+        src: require('@/assets/math_course3.jpg'),
+        course: '平移与旋转',
+        teacher: '卡通人物'
+      }, {
+        id: 4,
+        src: require('@/assets/math_course4.jpg'),
+        course: '分数的认识',
+        teacher: '周宇轩'
+      }],
+      // 趣味课堂信息
+      c: [{
+        id: 1,
+        src: require('@/assets/avatar.png'),
+        Rsrc: require('@/assets/math5.jpg'),
+        title: 'Π的由来'
+      },
+      {
+        id: 2,
+        src: require('@/assets/avatar.png'),
+        Rsrc: require('@/assets/math6.jpg'),
+        title: '数学界的"罪人'
+      },
+      {
+        id: 3,
+        src: require('@/assets/avatar.png'),
+        Rsrc: require('@/assets/math7.png'),
+        title: '先行者-祖冲之'
+      },
+      {
+        id: 4,
+        src: require('@/assets/avatar.png'),
+        Rsrc: require('@/assets/math8.png'),
+        title: '数学的对称美'
+      }],
       sizeList: ["medium"],
       // 线上答疑教师排班变量1
       teacherList: [],
@@ -389,6 +432,7 @@ export default {
       popularList: [],
       // 控制表格模态框显示变量
       dialogTableVisible: false,
+      dialogCommentVisible: false,
       // 控制反馈表单模态框显示变量
       dialogFormVisible: false,
       // 控制反馈模态框宽度变量
@@ -402,10 +446,16 @@ export default {
       problem: '试卷真题问题',
       // 接收课程信息对象
       course: {},
-      screenWidth: 992
+      // 对应的屏幕判断
+      screenWidth: 992,
+      // 
+      form: {
+        textarea: '',
+      }
     }
   },
   computed: {
+
     // 根据系统的当前时间动态生成今天的日期
     currentDay: function () {
       const now = new Date()
@@ -473,9 +523,26 @@ export default {
     // 时刻监控提问模态框下的确认按钮是否为禁用变量
     flag() {
       return this.textarea === '';
-    }
+    },
   },
   methods: {
+    getScroll() {
+      // 获取对应的img标签
+      const imgs = this.$refs.img
+
+      // 获取可视范围的高度
+      const vh = document.documentElement.clientHeight
+
+      // 获取滚动条的高度
+      var top = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset
+      for (const i in imgs) {
+
+        // 如果图片进入可视范围就替换加载过来的图片
+        if ((imgs[i].offsetTop + vh) < (vh + top)) {
+          if (imgs[i].src !== imgs[i].dataset.src) imgs[i].src = imgs[i].dataset.src
+        }
+      }
+    },
     // 最受欢迎老师可打分题型(使用到了节流操作)
     open1: mythrollte(function () {
       const h = this.$createElement;
@@ -529,6 +596,26 @@ export default {
       // 使用编程式路由将页面改为线上答疑页面
       this.$router.push('/math/chat')
     },
+
+    async comment() {
+      if (this.form.textarea) {
+        const { data: res } = await this.$http.get('/insetFeedback', {
+          params: {
+            'feedback': this.form.textarea
+          }
+        })
+
+        if (res === 1) {
+          this.$message.success('留言成功!')
+        } else {
+          this.$message.error('留言失败!')
+        }
+        this.dialogCommentVisible = false
+      } else {
+        this.$message.error('留言内容不能为空!')
+      }
+    },
+
     // 控制提问模态框的展示函数
     ask() {
       if (window.localStorage.getItem('token')) {
@@ -967,15 +1054,17 @@ export default {
   // 侧边内容二：线上活动展示样式
   .activities {
     position: relative;
+    display: flex;
     top: 37%;
     left: 50%;
     width: 87%;
-    min-height: 47%;
+    // min-height: 47%;
+    flex-wrap: wrap;
     border-radius: 0.53333rem;
-    box-shadow: 0 0 1.3333rem white;
+    justify-content: space-around;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 1.3333rem white;
     background: rgba(250, 250, 250, 1);
-    // border: 0.13333rem solid rgb(255, 235, 59);
     box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
 
 
@@ -1027,9 +1116,11 @@ export default {
     // 分页按钮样式
     .pagination {
       display: flex;
+      width: 80%;
       flex-direction: row;
       justify-content: space-around;
       color: rgb(0, 66, 149);
+      margin: 1rem 0;
     }
   }
 }
@@ -1159,13 +1250,10 @@ export default {
           list-style: none;
           display: flex;
           flex-wrap: wrap;
-          // justify-items: center;
-          // justify-content: space-around;
           margin-bottom: 0.333rem;
 
           // 资源推荐个课程包括框样式
           li {
-            position: relative;
             width: 98%;
             font-size: 0.65rem;
             text-align: left;
@@ -1173,7 +1261,6 @@ export default {
             border-radius: 0.33333rem;
             border: 0.0666rem solid #c9c9c9;
             box-shadow: 5px 5px 8px #888888;
-
             z-index: 999;
 
             // 不同内容的文字介绍样式
@@ -1194,8 +1281,8 @@ export default {
           li::before {
             display: none;
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 21.5%;
+            height: 94%;
             content: '';
             background: rgba(0, 0, 0, .4) url(@/assets/arr.png) no-repeat center;
             background-size: 2rem;

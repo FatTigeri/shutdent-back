@@ -219,8 +219,10 @@ export default {
                 }
                 // 置空处理
                 this.input = ''
-                // 页面自刷新
-                this.$router.go(0)
+                // 使用$nextTick实现
+                this.$nextTick(() => {
+                    this.getComments()
+                })  
             }
         },
         async initCourse() {
