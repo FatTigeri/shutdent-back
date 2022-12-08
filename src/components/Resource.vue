@@ -288,15 +288,17 @@ export default {
 
             // 侧边栏li标签样式
             li {
+                display: table;
                 width: 90%;
-                height: 33.3%;
+                height: 10.3%;
                 font-weight: 600;
                 margin: auto;
 
                 // 侧边狼a链接标签样式
                 a {
                     position: relative;
-                    display: block;
+                    display: table-cell;
+                    vertical-align: middle;
                     width: 90%;
                     height: 30%;
                     top: 50%;

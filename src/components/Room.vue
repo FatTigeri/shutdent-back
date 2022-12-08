@@ -37,10 +37,10 @@
                         <div class="contents2">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li><a href="javascript:void(0)"><i class="el-icon-tickets"></i>奥数竞赛抢答题</a></li>
-                                    <li><a href="javascript:void(0)"><i class="el-icon-document-remove"></i>趣味数学抢答题</a>
+                                    <li><a href="/math/contest"><i class="el-icon-tickets"></i>奥数竞赛抢答题</a></li>
+                                    <li><a href="/math/contest"><i class="el-icon-document-remove"></i>趣味数学抢答题</a>
                                     </li>
-                                    <li><a href="javascript:void(0)"><i class="el-icon-document"></i>知识巩固通关题</a></li>
+                                    <li><a href="/math/contest"><i class="el-icon-document"></i>知识巩固通关题</a></li>
                                 </ul>
                             </el-row>
                         </div>

@@ -304,7 +304,7 @@
         <el-col :xs="0" :sm="24" :md="24" :lg="24">
           <el-footer height="4.6666rem" ref="footer">
             <div class="schools">
-              <h5>&copy; 希冀数学 特别鸣谢</h5>
+              <h6>Copyright &copy; 2022-2023 希冀数学 特别鸣谢</h6>
               <ul>
                 <li><i class="el-icon-school"></i> <a href="/math/home">广东第二师范学院</a></li>
                 <li><i class="el-icon-office-building"></i> <a href="/math/home">希望小学</a></li>
@@ -343,13 +343,13 @@ export default {
       const height = document.querySelector('.main').offsetHeight
       // 将main内容的高度进行赋值
       document.querySelector('.aside').style.height = height + 'px'
-    }, 200)
+    }, 500)
 
     const _this = this
     setTimeout(function () {
       _this.$refs.text1.style.display = 'none'
       _this.$refs.text2.style.display = 'none'
-    }, 6000)
+    }, 6500)
 
     window.onresize = () => {
       return (() => {
@@ -734,6 +734,7 @@ export default {
   html,
   #home-container {
     font-size: 12px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -757,6 +758,7 @@ export default {
   html,
   #home-container {
     font-size: 12px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -784,6 +786,7 @@ export default {
   html,
   #home-container {
     font-size: 13px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -803,6 +806,7 @@ export default {
   #home-container,
   html {
     font-size: 14px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -821,6 +825,7 @@ export default {
   #home-container,
   html {
     font-size: 15px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -839,6 +844,7 @@ export default {
   #home-container,
   html {
     font-size: 16px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -857,6 +863,7 @@ export default {
   #home-container,
   html {
     font-size: 23.5px;
+    scroll-behavior: smooth;
   }
 
   .resources-item {
@@ -945,9 +952,6 @@ export default {
     width: 100%;
     height: 100%;
     text-align: center;
-    font-weight: 600;
-
-
 
     ul {
       display: flex;
@@ -962,6 +966,7 @@ export default {
         width: 16%;
         height: 70%;
         margin: 0.2333rem;
+        font-weight: 600;
         line-height: 180%;
         border-radius: 0.666rem;
         border: 0.13333rem solid black;
@@ -1055,7 +1060,7 @@ export default {
   .activities {
     position: relative;
     display: flex;
-    top: 37%;
+    top: 39%;
     left: 50%;
     width: 87%;
     // min-height: 47%;
@@ -1130,7 +1135,7 @@ export default {
   height: 100%;
   color: #333;
   text-align: center;
-  margin: 2rem 0 0 0;
+  margin: 2rem 0 1.2rem 0;
 
   .text {
     position: absolute;
@@ -1250,7 +1255,7 @@ export default {
           list-style: none;
           display: flex;
           flex-wrap: wrap;
-          margin-bottom: 0.333rem;
+          margin-bottom: 1rem;
 
           // 资源推荐个课程包括框样式
           li {
@@ -1310,7 +1315,7 @@ export default {
 
         // 资源推荐各老师包括框样式
         li {
-          height: 2rem;
+          height: 2.25rem;
           margin: 0.6666rem 0.3333rem;
 
         }

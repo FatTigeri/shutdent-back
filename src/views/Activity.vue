@@ -1,5 +1,11 @@
 <template>
     <div id="activity-container">
+        <div class="functions-fix">
+            <ul>
+                <!-- 返顶 -->
+                <li @click="to"><i class="el-icon-caret-top"></i> 返顶</li>
+            </ul>
+        </div>
         <!--大图推荐活动-->
         <div class="recommend">
             <!--照片-->
@@ -94,10 +100,17 @@
 </template>
 
 <script>
+import { toTop } from '@/utils/scrollTop';
+import { scrollTop } from '@/utils/scrollTop';
 export default {
     name: 'activity',
     created() {
         this.initActivityList()
+    },
+    mounted() {
+        window.addEventListener('scroll', function () {
+            scrollTop('.functions-fix')
+        })
     },
     data: function () {
         return {
@@ -123,6 +136,9 @@ export default {
         // 获取图片
         getSrc(src) {
             return 'http://1.12.235.213/img/' + src
+        },
+        to() {
+            toTop()
         }
     }
 
@@ -130,7 +146,53 @@ export default {
 </script>
 
 
-<style scoped>
+<style lang="less" scoped>
+.functions-fix {
+    display: none;
+    position: fixed;
+    width: 7rem;
+    top: 88%;
+    right: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 1000;
+
+    ul {
+        list-style: none;
+        text-align: center;
+
+        li {
+            width: 100%;
+            height: 2.3333rem;
+            line-height: 2.3333rem;
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+            color: rgb(58, 139, 255, 1);
+            background: rgba(250, 250, 249, 0.95);
+            box-shadow: 0px 2px 10px 0px rgba(31, 35, 41, .38);
+            cursor: pointer;
+
+            &:hover {
+                color: rgba(58, 139, 255, .65);
+            }
+
+
+            a {
+                display: block;
+                color: rgb(58, 139, 255, 1);
+                width: 100%;
+                font-weight: 600;
+                text-decoration: none;
+                border-radius: 1rem;
+
+                &:hover {
+                    color: rgba(58, 139, 255, .65);
+                }
+            }
+        }
+    }
+}
+
 .recommend {
     width: 80%;
     height: 450px;

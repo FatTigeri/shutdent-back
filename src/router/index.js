@@ -29,11 +29,11 @@ import Course from '@/components/Course.vue'
 import TResource from '@/views/TResource.vue'
 import UpActivity from '@/views/UpActivity.vue'
 import FeedBack from '@/views/FeedBack.vue'
+import Contest from '@/components/Contest.vue'
 
 const router = new VueRouter({
   mode: 'history',
   base: '/',
-  // mode: 'hash',
   routes: [
     {
       path: '/math', component: Layout, children: [
@@ -51,7 +51,8 @@ const router = new VueRouter({
         { path: 'video/:url/:id', component: Video },
         { path: 'activity', component: Activity },
         { path: 'courses', component: Course },
-        { path: 'TResource', component: TResource }
+        { path: 'TResource', component: TResource },
+        { path: 'contest', component: Contest }
       ]
     },
     { path: '', redirect: '/math/home' },

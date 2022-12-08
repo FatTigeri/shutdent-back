@@ -1,3 +1,4 @@
+// 导出防抖方法
 export function mythrollte(fn, interval) {
     var last;
     var timer;
@@ -20,6 +21,7 @@ export function mythrollte(fn, interval) {
 
 }
 
+// 导出节流方法
 export function mydebounce(fn, delay) {
     var delay = delay || 200;
     var timer;

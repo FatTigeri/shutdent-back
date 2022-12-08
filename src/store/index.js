@@ -25,7 +25,7 @@ export default new Vuex.Store({
     // 试卷类型变量
     type: '',
     // 试卷其他内容变量
-    other: ''
+    other: '',
   },
 
   // 

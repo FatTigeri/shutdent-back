@@ -2,6 +2,13 @@
     <el-row :gutter="0">
         <div id="video-container">
             <el-col :xs="24" :sm="17" :md="17" :lg="17">
+                <div class="functions-fix">
+                    <ul>
+                        <!-- 返顶 -->
+                        <li @click="to"><i class="el-icon-caret-top"></i> 返顶</li>
+                    </ul>
+                </div>
+
                 <div class="video-box" @click="update">
                     <video-player
                         style="width: 85%;height: 100%;margin:1rem auto;box-shadow:0.3125rem 0.3125rem 0.5rem #888888"
@@ -114,12 +121,19 @@
 </template>
 
 <script>
+import { toTop } from '@/utils/scrollTop.js'
+import { scrollTop } from '@/utils/scrollTop.js'
 export default {
     name: 'videos',
     created() {
         this.initCourse()
         this.initCourseList()
         this.getComments()
+    },
+    mounted() {
+        window.addEventListener('scroll', function () {
+            scrollTop('.functions-fix')
+        })
     },
     data() {
         return {
@@ -222,7 +236,7 @@ export default {
                 // 使用$nextTick实现
                 this.$nextTick(() => {
                     this.getComments()
-                })  
+                })
             }
         },
         async initCourse() {
@@ -236,10 +250,9 @@ export default {
         getCover(src) {
             return require('@/assets/' + src)
         },
-        // 视频链接跳转
-        // player(id, url) {
-        //     this.$router.push("/math/video/" + url + "/" + id)
-        // }
+        to() {
+            toTop()
+        }
     }
 
 }
@@ -296,6 +309,52 @@ html {
     width: 100%;
     min-height: 600px;
     box-sizing: border-box;
+
+    .functions-fix {
+        display: none;
+        position: fixed;
+        width: 7rem;
+        top: 88%;
+        right: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        z-index: 1000;
+
+        ul {
+            list-style: none;
+            text-align: center;
+
+            li {
+                width: 100%;
+                height: 2.3333rem;
+                line-height: 2.3333rem;
+                margin-bottom: 1rem;
+                border-radius: 1rem;
+                color: rgb(58, 139, 255, 1);
+                background: rgba(250, 250, 249, 0.95);
+                box-shadow: 0px 2px 10px 0px rgba(31, 35, 41, .38);
+                cursor: pointer;
+
+                &:hover {
+                    color: rgba(58, 139, 255, .65);
+                }
+
+
+                a {
+                    display: block;
+                    color: rgb(58, 139, 255, 1);
+                    width: 100%;
+                    font-weight: 600;
+                    text-decoration: none;
+                    border-radius: 1rem;
+
+                    &:hover {
+                        color: rgba(58, 139, 255, .65);
+                    }
+                }
+            }
+        }
+    }
 
     .video-box {
         margin: 1rem;
