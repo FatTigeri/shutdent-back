@@ -12,7 +12,11 @@
                             <!-- 1.1.1.1 logo图片 -->
                             <img src="@/assets/log.png" alt="blank" style="border-radius: 50%;">
                             <!-- 1.1.1.2 网站的名称介绍 -->
-                            <div>
+                            <div class="light">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
                                 <a href="/static/photo.html">希冀数学</a>
                             </div>
                         </div>
@@ -50,7 +54,7 @@
                         <div class="user">
                             <!-- 1.1.4.1 用户登录跳转按钮 -->
                             <el-button size="mini" plain style="border: 1px solid black" @click="login"
-                                v-show="this.$store.state.flag === true">登录
+                                v-show="this.$store.state.flag === true"> <i class="el-icon-user"></i> 登录
                             </el-button>
                             <!-- 1.1.4.2 用户登录图片 -->
                             <el-row class="demo-avatar demo-basic">
@@ -426,12 +430,14 @@ body {
 .el-header {
     position: fixed;
     width: 100%;
-    // background-color: rgb(184, 187, 250);
-    background-color: rgba(199, 201, 201, 0.3);
     color: #333;
     font-weight: 600;
     text-align: center;
     height: 4rem !important;
+    font-family: 'Montserrat';
+    border-bottom: .0625rem solid #c9c9c9;
+    background-color: rgba(199, 201, 201, 0.3);
+
     z-index: 999;
 
     .header-container {
@@ -454,8 +460,95 @@ body {
             }
 
             // home页面网站名称样式
-            div {
-                // line-height: 4rem;
+            .light {
+                width: 80px;
+                height: 40px;
+                line-height: 40px;
+                position: relative;
+                overflow: hidden;
+
+                @keyframes light1 {
+                    0% {
+                        transform: translateX(-160px);
+                    }
+
+                    100% {
+                        transform: translateX(160px);
+                    }
+                }
+
+                @keyframes light2 {
+                    0% {
+                        transform: translateY(-40px);
+                    }
+
+                    100% {
+                        transform: translateY(40px);
+                    }
+                }
+
+                @keyframes light3 {
+                    0% {
+                        transform: translateX(160px);
+                    }
+
+                    100% {
+                        transform: translateX(-160px);
+                    }
+                }
+
+                @keyframes light4 {
+                    0% {
+                        transform: translateY(40px);
+                    }
+
+                    100% {
+                        transform: translateY(-40px);
+                    }
+                }
+
+                div:nth-child(1) {
+                    background: linear-gradient(to right, transparent, purple);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    animation: light1 1s linear infinite;
+                }
+
+                div:nth-child(2) {
+                    position: absolute;
+                    background: linear-gradient(to bottom, transparent, purple);
+                    top: 0;
+                    right: 0;
+                    width: 1px;
+                    height: 100%;
+                    animation: light2 1s linear infinite;
+                    animation-delay: .5s;
+                }
+
+                div:nth-child(3) {
+                    background: linear-gradient(to left, transparent, purple);
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    animation: light3 1s linear infinite;
+                    animation-delay: 1;
+                }
+
+                div:nth-child(4) {
+                    background: linear-gradient(to top, transparent, purple);
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 1px;
+                    height: 100%;
+                    animation: light4 1s linear infinite;
+                    animation-delay: 1.5s;
+                }
 
                 a {
                     color: purple;
@@ -465,6 +558,7 @@ body {
 
 
             }
+
         }
 
         // home页面功能链接样式设置
@@ -520,7 +614,7 @@ body {
                     &::after {
                         display: block;
                         position: absolute;
-                        top: 2.2rem;
+                        top: 2.15rem;
                         left: 2.666rem;
                         content: '';
                         width: 0;

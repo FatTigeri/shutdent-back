@@ -13,6 +13,7 @@
                         </ul>
                     </el-aside>
                 </el-col>
+                <!-- 右侧内容搜索行 -->
                 <el-col :xs="24" :sm="21" style="height: 100% !important;">
                     <el-main>
                         <div class="choice">
@@ -85,6 +86,7 @@
 export default {
     name: 'resource',
     mounted() {
+        // 动态设置不同设备不同高度
         const vh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
         const header = document.querySelector('.el-header').offsetHeight
         document.querySelector('#resource-container').style.height = (vh - header - 3) + 'px'
@@ -124,6 +126,7 @@ export default {
                 }
             })
 
+            // 将当前页数更新为1
             this.cur = 1
 
             this.$store.commit('setPageList', res)

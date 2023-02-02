@@ -71,7 +71,9 @@
             <div class="aside">
               <!-- 2.1.1 侧边栏内容一：教师排答疑排班表 -->
               <div class="courses">
-                <h4>线上答疑排班表</h4>
+                <div class="course-title">
+                  <h4>线上答疑排班表</h4>
+                </div>
                 <!-- 2.1.1.1 教师排班内容 -->
                 <div>
                   <!-- 2.1.1.1.1 教师排班当天日期 -->
@@ -99,11 +101,21 @@
                     <li class="special" v-if="teacherList1.length === 0">当天暂无教师值班</li>
                   </ul>
                 </div>
-                <!-- 2.1.1.2 分页查询按钮 -->
-                <div class="pagination">
-                  <el-button type="primary" icon="el-icon-arrow-left" size="mini" @click="pre"></el-button>
-                  <el-button type="primary" size="mini" @click="next"><i class="el-icon-arrow-right el-icon--right"></i>
-                  </el-button>
+              </div>
+              <!-- 2.1.3 侧边栏内容三：用户调查 -->
+              <div class="asideNewNps">
+                <h3 class="aside-title">您愿意向朋友推荐“希冀数学”吗？</h3>
+                <div class="aside-content">
+                  <ul class="newnps-list">
+                    <li class="newnps-item" v-for="item in imgList" :key="item.id" :data-type="item.type"
+                      @click="clickChange(item.id)">
+                      <div class="newnps-img-box">
+                        <img class="img1" :src="item.src1" alt="blank" v-show="item.state1">
+                        <img class="img2" :src="item.src2" alt="blank" v-show="item.state2">
+                      </div>
+                      <div class="newnps-text">{{ item.type }}</div>
+                    </li>
+                  </ul>
                 </div>
               </div>
               <!-- 2.1.2 侧边栏内容二：线下活动内容展示 -->
@@ -125,6 +137,7 @@
                   </el-button>
                 </div>
               </div>
+
             </div>
           </el-col>
           <!-- 2.2 home首页主内容区域 -->
@@ -132,188 +145,200 @@
             <div>
               <el-container style="height: 100%">
                 <el-main>
-                  <!-- 2.2.1 home首页轮播图内容-->
-                  <el-row :gutter="0">
-                    <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                      <div class="text" ref="text1">
-                        <p class="line animation">Welcome to xijiMath!</p>
-                      </div>
-                      <div class="text margin" ref="text2">
-                        <p class="line animation it">Let’s begin the math adventure!</p>
-                      </div>
-
-                      <el-carousel :interval="4000" type="card" height="14.3333rem"
-                        style="line-height: 5.333rem; box-shadow: 0 0 0.233rem black ; border-radius: 0.5333rem;">
-                        <!-- v-for="item in 6" :key="item" -->
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="/math/video/1/1">
-                              <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="/math/video/4/4">
-                              <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="/math/video/2/2">
-                              <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="/math/video/3/3">
-                              <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="/math/video/6/6">
-                              <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="/math/video/5/5">
-                              <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="javascript:void(0);">
-                              <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="javascript:void(0)">
-                              <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                        <el-carousel-item>
-                          <h3 class="medium" style="width: 100%; height: 100%">
-                            <a href="javascript:void(0)">
-                              <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
-                            </a>
-                          </h3>
-                        </el-carousel-item>
-                      </el-carousel>
-                    </el-col>
-                  </el-row>
-                  <!-- 2.2.2 home页面主题内容 -->
-                  <div class="resources">
-                    <el-row :gutter="0" style="width: 100%;">
-                      <!-- 2.2.2.1 home页面主题内容 - 教学推荐和趣味课堂内容 -->
-                      <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
-                        <div class="resources-item">
-                          <div class="title1">
-                            <a href="/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
-                          </div>
-                          <div class="item1">
-                            <el-row :gutter="20">
-                              <ul>
-                                <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in resource1" :key="item.id">
-                                  <li @click="player(item.id)">
-                                    <img :src="item.src" alt="blank">
-                                    <a href="/math/video/1/1">课题:{{ item.course }}</a>
-                                    <a href="/math/video/1/1">授课人: {{ item.teacher }}</a>
-                                  </li>
-                                </el-col>
-                              </ul>
-                            </el-row>
-                          </div>
-                          <div class="title1">
-                            <a href="/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
-                          </div>
-                          <div class="item1">
-                            <el-row :gutter="20">
-                              <ul>
-                                <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in c" :key="item.id">
-                                  <li>
-                                    <img ref="img" :src="item.src" :data-src="item.Rsrc" alt="blank">
-                                    <router-link to="/circular">{{ item.title }}</router-link>
-                                  </li>
-                                </el-col>
-                              </ul>
-                            </el-row>
-                          </div>
+                  <div>
+                    <!-- 2.2.1 home首页轮播图内容-->
+                    <el-row :gutter="0" style="padding: 1.25rem; margin: 2rem 0 0 0;">
+                      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                        <div class="text" ref="text1">
+                          <p class="line animation">Welcome to xijiMath!</p>
                         </div>
-                      </el-col>
-
-                      <!-- 2.2.2.2 home页面主题内容 - 最受欢迎老师内容 -->
-                      <el-col :xs="0" :sm="1" :md="8" :lg="8" style="float:right; margin: 2.5rem 0.33rem 0 0;"
-                        v-show="screenWidth >= 992">
-                        <div class="resources-favor">
-                          <div class="title2">
-                            <a href="javascript:void(0)" alt="blank">最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i></a>
-                            <ul style="list-style: none;">
-                              <li v-for="(item, index) in popularList" :key="item.id">
-                                <el-badge :value="index + 1" class="item" type="primary"></el-badge>
-                                <span class="teacher-name" @click="dialogTableVisible = true">
-                                  {{ item.tName }}
-                                </span>
-                                <el-rate v-model="values[index]" show-text style="float: right;">
-                                </el-rate>
-                              </li>
-                            </ul>
-                            <!-- 2.2.2.2.1 最受欢迎老师介绍模态框 -->
-                            <el-dialog title="教师介绍" :visible.sync="dialogTableVisible"
-                              style="border-radius: 15px !important;">
-                              <el-table :data="popularList">
-                                <el-table-column property="tName" label="教师名字" width="150"></el-table-column>
-                                <el-table-column property="age" label="年龄" width="200"></el-table-column>
-                                <el-table-column property="department" label="院系部门"></el-table-column>
-                              </el-table>
-                            </el-dialog>
-                            <!-- 2.2.2.2.2 最受欢迎老师分页按钮 -->
-                            <div
-                              style="width: 100%; display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
-                              <el-button plain @click="open1" size="small" center style="margin-bottom: 10px">
-                                点击提示
-                              </el-button>
-                              <el-button plain @click.once="open2" size="small" center
-                                style="margin-bottom: 10px; float: right">
-                                打分确定
-                              </el-button>
-                            </div>
-                          </div>
+                        <div class="text margin" ref="text2">
+                          <p class="line animation it">Let’s begin the math adventure!</p>
                         </div>
+
+                        <el-carousel :interval="4000" type="card" height="14.3333rem"
+                          style="line-height: 5.333rem; box-shadow: 0 0 0.2rem black;">
+                          <!-- v-for="item in 6" :key="item" -->
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="/math/video/1/1">
+                                <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="/math/video/4/4">
+                                <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="/math/video/2/2">
+                                <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="/math/video/3/3">
+                                <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="/math/video/6/6">
+                                <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="/math/video/5/5">
+                                <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="javascript:void(0);">
+                                <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="javascript:void(0)">
+                                <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                          <el-carousel-item>
+                            <h3 class="medium" style="width: 100%; height: 100%">
+                              <a href="javascript:void(0)">
+                                <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
+                              </a>
+                            </h3>
+                          </el-carousel-item>
+                        </el-carousel>
                       </el-col>
                     </el-row>
+                    <!-- 2.2.2 home页面主题内容 -->
+                    <div class="resources">
+                      <el-row :gutter="0" style="width: 100%;">
+                        <!-- 2.2.2.1 home页面主题内容 - 教学推荐和趣味课堂内容 -->
+                        <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
+                          <div class="resources-item">
+                            <div class="title1">
+                              <a href="/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
+                            </div>
+                            <div class="item1">
+                              <el-row :gutter="20">
+                                <ul>
+                                  <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in resource1" :key="item.id">
+                                    <li @click="player(item.id)">
+                                      <img :src="item.src" alt="blank">
+                                      <a href="/math/video/1/1">课题:{{ item.course }}</a>
+                                      <a href="/math/video/1/1">授课人: {{ item.teacher }}</a>
+                                    </li>
+                                  </el-col>
+                                </ul>
+                              </el-row>
+                            </div>
+                            <div class="title1">
+                              <a href="/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
+                            </div>
+                            <div class="item1">
+                              <el-row :gutter="20">
+                                <ul>
+                                  <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in c" :key="item.id">
+                                    <li>
+                                      <img ref="img" :src="item.src" :data-src="item.Rsrc" alt="blank">
+                                      <router-link to="/circular">{{ item.title }}</router-link>
+                                    </li>
+                                  </el-col>
+                                </ul>
+                              </el-row>
+                            </div>
+                          </div>
+                        </el-col>
+
+                        <!-- 2.2.2.2 home页面主题内容 - 最受欢迎老师内容 -->
+                        <el-col :xs="0" :sm="1" :md="8" :lg="8" style="float:right; margin: 2.5rem 0.33rem 0 0;"
+                          v-show="screenWidth >= 992">
+                          <div class="resources-favor">
+                            <div class="title2">
+                              <a href="javascript:void(0)" alt="blank">最受欢迎老师排行榜<i
+                                  class="el-icon-d-arrow-right"></i></a>
+                              <ul style="list-style: none;">
+                                <li v-for="(item, index) in popularList" :key="item.id">
+                                  <el-badge :value="index + 1" class="item" type="primary"></el-badge>
+                                  <span class="teacher-name" @click="dialogTableVisible = true">
+                                    {{ item.tName }}
+                                  </span>
+                                  <el-rate v-model="values[index]" show-text style="float: right;">
+                                  </el-rate>
+                                </li>
+                              </ul>
+                              <!-- 2.2.2.2.1 最受欢迎老师介绍模态框 -->
+                              <el-dialog title="教师介绍" :visible.sync="dialogTableVisible"
+                                style="border-radius: 15px !important;">
+                                <el-table :data="popularList">
+                                  <el-table-column property="tName" label="教师名字" width="150"></el-table-column>
+                                  <el-table-column property="age" label="年龄" width="200"></el-table-column>
+                                  <el-table-column property="department" label="院系部门"></el-table-column>
+                                </el-table>
+                              </el-dialog>
+                              <!-- 2.2.2.2.2 最受欢迎老师分页按钮 -->
+                              <div
+                                style="width: 100%; display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
+                                <el-button plain @click="open1" size="small" center style="margin-bottom: 10px">
+                                  点击提示
+                                </el-button>
+                                <el-button plain @click.once="open2" size="small" center
+                                  style="margin-bottom: 10px; float: right">
+                                  打分确定
+                                </el-button>
+                              </div>
+                            </div>
+                          </div>
+                        </el-col>
+                      </el-row>
+
+                    </div>
                   </div>
                 </el-main>
+                <!-- (三) 页脚内容 -->
+                <el-row :gutter="0">
+                  <el-col :xs="0" :sm="24" :md="24" :lg="24">
+                    <el-footer ref="footer" height="none">
+                      <div class="schools">
+                        <h4>支持院校</h4>
+                        <ul>
+                          <li>
+                            <i class="el-icon-school"></i>
+                            <h6>广东第二师范学院</h6>
+                          </li>
+                          <li><i class="el-icon-office-building"></i>
+                            <h6>希望小学</h6>
+                          </li>
+                          <li><i class="el-icon-school"></i>
+                            <h6>广东第二师范学院</h6>
+                          </li>
+                          <li><i class="el-icon-office-building"></i>
+                            <h6>希望小学</h6>
+                          </li>
+                        </ul>
+                      </div>
+                    </el-footer>
+                  </el-col>
+                </el-row>
               </el-container>
             </div>
           </el-col>
         </el-container>
-      </el-row>
-
-      <!-- (三) 页脚内容 -->
-      <el-row :gutter="0">
-        <el-col :xs="0" :sm="24" :md="24" :lg="24">
-          <el-footer height="4.6666rem" ref="footer">
-            <div class="schools">
-              <h6>Copyright &copy; 2022-2023 希冀数学 特别鸣谢</h6>
-              <ul>
-                <li><i class="el-icon-school"></i> <a href="/math/home">广东第二师范学院</a></li>
-                <li><i class="el-icon-office-building"></i> <a href="/math/home">希望小学</a></li>
-                <li><i class="el-icon-school"></i> <a href="/math/home">广东第二师范学院</a></li>
-                <li><i class="el-icon-office-building"></i> <a href="/math/home">希望小学</a></li>
-              </ul>
-            </div>
-          </el-footer>
-        </el-col>
       </el-row>
     </el-container>
   </div>
@@ -421,6 +446,49 @@ export default {
         Rsrc: require('@/assets/math8.png'),
         title: '数学的对称美'
       }],
+      // 表情图片
+      imgList: [
+        {
+          id: 1,
+          type: '强烈不推荐',
+          src1: require('@/assets/npsFeel1.png'),
+          src2: require('@/assets/npsFeelGrey1.png'),
+          state1: true,
+          state2: false
+        },
+        {
+          id: 2,
+          type: '不推荐',
+          src1: require('@/assets/npsFeel2.png'),
+          src2: require('@/assets/npsFeelGrey2.png'),
+          state1: true,
+          state2: false
+        },
+        {
+          id: 3,
+          type: '一般般',
+          src1: require('@/assets/npsFeel3.png'),
+          src2: require('@/assets/npsFeelGrey3.png'),
+          state1: true,
+          state2: false
+        },
+        {
+          id: 4,
+          type: '推荐',
+          src1: require('@/assets/npsFeel4.png'),
+          src2: require('@/assets/npsFeelGrey4.png'),
+          state1: true,
+          state2: false
+        },
+        {
+          id: 5,
+          type: '强烈推荐',
+          src1: require('@/assets/npsFeel5.png'),
+          src2: require('@/assets/npsFeelGrey5.png'),
+          state1: true,
+          state2: false
+        }
+      ],
       sizeList: ["medium"],
       // 线上答疑教师排班变量1
       teacherList: [],
@@ -455,16 +523,15 @@ export default {
     }
   },
   computed: {
-
     // 根据系统的当前时间动态生成今天的日期
     currentDay: function () {
       const now = new Date()
-      return '2022-' + (now.getMonth() + 1) + '-' + now.getDate()
+      return '2023-' + (now.getMonth() + 1) + '-' + now.getDate()
     },
     // 根据系统的当前时间动态生成明天的日期
     nextDay: function () {
       const now = new Date()
-      return '2022-' + (now.getMonth() + 1) + '-' + (now.getDate() + 1)
+      return '2023-' + (now.getMonth() + 1) + '-' + (now.getDate() + 1)
     },
     // 根据系统的当前时间动态生成今天是周几
     currentWeek: function () {
@@ -524,6 +591,10 @@ export default {
     flag() {
       return this.textarea === '';
     },
+
+    getImgs() {
+      return this.imgList;
+    }
   },
   methods: {
     getScroll() {
@@ -651,6 +722,24 @@ export default {
       console.log("111");
 
       this.$message.info('功能后续开发中~!')
+    },
+
+    // 用户点击不同头像效果
+    clickChange(id) {
+      this.imgs = this.imgList.map(item => {
+        if (item.id !== id) {
+          item.state1 = false;
+          item.state2 = true;
+        } else {
+          item.state1 = true;
+          item.state2 = false;
+          const target = document.querySelectorAll('.img1')[id - 1];
+          target.style.transform = 'translate(0,  -0.25rem)';
+
+        }
+        return item;
+      })
+
     },
 
     // 用户点击提问调用的函数
@@ -877,9 +966,19 @@ export default {
   }
 }
 
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: "阿里妈妈数黑体 Bold";
+  font-weight: 700;
+  src: url("//at.alicdn.com/wf/webfont/bthrPwqDl4GP/sp4BJgkN5olwaSmNDvOeI.woff2") format("woff2"),
+    url("//at.alicdn.com/wf/webfont/bthrPwqDl4GP/s7bLHD2mQQJtIquhpEfUz.woff") format("woff");
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .el-radio {
@@ -945,39 +1044,51 @@ export default {
 // home页面页脚样式
 .el-footer {
   padding: 0.5rem 20px 0 20px !important;
+  border-top: 0.06666rem solid #c9c9c9;
   background-color: rgba(201, 201, 201, 0.2);
+
+  i {
+    font-size: 0.6rem;
+    font-weight: 600;
+  }
 
   // 致谢学校内容包括框样式
   .schools {
     width: 100%;
     height: 100%;
     text-align: center;
+    font-family: "阿里妈妈数黑体 Bold" !important;
 
     ul {
       display: flex;
-      height: 65%;
+      min-height: 3rem;
+      margin: .3125rem 0 0 0;
       flex-direction: row;
+      align-content: center;
       justify-content: space-around;
       list-style-type: none;
-      line-height: 3.13333rem;
 
       li {
-        // display: inline-block;
-        width: 16%;
-        height: 70%;
+        display: flex;
+        width: 15.5%;
         margin: 0.2333rem;
-        font-weight: 600;
-        line-height: 180%;
-        border-radius: 0.666rem;
-        border: 0.13333rem solid black;
-        box-shadow: 0 0 0.6666rem rgba(0, 0, 0, 0.8);
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        box-shadow: 0 5px 10px #7272720d;
+        border-radius: 10px;
 
+        i {
+          margin: 0 .6875rem;
+        }
 
         a {
           color: black;
           font-size: 0.75rem;
           text-decoration: none;
         }
+
       }
     }
   }
@@ -986,33 +1097,29 @@ export default {
 // home页面侧边栏样式
 .aside {
   height: 100%;
-  // background-color: rgb(184, 187, 222);
   color: #333;
   text-align: center;
-  background-color: rgba(201, 201, 201, 0.2);
-  border-right: 0.06666rem solid #c9c9c9;
-
+  background-color: hsla(0, 0%, 79%, .2);
 
   // 侧边栏内容一：线上答疑教师排班表样式
   .courses {
+    display: flex;
     position: relative;
-    width: 87%;
-    top: 24%;
+    width: 90%;
+    top: 20%;
     left: 50%;
-    min-height: 19.33333rem;
-    border-radius: 0.53333rem;
+    min-height: 20rem;
+    border-radius: 0.1rem;
+    border: 0.0666rem solid #c9c9c9;
+    box-shadow: 0 0 0.2rem #c9c9c9;
     transform: translate(-50%, -50%);
     background: rgba(250, 250, 250, 1);
-    box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Montserrat';
+    flex-direction: column;
+    justify-content: center;
 
-    // 分页按钮样式
-    .pagination {
-      display: flex;
-      flex-direction: row;
-      margin-top: 0.666rem;
-      color: rgb(0, 66, 149);
-      justify-content: space-around;
+    .course-title {
+      min-height: 2.5rem;
     }
 
     // 教师排班当天日期样式
@@ -1035,13 +1142,14 @@ export default {
       min-height: 4rem;
       list-style: none;
       text-align: left;
-      font-family: revert;
-      align-items: center;
-      align-content: center;
+      font-size: .75rem;
       flex-wrap: wrap;
       flex-direction: row;
-      font-size: 0.86666rem;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
       padding-left: 0.6666rem;
+      color: rgba(0, 0, 0, .8);
 
       li {
         padding: 0.2rem;
@@ -1049,9 +1157,10 @@ export default {
       }
 
       .special {
-        color: black;
+        color: rgba(0, 0, 0, .7);
         text-align: center;
         margin: 0 auto;
+        font-size: xx-small;
       }
     }
   }
@@ -1060,18 +1169,16 @@ export default {
   .activities {
     position: relative;
     display: flex;
-    top: 39%;
+    top: 33%;
     left: 50%;
-    width: 87%;
-    // min-height: 47%;
+    width: 90%;
     flex-wrap: wrap;
-    border-radius: 0.53333rem;
+    border-radius: 0.1rem;
     justify-content: space-around;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 1.3333rem white;
+    border: 0.0666rem solid #c9c9c9;
+    box-shadow: 0 0 0.2rem #c9c9c9;
     background: rgba(250, 250, 250, 1);
-    box-shadow: 0 0 0.6666rem rgba(64, 158, 255, 0.4);
-
 
     // 线上活动数据展示样式
     .activities-item {
@@ -1128,14 +1235,74 @@ export default {
       margin: 1rem 0;
     }
   }
+
+  // 侧边内容三：用户反馈调查
+  .asideNewNps {
+    position: relative;
+    top: 9%;
+    width: 92%;
+    height: 12%;
+    margin: 0 auto;
+    box-shadow: 0 0 0.2rem #c9c9c9;
+    border: 0.0666rem solid #c9c9c9;
+    background-color: #fff;
+
+    .aside-title {
+      background-size: 300px 38px;
+      color: #3d3d3d;
+      padding: 0 1rem;
+      height: 2.375rem;
+      font-size: .75rem;
+      line-height: 2.375rem;
+      border-bottom: .0625rem solid #ccc;
+      background: url(@/assets/bg-nav.png) no-repeat center;
+    }
+
+    .aside-content {
+      padding: .75rem .3125rem;
+      overflow: hidden;
+
+      ul {
+        display: flex;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        font-size: .75rem;
+        padding-top: 8px;
+        list-style: none;
+        justify-content: space-between;
+
+
+        li {
+          color: #777888;
+          cursor: pointer;
+
+          &:hover {
+            img {
+              transform: translate(0, -0.25rem); // 鼠标悬浮时box向上浮动的距离
+            }
+          }
+
+          img {
+            width: 1.375rem;
+            height: 1.375rem;
+            margin: 0 0 .3125rem 0;
+          }
+        }
+      }
+    }
+  }
 }
+
 
 // home页面主体内容样式
 .el-main {
   height: 100%;
   color: #333;
   text-align: center;
-  margin: 2rem 0 1.2rem 0;
+  padding: 0 !important;
+  font-family: 'Montserrat';
+  border-left: 0.06666rem solid #c9c9c9;
+
 
   .text {
     position: absolute;
@@ -1215,16 +1382,16 @@ export default {
 
   // 资源推荐样式
   .resources {
-    margin: 0 auto;
+    margin: 0 0 1.25rem 0;
     width: 100%;
     height: 59%;
+    padding: 1.25rem;
 
     // 资源推荐具体内容样式
     .resources-item {
       height: 100%;
-      border-radius: 0.3333rem;
       border: 0.0666rem solid #c9c9c9;
-      box-shadow: 0 0 0.6666rem #c9c9c9;
+      box-shadow: 0 0 0.2rem #c9c9c9;
 
       // 资源推荐-标题内容样式
       .title1 {
@@ -1246,7 +1413,6 @@ export default {
       // 资源内容-课程图片和文字介绍样式
       .item1 {
         width: 100%;
-        // border: 0.0666rem solid yellow;
 
         // 资源推荐总内容包括框样式
         ul {
@@ -1305,8 +1471,8 @@ export default {
       width: 100%;
       height: 100%;
       font-weight: 600;
-      border-radius: 0.3333rem;
-      box-shadow: 0 0 0.6666rem #c9c9c9;
+      border: 0.0666rem solid #c9c9c9;
+      box-shadow: 0 0 0.2rem #c9c9c9;
 
       // 最受欢迎老师-标题内容样式
       .title2 {

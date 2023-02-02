@@ -154,7 +154,7 @@ export default {
             } else {
                 // 将当前的数据进行清除操作
                 this.currentList = []
-
+                // 对当前要展示数据的数组长度进行计算
                 const size = (this.current + 1) * 6 > this.List.length ? this.List.length : (this.current + 1) * 6
 
                 // 对应的赋值算法

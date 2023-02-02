@@ -93,16 +93,20 @@
 <script>
     /* 用途: 接收地址栏参数*/
     const urlinfo = window.location.href; //获取当前页面的url
-    const len = urlinfo.length;//获取url的长度
-    const offset = urlinfo.indexOf('?');//设置参数字符串开始的位置
-    newsidinfo = urlinfo.substr(offset, len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
-    console.log(newsidinfo);
-    newsids = newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
-    newsid = newsids[1];//得到参数值
-    console.log(newsid);
-    // newsname = newsids[0];//得到参数名字
-    // console.log(newsname);
+    //获取url的长度
+    const len = urlinfo.length;
+    //设置参数字符串开始的位置
+    const offset = urlinfo.indexOf('?');
+    //取出参数字符串 这里会获得类似“id=1”这样的字符串
+    newsidinfo = urlinfo.substr(offset, len);
+    //对获得的参数字符串按照“=”进行分割
+    newsids = newsidinfo.split("=");
+    //得到参数值
+    newsid = newsids[1];
+
+    // 操作DOM元素获取类名为pdf的标签
     const pdf = document.querySelector('.pdf')
+    // 将pdf标签的src属性进行赋值
     pdf.src = './pages/' + newsid + '.pdf'
 </script>
 

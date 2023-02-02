@@ -32,7 +32,7 @@
 
                     <div class="video-info">
                         <span><strong>评论</strong></span>
-                        <span>204</span>
+                        <span>{{ numbers }}</span>
                         <span>最热</span>
                         <span> | </span>
                         <span>最新</span>
@@ -135,6 +135,11 @@ export default {
             scrollTop('.functions-fix')
         })
     },
+    computed: {
+        numbers() {
+            return this.comments.length
+        }
+    },
     data() {
         return {
             course: {},
@@ -166,8 +171,11 @@ export default {
             },
             // 用户输入的评论内容变量
             input: '',
+            // 推荐课程列表
             courseLists: [],
+
             List: [],
+            // 评论列表
             comments: []
         }
     },
@@ -239,6 +247,7 @@ export default {
                 })
             }
         },
+        // 初始化当前课程视频方法
         async initCourse() {
             const { data: res } = await this.$http.get('/getCourseById?id=' + this.$route.params.id)
             this.course = res
@@ -250,6 +259,7 @@ export default {
         getCover(src) {
             return require('@/assets/' + src)
         },
+        // 返顶方法
         to() {
             toTop()
         }
