@@ -20,6 +20,11 @@
                         <span>{{ item.grade }}</span>
                     </div>
                 </li>
+                <!-- 当用户选择的试卷类型在数据库中没有寻找到时现实的标签 -->
+                <li class="special" style="color: #9499a0; font-size: 0.75rem; border: none;"
+                    v-if="currentList.length === 0">
+                    没有对应的试卷内容...
+                </li>
                 <!-- (二) 分页按钮 -->
                 <div class="pagination">
                     <!-- 2.1 上一页按钮 -->

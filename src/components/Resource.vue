@@ -6,10 +6,16 @@
                 <el-col :xs="0" :sm="3" style="height: 100% !important;">
                     <el-aside>
                         <ul>
-                            <li><a href="/math/resource/classes" :class="{ actived: cur === 0 }"
-                                    @click="change(0)">优质课堂</a></li>
-                            <li><a href="/math/resource/examination" :class="{ actived: cur === 1 }"
-                                    @click="change(1)">试卷真题</a></li>
+                            <li>
+                                <a href="/math/resource/classes" :class="{ actived: cur === 0 }" @click="change(0)">
+                                    <span class="iconfont icon-ketang"></span> 优质课堂
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/math/resource/examination" :class="{ actived: cur === 1 }" @click="change(1)">
+                                    <span class="iconfont icon-fenshijuan"></span> 试卷真题
+                                </a>
+                            </li>
                         </ul>
                     </el-aside>
                 </el-col>

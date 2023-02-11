@@ -8,10 +8,7 @@
 </template>
 
 <script>
-import layout from '@/components/Layout.vue'
-import administrator from '@/components/Administrator.vue'
 export default {
-    components: { layout, administrator },
     name: 'App',
 }
 </script>

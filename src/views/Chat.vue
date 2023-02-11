@@ -1,10 +1,12 @@
 <template>
-    <div style="padding: 0.625rem; margin-bottom: 3.125rem">
+    <div id="container" style="padding: 0.625rem; margin: 1.875rem 0">
         <el-row>
             <el-col :xs="6" :sm="6">
                 <el-card style="width: 100%; min-height: 18.75rem; color: #333">
-                    <div style="padding-bottom: 0.625rem; border-bottom: 1px solid #ccc; font-weight: 600;">
-                        在线用户<span style="font-size: 0.75rem">（点击聊天气泡开始聊天）</span>
+                    <div
+                        style="padding-bottom: 0.625rem; border-bottom: 0.0625rem solid rgba(128, 0, 128, .4); font-weight: 600;">
+                        <i class="el-icon-user"></i> 在线用户
+                        <span style="font-size: 0.75rem">（点击聊天气泡开始聊天）</span>
                     </div>
                     <div style="padding: 0.625rem 0; font-weight: 600;" v-for="user in users" :key="user.username">
                         <span>{{ user.username }}</span>
@@ -14,19 +16,18 @@
                         <span style="font-size: 0.75rem;color: limegreen; margin-left: 0.3125rem;font-weight: 600;"
                             v-if="user.username === chatUser">chatting...</span>
                     </div>
-                    <div v-if="users.length === 0"
-                        style="width: 100%; font-size: 0.9rem; font-weight: 600;margin: 2rem auto; text-align: center">
+                    <div class="special" v-if="users.length === 0">
                         当前没有在线的用户 / 老师
                     </div>
                 </el-card>
             </el-col>
             <el-col :xs="18" :sm="18">
-                <div style="width: 90%; margin: 0 auto; background-color: white;
-                      border-radius: 0.3125rem; box-shadow: 0 0 0.625rem #ccc; box-sizing: border-box;">
-                    <div style="text-align: center; line-height: 3.125rem;font-weight: 600;">
-                        Web聊天室（{{ chatUser }}）
+                <div class="room">
+                    <div class="room-title">
+                        <i class="el-icon-chat-dot-square" style="font-size: 1.25rem; color: rgba(128, 0, 128, 1);"></i>
+                        Web 聊天室（{{ chatUser }}）
                     </div>
-                    <div style="height: 21.875rem; overflow:auto; border-top: 0.0333rem solid #ccc;border-bottom: 0.0333rem solid #ccc"
+                    <div style="height: 21.875rem; overflow:auto; border-top: 0.0333rem solid rgba(128, 0, 128, .4);border-bottom: 0.0333rem solid rgba(128, 0, 128, .4)"
                         v-html="content">
                     </div>
                     <div style="height: 12.5rem">
@@ -34,7 +35,7 @@
                             placeholder="Enter发送消息" style="width:97%; padding: 1.25rem; border: none; outline: none">
                         </el-input>
                         <div style="text-align: right; padding-right: 0.625rem">
-                            <el-button type="primary" size="mini" @click="send">消息发送</el-button>
+                            <el-button type="primary" size="mini" @click="send">发送</el-button>
                         </div>
                     </div>
                 </div>
@@ -206,7 +207,7 @@ export default {
     }
 }
 </script>
-<style>
+<style lang="less">
 .tip {
     color: white;
     text-align: center;
@@ -218,12 +219,43 @@ export default {
     display: inline;
 }
 
+// card卡片属性
+.el-card {
+    border: .0625rem solid rgba(128, 0, 128, .4) !important;
+    border-radius: 0 !important;
+}
+
+// 当并没有对应的用户在线时的样式
+.special {
+    width: 100%;
+    font-size: .75rem;
+    margin: 2rem auto;
+    text-align: center;
+    color: rgba(0, 0, 0, .8);
+    font-weight: 600;
+    font-family: 'Montserrat';
+}
+
+// 右侧聊天室样式
+.room {
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 0.625rem #ccc;
+    border: .0625rem solid rgba(128, 0, 128, .4);
+
+    .room-title {
+        text-align: center;
+        line-height: 3.125rem;
+        font-weight: 600;
+    }
+}
+
 .right1 {
-    background-color: deepskyblue;
+    background-color: rgb(0, 191, 255);
 }
 
 .left1 {
     background-color: forestgreen;
 }
 </style>
-  

@@ -72,13 +72,17 @@
               <!-- 2.1.1 侧边栏内容一：教师排答疑排班表 -->
               <div class="courses">
                 <div class="course-title">
-                  <h4>线上答疑排班表</h4>
+                  <h4>
+                    线上答疑排班表</h4>
                 </div>
                 <!-- 2.1.1.1 教师排班内容 -->
                 <div>
                   <!-- 2.1.1.1.1 教师排班当天日期 -->
                   <div class="day">
-                    <a href="/math/home">{{ currentDay + ' (' + currentWeek + ')' }}</a>
+                    <a href="/math/home">
+                      <i class="el-icon-date" style="color: rgba(128, 0, 128, 1);"></i>
+                      {{ currentDay + ' (' + currentWeek + ')' }}
+                    </a>
                   </div>
                   <!-- 2.1.1.1.2 教师排版当天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -90,7 +94,10 @@
                   </ul>
                   <!-- 2.1.1.1.3 教师排班下一天日期 -->
                   <div class="day">
-                    <a href="/math/home">{{ nextDay + ' (' + nextweek + ')' }}</a>
+                    <a href="/math/home">
+                      <i class="el-icon-date" style="color: rgba(128, 0, 128, 1);"></i>
+                      {{ nextDay + ' (' + nextweek + ')' }}
+                    </a>
                   </div>
                   <!-- 2.1.1.4 教师排版下一天具体时间段对应的排版老师 -->
                   <ul class="courses-item">
@@ -102,6 +109,30 @@
                   </ul>
                 </div>
               </div>
+
+              <!-- 2.1.2 侧边栏内容二：线下活动内容展示 -->
+              <div class="activities">
+                <h4>线下活动</h4>
+                <!-- 2.1.1.1 侧边栏线下活动内容具体展示 -->
+                <ul class="activities-item">
+                  <li v-for="item in activityList" :key="item.id">
+                    <a href="javascript:void(0)" @click="link(item.id)">
+                      <h4>
+                        <i class="el-icon-view" style="rgba(128, 0, 128, .4);"></i>
+                        {{ item.title }}
+                      </h4>
+                      <span>{{ item.activity }}</span>
+                    </a>
+                  </li>
+                </ul>
+                <!-- 2.1.1.2 侧边栏线下活动内容分页按钮 -->
+                <div class="pagination">
+                  <el-button type="primary" icon="el-icon-arrow-left" size="mini" @click="pre"></el-button>
+                  <el-button type="primary" size="mini" @click="next"><i class="el-icon-arrow-right el-icon--right"></i>
+                  </el-button>
+                </div>
+              </div>
+
               <!-- 2.1.3 侧边栏内容三：用户调查 -->
               <div class="asideNewNps">
                 <h3 class="aside-title">您愿意向朋友推荐“希冀数学”吗？</h3>
@@ -116,25 +147,6 @@
                       <div class="newnps-text">{{ item.type }}</div>
                     </li>
                   </ul>
-                </div>
-              </div>
-              <!-- 2.1.2 侧边栏内容二：线下活动内容展示 -->
-              <div class="activities">
-                <h4>线下活动</h4>
-                <!-- 2.1.1.1 侧边栏线下活动内容具体展示 -->
-                <ul class="activities-item">
-                  <li v-for="item in activityList" :key="item.id">
-                    <a href="javascript:void(0)" @click="link()">
-                      <h4>{{ item.title }}</h4>
-                      <span>{{ item.activity }}</span>
-                    </a>
-                  </li>
-                </ul>
-                <!-- 2.1.1.2 侧边栏线下活动内容分页按钮 -->
-                <div class="pagination">
-                  <el-button type="primary" icon="el-icon-arrow-left" size="mini" @click="pre"></el-button>
-                  <el-button type="primary" size="mini" @click="next"><i class="el-icon-arrow-right el-icon--right"></i>
-                  </el-button>
                 </div>
               </div>
 
@@ -158,7 +170,6 @@
 
                         <el-carousel :interval="4000" type="card" height="14.3333rem"
                           style="line-height: 5.333rem; box-shadow: 0 0 0.2rem black;">
-                          <!-- v-for="item in 6" :key="item" -->
                           <el-carousel-item>
                             <h3 class="medium" style="width: 100%; height: 100%">
                               <a href="/math/video/1/1">
@@ -170,27 +181,6 @@
                             <h3 class="medium" style="width: 100%; height: 100%">
                               <a href="/math/video/4/4">
                                 <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="/math/video/2/2">
-                                <img src="@/assets/carousel3.jpg" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="/math/video/3/3">
-                                <img src="@/assets/carousel4.jpg" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="/math/video/6/6">
-                                <img src="@/assets/carousel5.jpg" alt="blank" style="width: 100%; height: 100%">
                               </a>
                             </h3>
                           </el-carousel-item>
@@ -225,17 +215,21 @@
                         </el-carousel>
                       </el-col>
                     </el-row>
+
                     <!-- 2.2.2 home页面主题内容 -->
                     <div class="resources">
-                      <el-row :gutter="0" style="width: 100%;">
+                      <el-row :gutter="0" style="width: 100%; margin: 0 !important">
                         <!-- 2.2.2.1 home页面主题内容 - 教学推荐和趣味课堂内容 -->
-                        <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 2.5rem 0 0 0.33rem">
+                        <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 1.5rem 0 0 0.33rem">
                           <div class="resources-item">
                             <div class="title1">
-                              <a href="/math/home" alt="blank">资源推荐 <i class="el-icon-d-arrow-right"></i></a>
+                              <a href="/math/home" alt="blank">
+                                <span class="iconfont icon-tuijian" style="color: red;"></span> 资源推荐
+                                <i class="el-icon-d-arrow-right"></i>
+                              </a>
                             </div>
                             <div class="item1">
-                              <el-row :gutter="20">
+                              <el-row :gutter="20" style="margin: 0 !important">
                                 <ul>
                                   <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in resource1" :key="item.id">
                                     <li @click="player(item.id)">
@@ -248,10 +242,13 @@
                               </el-row>
                             </div>
                             <div class="title1">
-                              <a href="/math/home" alt="blank">趣味课堂 <i class="el-icon-d-arrow-right"></i></a>
+                              <a href="/math/home" alt="blank">
+                                <span class="iconfont icon-ketang" style="color: blue;"></span> 趣味课堂
+                                <i class="el-icon-d-arrow-right"></i>
+                              </a>
                             </div>
                             <div class="item1">
-                              <el-row :gutter="20">
+                              <el-row :gutter="20" style="margin: 0 !important">
                                 <ul>
                                   <el-col :xs="12" :sm="6" :md="6" :lg="6" v-for="item in c" :key="item.id">
                                     <li>
@@ -266,12 +263,14 @@
                         </el-col>
 
                         <!-- 2.2.2.2 home页面主题内容 - 最受欢迎老师内容 -->
-                        <el-col :xs="0" :sm="1" :md="8" :lg="8" style="float:right; margin: 2.5rem 0.33rem 0 0;"
+                        <el-col :xs="0" :sm="1" :md="8" :lg="8" style="float:right; margin: 1.5rem 0.33rem 0 0;"
                           v-show="screenWidth >= 992">
                           <div class="resources-favor">
                             <div class="title2">
-                              <a href="javascript:void(0)" alt="blank">最受欢迎老师排行榜<i
-                                  class="el-icon-d-arrow-right"></i></a>
+                              <a href="javascript:void(0)" alt="blank">
+                                <span class="iconfont icon-shiziduiwu1" style="color: black;"></span>
+                                最受欢迎老师排行榜<i class="el-icon-d-arrow-right"></i>
+                              </a>
                               <ul style="list-style: none;">
                                 <li v-for="(item, index) in popularList" :key="item.id">
                                   <el-badge :value="index + 1" class="item" type="primary"></el-badge>
@@ -706,9 +705,9 @@ export default {
     },
 
     // 点击线下活动跳转函数
-    link() {
+    link(id) {
       this.$store.commit('changeCurrent', 3)
-      this.$router.push('/math/activity')
+      this.$router.push('/math/act_content/' + id)
     },
 
     // 上一页按钮函数
@@ -1169,7 +1168,7 @@ export default {
   .activities {
     position: relative;
     display: flex;
-    top: 33%;
+    top: 32%;
     left: 50%;
     width: 90%;
     flex-wrap: wrap;
@@ -1239,7 +1238,7 @@ export default {
   // 侧边内容三：用户反馈调查
   .asideNewNps {
     position: relative;
-    top: 9%;
+    top: 12.5%;
     width: 92%;
     height: 12%;
     margin: 0 auto;

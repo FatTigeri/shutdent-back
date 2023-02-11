@@ -72,7 +72,8 @@
                                     </div>
                                     <!-- 评论日期 -->
                                     <div class="date">
-                                        {{ item.date }}
+                                        <span>{{ item.date }}</span>
+                                        <span class="iconfont icon-dianzan" @click="like">点赞</span>
                                     </div>
                                 </div>
                             </el-col>
@@ -136,8 +137,9 @@ export default {
         })
     },
     computed: {
+        // 计算返回的评论数
         numbers() {
-            return this.comments.length
+            return this.comments.length;
         }
     },
     data() {
@@ -262,6 +264,13 @@ export default {
         // 返顶方法
         to() {
             toTop()
+        },
+        // 用户点赞方法
+        like(e) {
+            // 将对应的颜色改为红色
+            let color = e.target.style.color;
+            // 使用三元运算符进行字体颜色的变换
+            e.target.style.color = color === 'rgb(221, 0, 0)' ? '' : 'rgb(221, 0, 0)';
         }
     }
 
@@ -269,6 +278,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@mainColor: #dd0000;
+
 // 当用户的手机屏幕小于768px时, 对应的字体大小为12px
 @media (max-width: 768px) {
 
@@ -514,8 +525,16 @@ html {
                 .date {
                     width: 100%;
                     height: 20%;
-                    font-size: 0.75rem;
                     color: rgba(95, 98, 116, .95);
+
+                    span:nth-child(2) {
+                        float: right;
+                        margin: 0 35px 0 0;
+
+                        &:hover {
+                            color: @mainColor;
+                        }
+                    }
                 }
             }
         }

@@ -20,22 +20,22 @@
                         <!-- 卡片内容数据二-简介 -->
                         <div class="info-text item">
                             <div class="word">简介: </div>
-                            <div>{{ teacherInfo.info }}</div>
-                        </div>
-                        <!-- 卡片数据内容三-微信 -->
-                        <div class="info-text item">
-                            <div class="word">微信: </div>
-                            <div>{{ teacherInfo.weChat }}</div>
+                            <div>{{ teacherInfo.tinfo }}</div>
                         </div>
                         <!-- 卡片数据内容四-邮箱 -->
                         <div class="info-text item">
                             <div class="word">邮箱: </div>
-                            <div>{{ teacherInfo.email }}</div>
+                            <div>{{ teacherInfo.temail }}</div>
+                        </div>
+                        <!-- 卡片数据内容三-微信 -->
+                        <div class="info-text item">
+                            <div class="word">授课均分: </div>
+                            <div>{{ teacherInfo.tscore }}</div>
                         </div>
                         <!-- 卡片数据内容五-联系方式 -->
                         <div class="info-text item">
                             <div class="word">联系方式: </div>
-                            <div>{{ teacherInfo.tel }}</div>
+                            <div>{{ teacherInfo.tphone }}</div>
                         </div>
                     </el-card>
                 </div>

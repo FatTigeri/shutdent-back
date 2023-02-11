@@ -42,9 +42,9 @@
                         <el-col :span="19" class="mycol">
                             <div class="grid-content bg-purple-light">
                                 <div class="mytitle">
-                                    <a href="#" class="mya3">{{ item.title }}</a>
+                                    <a :href="'/math/act_content/' + item.id" class="mya3">{{ item.title }}</a>
                                 </div>
-                                <a href="#" class="mya4">{{ item.activity }}</a>
+                                <a :href="'/math/act_content/' + item.id" class="mya4">{{ item.activity }}</a>
                             </div>
                         </el-col>
                     </el-row>
@@ -60,9 +60,9 @@
                         <el-col :span="19" class="mycol">
                             <div class="grid-content bg-purple-light">
                                 <div class="mytitle">
-                                    <a href="#" class="mya3">{{ ff.title }}</a>
+                                    <a :href="'/math/act_content/' + ff.id" class="mya3">{{ ff.title }}</a>
                                 </div>
-                                <a href="#" class="mya4">{{ ff.contents }}</a>
+                                <a :href="'/math/act_content/' + ff.id" class="mya4">{{ ff.contents }}</a>
                             </div>
                         </el-col>
                     </el-row>
@@ -147,6 +147,10 @@ export default {
 
 
 <style lang="less" scoped>
+* {
+    box-sizing: border-box;
+}
+
 .functions-fix {
     display: none;
     position: fixed;
@@ -195,8 +199,8 @@ export default {
 
 .recommend {
     width: 80%;
-    height: 450px;
-    margin: 30px 10%;
+    height: 28.125rem;
+    margin: 1.875rem 10%;
 }
 
 .myimg {
@@ -219,17 +223,17 @@ export default {
 }
 
 .mya1 {
-    text-decoration: none;
-    font-size: 26px;
-    color: black;
     font-weight: 600;
+    color: black;
+    font-size: 1.625rem;
+    text-decoration: none;
 }
 
 .mya2 {
     text-decoration: none;
     color: black;
     opacity: 0.6;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .mya1:hover {
@@ -241,29 +245,38 @@ export default {
 }
 
 .item {
-    margin-top: 10px;
-    margin-right: 40px;
+    margin-top: 0.625rem;
+    margin-right: 2.5rem;
 }
 
 .mytab {
     width: 80%;
-    height: 450px;
-    margin: 30px 10%;
+    height: 28.125rem;
+    margin: 1.875rem 10%;
 }
 
 .myrow {
-    height: 110px;
-    margin: 5px;
+    height: 6.875rem;
+    margin: 0.3125rem;
+
+    &:hover {
+        a {
+            color: #2291f7;
+            text-decoration: none;
+        }
+
+        background-color: rgb(243, 246, 248);
+    }
 }
 
 .imgs {
-    height: 100px;
     width: 100%;
+    height: 6.25rem;
 }
 
 .mycol {
-    padding-left: 30px;
-    padding-top: 4px;
+    padding-left: 1.875rem;
+    padding-top: 0.25rem;
 }
 
 .mya4 {
@@ -272,21 +285,21 @@ export default {
 }
 
 .mytitle {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
 }
 
 .mya3 {
-    font-size: 20px;
-    text-decoration: none;
     color: black;
     font-weight: 400;
+    font-size: 1.25rem;
+    text-decoration: none;
 }
 
 .mya4 {
-    text-decoration: none;
     color: black;
+    font-size: 0.875rem;
+    text-decoration: none;
     opacity: 0.7;
-    font-size: 14px;
 }
 
 .mya3:hover {

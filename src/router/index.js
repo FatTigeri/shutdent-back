@@ -37,7 +37,8 @@ const router = new VueRouter({
         { path: 'activity', component: () => import('@/views/Activity.vue') },
         { path: 'courses', component: Course },
         { path: 'TResource', component: TResource },
-        { path: 'contest', component: Contest }
+        { path: 'contest/:status', component: Contest },
+        { path: 'act_content/:id', component: () => import('@/components/MyActivity.vue') }
       ]
     },
     { path: '', redirect: '/math/home' },

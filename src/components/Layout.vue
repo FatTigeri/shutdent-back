@@ -27,16 +27,23 @@
                         <div class="functions">
                             <ul>
                                 <!-- 1.1.3 具体的a标签内容 -->
-                                <li><a href="/math/home" :class="{ active: 0 === cur }" @click="change(0)">首页</a></li>
-                                <li><a href="/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a>
+                                <li>
+                                    <a href="/math/home" :class="{ active: 0 === cur }" @click="change(0)">首页</a>
                                 </li>
-                                <li><a href="/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a>
+                                <li>
+                                    <a href="/math/chat" :class="{ active: 1 === cur }" @click="change(1)">线上答疑</a>
                                 </li>
-                                <li><a href="/math/activity" :class="{ active: 3 === cur }" @click="change(3)">线下活动</a>
+                                <li>
+                                    <a href="/math/room" :class="{ active: 2 === cur }" @click="change(2)">趣味课堂</a>
                                 </li>
-                                <li><a href="/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
+                                <li>
+                                    <a href="/math/activity" :class="{ active: 3 === cur }" @click="change(3)">线下活动</a>
                                 </li>
-                                <li><a href="/math/Tresource" :class="{ active: 5 === cur }" @click="change(5)">师资资源</a>
+                                <li>
+                                    <a href="/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
+                                </li>
+                                <li>
+                                    <a href="/math/Tresource" :class="{ active: 5 === cur }" @click="change(5)">师资资源</a>
                                 </li>
                             </ul>
                         </div>

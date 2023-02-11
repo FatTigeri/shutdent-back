@@ -26,7 +26,8 @@
                                 <span class="info2" v-if="context === 'psw_err'"><strong>{{ info2 }}</strong></span>
                             </div>
                             <div class="code">
-                                <el-input placeholder="验证码" prefix-icon="el-icon-key" v-model.trim="input_code">
+                                <el-input placeholder="验证码" prefix-icon="el-icon-key" v-model.trim="input_code"
+                                    @keydown.native.enter="login">
                                     <template slot="append">{{ code }}</template>
                                 </el-input>
                                 <span class="info4" v-if="context === 'code_err'"><strong>{{ info4 }}</strong></span>

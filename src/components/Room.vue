@@ -8,7 +8,9 @@
                 <div class="left-aside">
                     <!-- 1.1 小游戏内容 -->
                     <div class="games">
-                        <div class="aside-text1">小游戏</div>
+                        <div class="aside-text1"> <i class="iconfont icon-xiaoyouxi"></i>
+                            <span>小</span> <span>游</span> <span>戏</span>
+                        </div>
                         <!-- 1.1.1 小游戏罗列展示 -->
                         <div class="contents1">
                             <el-row :gutter="20" style="height: 100%">
@@ -37,14 +39,22 @@
                         <div class="contents2">
                             <el-row :gutter="20" style="height: 100%">
                                 <ul>
-                                    <li><a href="/math/contest"><i class="el-icon-tickets"></i>奥数竞赛抢答题</a></li>
-                                    <li><a href="/math/contest"><i class="el-icon-document-remove"></i>趣味数学抢答题</a>
+                                    <li @click="go(1)">
+                                        <a href="javascript:void(0);"><i class="el-icon-tickets"></i>奥数竞赛抢答题</a>
                                     </li>
-                                    <li><a href="/math/contest"><i class="el-icon-document"></i>知识巩固通关题</a></li>
+                                    <li @click="go(2)">
+                                        <a href="javascript:void(0);"><i class="el-icon-document-remove"></i>趣味数学抢答题</a>
+                                    </li>
+                                    <li @click="go(3)">
+                                        <a href="javascript:void(0);"><i class="el-icon-document"></i>知识巩固通关题</a>
+                                    </li>
                                 </ul>
                             </el-row>
                         </div>
-                        <div class="aside-text2">技能大闯关</div>
+                        <div class="aside-text2">
+                            <i class="iconfont icon-zhuanyezhishijineng"></i>
+                            <span>技</span> <span>能</span> <span>大</span> <span>闯</span> <span>关</span>
+                        </div>
                     </div>
                 </div>
             </el-col>
@@ -52,14 +62,16 @@
             <el-col :xs="24" :sm="13" style="height: 100%">
                 <!-- (二) 中间内容(最具体的希冀数学知识展示区域) -->
                 <div class="main">
-                    <div class="text">希冀数学涨知识</div>
+                    <div class="text"> <i class="iconfont icon-zhishi" style="font-size: 1.333rem;"></i> 希 冀 数 学 涨 知 识
+                    </div>
                     <div class="resources-item">
                         <div class="title1">
-                            <a href="javascript:void(0)" alt="blank">猜你喜欢 <i class="el-icon-d-arrow-right"></i></a>
+                            <a href="javascript:void(0)" alt="blank"> <i class="iconfont icon-cainixihuan"></i> 猜你喜欢 <i
+                                    class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <!-- 2.1 猜你喜欢内容，主要是根据用户的爱好进行资源的推荐 -->
                         <div class="item1">
-                            <el-row :gutter="20">
+                            <el-row :gutter="20" style="margin: 0 !important;">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li @click="player(1)">
@@ -101,11 +113,12 @@
                             </el-row>
                         </div>
                         <div class="title1">
-                            <a href="javascript:void(0)" alt="blank">数学名人馆 <i class="el-icon-d-arrow-right"></i></a>
+                            <a href="javascript:void(0)" alt="blank"> <i class="iconfont icon-mingrentang"></i> 数学名人馆 <i
+                                    class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <!-- 2.2 数学名人堂内容，对数学家进行对应的详细介绍 -->
                         <div class="item1">
-                            <el-row :gutter="20">
+                            <el-row :gutter="20" style="margin: 0 !important;">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li><a href="javascript:void(0)"><img src="@/assets/math5.jpg" alt="blank"></a>
@@ -135,11 +148,12 @@
                             </el-row>
                         </div>
                         <div class="title1">
-                            <a href="javascript:void(0)" alt="blank">不一样的数学<i class="el-icon-d-arrow-right"></i></a>
+                            <a href="javascript:void(0)" alt="blank"> <i class="iconfont icon-shuxue"></i> 不一样的数学<i
+                                    class="el-icon-d-arrow-right"></i></a>
                         </div>
                         <!-- 2.3 不一样的数学内容，进行课外数学知识的拓展 -->
                         <div class="item1">
-                            <el-row :gutter="20">
+                            <el-row :gutter="20" style="margin: 0 !important;">
                                 <ul>
                                     <el-col :xs="12" :sm="12" :md="8" :lg="4">
                                         <li><a href="javascript:void(0)"><img src="@/assets/math_course2.jpg"
@@ -176,7 +190,7 @@
                 <div class="right-aside">
                     <!-- 3.1 用户积分榜（降序展示用户信息） -->
                     <div class="ranking">
-                        <div class="rank-text">积分排行榜</div>
+                        <div class="rank-text"> <i class="el-icon-loading"></i> 积分排行榜</div>
                         <el-table v-loading="loading" element-loading-text="数据拼命加载中"
                             element-loading-spinner="el-icon-loading"
                             element-loading-background="rgba(250, 250, 250, 0.8)" :data="tableData" style="width: 100%"
@@ -216,6 +230,7 @@
 </template>
 
 <script>
+import { token } from '@/utils/config';
 export default {
     name: 'room',
     created() {
@@ -248,8 +263,19 @@ export default {
         // 视频播放功能
         player(id) {
             this.$router.push("/math/video/" + id + "/" + id)
+        },
+        // 用户点击了不同的技能大闯关后跳转
+        go(id) {
+            if (token === null || token === undefined) {
+                const h = this.$createElement;
+                this.$notify({
+                    title: '消息提示',
+                    message: h('i', { style: 'color: teal' }, '请先登录~！')
+                })
+                return
+            }
+            this.$router.push('/math/contest/' + id)
         }
-
     },
     data() {
         return {
@@ -353,11 +379,14 @@ html {
 
         // 文字信息1样式
         .aside-text1 {
+            display: flex;
             width: 1.5033rem;
             height: 100%;
             font-weight: 700;
-            line-height: 500%;
-            text-align: center;
+            align-content: center;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
             color: rgb(92, 48, 21);
         }
 
@@ -430,13 +459,15 @@ html {
 
         // 文字信息2样式
         .aside-text2 {
+            display: flex;
             width: 1.5033rem;
             height: 100%;
             font-weight: 700;
-            line-height: 310%;
-            text-align: center;
+            align-items: center;
+            align-content: center;
+            flex-direction: column;
+            justify-content: space-around;
             color: rgb(92, 48, 21);
-            // border-left: 0.10000rem solid rgb(92, 48, 21);
         }
 
     }
@@ -457,10 +488,13 @@ html {
 
         // 中间区域具体选项样式
         .resources-item {
+            display: flex;
             height: 90%;
             width: 97%;
             margin: 0 auto;
+            flex-direction: column;
             border-radius: 0.3333rem;
+            justify-content: space-around;
             border: 0.0666rem solid #c9c9c9;
             box-shadow: 0 0 0.6666rem #c9c9c9;
 
