@@ -1,88 +1,122 @@
 <template>
-    <div id="TResource-container">
-        <div>
-            <el-tabs type="border-card" :tab-position="tabPosition">
-                <el-tab-pane v-for="grade in grades" :key="grade.id">
-                  <span slot="label">{{grade.gra}}</span>
-                  <el-card class="box-card" shadow="always" v-for="(teacher,id) in teachers" :key="id" style="margin:10px;width:80%;margin-left:9%;">
-                    <div slot="header" class="clearfix">
-                      <span style="font-size:22px;">{{teacher.tname}}</span>
-                      <el-button style="float: right; padding: 3px 0" type="text" @click="Tenter">进入主页</el-button>
-                    </div>
-                    <div class="text item">
-                        <span style="float:left">好评&nbsp;&nbsp;&nbsp;</span>
-                        <el-rate
-                            v-model="teachers[id].score"
-                            disabled
-                            show-score
-                            text-color="#ff9900"
-                            :score-template="teacher.score"
-                            style="float:left">
-                        </el-rate>
-                    </div>
-                    <br>
-                    <div>
-                        优秀讲解视频:&nbsp;&nbsp;
-                        <span style="color:blueviolet">{{teacher.videos}}</span>
-                    </div>
-                  </el-card>
-                </el-tab-pane>
-                
-              </el-tabs>
-        </div>
+    <div id="container">
+        <el-row style="height: 100%">
+            <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
+                <el-menu class="el-menu-vertical-demo mymenu" background-color="rgba(199, 201, 201, 0.1)">
+                    <a href="" class="mymenus" @click="changeActive(0)">
+                        <el-menu-item index="1" :class="active === 0 ? 'selected' : ''">
+                            <span slot="title"><i class="el-icon-s-custom"></i>一年级</span>
+                        </el-menu-item>
+                    </a>
+                    <a href="" class="mymenus" @click="changeActive(1)">
+                        <el-menu-item index="2" :class="active === 1 ? 'selected' : ''">
+                            <span slot="title"><i class="el-icon-s-custom"></i>二年级</span>
+                        </el-menu-item>
+                    </a>
+                    <a href="" class="mymenus" @click="changeActive(2)">
+                        <el-menu-item index="3" :class="active === 2 ? 'selected' : ''">
+                            <span slot="title"><i class="el-icon-s-custom"></i>三年级</span>
+                        </el-menu-item>
+                    </a>
+                    <a href="" class="mymenus" @click="changeActive(3)">
+                        <el-menu-item index="4" :class="active === 3 ? 'selected' : ''">
+                            <span slot="title"><i class="el-icon-s-custom"></i>四年级</span>
+                        </el-menu-item>
+                    </a>
+                    <a href="" class="mymenus" @click="changeActive(4)">
+                        <el-menu-item index="5" :class="active === 4 ? 'selected' : ''">
+                            <span slot="title"><i class="el-icon-s-custom"></i>五年级</span>
+                        </el-menu-item>
+                    </a>
+                    <a href="" class="mymenus" @click="changeActive(5)">
+                        <el-menu-item index="6" :class="active === 5 ? 'selected' : ''">
+                            <span slot="title"><i class="el-icon-s-custom"></i>六年级</span>
+                        </el-menu-item>
+                    </a>
+                </el-menu>
+            </el-col>
+            <el-col :xs="19" :sm="19" :md="19" :lg="19" :xl="19">
+                <router-view></router-view>
+            </el-col>
+        </el-row>
     </div>
 </template>
+  
 <script>
-
-    export default {
-        data:function(){
-            return{
-                grades:[
-                    {id:1,gra:"一年级"},
-                    {id:2,gra:"二年级"},
-                    {id:3,gra:"三年级"},
-                    {id:4,gra:"四年级"},
-                    {id:5,gra:"五年级"},
-                    {id:6,gra:"六年级"}
-                ],
-                teachers:[
-                    {id:1,tname:"张三",score:'3.7',videos:"加法与减法计算 | 20以内的口算"},
-                    {id:2,tname:"赵四",score:'4.6',videos:"词语讲解 | 生字学习"},
-                    {id:3,tname:"王五",score:'3.6',videos:"生字学习 | 阅读理解"},
-                    {id:4,tname:"李六",score:'4.2',videos:"阅读理解 | 词语讲解"},
-                    {id:5,tname:"梅梅",score:'3.3',videos:"20以内的口算 | 20以内的进位加法"},
-                    {id:6,tname:"万华",score:'4.1',videos:"20以内的进位加法 | 加法与减法计算"}
-                ],
-                tabPosition: 'left',
-                value:3.7
-            }
+export default {
+    beforeCreate() {
+        // 对控制当前页面的index索引进行判断
+        if (!window.sessionStorage.getItem('active')) {
+            window.sessionStorage.setItem('active', 0);
+        }
+    },
+    data() {
+        return {
+            active: parseInt(window.sessionStorage.getItem('active')),
+        }
+    },
+    watch: {
+        $route(newval) {
+            window.localStorage.setItem("grade", newval.params.id);
+        },
+    },
+    methods: {
+        changeActive(index) {
+            this.active = index;
+            window.sessionStorage.setItem('active', index)
+            this.$router.push('/math/Tresource/tResource/' + (index + 1));
         }
     }
 
+}
 </script>
+  
+<style lang="less" scoped>
+#container {
+    width: 100%;
+    min-height: 37.5rem;
 
-<style scoped>
-    .text {
-        font-size: 14px;
+    .mymenus {
+        width: 100%;
+        text-align: center;
+        background-color: beige;
     }
 
-    .item {
-        margin-bottom: 18px;
-    }
+    .selected {
+        i {
+            color: orange;
+        }
 
-    .clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: "";
+        color: orange;
+        background-color: rgba(199, 201, 201, 0.3);
     }
-    .clearfix:after {
-        clear: both
-    }
+}
 
-    .box-card {
-        width: 480px;
-    }
-    
 
+.mymenu {
+    margin: 0;
+    padding: 0;
+    min-height: 47.5rem;
+    background-color: rgba(199, 201, 201, 0.3);
+    font-size: 1.25rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+/deep/ .el-menu-item {
+    font-size: .875rem;
+}
+
+router-link {
+    text-decoration: none;
+    background-color: #ffffff;
+}
+
+.el-menu-item.is-active {
+    background-color: #ffffff !important;
+    color: #fff;
+}
 </style>
-
+  

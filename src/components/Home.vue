@@ -994,8 +994,8 @@ export default {
   width: 7rem;
   height: 9rem;
   top: 73%;
-  right: 15px;
-  font-size: 14px;
+  right: .9375rem;
+  font-size: .875rem;
   font-weight: 600;
   z-index: 1000;
 
@@ -1011,7 +1011,7 @@ export default {
       border-radius: 1rem;
       color: rgb(58, 139, 255, 1);
       background: rgba(250, 250, 249, 0.95);
-      box-shadow: 0px 2px 10px 0px rgba(31, 35, 41, .38);
+      box-shadow: 0 .125rem .625rem 0 rgba(31, 35, 41, .38);
       cursor: pointer;
 
       &:hover {
@@ -1095,30 +1095,30 @@ export default {
 
 // home页面侧边栏样式
 .aside {
-  height: 100%;
+  display: flex;
   color: #333;
-  text-align: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   background-color: hsla(0, 0%, 79%, .2);
 
   // 侧边栏内容一：线上答疑教师排班表样式
   .courses {
     display: flex;
-    position: relative;
     width: 90%;
-    top: 20%;
-    left: 50%;
     min-height: 20rem;
     border-radius: 0.1rem;
-    border: 0.0666rem solid #c9c9c9;
-    box-shadow: 0 0 0.2rem #c9c9c9;
-    transform: translate(-50%, -50%);
-    background: rgba(250, 250, 250, 1);
     font-family: 'Montserrat';
     flex-direction: column;
     justify-content: center;
+    margin: 1.875rem 0 0 0;
+    border: 0.0666rem solid #c9c9c9;
+    box-shadow: 0 0 0.2rem #c9c9c9;
+    background: rgba(250, 250, 250, 1);
 
     .course-title {
       min-height: 2.5rem;
+      text-align: center;
     }
 
     // 教师排班当天日期样式
@@ -1159,22 +1159,18 @@ export default {
         color: rgba(0, 0, 0, .7);
         text-align: center;
         margin: 0 auto;
-        font-size: xx-small;
+        font-size: .75rem;
       }
     }
   }
 
   // 侧边内容二：线上活动展示样式
   .activities {
-    position: relative;
     display: flex;
-    top: 32%;
-    left: 50%;
     width: 90%;
     flex-wrap: wrap;
     border-radius: 0.1rem;
     justify-content: space-around;
-    transform: translate(-50%, -50%);
     border: 0.0666rem solid #c9c9c9;
     box-shadow: 0 0 0.2rem #c9c9c9;
     background: rgba(250, 250, 250, 1);
@@ -1205,7 +1201,7 @@ export default {
 
           span {
             display: inline-block;
-            font-size: 12px;
+            font-size: .75rem;
             margin: 0.2rem 0;
             text-indent: 1rem;
             font-family: fantasy;
@@ -1237,11 +1233,10 @@ export default {
 
   // 侧边内容三：用户反馈调查
   .asideNewNps {
-    position: relative;
-    top: 12.5%;
     width: 92%;
     height: 12%;
     margin: 0 auto;
+    text-align: center;
     box-shadow: 0 0 0.2rem #c9c9c9;
     border: 0.0666rem solid #c9c9c9;
     background-color: #fff;
@@ -1302,6 +1297,13 @@ export default {
   font-family: 'Montserrat';
   border-left: 0.06666rem solid #c9c9c9;
 
+  .el-rate__icon {
+    font-size: 1.125rem;
+  }
+
+  .el-rate__text {
+    font-size: .875rem;
+  }
 
   .text {
     position: absolute;
@@ -1392,6 +1394,10 @@ export default {
       border: 0.0666rem solid #c9c9c9;
       box-shadow: 0 0 0.2rem #c9c9c9;
 
+      /deep/ .el-rate__text {
+        font-size: 16px;
+      }
+
       // 资源推荐-标题内容样式
       .title1 {
         height: 10%;
@@ -1424,6 +1430,7 @@ export default {
 
           // 资源推荐个课程包括框样式
           li {
+            position: relative;
             width: 98%;
             font-size: 0.65rem;
             text-align: left;
@@ -1451,15 +1458,21 @@ export default {
           li::before {
             display: none;
             position: absolute;
-            width: 21.5%;
-            height: 94%;
             content: '';
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, .4) url(@/assets/arr.png) no-repeat center;
             background-size: 2rem;
           }
 
           li:hover::before {
             display: block;
+          }
+
+          li:hover {
+            transform: scale(1.02);
+            overflow: hidden;
+            transition: 0.8s;
           }
         }
       }

@@ -28,7 +28,7 @@ export default new Vuex.Store({
     other: '',
   },
 
-  // 
+  // 动态获取state数据
   getters: {
 
   },

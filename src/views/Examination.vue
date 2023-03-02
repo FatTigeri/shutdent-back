@@ -208,15 +208,15 @@ export default {
                 width: 100%;
                 height: 18%;
                 box-sizing: border-box;
-                border: 1px solid black;
+                border: .0625rem solid black;
 
                 // 试卷名字样式
                 .pages {
                     width: 100%;
                     height: 55%;
                     text-align: left;
-                    font-size: 14px;
-                    line-height: 26.14px;
+                    font-size: .875rem;
+                    line-height: 1.6338rem;
                     margin: 0 0.5rem;
                     box-sizing: border-box;
                     color: rgb(212, 39, 97);
@@ -232,7 +232,7 @@ export default {
                 .type {
                     width: 100%;
                     height: 40%;
-                    font-size: 12px !important;
+                    font-size: .75rem !important;
                     text-align: right;
                     box-sizing: border-box;
 

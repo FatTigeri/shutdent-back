@@ -18,8 +18,8 @@
                                     <li><a href="/static/index1.html"><img src="@/assets/game1.webp" alt="blank"></a>
                                     </li>
                                     <li><a href="/static/2048.html"><img src="@/assets/game2.webp" alt="blank"></a></li>
-                                    <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg"
-                                                alt="blank"></a></li>
+                                    <li><a href="/static/labyrinth.html"><img src="@/assets/mg-map1.svg" alt="blank"></a>
+                                    </li>
                                     <li><a href="/static/snake.html"><img src="@/assets/snake.webp" alt="blank"></a>
                                     </li>
                                     <li><a href="/static/word.html"><img src="@/assets/word.webp" alt="blank"></a></li>
@@ -192,9 +192,8 @@
                     <div class="ranking">
                         <div class="rank-text"> <i class="el-icon-loading"></i> 积分排行榜</div>
                         <el-table v-loading="loading" element-loading-text="数据拼命加载中"
-                            element-loading-spinner="el-icon-loading"
-                            element-loading-background="rgba(250, 250, 250, 0.8)" :data="tableData" style="width: 100%"
-                            stripe>
+                            element-loading-spinner="el-icon-loading" element-loading-background="rgba(250, 250, 250, 0.8)"
+                            :data="tableData" style="width: 100%" stripe>
                             <!-- 3.1.1 用户的ID展示 -->
                             <el-table-column label="ID" width="48">
                                 <template slot-scope="scope">
@@ -406,12 +405,18 @@ html {
                 li {
                     width: 30%;
                     height: 30%;
+                    overflow: hidden;
                     text-align: center;
 
                     img {
                         width: 70%;
                         margin: 0 auto;
 
+                    }
+
+                    &:hover {
+                        transform: scale(1.05);
+                        transition: 0.8s;
                     }
 
                 }
@@ -538,7 +543,6 @@ html {
                         text-align: left;
                         margin-bottom: 0.26666rem;
                         border-radius: 0.33333rem;
-                        // border: 0.088888rem solid rgb(92, 48, 21);
 
                         // 使用伪元素进行布局样式
                         &::before {
@@ -554,6 +558,11 @@ html {
                         // 当用户鼠标经过时显示伪元素的内容
                         &:hover::before {
                             display: block;
+                        }
+
+                        &:hover {
+                            transform: scale(1.01);
+                            transition: 0.8s;
                         }
 
                         // 不同内容的文字介绍样式

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>迷宫小游戏</title>
+    <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
     <style>
         @media (max-width: 768px) {
 
@@ -60,6 +61,31 @@
             }
         }
 
+        /* 消息框样式 */
+        .wrapper-info {
+            position: absolute;
+            display: flex;
+            width: 220px;
+            height: 70px;
+            top: 0;
+            left: 40%;
+            font-size: 15px;
+            color: rgb(0, 128, 128);
+            align-items: center;
+            flex-direction: column;
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+            justify-content: space-around;
+            background-color: #ccc;
+        }
+
+        h3 {
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+
+        /* 小球样式 */
         .player {
             position: absolute;
             width: 10px;
@@ -72,10 +98,25 @@
 </head>
 
 <body>
+    <div class="wrapper-info">
+        <h3>小编提示</h3>
+        W A S D 控制移动
+    </div>
+
+    <!-- 迷宫内容 -->
     <h1>迷宫小游戏</h1>
     <canvas width="400" height="400"></canvas>
     <div class="player"></div>
     <script>
+        // 用户进入该页面进行的操作提醒
+        window.addEventListener('load', () => {
+            // 定时器设置提示框展示的时间
+            setTimeout(() => {
+                // 使用jquery进行动画的上滑
+                $('.wrapper-info').slideUp(1000);
+            }, 2000)
+        })
+
         const cvs = document.querySelector('canvas')
         const player = document.querySelector('.player')
         const ctx = cvs.getContext('2d')

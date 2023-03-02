@@ -271,6 +271,10 @@ export default {
         height: 100%;
     }
 
+    /deep/ .el-radio__label {
+        font-size: .875rem;
+    }
+
     .el-header,
     .el-footer {
         background-color: #B3C0D1;
@@ -386,7 +390,7 @@ export default {
     }
 
     body>.el-container {
-        margin-bottom: 40px;
+        margin-bottom: 2.5rem;
     }
 }
 </style>

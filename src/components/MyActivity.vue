@@ -119,8 +119,7 @@
                     <span> <a href="/login">登录</a></span>
                     <span>|</span>
                     <span><a href="/register">注册</a></span>
-                    <el-button type="primary" size="small" class="submit" :disabled="active"
-                        @click="submit">发布</el-button>
+                    <el-button type="primary" size="small" class="submit" :disabled="active" @click="submit">发布</el-button>
                 </div>
             </div>
 
@@ -317,13 +316,19 @@ export default {
     }
 }
 
+@media screen and (min-width: 1481px) {
+    .main-content {
+        width: 1240px;
+    }
+}
+
 // 将常用的属性设置为less变量，提高可用性
 @bSize: 0.0625rem;
 @mainColor: #dd0000;
 
 #container {
     width: 100%;
-    padding: 35px 0;
+    padding: 2.1875rem 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
 
@@ -332,8 +337,8 @@ export default {
         position: fixed;
         width: 7rem;
         top: 88%;
-        right: 15px;
-        font-size: 14px;
+        right: 0.9375rem;
+        font-size: .875rem;
         font-weight: 600;
         z-index: 1000;
 
@@ -349,7 +354,7 @@ export default {
                 border-radius: 1rem;
                 color: rgb(58, 139, 255, 1);
                 background: rgba(250, 250, 249, 0.95);
-                box-shadow: 0px 2px 10px 0px rgba(31, 35, 41, .38);
+                box-shadow: 0px .125rem .625rem 0px rgba(31, 35, 41, .38);
                 cursor: pointer;
 
                 &:hover {
@@ -375,7 +380,7 @@ export default {
 
     ::-webkit-input-placeholder {
         color: #c9c9c9;
-        font-size: 18px;
+        font-size: 1.125rem;
         font-weight: bold;
     }
 
@@ -389,8 +394,8 @@ export default {
         .main-banner {
             width: 100%;
             height: 12.5rem;
-            border: @bSize solid rgba(128, 0, 128, 1);
-            background: url(../assets/activity.jpg) no-repeat;
+            background: url(../assets/activity.jpg) no-repeat center;
+            background-size: contain;
         }
 
         .main-link {
@@ -398,13 +403,13 @@ export default {
             margin: .9375rem 0 0 0;
 
             img {
-                width: 50px;
-                margin: 0 10px;
+                width: 3.125rem;
+                margin: 0 .625rem;
                 vertical-align: middle;
             }
 
             span {
-                margin: 0 2px;
+                margin: 0 .125rem;
                 font-size: 0.875rem;
 
                 a {
@@ -419,10 +424,10 @@ export default {
 
         .main-title {
             font-weight: bold;
-            font-size: 38px;
+            font-size: 2.375rem;
             color: #4D4F53;
             line-height: 38px;
-            padding: 40px 0;
+            padding: 2.5rem 0;
         }
 
         .top-bar-wrap {
@@ -444,8 +449,8 @@ export default {
                 }
 
                 span {
-                    padding: 0 10px;
-                    font-size: 16px;
+                    padding: 0 .625rem;
+                    font-size: 1rem;
                     color: #888;
                 }
 
@@ -475,7 +480,7 @@ export default {
                     }
 
                     i {
-                        margin: 0 3px;
+                        margin: 0 .1875rem;
                     }
                 }
             }
@@ -483,28 +488,28 @@ export default {
 
         .main-article {
             width: 100%;
-            min-height: 200px;
-            margin: 20px 0 0 0;
+            min-height: 12.5rem;
+            margin: 1.25rem 0 0 0;
             overflow: hidden;
 
             .article-img {
                 float: left;
                 width: 70%;
-                letter-spacing: 1px;
+                letter-spacing: .0625rem;
                 color: #4D4F53;
-                line-height: 32px;
+                line-height: 2rem;
                 border-right: @bSize dotted #ccc;
 
                 div:nth-child(1) {
                     float: left;
                     width: 65%;
-                    margin-right: 10px;
+                    margin-right: .625rem;
                     overflow: hidden;
                 }
 
                 p {
-                    text-indent: 36px;
-                    margin: 0 0 20px 0;
+                    text-indent: 2.25rem;
+                    margin: 0 0 1.25rem 0;
                 }
 
                 img {
@@ -513,11 +518,12 @@ export default {
 
                     &:hover {
                         transform: scale(1.03);
+                        transition: 0.5s;
                     }
                 }
 
                 h4 {
-                    margin: 0 0 12px 0;
+                    margin: 0 0 .75rem 0;
 
                     span {
                         font-weight: 400;
@@ -528,15 +534,15 @@ export default {
             .article-list {
                 float: right;
                 width: 25%;
-                min-height: 200px;
+                min-height: 12.5rem;
 
                 .article-text {
-                    border-top: 2px solid @mainColor;
-                    height: 60px;
-                    line-height: 60px;
+                    border-top: .125rem solid @mainColor;
+                    height: 3.75rem;
+                    line-height: 3.75rem;
 
                     h3 {
-                        font-size: 20px;
+                        font-size: 1.25rem;
                         color: @mainColor;
                         display: inline-block;
                         font-weight: 400;
@@ -548,18 +554,18 @@ export default {
 
                     li {
                         display: flex;
-                        margin-bottom: 25px;
+                        margin-bottom: 1.5625rem;
 
                         .txt {
                             display: flex;
-                            margin: 0 0 0 15px;
+                            margin: 0 0 0 .9375rem;
                             flex-direction: column;
                             justify-content: space-between;
                         }
 
                         a {
-                            letter-spacing: 2px;
-                            font-size: 14px;
+                            letter-spacing: .125rem;
+                            font-size: .875rem;
 
                             &:active {
                                 color: #333;
@@ -571,8 +577,7 @@ export default {
                         }
 
                         div {
-
-                            font-size: 12px;
+                            font-size: .75rem;
                             color: rgba(0, 0, 0, .6);
                         }
 
@@ -584,6 +589,7 @@ export default {
 
                                 &:hover {
                                     transform: scale(1.03);
+                                    transition: 0.5s;
                                 }
                             }
                         }
@@ -595,38 +601,38 @@ export default {
         .main-comment {
             display: flex;
             width: 100%;
-            min-height: 200px;
-            margin: 20px 0 0 0;
-            padding: 15px 30px;
+            min-height: 12.5rem;
+            margin: 1.25rem 0 0 0;
+            padding: .9375rem 1.875rem;
             flex-direction: column;
-            border: 1px solid #e8e8e8;
+            border: .0625rem solid #e8e8e8;
             justify-content: space-between;
-            border-top: 2px solid @mainColor;
+            border-top: .125rem solid @mainColor;
 
             .comment-title {
                 display: flex;
                 width: 100%;
-                height: 28px;
+                height: 1.75rem;
                 flex-direction: row;
                 justify-content: space-between;
 
                 .text1 {
                     width: 25%;
                     height: 100%;
-                    font-size: 26px;
-                    line-height: 28px;
+                    font-size: 1.625rem;
+                    line-height: 1.75rem;
                     color: @mainColor;
 
                     i {
-                        margin: 0 10px 0 0;
+                        margin: 0 .625rem 0 0;
                     }
                 }
 
                 .text2 {
                     width: 30%;
                     height: 100%;
-                    font-size: 14px;
-                    line-height: 28px;
+                    font-size: .875rem;
+                    line-height: 1.75rem;
                     text-align: right;
 
                     a {
@@ -641,7 +647,7 @@ export default {
 
             .p-comment {
                 width: 100%;
-                height: 83px;
+                height: 5.1875rem;
                 overflow: hidden;
 
                 .c-user {
@@ -662,7 +668,7 @@ export default {
                     position: relative;
                     float: left;
                     width: 60%;
-                    padding: 10px 0;
+                    padding: .625rem 0;
                     height: 100%;
                     text-align: center;
                     background: #f5f5f5;
@@ -671,13 +677,13 @@ export default {
                     &::before {
                         position: absolute;
                         content: '';
-                        top: 25px;
-                        left: -14px;
+                        top: 1.5625rem;
+                        left: -0.875rem;
                         width: 0;
                         height: 0;
-                        border-top: 15px solid transparent;
-                        border-right: 15px solid #f5f5f5;
-                        border-bottom: 15px solid transparent;
+                        border-top: .9375rem solid transparent;
+                        border-right: .9375rem solid #f5f5f5;
+                        border-bottom: .9375rem solid transparent;
                     }
 
                     .box {
@@ -693,15 +699,15 @@ export default {
             .btns-comment {
                 display: flex;
                 width: 100%;
-                height: 40px;
-                font-size: 18px;
+                height: 2.5rem;
+                font-size: 1.125rem;
                 text-align: right;
                 align-items: center;
                 justify-content: end;
 
                 span:nth-child(1),
                 span:nth-child(3) {
-                    margin: 0 10px;
+                    margin: 0 .625rem;
                 }
 
                 a {
@@ -714,28 +720,28 @@ export default {
 
                 .submit {
                     height: 80%;
-                    margin: 0 10px;
+                    margin: 0 .625rem;
                 }
             }
         }
 
         .info {
-            width: 100px;
-            line-height: 47px;
-            font-size: 18px;
+            width: 6.25rem;
+            line-height: 2.9375rem;
+            font-size: 1.125rem;
             text-align: center;
             font-weight: bold;
             color: #dd0000;
-            margin: 25px 0 0 0;
+            margin: 1.5625rem 0 0 0;
             border-bottom-color: #dd0000;
-            border-bottom: 2px solid #FA536F;
+            border-bottom: .125rem solid #FA536F;
         }
 
         .comment-box {
             width: 100%;
-            font-size: 16px;
-            padding: 10px 30px;
-            border: 1px solid #e8e8e8;
+            font-size: 1rem;
+            padding: .625rem 1.875rem;
+            border: .0625rem solid #e8e8e8;
 
             // 用户头像盒子样式
             .user-box {
@@ -770,7 +776,7 @@ export default {
                 .infos {
                     width: 100%;
                     margin: 0.6rem 0;
-                    line-height: 23px;
+                    line-height: 1.4375rem;
                     box-sizing: border-box;
 
                     .text {
@@ -785,7 +791,7 @@ export default {
 
                     span:nth-child(2) {
                         float: right;
-                        margin: 0 35px 0 0;
+                        margin: 0 2.1875rem 0 0;
 
                         &:hover {
                             color: @mainColor;

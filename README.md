@@ -66,3 +66,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 2023/02/07 继续完善趣味课堂中的抢答题
 
 2023/02/10 结束趣味课堂中的抢答题页面完善
+
+2023/02/24 对师资资源页面进行完善
+
+2023/03/01 对axios进行封装配置操作

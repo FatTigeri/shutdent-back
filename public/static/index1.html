@@ -18,18 +18,18 @@
     body {
       padding-top: 100px;
       /*火狐*/
-
       -webkit-user-select: none;
       -moz-user-select: none;
       /*webkit浏览器*/
       -ms-user-select: none;
       /*早期浏览器*/
       user-select: none;
-
       background: #000;
       /*IE10*/
-
       -khtml-user-select: none;
+      box-sizing: border-box;
+      color: rgb(255, 255, 255);
+      background: url(./images/skin-1024-bg.bd0d57de.gif);
     }
 
     .wrapper {
@@ -474,7 +474,7 @@
         }
         this.updateDomNumbers($('.time'), this.leftTime, 1);
       },
-      
+
       gameOver: function () {
         $('.game-over').removeClass('hidden').find('.history-score').text(this.getHistoryScore() || 0);
         this.updateDomNumbers($('.current-score'), this.score, 3);

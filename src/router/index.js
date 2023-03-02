@@ -15,6 +15,9 @@ import Classes from '@/views/Classes.vue'
 import Course from '@/components/Course.vue'
 import TResource from '@/views/TResource.vue'
 import Contest from '@/components/Contest.vue'
+import TResourceTool from "@/components/TResourceTool.vue"
+import Tinfo from "@/components/Tinfo.vue"
+import { Message } from 'element-ui'
 
 const router = new VueRouter({
   mode: 'history',
@@ -36,7 +39,12 @@ const router = new VueRouter({
         { path: 'video/:url/:id', component: Video },
         { path: 'activity', component: () => import('@/views/Activity.vue') },
         { path: 'courses', component: Course },
-        { path: 'TResource', component: TResource },
+        {
+          path: 'TResource', component: TResource, children: [
+            { path: 'tResource/:id', component: TResourceTool },
+            { path: 'tInfo', component: Tinfo },
+          ]
+        },
         { path: 'contest/:status', component: Contest },
         { path: 'act_content/:id', component: () => import('@/components/MyActivity.vue') }
       ]
@@ -68,17 +76,20 @@ const router = new VueRouter({
 
 // 使用路由守卫, 对页面的跳转进行限制
 router.beforeEach(function (to, from, next) {
+  // 当用户没有登录时不能通过，修改url地址的方式进行页面的访问
   if (to.path === '/administrator/teacher' || to.path === '/administrator/problem'
     || to.path === '/administrator/student' || to.path === '/stuAdmin/answer' || to.path === '/stuAdmin/info'
     || to.path === '/stuAdmin/question') {
     // 读取浏览器中的token缓存
     const token = window.localStorage.getItem('token')
-
+    // 倘若用户已登录
     if (token) {
       next()
     } else {
       window.sessionStorage.setItem('index', 0)
-      next('/math/home')
+      Message.warning('您还未进行登录，不能访问个人后台');
+      // 将页面重定向至登录页面
+      next('/login')
     }
   } else {
     next()

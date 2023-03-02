@@ -43,7 +43,8 @@
                                     <a href="/math/resource" :class="{ active: 4 === cur }" @click="change(4)">资源推荐</a>
                                 </li>
                                 <li>
-                                    <a href="/math/Tresource" :class="{ active: 5 === cur }" @click="change(5)">师资资源</a>
+                                    <a href="/math/Tresource/tResource/1" :class="{ active: 5 === cur }"
+                                        @click="change(5)">师资资源</a>
                                 </li>
                             </ul>
                         </div>
@@ -110,19 +111,19 @@
 </template>
 
 <script>
+// 按需导入防抖函数
 import { mydebounce } from '@/utils/index.js'
+
+
 export default {
-    mounted() {
-        window.addEventListener('scroll', this.handleScroll) // 监听页面滚动
-    },
     created() {
         // 当用户为教师时，进行对应的读取question表数据读取
         if (window.localStorage.getItem('state') === '1') {
-            this.initCount(1)
+            this.initCount(1);
             this.src = '/administrator/problem'
-        } else {
+        } else if (window.localStorage.getItem('state') === '0') {
             // 当用户为学生时，进行对应的读取answer表数据读取
-            this.initCount(0)
+            this.initCount(0);
             this.src = '/stuAdmin/answer'
         }
 
@@ -138,7 +139,7 @@ export default {
         }
 
         // 判断用户的token是否已经存在于客户端电脑
-        if (window.localStorage.getItem("token")) {
+        if (window.localStorage.getItem('token')) {
             // 改变控制按钮的变量的状态
             this.$store.commit('changeFlag', false)
             // 获取头像路径
@@ -147,13 +148,16 @@ export default {
             console.log("用户没有登录~~~!");
         }
     },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll) // 监听页面滚动
+    },
     computed: {
         // 时刻计算当前的功能索引位置
         cur: function () {
-            return this.$store.state.current
+            return this.$store.state.current;
         },
         state: function () {
-            return window.localStorage.getItem('state')
+            return window.localStorage.getItem('state');
         }
     },
     data() {
@@ -326,7 +330,7 @@ export default {
 
         // 获取question表数据数的函数
         async initCount(state) {
-            if (state === 1) {
+            if (state == 1) {
                 // 调用后端api接口，获取question表的所有数据
                 const { data: res } = await this.$http.get("/getProblems")
                 // 将对象的长度赋值给消息count变量
@@ -468,49 +472,49 @@ body {
 
             // home页面网站名称样式
             .light {
-                width: 80px;
-                height: 40px;
-                line-height: 40px;
+                width: 5rem;
+                height: 2.5rem;
+                line-height: 2.5rem;
                 position: relative;
                 overflow: hidden;
 
                 @keyframes light1 {
                     0% {
-                        transform: translateX(-160px);
+                        transform: translateX(-10rem);
                     }
 
                     100% {
-                        transform: translateX(160px);
+                        transform: translateX(10rem);
                     }
                 }
 
                 @keyframes light2 {
                     0% {
-                        transform: translateY(-40px);
+                        transform: translateY(-2.5rem);
                     }
 
                     100% {
-                        transform: translateY(40px);
+                        transform: translateY(2.5rem);
                     }
                 }
 
                 @keyframes light3 {
                     0% {
-                        transform: translateX(160px);
+                        transform: translateX(10rem);
                     }
 
                     100% {
-                        transform: translateX(-160px);
+                        transform: translateX(-10rem);
                     }
                 }
 
                 @keyframes light4 {
                     0% {
-                        transform: translateY(40px);
+                        transform: translateY(2.5rem);
                     }
 
                     100% {
-                        transform: translateY(-40px);
+                        transform: translateY(-2.5rem);
                     }
                 }
 
@@ -520,7 +524,7 @@ body {
                     top: 0;
                     left: 0;
                     width: 100%;
-                    height: 1px;
+                    height: .0625rem;
                     animation: light1 1s linear infinite;
                 }
 
@@ -529,7 +533,7 @@ body {
                     background: linear-gradient(to bottom, transparent, purple);
                     top: 0;
                     right: 0;
-                    width: 1px;
+                    width: .0625rem;
                     height: 100%;
                     animation: light2 1s linear infinite;
                     animation-delay: .5s;
@@ -541,7 +545,7 @@ body {
                     bottom: 0;
                     left: 0;
                     width: 100%;
-                    height: 1px;
+                    height: .0625rem;
                     animation: light3 1s linear infinite;
                     animation-delay: 1;
                 }
@@ -551,7 +555,7 @@ body {
                     position: absolute;
                     bottom: 0;
                     left: 0;
-                    width: 1px;
+                    width: .0625rem;
                     height: 100%;
                     animation: light4 1s linear infinite;
                     animation-delay: 1.5s;

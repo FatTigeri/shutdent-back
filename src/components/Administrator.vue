@@ -62,8 +62,8 @@
                                             </li>
                                             <!-- 2.1.3 答疑入口选项 -->
                                             <li>
-                                                <a href="/math/chat" :class="{ actived: cur === 1 }"
-                                                    @click="change(1)"><i class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
+                                                <a href="/math/chat" :class="{ actived: cur === 1 }" @click="change(1)"><i
+                                                        class="el-icon-s-comment"></i>&nbsp;答疑入口</a>
                                             </li>
                                             <!-- 2.1.4 课程上传选项 -->
                                             <li>
@@ -152,6 +152,10 @@ export default {
         change(index) {
             window.sessionStorage.setItem('cur', index)
             window.sessionStorage.setItem('current', -1)
+            if (index === 1) {
+                // 设置导航栏的当前索引index
+                window.sessionStorage.setItem('index', 1)
+            }
         },
         // 控制上方选项方法
         change1(index) {
