@@ -53,11 +53,11 @@ export default {
         };
     },
     created: function () {
-        this.tname = window.localStorage.getItem("tname");
-        this.$http.get("/getByid?tid=" + window.localStorage.getItem("tid")).then((response) => {
+        this.tname = window.sessionStorage.getItem("tname");
+        this.$http.get("/getByid?tid=" + window.sessionStorage.getItem("tid")).then((response) => {
             this.teacher = response.data[0];
         });
-        this.$http.get("/getCourseByTeacher?teacher=" + window.localStorage.getItem("tname")).then((response) => {
+        this.$http.get("/getCourseByTeacher?teacher=" + window.sessionStorage.getItem("tname")).then((response) => {
             this.tvideos = response.data;
         });
     },

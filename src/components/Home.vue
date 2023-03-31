@@ -4,14 +4,14 @@
     <el-row :gutter="0">
       <el-col :xs="0" :sm="24" :md="24" :lg="24" :xl="24">
         <!-- 固定栏内容 -->
-        <div class="functions-fix">
+        <div class="functions-fix" ref="box">
           <ul>
             <!-- 客服 -->
             <li @click="dialogCommentVisible = true"><i class="el-icon-phone-outline"></i> 留言</li>
             <!-- 提问 -->
             <li @click="ask"><i class="el-icon-chat-dot-round"></i> 提问</li>
             <!-- 返顶 -->
-            <li @click="toTop"><i class="el-icon-caret-top"></i> 返顶</li>
+            <li @click="toTop" ref="control"><i class="el-icon-caret-top"></i> 返顶</li>
           </ul>
         </div>
 
@@ -149,7 +149,6 @@
                   </ul>
                 </div>
               </div>
-
             </div>
           </el-col>
           <!-- 2.2 home首页主内容区域 -->
@@ -168,49 +167,15 @@
                           <p class="line animation it">Let’s begin the math adventure!</p>
                         </div>
 
-                        <el-carousel :interval="4000" type="card" height="14.3333rem"
-                          style="line-height: 5.333rem; box-shadow: 0 0 0.2rem black;">
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="/math/video/1/1">
-                                <img src="@/assets/carousel1.jpg" alt="blank" style="width: 100%; height: 100%">
+                        <el-carousel :interval="4000" type="card" arrow="always" height="14.3333rem"
+                          style="line-height: 5.333rem; box-shadow: 0 0 0.2rem black">
+                          <el-carousel-item v-for="item in carousels" :key="item.id">
+                            <div class="pic_img">
+                              <a :href="item.link">
+                                <img :src="item.src" alt="blank">
+                                <span class="carousel-title">{{ item.title }}</span>
                               </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="/math/video/4/4">
-                                <img src="@/assets/carousel2.jpg" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="/math/video/5/5">
-                                <img src="@/assets/carousel6.jpg" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="javascript:void(0);">
-                                <img src="@/assets/carousel7.png" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="javascript:void(0)">
-                                <img src="@/assets/carousel8.png" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
-                          </el-carousel-item>
-                          <el-carousel-item>
-                            <h3 class="medium" style="width: 100%; height: 100%">
-                              <a href="javascript:void(0)">
-                                <img src="@/assets/carousel9.png" alt="blank" style="width: 100%; height: 100%">
-                              </a>
-                            </h3>
+                            </div>
                           </el-carousel-item>
                         </el-carousel>
                       </el-col>
@@ -223,7 +188,7 @@
                         <el-col :xs="24" :sm="24" :md="14" :lg="14" style="float: left; margin: 1.5rem 0 0 0.33rem">
                           <div class="resources-item">
                             <div class="title1">
-                              <a href="/math/home" alt="blank">
+                              <a href="javascript:void(0);" alt="blank" @click="changeUrl(4, 'resource')">
                                 <span class="iconfont icon-tuijian" style="color: red;"></span> 资源推荐
                                 <i class="el-icon-d-arrow-right"></i>
                               </a>
@@ -242,7 +207,7 @@
                               </el-row>
                             </div>
                             <div class="title1">
-                              <a href="/math/home" alt="blank">
+                              <a href="javascript:void(0);" alt="blank" @click="changeUrl(2, 'room')">
                                 <span class="iconfont icon-ketang" style="color: blue;"></span> 趣味课堂
                                 <i class="el-icon-d-arrow-right"></i>
                               </a>
@@ -274,22 +239,13 @@
                               <ul style="list-style: none;">
                                 <li v-for="(item, index) in popularList" :key="item.id">
                                   <el-badge :value="index + 1" class="item" type="primary"></el-badge>
-                                  <span class="teacher-name" @click="dialogTableVisible = true">
-                                    {{ item.tName }}
-                                  </span>
+                                  <span class="teacher-name" @click="changeUrl(5, 'Tresource/tResource/1')">{{ item.tName
+                                  }}</span>
                                   <el-rate v-model="values[index]" show-text style="float: right;">
                                   </el-rate>
                                 </li>
                               </ul>
-                              <!-- 2.2.2.2.1 最受欢迎老师介绍模态框 -->
-                              <el-dialog title="教师介绍" :visible.sync="dialogTableVisible"
-                                style="border-radius: 15px !important;">
-                                <el-table :data="popularList">
-                                  <el-table-column property="tName" label="教师名字" width="150"></el-table-column>
-                                  <el-table-column property="age" label="年龄" width="200"></el-table-column>
-                                  <el-table-column property="department" label="院系部门"></el-table-column>
-                                </el-table>
-                              </el-dialog>
+
                               <!-- 2.2.2.2.2 最受欢迎老师分页按钮 -->
                               <div
                                 style="width: 100%; display: flex;flex-direction: row;align-items: center;justify-content: space-around;">
@@ -488,6 +444,44 @@ export default {
           state2: false
         }
       ],
+      // 轮播图数据
+      carousels: [
+        {
+          id: 1,
+          link: '/math/video/1/1',
+          src: require('@/assets/carousel1.jpg'),
+          title: '学习分数除法基本运算'
+        },
+        {
+          id: 2,
+          link: '/math/video/4/4',
+          src: require('@/assets/carousel2.jpg'),
+          title: '带你遨游在分数的世界'
+        },
+        {
+          id: 3,
+          link: '/math/video/5/5',
+          src: require('@/assets/carousel6.jpg'),
+          title: '学习圆面积的基本运算'
+        },
+        {
+          id: 4,
+          link: 'javascript:void(0);',
+          src: require('@/assets/carousel7.png'),
+          title: '享受绝对值的魅力'
+        }, {
+          id: 5,
+          link: 'javascript:void(0);',
+          src: require('@/assets/carousel8.png'),
+          title: '数学也有自己的对称方式'
+        },
+        {
+          id: 6,
+          link: 'javascript:void(0);',
+          src: require('@/assets/carousel9.png'),
+          title: '认识数学人物-祖冲之'
+        }
+      ],
       sizeList: ["medium"],
       // 线上答疑教师排班变量1
       teacherList: [],
@@ -497,8 +491,6 @@ export default {
       activityList: [],
       // 最受欢迎老师变量
       popularList: [],
-      // 控制表格模态框显示变量
-      dialogTableVisible: false,
       dialogCommentVisible: false,
       // 控制反馈表单模态框显示变量
       dialogFormVisible: false,
@@ -606,13 +598,25 @@ export default {
       // 获取滚动条的高度
       var top = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset
       for (const i in imgs) {
-
         // 如果图片进入可视范围就替换加载过来的图片
         if ((imgs[i].offsetTop + vh) < (vh + top)) {
           if (imgs[i].src !== imgs[i].dataset.src) imgs[i].src = imgs[i].dataset.src
         }
       }
+      // 当页面滚动大于200时
+      if (top >= 200) {
+        // 返顶显示
+        this.$refs.control.style.opacity = 1;
+        // 大盒子改变位置
+        this.$refs.box.style.top = '73%';
+      } else {
+        // 返顶隐藏
+        this.$refs.control.style.opacity = 0
+        // 大盒子改变位置
+        this.$refs.box.style.top = '82%';
+      }
     },
+
     // 最受欢迎老师可打分题型(使用到了节流操作)
     open1: mythrollte(function () {
       const h = this.$createElement;
@@ -667,6 +671,7 @@ export default {
       this.$router.push('/math/chat')
     },
 
+    // 用户留言方法
     async comment() {
       if (this.form.textarea) {
         const { data: res } = await this.$http.get('/insetFeedback', {
@@ -734,11 +739,15 @@ export default {
           item.state2 = false;
           const target = document.querySelectorAll('.img1')[id - 1];
           target.style.transform = 'translate(0,  -0.25rem)';
-
         }
         return item;
       })
+    },
 
+    // 用户点击了资源推荐和趣味课堂标题跳转方法
+    changeUrl(index, url) {
+      this.$store.commit('changeCurrent', index)
+      this.$router.push('/math/' + url);
     },
 
     // 用户点击提问调用的函数
@@ -810,7 +819,7 @@ export default {
       this.course = res
       // 将数据对象中的url属性作为video组件的动态参数
       this.$router.push("/math/video/" + this.course[0].url + "/" + id)
-    }
+    },
   },
 }
 </script>
@@ -993,7 +1002,7 @@ export default {
   position: fixed;
   width: 7rem;
   height: 9rem;
-  top: 73%;
+  top: 80%;
   right: .9375rem;
   font-size: .875rem;
   font-weight: 600;
@@ -1018,12 +1027,11 @@ export default {
         color: rgba(58, 139, 255, .65);
       }
 
-
       a {
         display: block;
         color: rgb(58, 139, 255, 1);
         width: 100%;
-        font-weight: 600;
+        font-weight: bold;
         text-decoration: none;
         border-radius: 1rem;
 
@@ -1031,6 +1039,11 @@ export default {
           color: rgba(58, 139, 255, .65);
         }
       }
+    }
+
+    li:nth-child(3) {
+      opacity: 1;
+      transition: all 1s;
     }
   }
 }
@@ -1378,6 +1391,42 @@ export default {
       border-right-color: transparent;
       /*文字透明化*/
     }
+  }
+
+  .pic_img {
+    width: 100%;
+    height: 100%;
+
+    a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat';
+      color: black;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-title {
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        height: 1.875rem;
+        left: 0;
+        bottom: 0;
+        padding: 0 0 0 1.25rem;
+        font-size: .8125rem;
+        text-align: left;
+        font-weight: bold;
+        letter-spacing: .0938rem;
+        line-height: 1.875rem;
+        color: rgb(0, 0, 0);
+      }
+    }
+
   }
 
 

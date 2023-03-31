@@ -242,10 +242,10 @@ export default {
                 this.$store.commit('getImgSrc', '')
 
                 // 将本地存储的变量删除
-                window.localStorage.removeItem('token')
-                window.sessionStorage.removeItem('user')
-                window.localStorage.removeItem('state')
-                window.localStorage.removeItem('avatar')
+                window.localStorage.removeItem('token');
+                window.sessionStorage.removeItem('user');
+                window.localStorage.removeItem('state');
+                window.localStorage.removeItem('avatar');
                 this.count = 0
 
                 // 用户登录注销后，调用Vuex中getImgSrc方法，赋值为没有头像的样式

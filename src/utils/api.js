@@ -2,10 +2,14 @@ import axios from "axios";
 import { MessageBox } from "element-ui";
 
 const api = axios.create({
-    // 请求的公共地址
+    // 请求地址公共部分
     baseURL: 'http://1.12.235.213:8088/api',
     // 请求超时时间 当请求的时间超过3秒还没获取请求结果，提示用户超时
     timeout: 3000,
+    // 设置请求头
+    header: {
+        ContentType: 'application/json',
+    }
 });
 
 // 获取当前用户的token值
@@ -13,9 +17,8 @@ import { token } from './config.js';
 
 // 请求拦截器
 api.interceptors.request.use(config => {
-    config.headers.Accept = 'application/json'
     // 请求投中携带用户的token信息
-    config.headers.Autotization = 'Bearer ' + token;
+    config.headers.Authorization = 'Bearer ' + token;
     // 将配置完成的config对象返回出去 如果不返回 请求则不会进行
     return config;
 }, err => {

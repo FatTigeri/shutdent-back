@@ -18,9 +18,9 @@ Vue.use(VideoPlayer)
 
 // 将axios封装文件进行导入
 import api from '@/utils/api.js'
+
 // 挂载到vue实例
 Vue.prototype.$http = api
-
 
 Vue.prototype.$qs = qs
 Vue.config.productionTip = false

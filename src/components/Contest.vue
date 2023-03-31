@@ -20,7 +20,6 @@
                     <em class="iconfont icon-xiangshang fr" v-show="show3"></em>
                     <em class="iconfont icon-xiangxia2 fr" v-show="!show3"></em>
                 </h3>
-                <!-- <div style="margin-top: 20px; height: 200px;"> -->
                 <el-collapse-transition>
                     <div class="Card_list" v-show="show3">
                         <div class="answerCard_list clearfix">

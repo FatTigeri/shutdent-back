@@ -703,7 +703,7 @@ export default {
                 font-size: 1.125rem;
                 text-align: right;
                 align-items: center;
-                justify-content: end;
+                justify-content: flex-end;
 
                 span:nth-child(1),
                 span:nth-child(3) {

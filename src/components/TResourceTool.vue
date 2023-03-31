@@ -25,7 +25,7 @@
 <script>
 export default {
     beforecreate() {
-        window.localStorage.setItem("grade", this.$route.params.id);
+        window.sessionStorage.setItem("grade", this.$route.params.id);
     },
     data: function () {
         return {
@@ -39,8 +39,8 @@ export default {
     },
     methods: {
         Tenter(tid, tname) {
-            window.localStorage.setItem("tid", tid);
-            window.localStorage.setItem("tname", tname);
+            window.sessionStorage.setItem("tid", tid);
+            window.sessionStorage.setItem("tname", tname);
             this.$router.push("/math/Tresource/tInfo/");
         }
     }

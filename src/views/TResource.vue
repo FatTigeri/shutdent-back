@@ -57,7 +57,7 @@ export default {
     },
     watch: {
         $route(newval) {
-            window.localStorage.setItem("grade", newval.params.id);
+            window.sessionStorage.setItem("grade", newval.params.id);
         },
     },
     methods: {
